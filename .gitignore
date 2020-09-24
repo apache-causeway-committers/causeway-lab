@@ -21,3 +21,34 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# IDEA
+.idea
+*.iml
+
+# MacOS
+.DS_Store
+
+# Eclipse
+.settings
+.classpath
+.project
+
+# Node
+package-lock.json
+package.json
+pnpmfile.js
+pnpm-lock.yaml
+webpack.config.js
+webpack.generated.js
+node/
+node_modules/
+
+#Gradle
+gradlew
+gradlew.*
+/.gradle/
+**/build/
+
+#Lombok (don't accept config alterations, might lead to a maintenance hell)
+lombok.config
