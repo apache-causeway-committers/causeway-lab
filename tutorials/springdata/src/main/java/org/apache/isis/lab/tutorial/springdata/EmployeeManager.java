@@ -32,10 +32,9 @@ public class EmployeeManager {
 
     @Inject private EmployeeRepository employeeRepo;
 
-    //XXX I believe this is automated based on simple class name anyway
-    //    public String title() {
-    //        return "Employee Manager";
-    //    }
+    public String title() {
+        return "Employee Manager";
+    }
     
     @Collection
     public List<Employee> getAllEmployees(){
