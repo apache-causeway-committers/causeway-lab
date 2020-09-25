@@ -70,7 +70,7 @@ isis:
     wicket:
       application:
         menubars-layout-xml: menubars.layout.xml
-        favicon-url: images/favicon.png
+        favicon-url: images/book_32.png
         brand-logo-header: images/book_48.png
         brand-logo-signin: images/book_256.png
         name: Apache Isis Spring Data Tutorial
