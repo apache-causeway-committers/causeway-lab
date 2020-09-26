@@ -1,0 +1,152 @@
+= Sample Application with Spring Boot and Apache Isis
+:toc:
+:toc-title: pass:[<h3>Contents</h3>]
+:toc-placement!:
+
+TODO: Link back to overview
+
+toc::[]
+
+== Overview
+
+_Apache Isis_ is a Java framework for creating web applications using 
+the https://en.wikipedia.org/wiki/Naked_objects[Naked Objects] pattern.  
+
+In this tutorial, we'll explore how to use Apache Isis to generate UI on a Spring Boot based backend. 
+For an introduction to Apache Isis refer to the documents at the official site https://isis.apache.org[].
+
+== Setup
+
+Let's start by adding Maven dependencies similar to a standard Spring Boot application:
+
+[source,xml]
+----
+<parent>
+	<groupId>org.apache.isis.app</groupId>
+	<artifactId>isis-app-starter-parent</artifactId>
+	<version>2.0.0-xxx</version>
+	<relativePath/>
+</parent>
+----
+
+NOTE: Lookup the latest available release version from Maven Central
+
+== Backend Service
+
+We'll use an Employee entity with firstName and lastName properties to perform CRUD operations on it:
+
+[source,java]
+----
+@Entity
+public class Employee {
+ 
+    @Id
+    @GeneratedValue
+    private Long id;
+ 
+    private String firstName;
+    private String lastName;
+}
+----	
+
+Here's the simple, corresponding Spring Data repository – to manage the CRUD operations:
+
+[source,java]
+----
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    
+}
+----
+
+Let's pre-populate the DB with a few sample Employees:
+
+[source,java]
+----
+@Bean
+public CommandLineRunner loadData(EmployeeRepository repository) {
+    return (args) -> {
+        repository.save(new Employee("Bill", "Gates"));
+        repository.save(new Employee("Mark", "Zuckerberg"));
+        repository.save(new Employee("Sundar", "Pichai"));
+        repository.save(new Employee("Jeff", "Bezos"));
+    };
+}
+----
+
+== Apache Isis UI
+
+=== View Model to manage Employee instances
+
+The *EmployeeManager* class is meant to represent a web page, to be rendered by the Apache Isis’ UI logic.
+We want this page to show a collection of all the Employees that are persisted in our *EmployeeRepository*.
+
+[source,java]
+----
+public class EmployeeManager {
+
+    @Inject private EmployeeRepository employeeRepo;
+
+    @Collection
+    public List<Employee> getAllEmployees(){
+        return employeeRepo.findAll();
+    }
+}
+----
+
+=== Mixin to add new Employees
+
+We can now extend our *EmployeeManager* above with new functionality. Let's add business logic that 
+creates a new *Employee*. 
+
+We do this by introducing a new class, a so called *Mixin*. This involves some naming convention, 
+for both the class and its main method *act*.
+
+[source,java]
+----
+@RequiredArgsConstructor
+public class EmployeeManager_newEmployee {
+
+    @Inject private EmployeeRepository employeeRepo;
+    
+    private final EmployeeManager holder;
+    
+    public EmployeeManager act(String firstName, String lastName) {
+        Employee newEmployee = new Employee(firstName, lastName); 
+        employeeRepo.save(newEmployee);
+        return holder;
+    }
+}
+----
+
+=== Menu
+
+We need one more class to tell the Apache Isis UI logic which *Actions* we want it to render in the top menu. 
+With this tutorial we only have one.
+As we see later, we map the *employeeManager()* method to a menu entry *Employee Manager*.
+
+[source,java]
+----
+@RequiredArgsConstructor(onConstructor_ = { @Inject })
+public class EmployeeMenu {
+
+    final FactoryService factoryService;
+
+    public EmployeeManager employeeManager(){
+        return factoryService.viewModel(EmployeeManager.class);
+    }
+}
+----
+
+=== Wiring the Components Together
+
+WARNING: some TODOs here 
+
+- more details on pom.xml
+- Application.java and imported components
+- application.yml
+- we left out Apache Isis specific annotations above, but need to explain these here
+
+== Conclusion
+
+In this article, we wrote a CRUD UI application using Spring Data JPA for persistence 
+and Apache Isis for presentation.
