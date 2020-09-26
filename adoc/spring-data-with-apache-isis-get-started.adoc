@@ -77,7 +77,8 @@ public CommandLineRunner loadData(EmployeeRepository repository) {
 
 === View Model to manage Employee instances
 
-The *EmployeeManager* class is meant to represent a web page, to be rendered by the Apache Isis’ UI logic.
+The *EmployeeManager* class is meant to represent a web page, to be rendered by Apache Isis' UI logic.
+
 We want this page to show a collection of all the Employees that are persisted in our *EmployeeRepository*.
 
 [source,java]
@@ -144,9 +145,12 @@ WARNING: some TODOs here
 - more details on pom.xml
 - Application.java and imported components
 - application.yml
-- we left out Apache Isis specific annotations above, but need to explain these here
+- we left out Apache Isis specific annotations above, but need to add and explain these here
 
 == Conclusion
 
 In this article, we wrote a CRUD UI application using Spring Data JPA for persistence 
 and Apache Isis for presentation.
+
+The code is available on 
+https://github.com/apache-isis-committers/isis-lab/tree/master/tutorials/springdata[GitHub].
