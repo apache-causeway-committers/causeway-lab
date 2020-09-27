@@ -1,9 +1,9 @@
 = Sample Application with Spring Boot and Apache Isis
 :toc:
 :toc-title: pass:[<h3>Contents</h3>]
-:toc-placement!:
+:toc-placement!
 
-TODO: Link back to overview
+Back to xref:../README.adoc[Main Page]
 
 toc::[]
 
@@ -22,10 +22,10 @@ Let's start by adding Maven dependencies similar to a standard Spring Boot appli
 [source,xml]
 ----
 <parent>
-	<groupId>org.apache.isis.app</groupId>
-	<artifactId>isis-app-starter-parent</artifactId>
-	<version>2.0.0-xxx</version>
-	<relativePath/>
+    <groupId>org.apache.isis.app</groupId>
+    <artifactId>isis-app-starter-parent</artifactId>
+    <version>2.0.0-xxx</version>
+    <relativePath/>
 </parent>
 ----
 
@@ -140,12 +140,15 @@ public class EmployeeMenu {
 
 === Wiring the Components Together
 
-WARNING: some TODOs here 
-
-- more details on pom.xml
-- Application.java and imported components
-- application.yml
-- we left out Apache Isis specific annotations above, but need to add and explain these here
+[WARNING]
+====
+some TODOs here 
+  
+  more details on pom.xml
+  Application.java and imported components
+  application.yml
+  we left out Apache Isis specific annotations above, but need to add and explain these here
+====
 
 == Conclusion
 
