@@ -15,6 +15,9 @@ the https://en.wikipedia.org/wiki/Naked_objects[Naked Objects] pattern.
 In this tutorial, we'll explore how to use Apache Isis to generate UI on a Spring Boot based backend. 
 For an introduction to Apache Isis refer to the documents at the official site https://isis.apache.org[].
 
+NOTE: We use _lombok_ (https://projectlombok.org/[]) annotations through out this tutorial.
+If you are not familiar with these yet, just ignore them as these are optional anyway.
+
 == Setup
 
 Let's start by adding Maven dependencies similar to a standard Spring Boot application:
@@ -100,7 +103,7 @@ We can now extend our `EmployeeManager` above with new functionality. Let's add 
 creates a new `Employee`. 
 
 We do this by introducing a new class, a so called *Mixin*. This involves some naming convention, 
-for both the class and its main method *act*.
+for both the class and its main method `act`.
 
 [source,java]
 ----
@@ -152,8 +155,8 @@ some TODOs here
 
 == Conclusion
 
-In this article, we wrote a CRUD UI application using Spring Data JPA for persistence 
-and Apache Isis for presentation.
+In this article, we wrote a CRUD UI application using *Spring Data JPA* for persistence 
+and *Apache Isis* for presentation.
 
 The code is available on 
 https://github.com/apache-isis-committers/isis-lab/tree/master/tutorials/springdata[GitHub].
