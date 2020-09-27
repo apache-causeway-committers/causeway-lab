@@ -33,7 +33,7 @@ NOTE: Lookup the latest available release version from Maven Central
 
 == Backend Service
 
-We'll use an Employee entity with firstName and lastName properties to perform CRUD operations on it:
+We'll use an Employee entity with `firstName` and `lastName` properties to perform CRUD operations on it:
 
 [source,java]
 ----
@@ -77,9 +77,9 @@ public CommandLineRunner loadData(EmployeeRepository repository) {
 
 === View Model to manage Employee instances
 
-The *EmployeeManager* class is meant to represent a web page, to be rendered by Apache Isis' UI logic.
+The `EmployeeManager` class is meant to represent a web page, to be rendered by Apache Isis' UI logic.
 
-We want this page to show a collection of all the Employees that are persisted in our *EmployeeRepository*.
+We want this page to show a collection of all the Employees that are persisted in our `EmployeeRepository`.
 
 [source,java]
 ----
@@ -96,8 +96,8 @@ public class EmployeeManager {
 
 === Mixin to add new Employees
 
-We can now extend our *EmployeeManager* above with new functionality. Let's add business logic that 
-creates a new *Employee*. 
+We can now extend our `EmployeeManager` above with new functionality. Let's add business logic that 
+creates a new `Employee`. 
 
 We do this by introducing a new class, a so called *Mixin*. This involves some naming convention, 
 for both the class and its main method *act*.
@@ -123,7 +123,7 @@ public class EmployeeManager_newEmployee {
 
 We need one more class to tell the Apache Isis UI logic which *Actions* we want it to render in the top menu. 
 With this tutorial we only have one.
-As we see later, we map the *employeeManager()* method to a menu entry *Employee Manager*.
+As we'll see later, we map the `employeeManager()` method to a menu entry named `Employee Manager`.
 
 [source,java]
 ----
