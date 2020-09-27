@@ -90,7 +90,6 @@ public class EmployeeManager {
 
     @Inject private EmployeeRepository employeeRepo;
 
-    @Collection
     public List<Employee> getAllEmployees(){
         return employeeRepo.findAll();
     }
