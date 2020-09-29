@@ -14,7 +14,7 @@
 	<groupId>org.apache.isis.lab</groupId>
 	<artifactId>isis-lab-tutorials-springdata</artifactId>
 
-	<name>Apache Isis Tutorial - Spring Data</name>
+	<name>Isis Labs - Tutorial - Spring Data</name>
 	<description>A Spring Data with Apache Isis tutorial.</description>
 
 	<packaging>jar</packaging>
