@@ -21,13 +21,22 @@ package org.apache.isis.lab.tutorial.secman;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
 import org.apache.isis.extensions.modelannotation.metamodel.IsisModuleExtModelAnnotation;
+import org.apache.isis.extensions.secman.api.SecurityModuleConfig;
+import org.apache.isis.extensions.secman.api.permission.PermissionsEvaluationService;
+import org.apache.isis.extensions.secman.api.permission.PermissionsEvaluationServiceAllowBeatsVeto;
+import org.apache.isis.extensions.secman.encryption.jbcrypt.IsisModuleExtSecmanEncryptionJbcrypt;
+import org.apache.isis.extensions.secman.jpa.IsisModuleExtSecmanPersistenceJpa;
+import org.apache.isis.extensions.secman.model.IsisModuleExtSecmanModel;
+import org.apache.isis.extensions.secman.shiro.IsisModuleExtSecmanRealmShiro;
 import org.apache.isis.persistence.jpa.eclipselink.IsisModuleJpaEclipseLink;
-import org.apache.isis.security.bypass.IsisModuleSecurityBypass;
+import org.apache.isis.security.shiro.IsisModuleSecurityShiro;
+import org.apache.isis.testing.fixtures.applib.IsisModuleTestingFixturesApplib;
 import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
 
 @SpringBootApplication
@@ -40,8 +49,20 @@ import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
     // UI (Wicket Viewer)
     IsisModuleViewerWicketViewer.class,
     
-    // Security
-    IsisModuleSecurityBypass.class
+    // Security using Shiro
+    IsisModuleSecurityShiro.class,
+
+    // Security Manager Extension (SecMan)
+    IsisModuleExtSecmanModel.class,
+    IsisModuleExtSecmanRealmShiro.class,
+    IsisModuleExtSecmanPersistenceJpa.class,
+    IsisModuleExtSecmanEncryptionJbcrypt.class,
+    
+    // Default Admin/User/Role Seeding Support for SecMan
+    IsisModuleTestingFixturesApplib.class, 
+})
+@EntityScan(basePackageClasses = {
+        Employee.class,
 })
 public class Application {
 
@@ -58,4 +79,18 @@ public class Application {
             repository.save(new Employee("Jeff", "Bezos"));
         };
     }
+    
+    @Bean
+    public SecurityModuleConfig securityModuleConfigBean() {
+        return SecurityModuleConfig.builder()
+                .adminUserName("sven")
+                .adminAdditionalPackagePermission("org.apache.isis")
+                .build();
+    }
+
+    @Bean
+    public PermissionsEvaluationService permissionsEvaluationService() {
+        return new PermissionsEvaluationServiceAllowBeatsVeto();
+    }
+    
 }
