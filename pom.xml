@@ -13,6 +13,7 @@
 
 	<modules>
         <module>tutorials/springdata</module>
+        <module>tutorials/secman</module>
     </modules>
 
 </project>
