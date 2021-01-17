@@ -26,14 +26,14 @@ import org.springframework.context.annotation.Import;
 
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
 import org.apache.isis.extensions.modelannotation.metamodel.IsisModuleExtModelAnnotation;
-import org.apache.isis.persistence.jpa.eclipselink.IsisModuleJpaEclipseLink;
+import org.apache.isis.persistence.jpa.eclipselink.IsisModuleJpaEclipselink;
 import org.apache.isis.security.bypass.IsisModuleSecurityBypass;
 import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
 
 @SpringBootApplication
 @Import({
     IsisModuleCoreRuntimeServices.class,
-    IsisModuleJpaEclipseLink.class, // EclipseLink as JPA provider for Spring Data 
+    IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
 
     IsisModuleExtModelAnnotation.class, // @Model support
     

@@ -34,17 +34,20 @@ import org.apache.isis.extensions.secman.encryption.jbcrypt.IsisModuleExtSecmanE
 import org.apache.isis.extensions.secman.jpa.IsisModuleExtSecmanPersistenceJpa;
 import org.apache.isis.extensions.secman.model.IsisModuleExtSecmanModel;
 import org.apache.isis.extensions.secman.shiro.IsisModuleExtSecmanRealmShiro;
-import org.apache.isis.persistence.jpa.eclipselink.IsisModuleJpaEclipseLink;
+import org.apache.isis.persistence.jpa.eclipselink.IsisModuleJpaEclipselink;
 import org.apache.isis.security.shiro.IsisModuleSecurityShiro;
 import org.apache.isis.testing.fixtures.applib.IsisModuleTestingFixturesApplib;
+import org.apache.isis.testing.h2console.ui.IsisModuleTestingH2ConsoleUi;
 import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
 
 @SpringBootApplication
 @Import({
     IsisModuleCoreRuntimeServices.class,
-    IsisModuleJpaEclipseLink.class, // EclipseLink as JPA provider for Spring Data 
+    IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
 
     IsisModuleExtModelAnnotation.class, // @Model support
+
+    IsisModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
     
     // UI (Wicket Viewer)
     IsisModuleViewerWicketViewer.class,
