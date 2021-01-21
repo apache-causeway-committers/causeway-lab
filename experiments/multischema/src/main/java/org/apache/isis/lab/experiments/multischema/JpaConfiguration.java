@@ -20,14 +20,16 @@ import lombok.val;
 
 @Configuration 
 @Import({
+    JpaSchemaConfiguration.class
 })
 public class JpaConfiguration extends JpaBaseConfiguration { 
 
     protected JpaConfiguration(
         DataSource dataSource,
+        JpaSchemaConfiguration jpaSchemaConfiguration,
         JpaProperties jpaProperties,
         ObjectProvider<JtaTransactionManager> jtaTransactionManager) {
-        super(fix(null, dataSource), fix(jpaProperties), jtaTransactionManager);
+        super(fix(jpaSchemaConfiguration, dataSource), fix(jpaSchemaConfiguration, jpaProperties), jtaTransactionManager);
     }
 
     @Override 
@@ -37,7 +39,7 @@ public class JpaConfiguration extends JpaBaseConfiguration {
 
     @Override
     protected Map<String, Object> getVendorProperties() {
-        HashMap<String, Object> jpaProps = new HashMap<>();
+        val jpaProps = new HashMap<String, Object>();
         jpaProps.put(PersistenceUnitProperties.WEAVING, "false");
         jpaProps.put(PersistenceUnitProperties.SCHEMA_GENERATION_CREATE_DATABASE_SCHEMAS, true);
         
@@ -46,56 +48,41 @@ public class JpaConfiguration extends JpaBaseConfiguration {
         
         jpaProps.put(PersistenceUnitProperties.DDL_GENERATION, PersistenceUnitProperties.CREATE_OR_EXTEND);
         return jpaProps;
-        
-        
-        
     }
     
     @SneakyThrows
     private static DataSource fix(
-            Object arg,
-            DataSource dataSource
-            ) {
+            JpaSchemaConfiguration jpaSchemaConfiguration,
+            DataSource dataSource) {
         
-        System.err.println("arg: " + arg);
+        System.err.println("jpaSchemaConfiguration: " + jpaSchemaConfiguration);
         
-        val con = dataSource.getConnection();
-        
-        System.err.println("catalog: " + con.getCatalog());
-        System.err.println("schema: " + con.getSchema());
-        
-//        DatabaseSessionImpl session = null;
-//        SchemaManager mgr = new SchemaManager(session);
-//        
-//        session.getPlatform().
-//        
-//        DatabaseObjectDefinition dod = null;
-//        
-//        dod.createDatabaseSchemaOnDatabase(session, null);
-        
-//        mgr.dropDatabaseSchemas();
-        
-        val s = con.createStatement();
-        s.execute("CREATE SCHEMA IF NOT EXISTS A");
-        s.execute("CREATE SCHEMA IF NOT EXISTS B");
-        con.close();
-        
-        //LocalContainerEntityManagerFactoryBean x;
+        if(jpaSchemaConfiguration.isAutoCreateAdditionalSchemas()) {
+            try(val con = dataSource.getConnection()){
+                
+                val s = con.createStatement();
+                
+                for(val schema : jpaSchemaConfiguration.getAdditionalSchemas()) {
+                    s.execute(String.format(jpaSchemaConfiguration.getCreateSchemaSqlTemplate(), schema));
+                }
+                
+            }
+        }
 
         return dataSource;
     }
     
-    private static JpaProperties fix(JpaProperties properties) {
+    private static JpaProperties fix(JpaSchemaConfiguration jpaSchemaConfiguration, JpaProperties properties) {
 
         System.err.println("properties: " + properties.getProperties());
+        
+        properties.setShowSql(true); // debug
+        
+        jpaSchemaConfiguration.getAdditionalSchemas()
+        .forEach(schema->properties.getMappingResources()
+                .add(String.format("META-INF/orm-%s.xml", schema)));
+        
         System.err.println("mapping-resources: " + properties.getMappingResources());
-        
-        //properties.setGenerateDdl(true);
-        properties.setShowSql(true);
-        
-        //properties.setDatabase(Database.H2);
-        properties.getMappingResources().add("META-INF/orm-a.xml");
-        properties.getMappingResources().add("META-INF/orm-b.xml");
         
         return properties;
     }
