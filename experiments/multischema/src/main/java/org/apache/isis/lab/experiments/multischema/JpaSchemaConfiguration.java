@@ -14,10 +14,15 @@ import lombok.ToString;
 public class JpaSchemaConfiguration {
     
     /**
-     * Configuration by convention, does lookup "mapping-files" in META-INF/orm-<i>name</i>.xml
+     * List of additional schemas to be auto-created.
+     */
+    private final List<String> autoCreateSchemas = new ArrayList<>();
+    
+    /**
+     * Does lookup additional "mapping-files" in META-INF/orm-<i>name</i>.xml
      * (equivalent to "mapping-file" entries in persistence.xml).
      */
-    private final List<String> additionalSchemas = new ArrayList<>();
+    private final List<String> additionalOrmFiles = new ArrayList<>();
     
     /**
      * SQL syntax to create a DB schema.
@@ -25,10 +30,5 @@ public class JpaSchemaConfiguration {
     @Setter
     private String createSchemaSqlTemplate = "CREATE SCHEMA IF NOT EXISTS %S";
     
-    /**
-     * Whether to automatically create additional schemas.
-     */
-    @Setter
-    private boolean autoCreateAdditionalSchemas = true;
 
 }

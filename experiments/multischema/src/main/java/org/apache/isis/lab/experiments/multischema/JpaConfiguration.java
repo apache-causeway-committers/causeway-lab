@@ -57,12 +57,12 @@ public class JpaConfiguration extends JpaBaseConfiguration {
         
         System.err.println("jpaSchemaConfiguration: " + jpaSchemaConfiguration);
         
-        if(jpaSchemaConfiguration.isAutoCreateAdditionalSchemas()) {
+        if(!jpaSchemaConfiguration.getAutoCreateSchemas().isEmpty()) {
             try(val con = dataSource.getConnection()){
                 
                 val s = con.createStatement();
                 
-                for(val schema : jpaSchemaConfiguration.getAdditionalSchemas()) {
+                for(val schema : jpaSchemaConfiguration.getAutoCreateSchemas()) {
                     s.execute(String.format(jpaSchemaConfiguration.getCreateSchemaSqlTemplate(), schema));
                 }
                 
@@ -78,7 +78,7 @@ public class JpaConfiguration extends JpaBaseConfiguration {
         
         properties.setShowSql(true); // debug
         
-        jpaSchemaConfiguration.getAdditionalSchemas()
+        jpaSchemaConfiguration.getAdditionalOrmFiles()
         .forEach(schema->properties.getMappingResources()
                 .add(String.format("META-INF/orm-%s.xml", schema)));
         
