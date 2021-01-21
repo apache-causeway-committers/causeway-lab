@@ -24,10 +24,10 @@ import lombok.val;
 public class JpaConfiguration extends JpaBaseConfiguration { 
 
     protected JpaConfiguration(
-            DataSource dataSource, 
-            JpaProperties properties,
-            ObjectProvider<JtaTransactionManager> jtaTransactionManager) {
-        super(fix(dataSource), fix(properties), jtaTransactionManager);
+        DataSource dataSource,
+        JpaProperties jpaProperties,
+        ObjectProvider<JtaTransactionManager> jtaTransactionManager) {
+        super(fix(null, dataSource), fix(jpaProperties), jtaTransactionManager);
     }
 
     @Override 
@@ -39,18 +39,41 @@ public class JpaConfiguration extends JpaBaseConfiguration {
     protected Map<String, Object> getVendorProperties() {
         HashMap<String, Object> jpaProps = new HashMap<>();
         jpaProps.put(PersistenceUnitProperties.WEAVING, "false");
-        jpaProps.put(PersistenceUnitProperties.SCHEMA_GENERATION_CREATE_DATABASE_SCHEMAS, "true");
+        jpaProps.put(PersistenceUnitProperties.SCHEMA_GENERATION_CREATE_DATABASE_SCHEMAS, true);
+        
+        jpaProps.put("javax.persistence.schema-generation.database.action", PersistenceUnitProperties.SCHEMA_GENERATION_CREATE_ACTION);
+        jpaProps.put("javax.persistence.schema-generation.scripts.action", PersistenceUnitProperties.SCHEMA_GENERATION_CREATE_ACTION);
+        
         jpaProps.put(PersistenceUnitProperties.DDL_GENERATION, PersistenceUnitProperties.CREATE_OR_EXTEND);
         return jpaProps;
+        
+        
+        
     }
     
     @SneakyThrows
-    private static DataSource fix(DataSource dataSource) {
+    private static DataSource fix(
+            Object arg,
+            DataSource dataSource
+            ) {
+        
+        System.err.println("arg: " + arg);
         
         val con = dataSource.getConnection();
         
         System.err.println("catalog: " + con.getCatalog());
         System.err.println("schema: " + con.getSchema());
+        
+//        DatabaseSessionImpl session = null;
+//        SchemaManager mgr = new SchemaManager(session);
+//        
+//        session.getPlatform().
+//        
+//        DatabaseObjectDefinition dod = null;
+//        
+//        dod.createDatabaseSchemaOnDatabase(session, null);
+        
+//        mgr.dropDatabaseSchemas();
         
         val s = con.createStatement();
         s.execute("CREATE SCHEMA IF NOT EXISTS A");
@@ -64,8 +87,15 @@ public class JpaConfiguration extends JpaBaseConfiguration {
     
     private static JpaProperties fix(JpaProperties properties) {
 
-        properties.setGenerateDdl(true);
+        System.err.println("properties: " + properties.getProperties());
+        System.err.println("mapping-resources: " + properties.getMappingResources());
+        
+        //properties.setGenerateDdl(true);
         properties.setShowSql(true);
+        
+        //properties.setDatabase(Database.H2);
+        properties.getMappingResources().add("META-INF/orm-a.xml");
+        properties.getMappingResources().add("META-INF/orm-b.xml");
         
         return properties;
     }

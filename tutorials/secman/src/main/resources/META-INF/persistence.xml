@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="secman">
+		<class>org.apache.isis.extensions.secman.jpa.dom.user.ApplicationUser</class>
+		<class>org.apache.isis.extensions.secman.jpa.dom.permission.ApplicationPermission</class>
+		<class>org.apache.isis.extensions.secman.jpa.dom.tenancy.ApplicationTenancy</class>
+		<class>org.apache.isis.extensions.secman.jpa.dom.role.ApplicationRole</class>
+		<class>org.apache.isis.extensions.secman.jpa.dom.role.ApplicationRole2</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		
+		<properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:db;DB_CLOSE_DELAY=-1"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+		</properties>
+		
+	</persistence-unit>
+	
+	<persistence-unit name="tutorial">
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+	</persistence-unit>
+	
+</persistence>
