@@ -11,13 +11,14 @@
 	</parent>
 	
 	<groupId>org.apache.isis.lab</groupId>
-	<artifactId>isis-lab-experiments-multischema</artifactId>
+	<artifactId>isis-lab-experiments-vaadin14</artifactId>
 	
-	<name>multischema</name>
-	<description>Demo project for Spring Boot</description>
+	<name>vaadin14</name>
+	<description>Demo project for Vaadin 14 on Spring Boot</description>
 	<properties>
 		<java.version>15</java.version>
 	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -49,6 +50,14 @@
 			<artifactId>org.eclipse.persistence.jpa</artifactId>
 			<version>2.7.8</version>
 		</dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-bom</artifactId>
+            <version>[14, 15)</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
 
 
 	</dependencies>
