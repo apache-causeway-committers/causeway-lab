@@ -194,7 +194,7 @@ Now let's wire everything up by importing required modules into the main _Applic
     // Default Admin/User/Role Seeding Support for SecMan <.>
     IsisModuleTestingFixturesApplib.class, 
 })
-@EntityScan(basePackageClasses = { <.>
+@EntityScan(basePackageClasses = { // <.>
         Employee.class,
 })
  public class Application {
@@ -202,7 +202,7 @@ Now let's wire everything up by importing required modules into the main _Applic
 ...
     
     @Bean
-    public SecurityModuleConfig securityModuleConfigBean() { <.>
+    public SecurityModuleConfig securityModuleConfigBean() { // <.>
         return SecurityModuleConfig.builder()
                 .adminUserName("sven")
                 .adminAdditionalPackagePermission("org.apache.isis")
@@ -210,7 +210,7 @@ Now let's wire everything up by importing required modules into the main _Applic
     }
 
     @Bean
-    public PermissionsEvaluationService permissionsEvaluationService() { <.>
+    public PermissionsEvaluationService permissionsEvaluationService() { // <.>
         return new PermissionsEvaluationServiceAllowBeatsVeto();
     }
     
