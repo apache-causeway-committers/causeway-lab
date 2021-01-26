@@ -9,8 +9,8 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>isis-lab-experiments-vaadin14-app</artifactId>
-	<description>Demo project for Vaadin14 on Spring Boot (App)</description>
+	<artifactId>isis-lab-experiments-vaadin14-webapp</artifactId>
+	<description>Demo project for Vaadin14 on Spring Boot (Webapp)</description>
 
 	<dependencies>
 
