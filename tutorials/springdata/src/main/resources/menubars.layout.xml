@@ -29,45 +29,45 @@
 			<mb3:named>Prototyping</mb3:named>
 			<mb3:section>
 				<mb3:serviceAction
-					objectType="isisApplib.LayoutServiceMenu" id="downloadLayouts">
+					objectType="isis.applib.LayoutServiceMenu" id="downloadLayouts">
 					<cpt:named>Download Object Layouts (ZIP)</cpt:named>
 				</mb3:serviceAction>
 				<mb3:serviceAction
-					objectType="isisApplib.LayoutServiceMenu"
+					objectType="isis.applib.LayoutServiceMenu"
 					id="downloadMenuBarsLayout">
 					<cpt:named>Download Menu Bars Layout (XML)</cpt:named>
 				</mb3:serviceAction>
 			</mb3:section>
 			<mb3:section>
 				<mb3:serviceAction
-					objectType="isisApplib.MetaModelServiceMenu"
+					objectType="isis.applib.MetaModelServiceMenu"
 					id="downloadMetaModelCsv">
 					<cpt:named>Download Meta Model (CSV)</cpt:named>
 				</mb3:serviceAction>
 				<mb3:serviceAction
-					objectType="isisApplib.MetaModelServiceMenu"
+					objectType="isis.applib.MetaModelServiceMenu"
 					id="downloadMetaModelXml">
 					<cpt:named>Download Meta Model (XML)</cpt:named>
 				</mb3:serviceAction>
 			</mb3:section>
 			<mb3:section>
 				<mb3:serviceAction
-					objectType="isisApplib.TranslationServicePoMenu"
+					objectType="isis.applib.TranslationServicePoMenu"
 					id="downloadTranslations">
 					<cpt:named>Download Translations</cpt:named>
 				</mb3:serviceAction>
 				<mb3:serviceAction
-					objectType="isisApplib.TranslationServicePoMenu"
+					objectType="isis.applib.TranslationServicePoMenu"
 					id="resetTranslationCache">
 					<cpt:named>Clear translation cache</cpt:named>
 				</mb3:serviceAction>
 				<mb3:serviceAction
-					objectType="isisApplib.TranslationServicePoMenu"
+					objectType="isis.applib.TranslationServicePoMenu"
 					id="switchToReadingTranslations">
 					<cpt:named>Switch To Reading Translations</cpt:named>
 				</mb3:serviceAction>
 				<mb3:serviceAction
-					objectType="isisApplib.TranslationServicePoMenu"
+					objectType="isis.applib.TranslationServicePoMenu"
 					id="switchToWritingTranslations">
 					<cpt:named>Switch To Writing Translations</cpt:named>
 				</mb3:serviceAction>
@@ -79,7 +79,7 @@
 			<mb3:named>Configuration Menu</mb3:named>
 			<mb3:section>
 				<mb3:serviceAction
-					objectType="isisApplib.ConfigurationMenu" id="configuration">
+					objectType="isis.applib.ConfigurationMenu" id="configuration">
 					<cpt:named>Configuration</cpt:named>
 				</mb3:serviceAction>
 			</mb3:section>
@@ -88,7 +88,7 @@
 			<mb3:named>Logout Menu</mb3:named>
 			<mb3:section>
 				<mb3:serviceAction
-					objectType="isisSecurityApi.LogoutMenu" id="logout">
+					objectType="isis.security.LogoutMenu" id="logout">
 					<cpt:named>Logout</cpt:named>
 				</mb3:serviceAction>
 			</mb3:section>
