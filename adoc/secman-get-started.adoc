@@ -170,7 +170,7 @@ _SecMan_ provides a bunch of menu entries, lets integrate these with our menubar
 ...
 ----
 
-=== Wiring the Components Together
+== Wiring the Components together
 
 Now let's wire everything up by importing required modules into the main _Application_ class:
 
