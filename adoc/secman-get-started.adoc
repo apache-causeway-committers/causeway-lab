@@ -23,7 +23,7 @@ If you are not familiar with these yet, just ignore them as these are optional a
 
 We start by reusing what we have created in the previous tutorial:
 
-xref:adoc/spring-data-with-apache-isis-get-started.adoc[Sample Application with Spring Boot and Apache Isis]
+xref:spring-data-with-apache-isis-get-started.adoc[Sample Application with Spring Boot and Apache Isis]
 
 === Maven (Shiro + SecMan)
 
