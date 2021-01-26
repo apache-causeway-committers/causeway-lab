@@ -1,0 +1,147 @@
+= Sample Application using Apache Isis SecMan Extension
+:toc:
+:toc-title: pass:[<h3>Contents</h3>]
+:toc-placement!
+
+Back to xref:../README.adoc[Main Page]
+
+toc::[]
+
+== Overview
+
+_Apache Isis_ is a Java framework for creating web applications using 
+the https://en.wikipedia.org/wiki/Naked_objects[Naked Objects] pattern.  
+
+In this tutorial, we'll explore how to add the _Apache Isis *SecMan* Extension_, which provides an UI to manage application users, roles and their permissions within the application. 
+ 
+For an introduction to Apache Isis refer to the documents at the official site https://isis.apache.org[].
+
+NOTE: We use _lombok_ (https://projectlombok.org/[]) annotations through out this tutorial.
+If you are not familiar with these yet, just ignore them as these are optional anyway.
+
+== Setup
+
+We start by reusing what we have created in the previous tutorial:
+
+xref:adoc/spring-data-with-apache-isis-get-started.adoc[Sample Application with Spring Boot and Apache Isis]
+
+=== Maven (Shiro + SecMan)
+
+Now let's add _Maven_ dependencies for _Shiro_ and _SecMan_:
+
+[source,xml]
+./pom.xml
+----
+<!-- SHIRO INTEGRATION -->
+
+<dependency>
+	<groupId>org.apache.isis.security</groupId>
+	<artifactId>isis-security-shiro</artifactId>
+	<scope>provided</scope>
+</dependency>
+
+<!-- SECMAN POWERED BY JPA -->
+
+<dependency>
+	<groupId>org.apache.isis.extensions</groupId>
+	<artifactId>isis-extensions-secman-model</artifactId>
+</dependency>
+<dependency>
+	<groupId>org.apache.isis.extensions</groupId>
+	<artifactId>isis-extensions-secman-encryption-jbcrypt</artifactId>
+</dependency>
+<dependency>
+	<groupId>org.apache.isis.extensions</groupId>
+	<artifactId>isis-extensions-secman-persistence-jpa</artifactId>
+</dependency>
+<dependency>
+	<groupId>org.apache.isis.extensions</groupId>
+	<artifactId>isis-extensions-secman-shiro-realm</artifactId>
+</dependency>
+----
+
+=== Security Backend (Shiro)
+
+For this tutorial we are using _Apache Shiro_ as the _Security Backend_. Lets add a Shiro configuration:
+
+[source,xml]
+./src/main/resources/shiro.ini
+----
+[main]
+
+authenticationStrategy=org.apache.isis.extensions.secman.shiro.AuthenticationStrategyForIsisModuleSecurityRealm
+isisModuleSecurityRealm=org.apache.isis.extensions.secman.shiro.IsisModuleExtSecmanShiroRealm
+
+securityManager.authenticator.authenticationStrategy = $authenticationStrategy
+securityManager.realms = $isisModuleSecurityRealm
+
+[users]
+[roles]
+----
+
+=== Menu (SecMan)
+
+[source,java]
+----
+
+----
+
+=== Wiring the Components Together
+
+Now let's wire everything up by importing required modules into the main _Application_ class:
+
+[source,java]
+----
+@SpringBootApplication
+@Import({
+    IsisModuleCoreRuntimeServices.class, // Apache Isis Runtime
+    IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
+    IsisModuleExtModelAnnotation.class, // @Model support
+    IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
+    IsisModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
+    IsisModuleSecurityShiro.class, // Security using Shiro
+
+    // Security Manager Extension (SecMan) <.>
+    IsisModuleExtSecmanModel.class,
+    IsisModuleExtSecmanRealmShiro.class,
+    IsisModuleExtSecmanPersistenceJpa.class,
+    IsisModuleExtSecmanEncryptionJbcrypt.class,
+    
+    // Default Admin/User/Role Seeding Support for SecMan <.>
+    IsisModuleTestingFixturesApplib.class, 
+})
+@EntityScan(basePackageClasses = { <.>
+        Employee.class,
+})
+ public class Application {
+ 
+...
+    
+    @Bean
+    public SecurityModuleConfig securityModuleConfigBean() { <.>
+        return SecurityModuleConfig.builder()
+                .adminUserName("sven")
+                .adminAdditionalPackagePermission("org.apache.isis")
+                .build();
+    }
+
+    @Bean
+    public PermissionsEvaluationService permissionsEvaluationService() { <.>
+        return new PermissionsEvaluationServiceAllowBeatsVeto();
+    }
+    
+ }
+----	
+
+<.> Required modules for _SecMan_ to use JPA as the persistence provider and _jbcrypt_ as encryption technology.  
+<.> Required module for _SecMan_ to seed the permission database with initial users, roles and permissions.
+<.> Explicitly tells Spring where to find JPA entities.
+<.> Configures which permission database entries should be seeded initially (on application startup).
+<.> Configures the permission policy to use, in our case _allow beats veto_. You can have it the other way around, if desired, or plug in your custom solution.
+
+== Conclusion
+
+In this article, we switched on *Shiro* as security backend and extended the application to use *SecMan*.
+
+The code is available on 
+https://github.com/apache-isis-committers/isis-lab/tree/master/tutorials/secman[GitHub].

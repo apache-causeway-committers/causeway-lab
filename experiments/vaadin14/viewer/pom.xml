@@ -51,6 +51,9 @@
 	<profiles>
 		<profile>
 			<id>production</id>
+			<activation>
+				<activeByDefault/>	
+			</activation>
 			<build>
 				<plugins>
 					<plugin>

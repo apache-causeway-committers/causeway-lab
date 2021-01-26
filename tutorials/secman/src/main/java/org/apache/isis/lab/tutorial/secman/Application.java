@@ -42,18 +42,12 @@ import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
 
 @SpringBootApplication
 @Import({
-    IsisModuleCoreRuntimeServices.class,
+    IsisModuleCoreRuntimeServices.class, // Apache Isis Runtime
     IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
-
     IsisModuleExtModelAnnotation.class, // @Model support
-
+    IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
     IsisModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
-    
-    // UI (Wicket Viewer)
-    IsisModuleViewerWicketViewer.class,
-    
-    // Security using Shiro
-    IsisModuleSecurityShiro.class,
+    IsisModuleSecurityShiro.class, // Security using Shiro
 
     // Security Manager Extension (SecMan)
     IsisModuleExtSecmanModel.class,

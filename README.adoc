@@ -13,4 +13,5 @@ toc::[]
 
 == Tutorials
 
-xref:adoc/spring-data-with-apache-isis-get-started.adoc[Sample Application with Spring Boot and Apache Isis]
+* xref:adoc/spring-data-with-apache-isis-get-started.adoc[Sample Application with Spring Boot and Apache Isis]
+* xref:adoc/secman-get-started.adoc[Sample Application using Apache Isis SecMan Extension]

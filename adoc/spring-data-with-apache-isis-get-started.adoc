@@ -142,12 +142,41 @@ public class EmployeeMenu {
 
 === Wiring the Components Together
 
+[source,java]
+----
+@SpringBootApplication
+@Import({
+    IsisModuleCoreRuntimeServices.class, // Apache Isis Runtime
+    IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
+    IsisModuleExtModelAnnotation.class, // @Model support
+    IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
+    IsisModuleSecurityBypass.class // Security (Bypass, grants all access)
+})
+public class Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class);
+    }
+
+    @Bean 
+    public CommandLineRunner loadData(EmployeeRepository repository) { // <.>
+        return (args) -> {
+            repository.save(new Employee("Bill", "Gates"));
+            repository.save(new Employee("Mark", "Zuckerberg"));
+            repository.save(new Employee("Sundar", "Pichai"));
+            repository.save(new Employee("Jeff", "Bezos"));
+        };
+    }
+}
+----
+
+<.> Initializes the repository (database) with some values on startup.
+
 [WARNING]
 ====
 some TODOs here 
   
   more details on pom.xml
-  Application.java and imported components
   application.yml
   we left out Apache Isis specific annotations above, but need to add and explain these here
 ====

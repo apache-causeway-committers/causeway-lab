@@ -13,7 +13,13 @@
 	<artifactId>isis-lab-experiments-vaadin14</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>isis-lab-experiments-vaadin14</name>
-	<description>Demo project for Vaadin14 on Spring Boot</description>
+	<description>
+		Demo project for Vaadin14 on Spring Boot.
+		
+		Especially dealing with the question on how to package a vaadin module for production,
+		such that any consuming module does no need to pull all the npm stuff again and just 
+		use what's already in the vaadin module.
+	</description>
 	<packaging>pom</packaging>
 	
 	<properties>
