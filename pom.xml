@@ -16,6 +16,7 @@
         <module>tutorials/secman</module>
         
         <module>experiments/multischema</module>
+        <module>experiments/springsecurity</module>
         <module>experiments/vaadin14</module>
         
     </modules>
