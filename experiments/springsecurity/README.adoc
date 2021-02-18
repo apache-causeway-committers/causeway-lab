@@ -1,0 +1,31 @@
+= Apache Isis Laboratory - Spring Security Experiment
+:toc:
+:toc-title: pass:[<h3>Contents</h3>]
+:toc-placement!:
+
+Laboratory for the _Apache Isis_ framework. (Tutorials, Experiments, ...)
+____
+http://isis.apache.org[Apache Isis] software is a framework for rapidly developing domain-driven apps in Java.
+Write your business logic in entities, domain services and repositories, and the framework dynamically generates a representation of that domain model as a webapp or a RESTful API.
+____
+
+With this example project we are trying to setup an application that uses GitHub as an OpenId Connect provider.
+
+The sources are missing an entry in application.yml with secrets for eg. `github`, but could also be `google` etc
+
+[source,yaml]
+----
+spring:
+  security:
+    oauth2:
+      client:
+        registration: 
+          github: 
+            client-id: <client-id>
+            client-secret: <client-secret> 
+----
+ 
+
+See https://www.baeldung.com/spring-security-openid-connect[baeldung.com - Spring Security OpenID connect] + 
+See https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/[GitHub - Creating an OAuth App]
+
