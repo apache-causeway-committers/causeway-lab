@@ -3,81 +3,139 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.2</version>
+		<groupId>org.apache.isis.app</groupId>
+		<artifactId>isis-app-starter-parent</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<groupId>org.apache.isis.lab</groupId>
 	<artifactId>isis-lab-experiments-springsecurity</artifactId>
 
-	<name>multischema</name>
+	<name>springsecurity</name>
 	<description>Demo project for Spring Security</description>
 	<properties>
 		<java.version>15</java.version>
 	</properties>
 	<dependencies>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
+	
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
 
+		<!-- PERSISTENCE -->
+
 		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.jpa</artifactId>
-			<version>2.7.8</version>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
 		</dependency>
 
+		<!-- ISIS -->
+
+		<dependency>
+			<groupId>org.apache.isis.viewer</groupId>
+			<artifactId>isis-viewer-wicket-viewer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.isis.viewer</groupId>
+			<artifactId>isis-viewer-restfulobjects-viewer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.isis.viewer</groupId>
+			<artifactId>isis-viewer-restfulobjects-jaxrsresteasy4</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.isis.core</groupId>
+			<artifactId>isis-core-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.isis.security</groupId>
+			<artifactId>isis-security-spring</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.isis.persistence</groupId>
+			<artifactId>isis-persistence-jpa-eclipselink</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.isis.core</groupId>
+			<artifactId>isis-core-runtimeservices</artifactId>
+		</dependency>
+		
+		<!-- H2 CONSOLE FOR DEBUGGING -->
+		
+		<dependency>
+			<groupId>org.apache.isis.testing</groupId>
+			<artifactId>isis-testing-h2console-ui</artifactId>
+		</dependency>
+
+		<!-- SHIRO INTEGRATION -->
+
+		<dependency>
+            <groupId>org.apache.isis.security</groupId>
+			<artifactId>isis-security-shiro</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- SPRING SECURITY OAUTH-2 STACK -->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
+		<!-- SECMAN POWERED BY JPA -->
+
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<groupId>org.apache.isis.extensions</groupId>
+			<artifactId>isis-extensions-secman-model</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.isis.extensions</groupId>
+			<artifactId>isis-extensions-secman-encryption-jbcrypt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.isis.extensions</groupId>
+			<artifactId>isis-extensions-secman-persistence-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.isis.extensions</groupId>
+			<artifactId>isis-extensions-secman-shiro-realm</artifactId>
+		</dependency>
+
+		<!-- ISIS EXTENSIONS -->
+
+		<dependency>
+			<groupId>org.apache.isis.extensions</groupId>
+			<artifactId>isis-extensions-modelannotation</artifactId>
 		</dependency>
 
 		<!-- TESTING -->
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
+			<groupId>org.apache.isis.testing</groupId>
+			<artifactId>isis-testing-unittestsupport-applib</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-
 
 	</dependencies>
 

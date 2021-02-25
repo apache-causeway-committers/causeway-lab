@@ -113,7 +113,11 @@ server:
 spring:
   banner:
     location: banner.txt
-
+#  datasource:
+#    url: jdbc:postgresql://lan.corax.at:5432/isis
+#    driver-class-name: org.postgresql.Driver
+#    username: postgres
+#    password: postgres
   quartz:
     job-store-type: memory
 

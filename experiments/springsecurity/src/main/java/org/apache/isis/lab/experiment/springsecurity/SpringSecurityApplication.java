@@ -16,7 +16,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  */
-package org.apache.isis.lab.tutorial.secman;
+package org.apache.isis.lab.experiment.springsecurity;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,7 +24,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.web.FilterChainProxy;
 
+import org.apache.isis.core.config.presets.IsisPresets;
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
 import org.apache.isis.extensions.modelannotation.metamodel.IsisModuleExtModelAnnotation;
 import org.apache.isis.extensions.secman.api.SecmanConfiguration;
@@ -35,10 +37,11 @@ import org.apache.isis.extensions.secman.jpa.IsisModuleExtSecmanPersistenceJpa;
 import org.apache.isis.extensions.secman.model.IsisModuleExtSecmanModel;
 import org.apache.isis.extensions.secman.shiro.IsisModuleExtSecmanRealmShiro;
 import org.apache.isis.persistence.jpa.eclipselink.IsisModuleJpaEclipselink;
-import org.apache.isis.security.shiro.IsisModuleSecurityShiro;
+import org.apache.isis.security.spring.IsisModuleSecuritySpring;
 import org.apache.isis.testing.fixtures.applib.IsisModuleTestingFixturesApplib;
 import org.apache.isis.testing.h2console.ui.IsisModuleTestingH2ConsoleUi;
 import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
+import org.apache.isis.viewer.wicket.viewer.integration.WebRequestCycleForIsis;
 
 @SpringBootApplication
 @Import({
@@ -47,24 +50,47 @@ import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
     IsisModuleExtModelAnnotation.class, // @Model support
     IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
     IsisModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
-    IsisModuleSecurityShiro.class, // Security using Shiro
+    IsisModuleSecuritySpring.class, // Authorization using Spring Security
 
     // Security Manager Extension (SecMan)
     IsisModuleExtSecmanModel.class,
     IsisModuleExtSecmanRealmShiro.class,
     IsisModuleExtSecmanPersistenceJpa.class,
     IsisModuleExtSecmanEncryptionJbcrypt.class,
-    
+
     // Default Admin/User/Role Seeding Support for SecMan
     IsisModuleTestingFixturesApplib.class, 
 })
 @EntityScan(basePackageClasses = {
         Employee.class,
 })
-public class Application {
+public class SpringSecurityApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class);
+
+        IsisPresets.logging(FilterChainProxy.class, "debug");
+
+        IsisPresets.logging(org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.context.SecurityContextPersistenceFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.header.HeaderWriterFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.csrf.CsrfFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.authentication.logout.LogoutFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.savedrequest.RequestCacheAwareFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.authentication.AnonymousAuthenticationFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.oauth2.client.web.OAuth2AuthorizationCodeGrantFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.session.SessionManagementFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.access.ExceptionTranslationFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.access.intercept.FilterSecurityInterceptor.class, "debug");
+
+        IsisPresets.logging(WebRequestCycleForIsis.class, "debug");
+
+        SpringApplication.run(SpringSecurityApplication.class);
     }
 
     @Bean
@@ -78,7 +104,7 @@ public class Application {
             }
         };
     }
-    
+
     @Bean
     public SecmanConfiguration securityModuleConfigBean() {
         return SecmanConfiguration.builder()
@@ -91,5 +117,5 @@ public class Application {
     public PermissionsEvaluationService permissionsEvaluationService() {
         return new PermissionsEvaluationServiceAllowBeatsVeto();
     }
-    
+
 }
