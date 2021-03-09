@@ -1,19 +1,19 @@
-package org.apache.isis.lab.experiments.vaadin14;
+package org.apache.isis.lab.experiments.vaadin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
-import org.apache.isis.lab.experiments.vaadin14.dom.Vaadin14Configuration;
+import org.apache.isis.lab.experiments.vaadin.dom.VaadinConfiguration;
 
 @SpringBootApplication
 @Import({
-    Vaadin14Configuration.class
+    VaadinConfiguration.class
 })
-public class Vaadin14Application {
+public class VaadinApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Vaadin14Application.class, args);
+		SpringApplication.run(VaadinApplication.class, args);
 	}
 	
 }

@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.vaadin14.dom;
+package org.apache.isis.lab.experiments.vaadin.dom;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = {
-    Vaadin14Configuration.class
+    VaadinConfiguration.class
 })
 @EnableAutoConfiguration
-class Vaadin14ApplicationTests {
+class VaadinApplicationTests {
 
     @Autowired EmployeeRepository employeeRepository;
     

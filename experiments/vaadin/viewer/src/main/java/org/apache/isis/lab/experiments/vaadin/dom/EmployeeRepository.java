@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.vaadin14.dom;
+package org.apache.isis.lab.experiments.vaadin.dom;
 
 import java.util.List;
 

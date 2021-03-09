@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.vaadin14.dom;
+package org.apache.isis.lab.experiments.vaadin.dom;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

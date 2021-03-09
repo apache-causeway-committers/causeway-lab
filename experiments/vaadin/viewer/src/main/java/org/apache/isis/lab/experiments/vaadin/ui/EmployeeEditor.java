@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.vaadin14.ui;
+package org.apache.isis.lab.experiments.vaadin.ui;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
@@ -13,8 +13,8 @@ import com.vaadin.flow.spring.annotation.UIScope;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.apache.isis.lab.experiments.vaadin14.dom.Employee;
-import org.apache.isis.lab.experiments.vaadin14.dom.EmployeeRepository;
+import org.apache.isis.lab.experiments.vaadin.dom.Employee;
+import org.apache.isis.lab.experiments.vaadin.dom.EmployeeRepository;
 
 @SpringComponent
 @UIScope

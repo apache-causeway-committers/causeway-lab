@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.vaadin14.ui;
+package org.apache.isis.lab.experiments.vaadin.ui;
 
 public class Row {
 

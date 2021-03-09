@@ -51,6 +51,10 @@ webpack.config.js
 webpack.generated.js
 node/
 node_modules/
+.npmrc
+tsconfig.json
+types.d.ts
+vaadin.ts
 
 #Gradle
 gradlew

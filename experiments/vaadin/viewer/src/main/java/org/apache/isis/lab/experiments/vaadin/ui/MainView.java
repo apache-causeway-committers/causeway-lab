@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.vaadin14.ui;
+package org.apache.isis.lab.experiments.vaadin.ui;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -11,8 +11,8 @@ import com.vaadin.flow.router.Route;
 
 import org.springframework.util.StringUtils;
 
-import org.apache.isis.lab.experiments.vaadin14.dom.Employee;
-import org.apache.isis.lab.experiments.vaadin14.dom.EmployeeRepository;
+import org.apache.isis.lab.experiments.vaadin.dom.Employee;
+import org.apache.isis.lab.experiments.vaadin.dom.EmployeeRepository;
 
 @Route
 public class MainView extends VerticalLayout {

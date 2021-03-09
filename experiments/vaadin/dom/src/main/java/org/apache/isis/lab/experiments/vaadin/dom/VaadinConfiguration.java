@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.vaadin14.dom;
+package org.apache.isis.lab.experiments.vaadin.dom;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaRepositories(basePackageClasses = {EmployeeRepository.class})
-public class Vaadin14Configuration {
+public class VaadinConfiguration {
   
     @Bean
     public CommandLineRunner loadData(EmployeeRepository eRepo) {
