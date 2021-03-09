@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.apache.isis.lab</groupId>
-		<artifactId>isis-lab-experiments-vaadin14</artifactId>
+		<artifactId>isis-lab-experiments-vaadin</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>isis-lab-experiments-vaadin14-viewer</artifactId>
-	<description>Demo project for Vaadin14 on Spring Boot (Viewer)</description>
+	<artifactId>isis-lab-experiments-vaadin-viewer</artifactId>
+	<description>Demo project for Vaadin on Spring Boot (Viewer)</description>
 
 	<dependencies>
 
@@ -36,7 +36,7 @@
 
 		<dependency>
 			<groupId>org.apache.isis.lab</groupId>
-			<artifactId>isis-lab-experiments-vaadin14-dom</artifactId>
+			<artifactId>isis-lab-experiments-vaadin-dom</artifactId>
 		</dependency>
 
 	</dependencies>

@@ -17,7 +17,7 @@
         
         <module>experiments/multischema</module>
         <module>experiments/springsecurity</module>
-        <module>experiments/vaadin14</module>
+        <module>experiments/vaadin</module>
         
     </modules>
 

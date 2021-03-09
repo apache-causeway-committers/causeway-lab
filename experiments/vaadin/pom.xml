@@ -10,11 +10,11 @@
 	</parent>
 	
 	<groupId>org.apache.isis.lab</groupId>
-	<artifactId>isis-lab-experiments-vaadin14</artifactId>
+	<artifactId>isis-lab-experiments-vaadin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>isis-lab-experiments-vaadin14</name>
+	<name>isis-lab-experiments-vaadin</name>
 	<description>
-		Demo project for Vaadin14 on Spring Boot.
+		Demo project for Vaadin on Spring Boot.
 		
 		Especially dealing with the question on how to package a vaadin module for production,
 		such that any consuming module does no need to pull all the npm stuff again and just 
@@ -24,7 +24,7 @@
 	
 	<properties>
 		<java.version>15</java.version>
-		<vaadin.version>14.4.8</vaadin.version>
+		<vaadin.version>19.0.0</vaadin.version>
 	</properties>
 	
 	<dependencies>
@@ -72,13 +72,13 @@
 			
 			<dependency>
 				<groupId>org.apache.isis.lab</groupId>
-				<artifactId>isis-lab-experiments-vaadin14-dom</artifactId>
+				<artifactId>isis-lab-experiments-vaadin-dom</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>org.apache.isis.lab</groupId>
-				<artifactId>isis-lab-experiments-vaadin14-viewer</artifactId>
+				<artifactId>isis-lab-experiments-vaadin-viewer</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
