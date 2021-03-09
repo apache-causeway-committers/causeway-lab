@@ -64,6 +64,10 @@ isis:
       translation:
         po:
           mode: disabled
+  
+  security:
+    spring: 
+      allow-csrf-filters: false
 
   viewer:
     wicket:
@@ -125,8 +129,8 @@ spring:
       client:
         registration: 
           github: 
-            client-id: xxx
-            client-secret: xxx
+            client-id: ${client-id}
+            client-secret: ${client-secret}
 
 vaadin:
   compatibilityMode: false

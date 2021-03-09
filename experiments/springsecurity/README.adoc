@@ -11,7 +11,7 @@ ____
 
 With this example project we are trying to setup an application that uses GitHub as an OpenId Connect provider.
 
-The sources are missing an entry in application.yml with secrets for eg. `github`, but could also be `google` etc
+Secrets are configured with the `application.yml`, where Spring supports `github`, `google` etc
 
 [source,yaml]
 ----
@@ -21,8 +21,8 @@ spring:
       client:
         registration: 
           github: 
-            client-id: <client-id>
-            client-secret: <client-secret> 
+            client-id: ${client-id}
+            client-secret: ${client-secret} 
 ----
  
 
