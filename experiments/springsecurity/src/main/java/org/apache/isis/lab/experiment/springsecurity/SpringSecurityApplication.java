@@ -30,7 +30,6 @@ import org.springframework.security.web.FilterChainProxy;
 
 import org.apache.isis.core.config.presets.IsisPresets;
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
-import org.apache.isis.extensions.modelannotation.metamodel.IsisModuleExtModelAnnotation;
 import org.apache.isis.extensions.secman.api.SecmanConfiguration;
 import org.apache.isis.extensions.secman.api.SecurityRealm;
 import org.apache.isis.extensions.secman.api.SecurityRealmCharacteristic;
@@ -52,7 +51,6 @@ import org.apache.isis.viewer.wicket.viewer.integration.WebRequestCycleForIsis;
 @Import({
     IsisModuleCoreRuntimeServices.class, // Apache Isis Runtime
     IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
-    IsisModuleExtModelAnnotation.class, // @Model support
     IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
     IsisModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
     IsisModuleSecuritySpring.class, // Authorization using Spring Security

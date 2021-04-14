@@ -26,7 +26,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
-import org.apache.isis.extensions.modelannotation.metamodel.IsisModuleExtModelAnnotation;
 import org.apache.isis.extensions.secman.api.SecmanConfiguration;
 import org.apache.isis.extensions.secman.api.permission.PermissionsEvaluationService;
 import org.apache.isis.extensions.secman.api.permission.PermissionsEvaluationServiceAllowBeatsVeto;
@@ -44,7 +43,6 @@ import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
 @Import({
     IsisModuleCoreRuntimeServices.class, // Apache Isis Runtime
     IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
-    IsisModuleExtModelAnnotation.class, // @Model support
     IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
     IsisModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
     IsisModuleSecurityShiro.class, // Security using Shiro

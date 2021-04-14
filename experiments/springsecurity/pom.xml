@@ -118,11 +118,6 @@
 
 		<!-- ISIS EXTENSIONS -->
 
-		<dependency>
-			<groupId>org.apache.isis.extensions</groupId>
-			<artifactId>isis-extensions-modelannotation</artifactId>
-		</dependency>
-
 		<!-- TESTING -->
 
 		<dependency>
