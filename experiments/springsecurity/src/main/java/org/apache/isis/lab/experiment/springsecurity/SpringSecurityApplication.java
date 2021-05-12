@@ -35,8 +35,8 @@ import org.apache.isis.extensions.secman.api.SecurityRealm;
 import org.apache.isis.extensions.secman.api.SecurityRealmCharacteristic;
 import org.apache.isis.extensions.secman.api.SecurityRealmService;
 import org.apache.isis.extensions.secman.api.authorizor.AuthorizorSecman;
-import org.apache.isis.extensions.secman.api.permission.PermissionsEvaluationService;
-import org.apache.isis.extensions.secman.api.permission.PermissionsEvaluationServiceAllowBeatsVeto;
+import org.apache.isis.extensions.secman.api.permission.spi.PermissionsEvaluationService;
+import org.apache.isis.extensions.secman.api.permission.spi.PermissionsEvaluationServiceAllowBeatsVeto;
 import org.apache.isis.extensions.secman.encryption.jbcrypt.IsisModuleExtSecmanEncryptionJbcrypt;
 import org.apache.isis.extensions.secman.jpa.IsisModuleExtSecmanPersistenceJpa;
 import org.apache.isis.extensions.secman.model.IsisModuleExtSecmanModel;
@@ -50,7 +50,7 @@ import org.apache.isis.viewer.wicket.viewer.integration.WebRequestCycleForIsis;
 @SpringBootApplication//(exclude = { CsrfConfigurer.class })
 @Import({
     IsisModuleCoreRuntimeServices.class, // Apache Isis Runtime
-    IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
+    IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data
     IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
     IsisModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
     IsisModuleSecuritySpring.class, // Authorization using Spring Security
@@ -63,7 +63,7 @@ import org.apache.isis.viewer.wicket.viewer.integration.WebRequestCycleForIsis;
     IsisModuleExtSecmanEncryptionJbcrypt.class,
 
     // Default Admin/User/Role Seeding Support for SecMan
-    IsisModuleTestingFixturesApplib.class, 
+    IsisModuleTestingFixturesApplib.class,
 })
 @EntityScan(basePackageClasses = {
         Employee.class,
@@ -121,8 +121,8 @@ public class SpringSecurityApplication {
     public PermissionsEvaluationService permissionsEvaluationService() {
         return new PermissionsEvaluationServiceAllowBeatsVeto();
     }
-    
-    @Bean 
+
+    @Bean
     public SecurityRealmService securityRealmService() {
         return new SecurityRealmService() {
             @Override
@@ -131,15 +131,15 @@ public class SpringSecurityApplication {
             }
         };
     }
-    
+
     // -- HELPER
-    
+
     private final SecurityRealm securityRealm = new SecurityRealm() {
         @Override
         public EnumSet<SecurityRealmCharacteristic> getCharacteristics() {
             return EnumSet.of(SecurityRealmCharacteristic.DELEGATING);
         }
     };
-    
+
 
 }

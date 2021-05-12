@@ -27,8 +27,8 @@ import org.springframework.context.annotation.Import;
 
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
 import org.apache.isis.extensions.secman.api.SecmanConfiguration;
-import org.apache.isis.extensions.secman.api.permission.PermissionsEvaluationService;
-import org.apache.isis.extensions.secman.api.permission.PermissionsEvaluationServiceAllowBeatsVeto;
+import org.apache.isis.extensions.secman.api.permission.spi.PermissionsEvaluationService;
+import org.apache.isis.extensions.secman.api.permission.spi.PermissionsEvaluationServiceAllowBeatsVeto;
 import org.apache.isis.extensions.secman.encryption.jbcrypt.IsisModuleExtSecmanEncryptionJbcrypt;
 import org.apache.isis.extensions.secman.jpa.IsisModuleExtSecmanPersistenceJpa;
 import org.apache.isis.extensions.secman.model.IsisModuleExtSecmanModel;
@@ -42,7 +42,7 @@ import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
 @SpringBootApplication
 @Import({
     IsisModuleCoreRuntimeServices.class, // Apache Isis Runtime
-    IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
+    IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data
     IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
     IsisModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
     IsisModuleSecurityShiro.class, // Security using Shiro
@@ -52,9 +52,9 @@ import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
     IsisModuleExtSecmanRealmShiro.class,
     IsisModuleExtSecmanPersistenceJpa.class,
     IsisModuleExtSecmanEncryptionJbcrypt.class,
-    
+
     // Default Admin/User/Role Seeding Support for SecMan
-    IsisModuleTestingFixturesApplib.class, 
+    IsisModuleTestingFixturesApplib.class,
 })
 @EntityScan(basePackageClasses = {
         Employee.class,
@@ -76,7 +76,7 @@ public class Application {
             }
         };
     }
-    
+
     @Bean
     public SecmanConfiguration securityModuleConfigBean() {
         return SecmanConfiguration.builder()
@@ -89,5 +89,5 @@ public class Application {
     public PermissionsEvaluationService permissionsEvaluationService() {
         return new PermissionsEvaluationServiceAllowBeatsVeto();
     }
-    
+
 }
