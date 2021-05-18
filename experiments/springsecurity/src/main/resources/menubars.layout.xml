@@ -156,7 +156,7 @@
 			<mb3:section>
 				<mb3:serviceAction objectType="isis.ext.secman.MeService" id="me"/>
 				<mb3:serviceAction
-					objectType="isis.applib.ConfigurationMenu" id="configuration">
+					objectType="isis.conf.ConfigurationMenu" id="configuration">
 					<cpt:named>Configuration</cpt:named>
 				</mb3:serviceAction>
 			</mb3:section>
