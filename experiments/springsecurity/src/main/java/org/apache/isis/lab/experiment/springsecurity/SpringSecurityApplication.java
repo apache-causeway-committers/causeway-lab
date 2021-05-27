@@ -18,8 +18,6 @@
  */
 package org.apache.isis.lab.experiment.springsecurity;
 
-import java.util.EnumSet;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,16 +28,13 @@ import org.springframework.security.web.FilterChainProxy;
 
 import org.apache.isis.core.config.presets.IsisPresets;
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
-import org.apache.isis.extensions.secman.api.SecmanConfiguration;
-import org.apache.isis.extensions.secman.api.SecurityRealm;
-import org.apache.isis.extensions.secman.api.SecurityRealmCharacteristic;
-import org.apache.isis.extensions.secman.api.SecurityRealmService;
-import org.apache.isis.extensions.secman.api.authorizor.AuthorizorSecman;
-import org.apache.isis.extensions.secman.api.permission.spi.PermissionsEvaluationService;
-import org.apache.isis.extensions.secman.api.permission.spi.PermissionsEvaluationServiceAllowBeatsVeto;
+import org.apache.isis.extensions.secman.applib.SecmanConfiguration;
+import org.apache.isis.extensions.secman.applib.permission.spi.PermissionsEvaluationService;
+import org.apache.isis.extensions.secman.applib.permission.spi.PermissionsEvaluationServiceAllowBeatsVeto;
 import org.apache.isis.extensions.secman.encryption.jbcrypt.IsisModuleExtSecmanEncryptionJbcrypt;
+import org.apache.isis.extensions.secman.integration.IsisModuleExtSecmanIntegration;
+import org.apache.isis.extensions.secman.integration.authorizor.AuthorizorSecman;
 import org.apache.isis.extensions.secman.jpa.IsisModuleExtSecmanPersistenceJpa;
-import org.apache.isis.extensions.secman.model.IsisModuleExtSecmanModel;
 import org.apache.isis.persistence.jpa.eclipselink.IsisModuleJpaEclipselink;
 import org.apache.isis.security.spring.IsisModuleSecuritySpring;
 import org.apache.isis.testing.fixtures.applib.IsisModuleTestingFixturesApplib;
@@ -57,7 +52,7 @@ import org.apache.isis.viewer.wicket.viewer.integration.WebRequestCycleForIsis;
 
     // Security Manager Extension (SecMan)
     AuthorizorSecman.class,
-    IsisModuleExtSecmanModel.class,
+    IsisModuleExtSecmanIntegration.class,
     //IsisModuleExtSecmanRealmShiro.class,
     IsisModuleExtSecmanPersistenceJpa.class,
     IsisModuleExtSecmanEncryptionJbcrypt.class,
@@ -121,25 +116,6 @@ public class SpringSecurityApplication {
     public PermissionsEvaluationService permissionsEvaluationService() {
         return new PermissionsEvaluationServiceAllowBeatsVeto();
     }
-
-    @Bean
-    public SecurityRealmService securityRealmService() {
-        return new SecurityRealmService() {
-            @Override
-            public SecurityRealm getCurrentRealm() {
-                return securityRealm;
-            }
-        };
-    }
-
-    // -- HELPER
-
-    private final SecurityRealm securityRealm = new SecurityRealm() {
-        @Override
-        public EnumSet<SecurityRealmCharacteristic> getCharacteristics() {
-            return EnumSet.of(SecurityRealmCharacteristic.DELEGATING);
-        }
-    };
 
 
 }
