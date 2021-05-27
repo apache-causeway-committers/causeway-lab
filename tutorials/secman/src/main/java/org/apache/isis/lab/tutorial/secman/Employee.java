@@ -33,7 +33,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@DomainObject(nature=Nature.ENTITY, objectType = "isisLab.Employee")
+@DomainObject(nature=Nature.ENTITY, logicalTypeName = "isisLab.Employee")
 @Getter @Setter @ToString @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Employee {
