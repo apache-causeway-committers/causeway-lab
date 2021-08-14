@@ -35,7 +35,7 @@ import org.apache.isis.extensions.secman.encryption.jbcrypt.IsisModuleExtSecmanE
 import org.apache.isis.extensions.secman.integration.IsisModuleExtSecmanIntegration;
 import org.apache.isis.extensions.secman.integration.authorizor.AuthorizorSecman;
 import org.apache.isis.extensions.secman.jpa.IsisModuleExtSecmanPersistenceJpa;
-import org.apache.isis.persistence.jpa.eclipselink.IsisModuleJpaEclipselink;
+import org.apache.isis.persistence.jpa.eclipselink.IsisModulePersistenceJpaEclipselink;
 import org.apache.isis.security.spring.IsisModuleSecuritySpring;
 import org.apache.isis.testing.fixtures.applib.IsisModuleTestingFixturesApplib;
 import org.apache.isis.testing.h2console.ui.IsisModuleTestingH2ConsoleUi;
@@ -45,7 +45,7 @@ import org.apache.isis.viewer.wicket.viewer.integration.WebRequestCycleForIsis;
 @SpringBootApplication//(exclude = { CsrfConfigurer.class })
 @Import({
     IsisModuleCoreRuntimeServices.class, // Apache Isis Runtime
-    IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data
+    IsisModulePersistenceJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data
     IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
     IsisModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
     IsisModuleSecuritySpring.class, // Authorization using Spring Security
@@ -65,7 +65,7 @@ import org.apache.isis.viewer.wicket.viewer.integration.WebRequestCycleForIsis;
 })
 public class SpringSecurityApplication {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         IsisPresets.logging(FilterChainProxy.class, "debug");
 
@@ -93,7 +93,7 @@ public class SpringSecurityApplication {
     }
 
     @Bean
-    public CommandLineRunner loadData(EmployeeRepository repository) {
+    public CommandLineRunner loadData(final EmployeeRepository repository) {
         return (args) -> {
             if(repository.count()<4L) {
                 repository.save(new Employee("Bill", "Gates"));

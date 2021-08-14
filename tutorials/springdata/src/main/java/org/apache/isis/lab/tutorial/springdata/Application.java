@@ -25,25 +25,25 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
-import org.apache.isis.persistence.jpa.eclipselink.IsisModuleJpaEclipselink;
+import org.apache.isis.persistence.jpa.eclipselink.IsisModulePersistenceJpaEclipselink;
 import org.apache.isis.security.bypass.IsisModuleSecurityBypass;
 import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
 
 @SpringBootApplication
 @Import({
     IsisModuleCoreRuntimeServices.class, // Apache Isis Runtime
-    IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
+    IsisModulePersistenceJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data
     IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
     IsisModuleSecurityBypass.class // Security (Bypass, grants all access)
 })
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(Application.class);
     }
 
     @Bean
-    public CommandLineRunner loadData(EmployeeRepository repository) {
+    public CommandLineRunner loadData(final EmployeeRepository repository) {
         return (args) -> {
             repository.save(new Employee("Bill", "Gates"));
             repository.save(new Employee("Mark", "Zuckerberg"));
