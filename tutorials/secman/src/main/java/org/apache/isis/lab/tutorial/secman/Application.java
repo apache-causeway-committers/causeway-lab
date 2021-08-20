@@ -26,9 +26,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
-import org.apache.isis.extensions.secman.applib.SecmanConfiguration;
-import org.apache.isis.extensions.secman.applib.permission.spi.PermissionsEvaluationService;
-import org.apache.isis.extensions.secman.applib.permission.spi.PermissionsEvaluationServiceAllowBeatsVeto;
 import org.apache.isis.extensions.secman.encryption.jbcrypt.IsisModuleExtSecmanEncryptionJbcrypt;
 import org.apache.isis.extensions.secman.integration.IsisModuleExtSecmanIntegration;
 import org.apache.isis.extensions.secman.jpa.IsisModuleExtSecmanPersistenceJpa;
@@ -75,19 +72,6 @@ public class Application {
                 repository.save(new Employee("Jeff", "Bezos"));
             }
         };
-    }
-
-    @Bean
-    public SecmanConfiguration securityModuleConfigBean() {
-        return SecmanConfiguration.builder()
-                .adminUserName("sven")
-                .adminAdditionalNamespacePermission("isisLab")
-                .build();
-    }
-
-    @Bean
-    public PermissionsEvaluationService permissionsEvaluationService() {
-        return new PermissionsEvaluationServiceAllowBeatsVeto();
     }
 
 }

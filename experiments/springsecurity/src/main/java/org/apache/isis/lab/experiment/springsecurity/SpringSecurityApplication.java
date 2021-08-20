@@ -28,9 +28,6 @@ import org.springframework.security.web.FilterChainProxy;
 
 import org.apache.isis.core.config.presets.IsisPresets;
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
-import org.apache.isis.extensions.secman.applib.SecmanConfiguration;
-import org.apache.isis.extensions.secman.applib.permission.spi.PermissionsEvaluationService;
-import org.apache.isis.extensions.secman.applib.permission.spi.PermissionsEvaluationServiceAllowBeatsVeto;
 import org.apache.isis.extensions.secman.encryption.jbcrypt.IsisModuleExtSecmanEncryptionJbcrypt;
 import org.apache.isis.extensions.secman.integration.IsisModuleExtSecmanIntegration;
 import org.apache.isis.extensions.secman.integration.authorizor.AuthorizorSecman;
@@ -103,19 +100,5 @@ public class SpringSecurityApplication {
             }
         };
     }
-
-    @Bean
-    public SecmanConfiguration securityModuleConfigBean() {
-        return SecmanConfiguration.builder()
-                .adminUserName("sven")
-                .adminAdditionalNamespacePermission("isisLab")
-                .build();
-    }
-
-    @Bean
-    public PermissionsEvaluationService permissionsEvaluationService() {
-        return new PermissionsEvaluationServiceAllowBeatsVeto();
-    }
-
 
 }

@@ -103,6 +103,13 @@ isis:
     schema:
        autoCreateSchemas: isisExtensionsSecman
 
+  extensions:
+    secman:
+      seed:
+        admin:
+          user-name: sven
+          namespace-permissions.additional: isisLab
+
 resteasy:
   jaxrs:
     app:
