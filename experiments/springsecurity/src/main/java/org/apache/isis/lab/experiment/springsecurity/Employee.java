@@ -33,7 +33,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@DomainObject(nature=Nature.ENTITY, objectType = "isisLab.Employee")
+@DomainObject(nature=Nature.ENTITY, logicalTypeName = "isisLab.Employee")
 @Getter @Setter @ToString @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Employee {
@@ -46,7 +46,7 @@ public class Employee {
 
     private String lastName;
 
-    public Employee(String firstName, String lastName) {
+    public Employee(final String firstName, final String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }

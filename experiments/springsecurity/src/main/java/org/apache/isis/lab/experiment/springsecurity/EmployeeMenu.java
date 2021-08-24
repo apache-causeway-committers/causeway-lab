@@ -11,7 +11,7 @@ import org.apache.isis.applib.services.factory.FactoryService;
 
 import lombok.RequiredArgsConstructor;
 
-@DomainService(nature=NatureOfService.VIEW, objectType = "isisLab.EmployeeMenu")
+@DomainService(nature=NatureOfService.VIEW, logicalTypeName = "isisLab.EmployeeMenu")
 @DomainObjectLayout(named="Employees")
 @RequiredArgsConstructor(onConstructor_ = { @Inject })
 public class EmployeeMenu {
@@ -23,6 +23,6 @@ public class EmployeeMenu {
     public EmployeeManager employeeManager(){
         return factoryService.viewModel(EmployeeManager.class);
     }
-    
+
 
 }

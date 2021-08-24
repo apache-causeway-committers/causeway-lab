@@ -26,7 +26,7 @@ import org.apache.isis.applib.annotation.Collection;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.Nature;
 
-@DomainObject(nature=Nature.VIEW_MODEL, objectType = "isisLab.EmployeeManager")
+@DomainObject(nature=Nature.VIEW_MODEL, logicalTypeName = "isisLab.EmployeeManager")
 //@RequiredArgsConstructor(onConstructor_ = {@Inject}) //XXX not supported for view models yet
 public class EmployeeManager {
 
@@ -35,7 +35,7 @@ public class EmployeeManager {
     public String title() {
         return "Employee Manager";
     }
-    
+
     @Collection
     public List<Employee> getAllEmployees(){
         return employeeRepo.findAll();
