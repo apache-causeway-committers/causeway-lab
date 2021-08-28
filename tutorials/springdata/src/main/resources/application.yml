@@ -100,9 +100,6 @@ isis:
       dialog-mode-for-menu: modal
 
   #persistence:
-  persistence:
-    schema:
-       autoCreateSchemas: isisExtensionsSecman
 
 resteasy:
   jaxrs:
