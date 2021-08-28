@@ -24,7 +24,6 @@ isis:
     annotation:
       action:
         command: ignore_safe
-        explicit: true
         publishing: none
       action-layout:
         css-class-fa:
@@ -61,6 +60,7 @@ isis:
       introspector:
         parallelize: false
         mode: full
+        policy: ANNOTATION_REQUIRED
     runtime-services:
       translation:
         po:

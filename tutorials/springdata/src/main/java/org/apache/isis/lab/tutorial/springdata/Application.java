@@ -21,6 +21,7 @@ package org.apache.isis.lab.tutorial.springdata;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
@@ -35,6 +36,9 @@ import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
     IsisModulePersistenceJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data
     IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
     IsisModuleSecurityBypass.class // Security (Bypass, grants all access)
+})
+@EntityScan(basePackageClasses = {
+        Employee.class,
 })
 public class Application {
 
