@@ -28,7 +28,7 @@ import org.springframework.security.web.FilterChainProxy;
 
 import org.apache.isis.core.config.presets.IsisPresets;
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
-import org.apache.isis.extensions.secman.encryption.jbcrypt.IsisModuleExtSecmanEncryptionJbcrypt;
+import org.apache.isis.extensions.secman.encryption.spring.IsisModuleExtSecmanEncryptionSpring;
 import org.apache.isis.extensions.secman.integration.IsisModuleExtSecmanIntegration;
 import org.apache.isis.extensions.secman.integration.authorizor.AuthorizorSecman;
 import org.apache.isis.extensions.secman.jpa.IsisModuleExtSecmanPersistenceJpa;
@@ -52,7 +52,7 @@ import org.apache.isis.viewer.wicket.viewer.integration.WebRequestCycleForIsis;
     IsisModuleExtSecmanIntegration.class,
     //IsisModuleExtSecmanRealmShiro.class,
     IsisModuleExtSecmanPersistenceJpa.class,
-    IsisModuleExtSecmanEncryptionJbcrypt.class,
+    IsisModuleExtSecmanEncryptionSpring.class,
 
     // Default Admin/User/Role Seeding Support for SecMan
     IsisModuleTestingFixturesApplib.class,
