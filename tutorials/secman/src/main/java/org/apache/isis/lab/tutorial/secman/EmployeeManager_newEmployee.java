@@ -20,7 +20,7 @@ package org.apache.isis.lab.tutorial.secman;
 
 import javax.inject.Inject;
 
-import org.apache.isis.applib.annotations.Action;
+import org.apache.isis.applib.annotation.Action;
 
 import lombok.RequiredArgsConstructor;
 import lombok.val;
