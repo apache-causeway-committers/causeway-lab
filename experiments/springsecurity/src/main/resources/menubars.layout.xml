@@ -87,34 +87,24 @@
         <mb3:menu>
             <mb3:named>Security</mb3:named>
             <mb3:section>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationRoleMenu" id="allRoles">
-                    <cpt:named>All Roles</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationRoleMenu" id="newRole">
-                    <cpt:named>New Role</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationRoleMenu" id="findRoles">
-                    <cpt:named>Find Roles</cpt:named>
-                </mb3:serviceAction>
+                <mb3:named>Users</mb3:named>
+            	<mb3:serviceAction objectType="isis.ext.secman.ApplicationUserMenu" id="userManager"/>
+            	<mb3:serviceAction objectType="isis.ext.secman.ApplicationUserMenu" id="findUsers"/>
             </mb3:section>
             <mb3:section>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationTenancyMenu" id="newTenancy">
-                    <cpt:named>New Tenancy</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationTenancyMenu" id="findTenancies">
-                    <cpt:named>Find Tenancies</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationTenancyMenu" id="allTenancies">
-                    <cpt:named>All Tenancies</cpt:named>
-                </mb3:serviceAction>
+                <mb3:named>Roles</mb3:named>
+                <mb3:serviceAction objectType="isis.ext.secman.ApplicationRoleMenu" id="roleManager"/>
+                <mb3:serviceAction objectType="isis.ext.secman.ApplicationRoleMenu" id="findRoles"/>
             </mb3:section>
             <mb3:section>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationPermissionMenu" id="findOrphanedPermissions">
-                    <cpt:named>Find Orphaned Permissions</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationPermissionMenu" id="allPermissions">
-                    <cpt:named>All Permissions</cpt:named>
-                </mb3:serviceAction>
+                <mb3:named>Permissions</mb3:named>
+                <mb3:serviceAction objectType="isis.ext.secman.ApplicationPermissionMenu" id="allPermissions"/>
+                <mb3:serviceAction objectType="isis.ext.secman.ApplicationPermissionMenu" id="findOrphanedPermissions"/>
+            </mb3:section>
+            <mb3:section>
+                <mb3:named>Tenancies</mb3:named>
+                <mb3:serviceAction objectType="isis.ext.secman.ApplicationTenancyMenu" id="tenancyManager"/>
+                <mb3:serviceAction objectType="isis.ext.secman.ApplicationTenancyMenu" id="findTenancies"/>
             </mb3:section>
             <mb3:section>
                 <mb3:serviceAction objectType="isis.ext.secman.ApplicationFeatureViewModels" id="allProperties">
@@ -131,20 +121,6 @@
                 </mb3:serviceAction>
                 <mb3:serviceAction objectType="isis.ext.secman.ApplicationFeatureViewModels" id="allCollections">
                     <cpt:named>All Collections</cpt:named>
-                </mb3:serviceAction>
-            </mb3:section>
-            <mb3:section>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationUserMenu" id="findUsers">
-                    <cpt:named>Find Users</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationUserMenu" id="newLocalUser">
-                    <cpt:named>New Local User</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationUserMenu" id="allUsers">
-                    <cpt:named>All Users</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction objectType="isis.ext.secman.ApplicationUserMenu" id="newDelegateUser">
-                    <cpt:named>New Delegate User</cpt:named>
                 </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
