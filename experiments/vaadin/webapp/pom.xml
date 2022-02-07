@@ -20,6 +20,12 @@
 		<dependency>
 			<groupId>org.apache.isis.lab</groupId>
 			<artifactId>isis-lab-experiments-vaadin-viewer</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>

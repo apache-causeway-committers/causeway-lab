@@ -5,6 +5,7 @@ bin/
 target/
 target-ide/
 logs/
+frontend/
 
 # Compiled class file
 *.class
