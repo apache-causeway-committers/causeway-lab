@@ -10,7 +10,10 @@
 	</parent>
 
 	<artifactId>isis-lab-experiments-vaadin-webapp</artifactId>
-	<description>Demo project for Vaadin on Spring Boot (Webapp)</description>
+	<description>
+		Demo project for Vaadin on Spring Boot (Webapp).
+		The Webapp dependents on the Vaadin-Viewer, but should not require NPM or NODE.
+	</description>
 
 	<dependencies>
 
@@ -21,18 +24,7 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.jpa</artifactId>
-			<version>2.7.10</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
@@ -42,17 +34,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>

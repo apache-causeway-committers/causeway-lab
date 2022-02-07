@@ -9,7 +9,10 @@
 	</parent>
 	
 	<artifactId>isis-lab-experiments-vaadin-dom</artifactId>
-	<description>Demo project for Vaadin on Spring Boot (Domain)</description>
+	<description>
+		Demo project for Vaadin on Spring Boot (Domain).
+		The Domain should stand on its own, independent of Vaadin-Viewer.
+	</description>
 	
 	<dependencies>
 		
@@ -17,23 +20,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.jpa</artifactId>
-			<version>2.7.10</version>
-		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
 		
 		<dependency>
