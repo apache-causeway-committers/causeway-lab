@@ -73,9 +73,35 @@
 						</goals>
 						<configuration>
 							<productionMode>true</productionMode>
-						</configuration>
+							<!-- does not work due to realative path ../../ resolving issues;
+							instead we copy the frontend folder with the maven-resources-plugin below  
+						    <frontendDirectory>${project.basedir}/src/main/resources/static/frontend</frontendDirectory>
+						    -->
+    					</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			
+			<plugin>
+			    <artifactId>maven-resources-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <id>copy-resource-one</id>
+			            <phase>validate</phase>
+			            <goals>
+			                <goal>copy-resources</goal>
+			            </goals>
+			            <configuration>
+			                <outputDirectory>${project.basedir}/src/main/resources/static/frontend</outputDirectory>
+			                <resources>
+			                    <resource>
+			                        <directory>frontend</directory>
+			                        <filtering>true</filtering>
+			                    </resource>
+			                </resources>
+			            </configuration>
+			        </execution>
+			    </executions>
 			</plugin>
 
 		</plugins>

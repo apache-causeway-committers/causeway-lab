@@ -12,8 +12,11 @@ import org.apache.isis.lab.experiments.vaadin.dom.VaadinConfiguration;
 })
 public class VaadinApplication {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
+
+	    System.setProperty("vaadin.enableDevServer", "false");
+
 		SpringApplication.run(VaadinApplication.class, args);
 	}
-	
+
 }
