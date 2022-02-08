@@ -4,17 +4,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
-import org.apache.isis.lab.experiments.vaadin.dom.VaadinConfiguration;
+import org.apache.isis.lab.experiments.vaadin.dom.EmployeeFixture;
+import org.apache.isis.lab.experiments.vaadin.viewer.LabModuleVaadinViewer;
 
 @SpringBootApplication
 @Import({
-    VaadinConfiguration.class
+    EmployeeFixture.class,
+    LabModuleVaadinViewer.class
 })
 public class VaadinApplication {
 
 	public static void main(final String[] args) {
-
-	    System.setProperty("vaadin.enableDevServer", "false");
 
 		SpringApplication.run(VaadinApplication.class, args);
 	}

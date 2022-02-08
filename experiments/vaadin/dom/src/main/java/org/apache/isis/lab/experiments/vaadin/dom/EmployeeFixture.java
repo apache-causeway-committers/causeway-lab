@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaRepositories(basePackageClasses = {EmployeeRepository.class})
-public class VaadinConfiguration {
+public class EmployeeFixture {
   
     @Bean
     public CommandLineRunner loadData(EmployeeRepository eRepo) {

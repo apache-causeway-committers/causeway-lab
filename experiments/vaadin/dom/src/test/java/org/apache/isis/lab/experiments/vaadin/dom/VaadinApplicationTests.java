@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = {
-    VaadinConfiguration.class
+    EmployeeFixture.class
 })
 @EnableAutoConfiguration
 class VaadinApplicationTests {
