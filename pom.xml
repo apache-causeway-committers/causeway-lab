@@ -6,6 +6,7 @@
 	
 	<groupId>org.apache.isis.lab</groupId>
 	<artifactId>isis-lab</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
 
 	<name>Isis Labs</name>
 
@@ -15,7 +16,7 @@
         <module>tutorials/springdata</module>
         <module>tutorials/secman</module>
         
-        <module>experiments/layout</module>
+        <module>experiments/cssgridlayout</module>
         <module>experiments/multischema</module>
         <module>experiments/springsecurity</module>
         <module>experiments/vaadin</module>
