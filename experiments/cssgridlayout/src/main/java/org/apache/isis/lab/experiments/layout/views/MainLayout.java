@@ -14,6 +14,7 @@ import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.router.RouterLink;
 
 import org.apache.isis.lab.experiments.layout.views.about.AboutView;
+import org.apache.isis.lab.experiments.layout.views.flex.GridLayoutView;
 import org.apache.isis.lab.experiments.layout.views.helloworld.HelloWorldView;
 
 /**
@@ -105,9 +106,9 @@ public class MainLayout extends AppLayout {
 
     private MenuItemInfo[] createMenuItems() {
         return new MenuItemInfo[]{ //
-                new MenuItemInfo("Hello World", "la la-globe", HelloWorldView.class), //
-
-                new MenuItemInfo("About", "la la-file", AboutView.class), //
+                new MenuItemInfo("Hello World", "la la-globe", HelloWorldView.class),
+                new MenuItemInfo("Grid Layout", "la la-file", GridLayoutView.class),
+                new MenuItemInfo("About", "la la-file", AboutView.class),
 
         };
     }
