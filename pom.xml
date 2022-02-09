@@ -15,6 +15,7 @@
         <module>tutorials/springdata</module>
         <module>tutorials/secman</module>
         
+        <module>experiments/layout</module>
         <module>experiments/multischema</module>
         <module>experiments/springsecurity</module>
         <module>experiments/vaadin</module>

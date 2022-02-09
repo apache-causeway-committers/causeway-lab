@@ -15,3 +15,9 @@ toc::[]
 
 * xref:adoc/spring-data-with-apache-isis-get-started.adoc[Sample Application with Spring Boot and Apache Isis]
 * xref:adoc/secman-get-started.adoc[Sample Application using Apache Isis SecMan Extension]
+
+== Experiments
+
+* `layout` - _Vaadin_ with _CSS Grid Layout_.
+* `multischema` - _Spring Data JPA_ with multiple database schemas.
+* `vaadin` - How to package _Vaadin_ fronted as _Maven_ artifact, so it can be consumed as a library. 
