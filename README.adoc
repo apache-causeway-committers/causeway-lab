@@ -20,4 +20,5 @@ toc::[]
 
 * `layout` - _Vaadin_ with _CSS Grid Layout_.
 * `multischema` - _Spring Data JPA_ with multiple database schemas.
+* `springsecurity` _Spring_ application with _GitHub_ as an _OpenId Connect_ provider. 
 * `vaadin` - How to package _Vaadin_ fronted as _Maven_ artifact, so it can be consumed as a library. 
