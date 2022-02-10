@@ -8,11 +8,11 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 
-import org.apache.isis.lab.experiments.layout.views.MainLayout;
+import org.apache.isis.lab.experiments.layout.views.PageLayout;
 
 @PageTitle("Hello World")
-@Route(value = "hello", layout = MainLayout.class)
-@RouteAlias(value = "", layout = MainLayout.class)
+@Route(value = "hello", layout = PageLayout.class)
+@RouteAlias(value = "", layout = PageLayout.class)
 public class HelloWorldView extends HorizontalLayout {
 
     private static final long serialVersionUID = 1L;

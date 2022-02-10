@@ -7,10 +7,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import org.apache.isis.lab.experiments.layout.views.MainLayout;
+import org.apache.isis.lab.experiments.layout.views.PageLayout;
 
 @PageTitle("About")
-@Route(value = "about", layout = MainLayout.class)
+@Route(value = "about", layout = PageLayout.class)
 public class AboutView extends VerticalLayout {
 
     private static final long serialVersionUID = 1L;

@@ -129,6 +129,11 @@
         
         <!-- NON VAADIN ADD-ONS  -->
         
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+        
         <dependency>
 		    <groupId>com.github.appreciated</groupId>
 		    <artifactId>vaadin-css-grid</artifactId>

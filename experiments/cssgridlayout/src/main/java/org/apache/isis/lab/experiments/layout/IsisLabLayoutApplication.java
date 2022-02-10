@@ -17,8 +17,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @Theme(value = "isis-lab-experiments-layout")
-@PWA(name = "isis-lab-experiments-layout", shortName = "isis-lab-experiments-layout", offlineResources = {
-        "images/logo.png"})
+@PWA(
+        name = "isis-lab-experiments-layout",
+        shortName = "isis-lab-experiments-layout",
+        offlineResources = {"images/logo.png"})
 @NpmPackage(value = "line-awesome", version = "1.3.0")
 public class IsisLabLayoutApplication implements AppShellConfigurator {
 
