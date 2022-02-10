@@ -1,7 +1,5 @@
 package org.apache.isis.lab.experiments.layout.views;
 
-import java.util.List;
-
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -31,7 +29,7 @@ class _SideMenuLayout {
         return header;
     }
 
-    Component createDrawerContent(final List<MenuItemInfo> menuItems) {
+    Component createDrawerContent(final Iterable<MenuItemInfo> menuItems) {
         H2 appName = new H2("isis-lab-experiments-layout-sidemenu");
         appName.addClassNames("flex", "items-center", "h-xl", "m-0", "px-m", "text-m");
 
@@ -43,7 +41,7 @@ class _SideMenuLayout {
 
     // -- HELPER
 
-    private Nav createNavigation(final List<MenuItemInfo> menuItems) {
+    private Nav createNavigation(final Iterable<MenuItemInfo> menuItems) {
         Nav nav = new Nav();
         nav.addClassNames("border-b", "border-contrast-10", "flex-grow", "overflow-auto");
         nav.getElement().setAttribute("aria-labelledby", "views");

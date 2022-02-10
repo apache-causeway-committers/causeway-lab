@@ -7,29 +7,31 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.router.RouterLink;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.val;
 
 /**
  * A simple navigation item component, based on ListItem element.
  */
+@RequiredArgsConstructor
 public class MenuItemInfo extends ListItem {
 
     private static final long serialVersionUID = 1L;
 
+    private final MenuPosition menuPosition;
+    private final String menuTitle;
+    private final String iconClass;
+
     @Getter
     private final Class<? extends Component> view;
 
-    public MenuItemInfo(
-            final MenuPosition menuPosition,
-            final String menuTitle,
-            final String iconClass,
-            final Class<? extends Component> view) {
+    public void setup() {
 
-        this.view = view;
         val routerLink = new RouterLink();
-        routerLink.setRoute(view);
-        val menuTitleSpan = new Span(menuTitle);
         add(routerLink);
+        routerLink.setRoute(view);
+
+        val menuTitleSpan = new Span(menuTitle);
         routerLink.add(new LineAwesomeIcon(iconClass), menuTitleSpan);
 
         // Use Lumo classnames for various styling

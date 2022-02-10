@@ -1,7 +1,5 @@
 package org.apache.isis.lab.experiments.layout.views;
 
-import java.util.List;
-
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
@@ -14,7 +12,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 class _TopMenuLayout {
 
-    Component createHeaderContent(final List<MenuItemInfo> menuItems) {
+    Component createHeaderContent(final Iterable<MenuItemInfo> menuItems) {
         Header header = new Header();
         header.addClassNames("bg-base", "border-b", "border-contrast-10", "box-border", "flex", "flex-col", "w-full");
 
