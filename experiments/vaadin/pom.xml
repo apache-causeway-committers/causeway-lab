@@ -25,7 +25,7 @@
 
 	<properties>
 		<maven.compiler.release>17</maven.compiler.release>
-		<vaadin.version>22.0.5</vaadin.version>
+		<vaadin.version>22.0.6</vaadin.version>
 		<!-- See https://nodejs.org/en/download/ for latest node and npm (lts) 
 			versions -->
 		<node.version>v16.13.2</node.version>
