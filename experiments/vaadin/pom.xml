@@ -28,8 +28,8 @@
 		<vaadin.version>23.0.0</vaadin.version>
 		<!-- See https://nodejs.org/en/download/ for latest node and npm (lts) 
 			versions -->
-		<node.version>v16.13.2</node.version>
-		<npm.version>8.1.2</npm.version>
+		<node.version>v16.14.0</node.version>
+		<npm.version>8.3.1</npm.version>
 		<jpa.version>2.7.10</jpa.version>
 	</properties>
 
