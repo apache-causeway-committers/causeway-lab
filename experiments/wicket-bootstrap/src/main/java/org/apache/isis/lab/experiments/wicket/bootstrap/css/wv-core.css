@@ -1,0 +1,12 @@
+.wv-editable-field .form-control {
+  border-color: transparent;
+}
+.wv-editable-field .input-group-text {
+  opacity: 0;
+}
+.wv-editable-field:hover,
+.wv-editable-field:hover .form-control,
+.wv-editable-field:hover .input-group-text {
+  border-color: rgb(206, 212, 218);
+  opacity: unset;
+}
