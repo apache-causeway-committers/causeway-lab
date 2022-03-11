@@ -1,6 +1,7 @@
 package org.apache.isis.lab.experiments.wicket.bootstrap.home;
 
 import java.io.Serializable;
+import java.util.EnumSet;
 import java.util.Optional;
 
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
@@ -14,6 +15,7 @@ import org.apache.wicket.util.string.StringValue;
 
 import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.ShowCaseModel;
 import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.ShowCasePanel;
+import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.FormFieldPanel.FormatModifer;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +41,8 @@ public class ShowCasePage extends WebPage {
                 .map(showCase->{
                     val showCaseModel = new ShowCaseModel(showCase.getType());
                     showCaseModel.setTitle(showCase.getTitle());
-                    showCaseModel.setValue(showCase.getInitialValue());
+                    showCaseModel.setValueObject(showCase.getInitialValue());
+                    showCaseModel.setFormatModifers(showCase.getFormatModifers());
                     return showCaseModel;
                 })
                 .orElseGet(()->{
@@ -56,8 +59,8 @@ public class ShowCasePage extends WebPage {
 
     @RequiredArgsConstructor
     static enum ShowCase {
-        STRING("linkToString", "String", String.class, "A String"),
-        MULTILNIE("linkToMultiline", "Multiline", String.class,
+        STRING("linkToString", "String", String.class, EnumSet.noneOf(FormatModifer.class), "A String"),
+        MULTILNIE("linkToMultiline", "Multiline", String.class, EnumSet.of(FormatModifer.MULITLINE),
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
                 + "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
                 + "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris "
@@ -69,8 +72,8 @@ public class ShowCasePage extends WebPage {
         @Getter private final String linkId;
         @Getter private final String title;
         @Getter private final Class<?> type;
+        @Getter private final EnumSet<FormatModifer> formatModifers;
         @Getter private final Serializable initialValue;
-
         static Optional<ShowCase> parse(final StringValue stringValue) {
             return Optional.ofNullable(stringValue.toOptionalString())
                     .map(ShowCase::valueOf);

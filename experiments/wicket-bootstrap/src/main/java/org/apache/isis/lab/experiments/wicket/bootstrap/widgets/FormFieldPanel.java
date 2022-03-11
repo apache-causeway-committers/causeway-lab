@@ -9,6 +9,10 @@ public class FormFieldPanel<T> extends Panel {
 
     private static final long serialVersionUID = 1L;
 
+    public static enum FormatModifer {
+        MULITLINE
+    }
+
     static enum Format {
         OUTPUT,
         INPUT;
@@ -19,9 +23,12 @@ public class FormFieldPanel<T> extends Panel {
     @Getter
     private Format format;
 
-    public FormFieldPanel(final String id, final FormFieldModel<T> formFieldModel) {
+    public FormFieldPanel(
+            final String id,
+            final FormFieldModel<T> formFieldModel) {
         super(id, new FormFieldModelHolder<>(formFieldModel));
         setOutputMarkupId(true);
+
         setFormat(Format.OUTPUT);
     }
 

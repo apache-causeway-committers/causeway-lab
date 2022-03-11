@@ -1,23 +1,42 @@
 package org.apache.isis.lab.experiments.wicket.bootstrap.widgets;
 
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.panel.Fragment;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.LambdaModel;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.val;
 
 public class FormFieldOutputPanel<T> extends Panel {
 
     private static final long serialVersionUID = 1L;
 
+    @RequiredArgsConstructor
+    static enum OutputVariant implements FragmentHelper {
+        FORM_VALUE_OUTPUT_AS_LABEL("formValueOutput", "label");
+        @Getter private final String id;
+        @Getter private final String variant;
+    }
+
+    @RequiredArgsConstructor
+    static enum FragmentTemplate implements FragmentHelper {
+        LINK_TO_EDIT("linkToEdit", "default"),
+        LINK_TO_COPY("linkToCopy", "default");
+        @Getter private final String id;
+        @Getter private final String variant;
+    }
+
+
     public FormFieldOutputPanel(final String id, final FormFieldModel<T> formFieldModel) {
         super(id, new FormFieldModelHolder<>(formFieldModel));
-        addFormValueOutputContainer("container-formValueOutput");
-        addLinkToEditContainer("container-linkToEdit");
-        addLinkToCopyContainer("container-linkToCopy");
+
+        OutputVariant.FORM_VALUE_OUTPUT_AS_LABEL.createComponent(this, this::createFormValueOutputAsLabel);
+
+        FragmentTemplate.LINK_TO_EDIT.createComponent(this, this::createLinkToEdit);
+        FragmentTemplate.LINK_TO_COPY.createComponent(this, this::createLinkToCopy);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,20 +48,12 @@ public class FormFieldOutputPanel<T> extends Panel {
         return (FormFieldPanel<T>) getParent();
     }
 
-    private void addFormValueOutputContainer(final String id) {
-        val formValueFragment = new Fragment(id, "fragment-formValueAsOutputLabel", this);
-        add(formValueFragment);
-
-        formValueFragment.add(new Label("formValueOutput", LambdaModel.of(()->{
-            return formFieldModel().getPendingValue();
-        })));
+    private Component createFormValueOutputAsLabel(final String id) {
+        return new Label("formValueOutput", formFieldModel().getValue());
     }
 
-    private void addLinkToEditContainer(final String id) {
-        val linkToEditFragment = new Fragment(id, "fragment-linkToEdit", this);
-        add(linkToEditFragment);
-
-        val link = new AjaxLink<Void>("linkToEdit"){
+    private Component createLinkToEdit(final String id) {
+        val link = new AjaxLink<Void>(id){
             @Override
             public void onClick(final AjaxRequestTarget target) {
                 val parent = FormFieldOutputPanel.this.formFieldPanel();
@@ -50,22 +61,17 @@ public class FormFieldOutputPanel<T> extends Panel {
                 target.add(parent);
             }
         };
-        linkToEditFragment.add(link);
+        return link;
     }
 
-    private void addLinkToCopyContainer(final String id) {
-        val linkToCopyFragment = new Fragment(id, "fragment-linkToCopy", this);
-        add(linkToCopyFragment);
-
-        val link = new AjaxLink<Void>("linkToCopy"){
+    private Component createLinkToCopy(final String id) {
+        val link = new AjaxLink<Void>(id){
             @Override
             public void onClick(final AjaxRequestTarget target) {
-                //modify the model of a label and refresh it on browser
-//                label.setDefaultModelObject("Another value 4 label.");
-//                target.add(label);
+                //TODO copy value to clipboard
             }
         };
-        linkToCopyFragment.add(link);
+        return link;
     }
 
 }

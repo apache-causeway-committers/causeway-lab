@@ -7,37 +7,55 @@
 <body>
 	<wicket:panel>
 
-		<div class="input-group mb-3 wv-editing-field has-validation shadow">
-			<wicket:container wicket:id="container-formValueInput" />
+		<form wicket:id="form">
 
-			<span class="position-absolute top-100 end-0">
-				<div class="btn-group btn-group-sm shadow" role="group">
-					<wicket:container wicket:id="container-linkToSave" />
-					<wicket:container wicket:id="container-linkToCancel" />
-				</div>
-			</span>
-
-			<div class="invalid-feedback">[Validation]</div>
-
-		</div>
+			<div class="input-group mb-3 wv-editing-field has-validation shadow">
+				<wicket:container wicket:id="container-formValueInput" />
+	
+				<span class="position-absolute top-100 end-0">
+					<div class="btn-group btn-group-sm shadow" role="group">
+						<wicket:container wicket:id="container-linkToSave" />
+						<wicket:container wicket:id="container-linkToCancel" />
+					</div>
+				</span>
+				
+				<wicket:container wicket:id="container-validationFeedback" />
+	
+			</div>
+		
+		</form>
 
 		<!-- FRAGMENTS -->
 
-		<wicket:fragment wicket:id="fragment-formValueAsInputText">
+		<wicket:fragment wicket:id="fragment-formValueInput-text">
 			<input wicket:id="formValueInput" class="form-control" type="text" />
 		</wicket:fragment>
+		
+		<wicket:fragment wicket:id="fragment-formValueInput-textarea">
+			<textarea wicket:id="formValueInput" class="form-control" />
+		</wicket:fragment>
 
-		<wicket:fragment wicket:id="fragment-linkToSave">
+		<wicket:fragment wicket:id="fragment-linkToSave-default">
 			<button wicket:id="linkToSave" type="button" class="btn btn-primary">
 				<i class="fa-solid fa-check"></i>
 			</button>
 		</wicket:fragment>
+		
+		<wicket:fragment wicket:id="fragment-linkToSave-submit">
+			<button type="submit" class="btn btn-primary">
+				<i class="fa-solid fa-check"></i>
+			</button>
+		</wicket:fragment>
 
-		<wicket:fragment wicket:id="fragment-linkToCancel">
+		<wicket:fragment wicket:id="fragment-linkToCancel-default">
 			<button wicket:id="linkToCancel" type="button"
 				class="btn btn-secondary">
 				<i class="fa-solid fa-x"></i>
 			</button>
+		</wicket:fragment>
+		
+		<wicket:fragment wicket:id="fragment-validationFeedback-default">
+			<div class="invalid-feedback"><label wicket:id="validationFeedback"/></div>
 		</wicket:fragment>
 
 	</wicket:panel>
