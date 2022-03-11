@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://wicket.apache.org" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<wicket:panel>
+
+		<div class="input-group mb-3 wv-editing-field has-validation shadow">
+			<wicket:container wicket:id="container-formValueInput" />
+
+			<span class="position-absolute top-100 end-0">
+				<div class="btn-group btn-group-sm shadow" role="group">
+					<wicket:container wicket:id="container-linkToSave" />
+					<wicket:container wicket:id="container-linkToCancel" />
+				</div>
+			</span>
+
+			<div class="invalid-feedback">[Validation]</div>
+
+		</div>
+
+		<!-- FRAGMENTS -->
+
+		<wicket:fragment wicket:id="fragment-formValueAsInputText">
+			<input wicket:id="formValueInput" class="form-control" type="text" />
+		</wicket:fragment>
+
+		<wicket:fragment wicket:id="fragment-linkToSave">
+			<button wicket:id="linkToSave" type="button" class="btn btn-primary">
+				<i class="fa-solid fa-check"></i>
+			</button>
+		</wicket:fragment>
+
+		<wicket:fragment wicket:id="fragment-linkToCancel">
+			<button wicket:id="linkToCancel" type="button"
+				class="btn btn-secondary">
+				<i class="fa-solid fa-x"></i>
+			</button>
+		</wicket:fragment>
+
+	</wicket:panel>
+</body>
+</html>

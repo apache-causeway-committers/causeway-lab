@@ -7,22 +7,31 @@
 
 		<div class="mb-3 row">
 			<div class="d-inline-flex">
-			<div wicket:id="selfLinkContainer" class="btn-group" role="group">
-				<button wicket:id="linkToString" type="button"
-					class="btn btn-outline-primary">String</button>
-				<button wicket:id="linkToMultiline" type="button"
-					class="btn btn-outline-primary">Multiline</button>
-			</div>
+				<div wicket:id="showCaseSelect" class="btn-group" role="group">
+					<button wicket:id="linkToString" type="button"
+						class="btn btn-outline-primary">String</button>
+					<button wicket:id="linkToMultiline" type="button"
+						class="btn btn-outline-primary">Multiline</button>
+				</div>
 			</div>
 		</div>
+		
+		<div id="content" wicket:id="showCasePanel">[ShowCasePanel]</div>
+		
+		<!-- DESIGNS -->
 
 		<div class="mb-3 row">
 
+			<p>
+				<button class="btn btn-primary" type="button"
+					data-bs-toggle="collapse" data-bs-target="#collapseExample"
+					aria-expanded="false" aria-controls="collapseExample">
+					Designs</button>
+			</p>
+			<div class="collapse" id="collapseExample">
+			
+			
 			<ul class="list-group">
-
-				<li class="list-group-item">
-					<h3><label wicket:id="demoTitle">[title]</label></h3>
-				</li>
 
 				<li class="list-group-item">
 					<h5>Output Format (Editable)</h5>
@@ -121,7 +130,9 @@
 				</li>
 
 			</ul>
-
+			
+				
+			</div>
 		</div>
 
 	</div>
