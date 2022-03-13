@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://wicket.apache.org" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<wicket:panel>
+
+		<div class="input-group mb-3 wv-editable-field">
+			<wicket:container wicket:id="container-formValueOutput" />
+			<wicket:container wicket:id="container-linkToEdit" />
+			<wicket:container wicket:id="container-linkToCopy" />
+		</div>
+
+		<!-- FRAGMENTS -->
+
+		<wicket:fragment wicket:id="fragment-formValueOutput-label">
+			<label wicket:id="formValueOutput" class="form-control">[Output
+				Format]</label>
+		</wicket:fragment>
+
+		<wicket:fragment wicket:id="fragment-linkToEdit-default">
+			<button wicket:id="linkToEdit"
+				class="btn btn-outline-primary input-group-hoverable" type="button">
+				<i class="fa-solid fa-edit"></i>
+			</button>
+		</wicket:fragment>
+
+		<wicket:fragment wicket:id="fragment-linkToCopy-default">
+			<button wicket:id="linkToCopy"
+				class="btn btn-outline-secondary input-group-hoverable"
+				type="button">
+				<i class="fa-solid fa-clone"></i>
+			</button>
+		</wicket:fragment>
+
+	</wicket:panel>
+</body>
+</html>
+

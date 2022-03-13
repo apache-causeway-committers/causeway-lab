@@ -6,7 +6,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.FormFieldPanel;
+import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel;
 
 import lombok.val;
 
@@ -20,7 +20,7 @@ public class ShowCasePanel extends Panel {
         super(id, Model.of(model));
 
         add(new Label("showCaseTitle", model.getTitle()));
-        addFormFieldPanel("formFieldPanel", model);
+        addFormFieldPanel("scalarPanel", model);
     }
 
     protected ShowCaseModel<?> showCaseModel() {
@@ -30,7 +30,7 @@ public class ShowCasePanel extends Panel {
     private <T extends Serializable> void addFormFieldPanel(
             final String id,
             final ShowCaseModel<T> showCaseModel) {
-        val formFieldPanel = new FormFieldPanel<T>(id, showCaseModel.getFormFieldModel());
+        val formFieldPanel = new ScalarPanel<T>(id, showCaseModel.getScalarModel());
         add(formFieldPanel);
     }
 

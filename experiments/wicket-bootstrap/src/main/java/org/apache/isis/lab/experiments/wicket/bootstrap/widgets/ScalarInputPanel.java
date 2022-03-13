@@ -13,13 +13,13 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.util.string.Strings;
 
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.FormFieldPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 
-public class FormFieldInputPanel<T> extends Panel {
+public class ScalarInputPanel<T> extends Panel {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,16 +43,16 @@ public class FormFieldInputPanel<T> extends Panel {
 
     private FormComponent<T> formComponent;
 
-    public FormFieldInputPanel(
+    public ScalarInputPanel(
             final String id,
-            final FormFieldModel<T> formFieldModel) {
-        super(id, new FormFieldModelHolder<>(formFieldModel));
+            final ScalarModel<T> scalarModel) {
+        super(id, new ScalarModelHolder<>(scalarModel));
 
-        val form = createForm("form");
+        val form = createForm("scalarInputForm");
 
         val markupProvider = this;
 
-        if(formFieldModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
+        if(scalarModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
             formComponent = InputVariant.FORM_VALUE_INPUT_AS_TEXTAREA
                     .createComponent(markupProvider, form, this::createFormValueInputAsTextarea);
         } else {
@@ -66,24 +66,24 @@ public class FormFieldInputPanel<T> extends Panel {
     }
 
     @SuppressWarnings("unchecked")
-    protected FormFieldModel<T> formFieldModel() {
-        return (FormFieldModel<T>) getDefaultModelObject();
+    protected ScalarModel<T> scalarModel() {
+        return (ScalarModel<T>) getDefaultModelObject();
     }
 
-    protected FormFieldPanel<T> formFieldPanel() {
-        return (FormFieldPanel<T>) getParent();
+    protected ScalarPanel<T> scalarPanel() {
+        return (ScalarPanel<T>) getParent();
     }
 
     private MarkupContainer createForm(final String id) {
         val form = new Form<Void>(id){
             @Override
             protected void onSubmit() {
-                final FormFieldModel<T> formFieldModel = formFieldModel();
-                val feedback = formFieldModel.validatePendingValue();
+                final ScalarModel<T> scalarModel = scalarModel();
+                val feedback = scalarModel.validatePendingValue();
                 if(Strings.isEmpty(feedback)) {
-                    formFieldModel.submitPendingValue();
-                    val parent = FormFieldInputPanel.this.formFieldPanel();
-                    parent.setFormat(FormFieldPanel.Format.OUTPUT);
+                    scalarModel.submitPendingValue();
+                    val parent = ScalarInputPanel.this.scalarPanel();
+                    parent.setFormat(ScalarPanel.Format.OUTPUT);
                 } else {
                     // TODO show validation feedback
 
@@ -98,12 +98,12 @@ public class FormFieldInputPanel<T> extends Panel {
     }
 
     private FormComponent<T> createFormValueInputAsText(final String id) {
-        val formComponent = new TextField<>(id, formFieldModel().getPendingValue());
+        val formComponent = new TextField<>(id, scalarModel().getPendingValue());
         return formComponent;
     }
 
     private FormComponent<T> createFormValueInputAsTextarea(final String id) {
-        val formComponent = new TextArea<>(id, formFieldModel().getPendingValue());
+        val formComponent = new TextArea<>(id, scalarModel().getPendingValue());
         return formComponent;
     }
 
@@ -111,8 +111,8 @@ public class FormFieldInputPanel<T> extends Panel {
         val link = new AjaxLink<Void>(id){
             @Override
             public void onClick(final AjaxRequestTarget target) {
-                val parent = FormFieldInputPanel.this.formFieldPanel();
-                parent.setFormat(FormFieldPanel.Format.OUTPUT);
+                val parent = ScalarInputPanel.this.scalarPanel();
+                parent.setFormat(ScalarPanel.Format.OUTPUT);
                 target.add(parent);
             }
         };
@@ -120,7 +120,7 @@ public class FormFieldInputPanel<T> extends Panel {
     }
 
     private Component createValidationFeedback(final String id) {
-        val link = new Label(id, formFieldModel().getValidationFeedback());
+        val link = new Label(id, scalarModel().getValidationFeedback());
         return link;
     }
 }

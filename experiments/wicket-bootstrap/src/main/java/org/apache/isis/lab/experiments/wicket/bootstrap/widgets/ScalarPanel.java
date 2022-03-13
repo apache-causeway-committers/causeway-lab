@@ -5,7 +5,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import lombok.Getter;
 import lombok.NonNull;
 
-public class FormFieldPanel<T> extends Panel {
+public class ScalarPanel<T> extends Panel {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,18 +23,18 @@ public class FormFieldPanel<T> extends Panel {
     @Getter
     private Format format;
 
-    public FormFieldPanel(
+    public ScalarPanel(
             final String id,
-            final FormFieldModel<T> formFieldModel) {
-        super(id, new FormFieldModelHolder<>(formFieldModel));
+            final ScalarModel<T> formFieldModel) {
+        super(id, new ScalarModelHolder<>(formFieldModel));
         setOutputMarkupId(true);
 
         setFormat(Format.OUTPUT);
     }
 
     @SuppressWarnings("unchecked")
-    protected FormFieldModel<T> formFieldModel() {
-        return (FormFieldModel<T>) getDefaultModelObject();
+    protected ScalarModel<T> scalarModel() {
+        return (ScalarModel<T>) getDefaultModelObject();
     }
 
     public void setFormat(final @NonNull Format format) {
@@ -46,10 +46,10 @@ public class FormFieldPanel<T> extends Panel {
 
         switch (format) {
         case OUTPUT:
-            addOrReplace(new FormFieldOutputPanel<T>(id, formFieldModel()));
+            addOrReplace(new ScalarOutputPanel<T>(id, scalarModel()));
             return;
         case INPUT: {
-            addOrReplace(new FormFieldInputPanel<T>(id, formFieldModel()));
+            addOrReplace(new ScalarInputPanel<T>(id, scalarModel()));
             return;
         }
         default:

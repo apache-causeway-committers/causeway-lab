@@ -5,8 +5,8 @@ import java.util.EnumSet;
 
 import org.apache.wicket.model.IModel;
 
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.FormFieldModel;
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.FormFieldPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarModel;
+import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
 
 import lombok.Data;
 import lombok.Getter;
@@ -22,9 +22,9 @@ implements Serializable {
     private T valueObject;
     private EnumSet<FormatModifer> formatModifers;
 
-    public FormFieldModel<T> getFormFieldModel() {
+    public ScalarModel<T> getScalarModel() {
 
-        return new FormFieldModel<T>() {
+        return new ScalarModel<T>() {
 
             private static final long serialVersionUID = 1L;
             private T pendingValueObject = valueObject;

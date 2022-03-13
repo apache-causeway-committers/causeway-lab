@@ -32,6 +32,8 @@ implements WicketApplicationInitConfiguration {
       settings.setDeferJavascript(false);
       Bootstrap.install(webApplication, settings);
 
+      webApplication.getCspSettings().blocking().disabled();
+
       webApplication.getHeaderContributorListeners().add(new IHeaderContributor() {
           private static final long serialVersionUID = 1L;
 

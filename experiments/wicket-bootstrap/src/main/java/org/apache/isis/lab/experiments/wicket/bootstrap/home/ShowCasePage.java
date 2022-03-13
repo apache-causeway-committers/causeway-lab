@@ -15,7 +15,7 @@ import org.apache.wicket.util.string.StringValue;
 
 import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.ShowCaseModel;
 import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.ShowCasePanel;
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.FormFieldPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

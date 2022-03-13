@@ -5,9 +5,9 @@ import java.util.EnumSet;
 
 import org.apache.wicket.model.IModel;
 
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.FormFieldPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
 
-public interface FormFieldModel<T> extends Serializable {
+public interface ScalarModel<T> extends Serializable {
 
     EnumSet<FormatModifer> getFormatModifers();
 
