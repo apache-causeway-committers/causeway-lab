@@ -8,7 +8,12 @@
 }
 .wv-editable-field:hover,
 .wv-editable-field:hover .form-control,
-.wv-editable-field:hover .input-group-hoverable {
+.wv-editable-field:hover .input-group-hoverable,
+/*demo*/
+.wv-editable-field-hovering,
+.wv-editable-field-hovering .form-control,
+.wv-editable-field-hovering .input-group-hoverable {
   border-color: rgb(206, 212, 218);
   opacity: unset;
 }
+
