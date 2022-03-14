@@ -19,9 +19,11 @@ public class StringDesign extends Panel {
 
     @Override
     public String getVariation() {
-        return formatModifers.contains(FormatModifer.MULITLINE)
-                ? "multiline"
-                : null;
+        return formatModifers.contains(FormatModifer.MARKUP)
+                ? "markup"
+                : formatModifers.contains(FormatModifer.MULITLINE)
+                    ? "multiline"
+                    : null;
     }
 
 }

@@ -68,7 +68,12 @@ public class ShowCasePage extends WebPage {
                 + "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla "
                 + "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa "
                 + "qui officia deserunt mollit anim id est laborum."),
-
+        MARKUP("linkToMarkup", "Markup", String.class, EnumSet.of(FormatModifer.MARKUP, FormatModifer.MULITLINE),
+                "<p>\n"
+                + "\t<span style=\"color:red;\">red</span>\n"
+                + "\t<span style=\"color:blue;\">blue</span>\n"
+                + "\t<span style=\"font-size:24px;\">big</span>\n"
+                + "</p>"),
         BOOLEAN_BINARY("linkToBooleanBinary", "Boolean(Binary)", boolean.class, EnumSet.noneOf(FormatModifer.class), true),
         BOOLEAN_TERTIARY("linkBooleanTertiary", "Boolean(Tertiary)", Boolean.class, EnumSet.of(FormatModifer.TRISTATE), Boolean.TRUE),
         ;

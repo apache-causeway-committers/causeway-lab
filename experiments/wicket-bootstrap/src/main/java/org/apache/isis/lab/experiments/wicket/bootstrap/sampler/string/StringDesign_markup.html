@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://wicket.apache.org" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<wicket:panel>
+	<ul class="list-group">
+
+		<li class="list-group-item">
+			<h5>Output Format - Editable</h5>
+		</li>
+		<li class="list-group-item">
+			
+
+				<div class="input-group mb-3 wv-editable-field">
+					<div class="form-control">
+						<p>
+							<span style="color:red;">red</span>
+							<span style="color:blue;">blue</span>
+							<span style="font-size:24px;">big</span>
+						</p>
+					</div>
+					<span class="position-absolute bottom-0 end-0">
+						<div class="btn-group btn-group-sm input-group-hoverable" role="group">
+							<button type="button" class="btn btn-primary">
+								<i class="fa-solid fa-edit"></i>
+							</button>
+							<button type="button" class="btn btn-secondary">
+								<i class="fa-solid fa-clone"></i>
+							</button>
+						</div>
+					</span>
+				</div>
+			
+		</li>
+
+		<li class="list-group-item">
+			<h5>Output Format - Editable (on hover)</h5>
+		</li>
+		<li class="list-group-item">
+			
+
+				<div class="input-group mb-3 wv-editable-field wv-editable-field-hovering">
+					<div class="form-control">
+						<p>
+							<span style="color:red;">red</span>
+							<span style="color:blue;">blue</span>
+							<span style="font-size:24px;">big</span>
+						</p>
+					</div>
+					<span class="position-absolute bottom-0 end-0">
+						<div class="btn-group btn-group-sm input-group-hoverable" role="group">
+							<button type="button" class="btn btn-primary">
+								<i class="fa-solid fa-edit"></i>
+							</button>
+							<button type="button" class="btn btn-secondary">
+								<i class="fa-solid fa-clone"></i>
+							</button>
+						</div>
+					</span>
+				</div>
+			
+		</li>
+
+		<li class="list-group-item">
+			<h5>Input Format</h5>
+		</li>
+		<li class="list-group-item">
+			
+				<div class="input-group mb-3 wv-editing-field shadow">
+					<textarea class="form-control">&lt;p&gt;
+ &lt;span style="color:red;"&gt;red&lt;/span&gt;
+ &lt;span style="color:blue;"&gt;blue&lt;/span&gt;
+ &lt;span style="font-size:24px;"&gt;big&lt;/span&gt;
+&lt;/p&gt;
+					</textarea>
+					 <span
+						class="position-absolute top-100 end-0">
+						<div class="btn-group btn-group-sm shadow" role="group">
+							<button type="button" class="btn btn-primary">
+								<i class="fa-solid fa-check"></i>
+							</button>
+							<button type="button" class="btn btn-secondary">
+								<i class="fa-solid fa-x"></i>
+							</button>
+						</div>
+					</span>
+				</div>
+			
+		</li>
+
+		<li class="list-group-item">Feedback</li>
+		<li class="list-group-item">
+			
+				<div
+					class="input-group mb-3 wv-editing-field has-validation shadow">
+					<textarea class="form-control is-invalid">&lt;p&gt;
+ &lt;span style="color:red;"&gt;red&lt;/span&gt;
+ &lt;span style="color:blue;"&gt;blue&lt;/span&gt;
+ &lt;span style="font-size:24px;"&gt;big&lt;/span&gt;
+&lt;/p&gt;
+					</textarea>
+					<span class="position-absolute top-100 end-0">
+						<div class="btn-group btn-group-sm shadow" role="group">
+							<button type="button" class="btn btn-primary">
+								<i class="fa-solid fa-check"></i>
+							</button>
+							<button type="button" class="btn btn-secondary">
+								<i class="fa-solid fa-x"></i>
+							</button>
+						</div>
+					</span>
+
+					<div class="invalid-feedback">Please choose a valid string.
+					</div>
+
+				</div>
+			
+		</li>
+
+	</ul>
+</wicket:panel>
+</body>
+</html>
