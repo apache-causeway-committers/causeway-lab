@@ -10,7 +10,8 @@ public class ScalarPanel<T> extends Panel {
     private static final long serialVersionUID = 1L;
 
     public static enum FormatModifer {
-        MULITLINE
+        MULITLINE,
+        TRISTATE,
     }
 
     static enum Format {

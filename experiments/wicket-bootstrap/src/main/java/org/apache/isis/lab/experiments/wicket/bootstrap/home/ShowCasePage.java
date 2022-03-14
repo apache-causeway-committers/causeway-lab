@@ -70,7 +70,7 @@ public class ShowCasePage extends WebPage {
                 + "qui officia deserunt mollit anim id est laborum."),
 
         BOOLEAN_BINARY("linkToBooleanBinary", "Boolean(Binary)", boolean.class, EnumSet.noneOf(FormatModifer.class), true),
-        BOOLEAN_TERTIARY("linkBooleanTertiary", "Boolean(Tertiary)", Boolean.class, EnumSet.noneOf(FormatModifer.class), Boolean.TRUE),
+        BOOLEAN_TERTIARY("linkBooleanTertiary", "Boolean(Tertiary)", Boolean.class, EnumSet.of(FormatModifer.TRISTATE), Boolean.TRUE),
         ;
 
         @Getter private final String linkId;

@@ -8,10 +8,8 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
 import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.bool.BooleanDesign;
-import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.string.MultilineDesign;
 import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.string.StringDesign;
 import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel;
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
 
 import lombok.val;
 
@@ -46,15 +44,12 @@ public class ShowCasePanel extends Panel {
 
         switch (showCaseModel.getType().getSimpleName()) {
         case "String": {
-            if(showCaseModel.getScalarModel().getFormatModifers().contains(FormatModifer.MULITLINE)) {
-                add(new MultilineDesign(id));
-            } else {
-                add(new StringDesign(id));
-            }
+            add(new StringDesign(id, showCaseModel.getScalarModel().getFormatModifers()));
             return;
         }
+        case "boolean":
         case "Boolean": {
-            add(new BooleanDesign(id));
+            add(new BooleanDesign(id, showCaseModel.getScalarModel().getFormatModifers()));
             return;
         }
         default:
