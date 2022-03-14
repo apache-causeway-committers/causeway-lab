@@ -32,10 +32,41 @@ public class ScalarInputPanel<T> extends Panel {
     }
 
     @RequiredArgsConstructor
-    static enum FragmentTemplate implements FragmentHelper {
-        SUBMIT("linkToSave", "submit"),
-        LINK_TO_SAVE("linkToSave", "default"),
-        LINK_TO_CANCEL("linkToCancel", "default"),
+    static enum ButtonGroupTemplate implements FragmentHelper {
+        OUTLINE("buttons", "btnOutline"),
+        RIGHT_BELOW("buttons", "btnRightBelow");
+        @Getter private final String id;
+        @Getter private final String variant;
+    }
+
+    @RequiredArgsConstructor
+    static enum ButtonTemplate implements FragmentHelper {
+        LINK_TO_SAVE_OUTLINED("linkToSave", "btnOutline"),
+        LINK_TO_SAVE_GROUPED("linkToSave", "btnGroup"),
+        LINK_TO_CANCEL_OUTLINED("linkToCancel", "btnOutline"),
+        LINK_TO_CANCEL_GROUPED("linkToCancel", "btnGroup");
+        @Getter private final String id;
+        @Getter private final String variant;
+        public static ButtonTemplate save(final ButtonGroupTemplate buttonGroup) {
+            switch (buttonGroup) {
+            case OUTLINE: return LINK_TO_SAVE_OUTLINED;
+            case RIGHT_BELOW: return LINK_TO_SAVE_GROUPED;
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + buttonGroup);
+            }
+        }
+        public static ButtonTemplate cancel(final ButtonGroupTemplate buttonGroup) {
+            switch (buttonGroup) {
+            case OUTLINE: return LINK_TO_CANCEL_OUTLINED;
+            case RIGHT_BELOW: return LINK_TO_CANCEL_GROUPED;
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + buttonGroup);
+            }
+        }
+    }
+
+    @RequiredArgsConstructor
+    static enum FeedbackTemplate implements FragmentHelper {
         VALIDATION_FEEDBACK("validationFeedback", "default");
         @Getter private final String id;
         @Getter private final String variant;
@@ -52,17 +83,23 @@ public class ScalarInputPanel<T> extends Panel {
 
         val markupProvider = this;
 
+        final ButtonGroupTemplate buttonGroupTemplate;
         if(scalarModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
             formComponent = InputVariant.FORM_VALUE_INPUT_AS_TEXTAREA
                     .createComponent(markupProvider, form, this::createFormValueInputAsTextarea);
+            buttonGroupTemplate = ButtonGroupTemplate.RIGHT_BELOW;
         } else {
+
             formComponent = InputVariant.FORM_VALUE_INPUT_AS_TEXT
                     .createComponent(markupProvider, form, this::createFormValueInputAsText);
+            buttonGroupTemplate = ButtonGroupTemplate.OUTLINE;
         }
 
-        FragmentTemplate.SUBMIT.createFragment(markupProvider, form);
-        FragmentTemplate.LINK_TO_CANCEL.createComponent(markupProvider, form, this::createLinkToCancel);
-        FragmentTemplate.VALIDATION_FEEDBACK.createComponent(markupProvider, form, this::createValidationFeedback);
+        val buttonGroup = buttonGroupTemplate.createFragment(markupProvider, form);
+
+        ButtonTemplate.save(buttonGroupTemplate).createFragment(markupProvider, buttonGroup);
+        ButtonTemplate.cancel(buttonGroupTemplate).createComponent(markupProvider, buttonGroup, this::createLinkToCancel);
+        FeedbackTemplate.VALIDATION_FEEDBACK.createComponent(markupProvider, form, this::createValidationFeedback);
     }
 
     @SuppressWarnings("unchecked")

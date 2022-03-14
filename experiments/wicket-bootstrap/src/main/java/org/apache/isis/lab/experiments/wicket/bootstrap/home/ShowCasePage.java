@@ -1,5 +1,6 @@
 package org.apache.isis.lab.experiments.wicket.bootstrap.home;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.EnumSet;
 import java.util.Optional;
@@ -75,7 +76,8 @@ public class ShowCasePage extends WebPage {
                 + "\t<span style=\"font-size:24px;\">big</span>\n"
                 + "</p>"),
         BOOLEAN_BINARY("linkToBooleanBinary", "Boolean(Binary)", boolean.class, EnumSet.noneOf(FormatModifer.class), true),
-        BOOLEAN_TERTIARY("linkBooleanTertiary", "Boolean(Tertiary)", Boolean.class, EnumSet.of(FormatModifer.TRISTATE), Boolean.TRUE),
+        BOOLEAN_TERTIARY("linkToBooleanTertiary", "Boolean(Tertiary)", Boolean.class, EnumSet.of(FormatModifer.TRISTATE), Boolean.TRUE),
+        FILE("linkToFile", "File", File.class, EnumSet.noneOf(FormatModifer.class), new File("sample.docx")),
         ;
 
         @Getter private final String linkId;

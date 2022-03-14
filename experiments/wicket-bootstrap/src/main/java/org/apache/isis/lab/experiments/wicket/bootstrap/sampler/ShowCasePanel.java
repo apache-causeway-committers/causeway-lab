@@ -8,6 +8,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
 import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.bool.BooleanDesign;
+import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.file.FileDesign;
 import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.string.StringDesign;
 import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel;
 
@@ -50,6 +51,10 @@ public class ShowCasePanel extends Panel {
         case "boolean":
         case "Boolean": {
             add(new BooleanDesign(id, showCaseModel.getScalarModel().getFormatModifers()));
+            return;
+        }
+        case "File": {
+            add(new FileDesign(id, showCaseModel.getScalarModel().getFormatModifers()));
             return;
         }
         default:
