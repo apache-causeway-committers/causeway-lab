@@ -40,7 +40,7 @@ public class BootstrapFragment extends Panel {
 
     @RequiredArgsConstructor
     public static enum FeedbackTemplate implements FragmentMapper {
-        VALIDATION_FEEDBACK("validationFeedback", "default");
+        DEFAULT("validationFeedback", "default");
         @Getter private final String id;
         @Getter private final String variant;
     }

@@ -7,37 +7,21 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 
-import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.TemplateMapper;
 import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.LinkToTemplate;
 import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.OutputTemplate;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.val;
 
 public class ScalarOutputPanel<T> extends Panel {
 
     private static final long serialVersionUID = 1L;
 
-    @RequiredArgsConstructor
-    static enum OutputVariant implements TemplateMapper {
-        LABEL(OutputTemplate.LABEL);
-        @Getter private final OutputTemplate template;
-    }
-
-    @RequiredArgsConstructor
-    static enum LinkTo implements TemplateMapper {
-        EDIT(LinkToTemplate.EDIT),
-        COPY(LinkToTemplate.COPY);
-        @Getter private final LinkToTemplate template;
-    }
-
     public ScalarOutputPanel(final String id, final ScalarModel<T> scalarModel) {
         super(id, new ScalarModelHolder<>(scalarModel));
 
-        OutputVariant.LABEL.createComponent(this, this::createOutputAsLabel);
-        LinkTo.EDIT.createComponent(this, this::createLinkToEdit);
-        LinkTo.COPY.createComponent(this, this::createLinkToCopy);
+        OutputTemplate.LABEL.createComponent(this, this::createOutputAsLabel);
+        LinkToTemplate.EDIT.createComponent(this, this::createLinkToEdit);
+        LinkToTemplate.COPY.createComponent(this, this::createLinkToCopy);
     }
 
     @SuppressWarnings("unchecked")
