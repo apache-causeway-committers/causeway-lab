@@ -13,6 +13,11 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.util.string.Strings;
 
+import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.TemplateMapper;
+import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonGroupTemplate;
+import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonTemplate;
+import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.FeedbackTemplate;
+import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.InputTemplate;
 import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
 
 import lombok.Getter;
@@ -24,52 +29,37 @@ public class ScalarInputPanel<T> extends Panel {
     private static final long serialVersionUID = 1L;
 
     @RequiredArgsConstructor
-    static enum InputVariant implements FragmentHelper {
-        FORM_VALUE_INPUT_AS_TEXT("formValueInput", "text"),
-        FORM_VALUE_INPUT_AS_TEXTAREA("formValueInput", "textarea");
-        @Getter private final String id;
-        @Getter private final String variant;
+    static enum InputVariant implements TemplateMapper {
+        TEXT(InputTemplate.TEXT),
+        TEXTAREA(InputTemplate.TEXTAREA);
+        @Getter private final InputTemplate template;
     }
 
     @RequiredArgsConstructor
-    static enum ButtonGroupTemplate implements FragmentHelper {
-        OUTLINE("buttons", "btnOutline"),
-        RIGHT_BELOW("buttons", "btnRightBelow");
-        @Getter private final String id;
-        @Getter private final String variant;
+    static enum FeedbackVariant implements TemplateMapper {
+        DEFAULT(FeedbackTemplate.VALIDATION_FEEDBACK);
+        @Getter private final FeedbackTemplate template;
     }
 
     @RequiredArgsConstructor
-    static enum ButtonTemplate implements FragmentHelper {
-        LINK_TO_SAVE_OUTLINED("linkToSave", "btnOutline"),
-        LINK_TO_SAVE_GROUPED("linkToSave", "btnGroup"),
-        LINK_TO_CANCEL_OUTLINED("linkToCancel", "btnOutline"),
-        LINK_TO_CANCEL_GROUPED("linkToCancel", "btnGroup");
-        @Getter private final String id;
-        @Getter private final String variant;
-        public static ButtonTemplate save(final ButtonGroupTemplate buttonGroup) {
-            switch (buttonGroup) {
-            case OUTLINE: return LINK_TO_SAVE_OUTLINED;
-            case RIGHT_BELOW: return LINK_TO_SAVE_GROUPED;
-            default:
-                throw new IllegalArgumentException("Unexpected value: " + buttonGroup);
-            }
-        }
-        public static ButtonTemplate cancel(final ButtonGroupTemplate buttonGroup) {
-            switch (buttonGroup) {
-            case OUTLINE: return LINK_TO_CANCEL_OUTLINED;
-            case RIGHT_BELOW: return LINK_TO_CANCEL_GROUPED;
-            default:
-                throw new IllegalArgumentException("Unexpected value: " + buttonGroup);
-            }
-        }
+    static enum ButtonGroupVariant implements TemplateMapper {
+        OUTLINE(ButtonGroupTemplate.OUTLINE),
+        RIGHT_BELOW(ButtonGroupTemplate.RIGHT_BELOW);
+        @Getter private final ButtonGroupTemplate template;
     }
 
     @RequiredArgsConstructor
-    static enum FeedbackTemplate implements FragmentHelper {
-        VALIDATION_FEEDBACK("validationFeedback", "default");
-        @Getter private final String id;
-        @Getter private final String variant;
+    static enum SaveButtonVariant implements TemplateMapper {
+        OUTLINE(ButtonTemplate.SAVE_OUTLINED),
+        RIGHT_BELOW(ButtonTemplate.SAVE_GROUPED);
+        @Getter private final ButtonTemplate template;
+    }
+
+    @RequiredArgsConstructor
+    static enum CancelButtonVariant implements TemplateMapper {
+        OUTLINE(ButtonTemplate.CANCEL_OUTLINED),
+        RIGHT_BELOW(ButtonTemplate.CANCEL_GROUPED);
+        @Getter private final ButtonTemplate template;
     }
 
     private FormComponent<T> formComponent;
@@ -81,25 +71,21 @@ public class ScalarInputPanel<T> extends Panel {
 
         val form = createForm("scalarInputForm");
 
-        val markupProvider = this;
-
-        final ButtonGroupTemplate buttonGroupTemplate;
         if(scalarModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
-            formComponent = InputVariant.FORM_VALUE_INPUT_AS_TEXTAREA
-                    .createComponent(markupProvider, form, this::createFormValueInputAsTextarea);
-            buttonGroupTemplate = ButtonGroupTemplate.RIGHT_BELOW;
+            formComponent = InputVariant.TEXTAREA
+                    .createComponent(form, this::createFormValueInputAsTextarea);
+            val bg = ButtonGroupVariant.RIGHT_BELOW.createFragment(form);
+            SaveButtonVariant.RIGHT_BELOW.createFragment(bg);
+            CancelButtonVariant.RIGHT_BELOW.createComponent(bg, this::createLinkToCancel);
         } else {
-
-            formComponent = InputVariant.FORM_VALUE_INPUT_AS_TEXT
-                    .createComponent(markupProvider, form, this::createFormValueInputAsText);
-            buttonGroupTemplate = ButtonGroupTemplate.OUTLINE;
+            formComponent = InputVariant.TEXT
+                    .createComponent(form, this::createFormValueInputAsText);
+            val bg = ButtonGroupVariant.OUTLINE.createFragment(form);
+            SaveButtonVariant.OUTLINE.createFragment(bg);
+            CancelButtonVariant.OUTLINE.createComponent(bg, this::createLinkToCancel);
         }
 
-        val buttonGroup = buttonGroupTemplate.createFragment(markupProvider, form);
-
-        ButtonTemplate.save(buttonGroupTemplate).createFragment(markupProvider, buttonGroup);
-        ButtonTemplate.cancel(buttonGroupTemplate).createComponent(markupProvider, buttonGroup, this::createLinkToCancel);
-        FeedbackTemplate.VALIDATION_FEEDBACK.createComponent(markupProvider, form, this::createValidationFeedback);
+        FeedbackVariant.DEFAULT.createComponent(form, this::createValidationFeedback);
     }
 
     @SuppressWarnings("unchecked")

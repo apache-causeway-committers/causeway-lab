@@ -7,6 +7,10 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 
+import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.TemplateMapper;
+import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.LinkToTemplate;
+import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.OutputTemplate;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -16,28 +20,24 @@ public class ScalarOutputPanel<T> extends Panel {
     private static final long serialVersionUID = 1L;
 
     @RequiredArgsConstructor
-    static enum OutputVariant implements FragmentHelper {
-        FORM_VALUE_OUTPUT_AS_LABEL("formValueOutput", "label");
-        @Getter private final String id;
-        @Getter private final String variant;
+    static enum OutputVariant implements TemplateMapper {
+        LABEL(OutputTemplate.LABEL);
+        @Getter private final OutputTemplate template;
     }
 
     @RequiredArgsConstructor
-    static enum FragmentTemplate implements FragmentHelper {
-        LINK_TO_EDIT("linkToEdit", "default"),
-        LINK_TO_COPY("linkToCopy", "default");
-        @Getter private final String id;
-        @Getter private final String variant;
+    static enum LinkTo implements TemplateMapper {
+        EDIT(LinkToTemplate.EDIT),
+        COPY(LinkToTemplate.COPY);
+        @Getter private final LinkToTemplate template;
     }
-
 
     public ScalarOutputPanel(final String id, final ScalarModel<T> scalarModel) {
         super(id, new ScalarModelHolder<>(scalarModel));
 
-        OutputVariant.FORM_VALUE_OUTPUT_AS_LABEL.createComponent(this, this::createFormValueOutputAsLabel);
-
-        FragmentTemplate.LINK_TO_EDIT.createComponent(this, this::createLinkToEdit);
-        FragmentTemplate.LINK_TO_COPY.createComponent(this, this::createLinkToCopy);
+        OutputVariant.LABEL.createComponent(this, this::createOutputAsLabel);
+        LinkTo.EDIT.createComponent(this, this::createLinkToEdit);
+        LinkTo.COPY.createComponent(this, this::createLinkToCopy);
     }
 
     @SuppressWarnings("unchecked")
@@ -50,8 +50,8 @@ public class ScalarOutputPanel<T> extends Panel {
         return (ScalarPanel<T>) getParent();
     }
 
-    private Component createFormValueOutputAsLabel(final String id) {
-        val label = new Label("formValueOutput", scalarModel().getValue());
+    private Component createOutputAsLabel(final String id) {
+        val label = new Label(id, scalarModel().getValue());
 
         label.add(new AjaxEventBehavior("click") {
             @Override

@@ -8,34 +8,10 @@
 	<wicket:panel>
 
 		<div class="input-group mb-3 wv-editable-field">
-			<wicket:container wicket:id="container-formValueOutput" />
+			<wicket:container wicket:id="container-formatOutput" />
 			<wicket:container wicket:id="container-linkToEdit" />
 			<wicket:container wicket:id="container-linkToCopy" />
 		</div>
-
-		<!-- FRAGMENTS - VALUE -->
-
-		<wicket:fragment wicket:id="fragment-formValueOutput-label">
-			<label wicket:id="formValueOutput" class="form-control">[Output
-				Format]</label>
-		</wicket:fragment>
-
-		<!-- FRAGMENTS - BUTTONS -->
-
-		<wicket:fragment wicket:id="fragment-linkToEdit-default">
-			<button wicket:id="linkToEdit"
-				class="btn btn-outline-primary input-group-hoverable" type="button">
-				<i class="fa-solid fa-edit"></i>
-			</button>
-		</wicket:fragment>
-
-		<wicket:fragment wicket:id="fragment-linkToCopy-default">
-			<button wicket:id="linkToCopy"
-				class="btn btn-outline-secondary input-group-hoverable"
-				type="button">
-				<i class="fa-solid fa-clone"></i>
-			</button>
-		</wicket:fragment>
 
 	</wicket:panel>
 </body>
