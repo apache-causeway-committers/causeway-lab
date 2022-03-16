@@ -7,8 +7,10 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 
-import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.LinkToTemplate;
+import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonGroupTemplate;
+import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonTemplate;
 import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.OutputTemplate;
+import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
 
 import lombok.val;
 
@@ -20,8 +22,18 @@ public class ScalarOutputPanel<T> extends Panel {
         super(id, new ScalarModelHolder<>(scalarModel));
 
         OutputTemplate.LABEL.createComponent(this, this::createOutputAsLabel);
-        LinkToTemplate.EDIT.createComponent(this, this::createLinkToEdit);
-        LinkToTemplate.COPY.createComponent(this, this::createLinkToCopy);
+
+        if(scalarModel.getFormatModifers()!=null
+                && scalarModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
+            val bg = ButtonGroupTemplate.RIGHT_BELOW_INSIDE.createRepeatingView(this);
+            ButtonTemplate.EDIT_GROUPED.createComponent(bg, this::createLinkToEdit);
+            ButtonTemplate.COPY_GROUPED.createComponent(bg, this::createLinkToCopy);
+        } else {
+            val bg = ButtonGroupTemplate.OUTLINED.createRepeatingView(this);
+            ButtonTemplate.EDIT_OUTLINED.createComponent(bg, this::createLinkToEdit);
+            ButtonTemplate.COPY_OUTLINED.createComponent(bg, this::createLinkToCopy);
+        }
+
     }
 
     @SuppressWarnings("unchecked")

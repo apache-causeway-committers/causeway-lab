@@ -5,6 +5,7 @@ import java.util.function.Function;
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.markup.html.panel.Fragment;
+import org.apache.wicket.markup.repeater.RepeatingView;
 
 public interface FragmentMapper {
     String getId();
@@ -25,5 +26,9 @@ public interface FragmentMapper {
             .createFragment(targetContainer, this);
     }
 
+    default RepeatingView createRepeatingView(
+            final MarkupContainer targetContainer) {
+        return createComponent(targetContainer, RepeatingView::new);
+    }
 
 }

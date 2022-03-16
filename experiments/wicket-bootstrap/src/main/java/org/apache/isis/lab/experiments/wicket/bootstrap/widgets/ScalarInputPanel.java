@@ -37,13 +37,13 @@ public class ScalarInputPanel<T> extends Panel {
         if(scalarModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
             formComponent = InputTemplate.TEXTAREA
                     .createComponent(form, this::createFormValueInputAsTextarea);
-            val bg = ButtonGroupTemplate.RIGHT_BELOW.createFragment(form);
+            val bg = ButtonGroupTemplate.RIGHT_BELOW_OUTSIDE.createRepeatingView(form);
             ButtonTemplate.SAVE_GROUPED.createFragment(bg);
             ButtonTemplate.CANCEL_GROUPED.createComponent(bg, this::createLinkToCancel);
         } else {
             formComponent = InputTemplate.TEXT
                     .createComponent(form, this::createFormValueInputAsText);
-            val bg = ButtonGroupTemplate.OUTLINE.createFragment(form);
+            val bg = ButtonGroupTemplate.OUTLINED.createRepeatingView(form);
             ButtonTemplate.SAVE_OUTLINED.createFragment(bg);
             ButtonTemplate.CANCEL_OUTLINED.createComponent(bg, this::createLinkToCancel);
         }

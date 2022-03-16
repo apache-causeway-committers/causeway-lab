@@ -23,14 +23,6 @@ public class BootstrapFragment extends Panel {
     }
 
     @RequiredArgsConstructor
-    public static enum LinkToTemplate implements FragmentMapper {
-        EDIT("linkToEdit", "default"),
-        COPY("linkToCopy", "default");
-        @Getter private final String id;
-        @Getter private final String variant;
-    }
-
-    @RequiredArgsConstructor
     public static enum InputTemplate implements FragmentMapper {
         TEXT("formValueInput", "text"),
         TEXTAREA("formValueInput", "textarea");
@@ -47,14 +39,21 @@ public class BootstrapFragment extends Panel {
 
     @RequiredArgsConstructor
     public static enum ButtonGroupTemplate implements FragmentMapper {
-        OUTLINE("buttons", "btnOutline"),
-        RIGHT_BELOW("buttons", "btnRightBelow");
+        OUTLINED("buttons", "outlined"),
+        RIGHT_BELOW_OUTSIDE("buttons", "rightBelowOutside"),
+        RIGHT_BELOW_INSIDE("buttons", "rightBelowInside");
         @Getter private final String id;
         @Getter private final String variant;
     }
 
     @RequiredArgsConstructor
     public static enum ButtonTemplate implements FragmentMapper {
+        EDIT_OUTLINED("linkToEdit", "btnOutline"),
+        EDIT_GROUPED("linkToEdit", "btnGroup"),
+
+        COPY_OUTLINED("linkToCopy", "btnOutline"),
+        COPY_GROUPED("linkToCopy", "btnGroup"),
+
         SAVE_OUTLINED("linkToSave", "btnOutline"),
         SAVE_GROUPED("linkToSave", "btnGroup"),
 
@@ -69,14 +68,14 @@ public class BootstrapFragment extends Panel {
         super(id);
     }
 
-    public Fragment createFragment(
+    Fragment createFragment(
             final MarkupContainer targetContainer,
             final FragmentMapper template) {
         targetContainer.add(this);
         return createFragment(template.getFragmentId());
     }
 
-    public <T extends Component> T createComponent(
+    <T extends Component> T createComponent(
             final MarkupContainer targetContainer,
             final FragmentMapper template,
             final Function<String, T> componentFactory) {
@@ -90,7 +89,7 @@ public class BootstrapFragment extends Panel {
     // -- HELPER
 
     private Fragment createFragment(final String fragmentId) {
-        val fragment = new Fragment("container-bootstrap", fragmentId, this);
+        val fragment = new Fragment("container-bootstrapFragment", fragmentId, this);
         add(fragment);
         return fragment;
     }
