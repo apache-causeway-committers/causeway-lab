@@ -20,7 +20,11 @@ public class BootstrapFragment extends Panel {
         LABEL_FLEX("formatOutput", "labelFlex"),
         LABEL_WIDE("formatOutput", "labelWide"),
         MARKUP_FLEX("formatOutput", "markupFlex"),
-        MARKUP_WIDE("formatOutput", "markupWide");
+        MARKUP_WIDE("formatOutput", "markupWide"),
+        CHECK_CHECKED("formatOutput", "checkChecked"),
+        CHECK_UNCHECKED("formatOutput", "checkUnchecked"),
+        CHECK_INTERMEDIATE("formatOutput", "checkIntermediate"),
+        ;
         @Getter private final String id;
         @Getter private final String variant;
     }
@@ -61,7 +65,12 @@ public class BootstrapFragment extends Panel {
         SAVE_GROUPED("linkToSave", "btnGroup"),
 
         CANCEL_OUTLINED("linkToCancel", "btnOutline"),
-        CANCEL_GROUPED("linkToCancel", "btnGroup");
+        CANCEL_GROUPED("linkToCancel", "btnGroup"),
+
+        CHECK_SET_OUTLINED("linkToCheckSet", "btnOutline"),
+        CHECK_CLEAR_OUTLINED("linkToCheckClear", "btnOutline"),
+        CHECK_INTERMEDIATE_OUTLINED("linkToCheckIntermediate", "btnOutline"),
+        ;
         @Getter private final String id;
         @Getter private final String variant;
     }

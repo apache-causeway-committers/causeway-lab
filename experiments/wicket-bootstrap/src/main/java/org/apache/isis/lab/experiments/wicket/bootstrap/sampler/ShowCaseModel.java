@@ -6,6 +6,7 @@ import java.util.EnumSet;
 import org.apache.wicket.model.IModel;
 
 import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarModel;
+import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarModelAbstract;
 import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
 
 import lombok.Data;
@@ -24,7 +25,9 @@ implements Serializable {
 
     public ScalarModel<T> getScalarModel() {
 
-        return new ScalarModel<T>() {
+        return new ScalarModelAbstract<T>(type, formatModifers!=null
+                ? formatModifers
+                : EnumSet.noneOf(FormatModifer.class)) {
 
             private static final long serialVersionUID = 1L;
             private T pendingValueObject = valueObject;
@@ -87,12 +90,6 @@ implements Serializable {
                 getValue().setObject(pendingValueObject);
             }
 
-            @Override
-            public EnumSet<FormatModifer> getFormatModifers() {
-                return formatModifers!=null
-                        ? formatModifers
-                        : EnumSet.noneOf(FormatModifer.class);
-            }
         };
     }
 

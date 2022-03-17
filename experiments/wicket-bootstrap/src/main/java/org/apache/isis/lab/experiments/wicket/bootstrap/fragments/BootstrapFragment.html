@@ -9,7 +9,7 @@
 
 		<wicket:container wicket:id="container-bootstrapFragment" />
 
-		<!-- FRAGMENTS - OUTPUT -->
+		<!-- FRAGMENTS - OUTPUT / LABEL -->
 
 		<wicket:fragment wicket:id="fragment-formatOutput-labelFlex">
 			<div class="d-inline-flex">
@@ -21,6 +21,8 @@
 			<label wicket:id="formatOutput" class="form-control"/>
 		</wicket:fragment>
 		
+		<!-- FRAGMENTS - OUTPUT / MARKUP -->
+		
 		<wicket:fragment wicket:id="fragment-formatOutput-markupFlex">
 			<div class="d-inline-flex">
 				<slot name="markup" wicket:id="formatOutput" class="form-control"/>
@@ -31,7 +33,29 @@
 			<slot name="markup" wicket:id="formatOutput" class="form-control"/>
 		</wicket:fragment>
 		
-		<!-- FRAGMENTS - INPUT -->
+		<!-- FRAGMENTS - OUTPUT / CHECK -->
+		
+		<wicket:fragment wicket:id="fragment-formatOutput-checkChecked">
+			<div wicket:id="formatOutput" class="d-inline-flex">
+				<label class="form-control" style="color: green;"><i 
+					class="fa-regular fa-check-square"></i></label>
+			</div>
+		</wicket:fragment>
+		
+		<wicket:fragment wicket:id="fragment-formatOutput-checkUnchecked">
+			<div wicket:id="formatOutput" class="d-inline-flex">
+				<label class="form-control"><i class="fa-regular fa-square"></i></label>
+			</div>
+		</wicket:fragment>
+		
+		<wicket:fragment wicket:id="fragment-formatOutput-checkIntermediate">
+			<div wicket:id="formatOutput" class="d-inline-flex">
+				<label class="form-control" style="color: silver;"><i 
+					class="fa-regular fa-square-minus"></i></label>
+			</div>
+		</wicket:fragment>
+		
+		<!-- FRAGMENTS - INPUT / TEXT -->
 
 		<wicket:fragment wicket:id="fragment-formatInput-text">
 			<div class="d-inline-flex">
@@ -42,8 +66,10 @@
 		<wicket:fragment wicket:id="fragment-formatInput-textarea">
 			<textarea wicket:id="formatInput" class="form-control" />
 		</wicket:fragment>
+		
+		<!-- FRAGMENTS - INPUT / CHECK -->
 
-		<!-- FRAGMENTS - EDIT -->
+		<!-- FRAGMENTS - LINK / EDIT -->
 
 		<wicket:fragment wicket:id="fragment-linkToEdit-btnOutline">
 			<button wicket:id="linkToEdit"
@@ -58,7 +84,30 @@
 			</button>
 		</wicket:fragment>
 
-		<!-- FRAGMENTS - COPY -->
+		<!-- FRAGMENTS - LINK / CHECK -->
+
+		<wicket:fragment wicket:id="fragment-linkToCheckSet-btnOutline">
+			<button wicket:id="linkToCheckSet"
+				class="btn btn-outline-primary input-group-hoverable" type="button">
+				<i class="fa-solid fa-check-square"></i>
+			</button>
+		</wicket:fragment>
+		
+		<wicket:fragment wicket:id="fragment-linkToCheckClear-btnOutline">
+			<button wicket:id="linkToCheckClear"
+				class="btn btn-outline-primary input-group-hoverable" type="button">
+				<i class="fa-regular fa-square"></i>
+			</button>
+		</wicket:fragment>
+		
+		<wicket:fragment wicket:id="fragment-linkToCheckIntermediate-btnOutline">
+			<button wicket:id="linkToCheckIntermediate"
+				class="btn btn-outline-primary input-group-hoverable" type="button">
+				<i class="fa-regular fa-square-minus"></i>
+			</button>
+		</wicket:fragment>
+
+		<!-- FRAGMENTS - LINK / COPY -->
 
 		<wicket:fragment wicket:id="fragment-linkToCopy-btnOutline">
 			<button wicket:id="linkToCopy"
@@ -74,7 +123,7 @@
 			</button>
 		</wicket:fragment>
 
-		<!-- FRAGMENTS - SAVE -->
+		<!-- FRAGMENTS - LINK / SAVE -->
 
 		<wicket:fragment wicket:id="fragment-linkToSave-btnOutline">
 			<button class="btn btn-outline-primary" type="submit">
@@ -88,7 +137,7 @@
 			</button>
 		</wicket:fragment>
 
-		<!-- FRAGMENTS - CANCEL -->
+		<!-- FRAGMENTS - LINK / CANCEL -->
 
 		<wicket:fragment wicket:id="fragment-linkToCancel-btnOutline">
 			<button wicket:id="linkToCancel" class="btn btn-outline-secondary"
