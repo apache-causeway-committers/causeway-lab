@@ -2,9 +2,12 @@ package org.apache.isis.lab.experiments.wicket.bootstrap.sampler;
 
 import java.io.Serializable;
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.form.AjaxCheckBox;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.LambdaModel;
 import org.apache.wicket.model.Model;
 
 import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.bool.BooleanDesign;
@@ -26,6 +29,7 @@ public class ShowCasePanel extends Panel {
         add(new Label("showCaseTitle", model.getTitle()));
         addScalarPanel("scalarPanel", model);
         addDesignPanel("designPanel", model);
+        addActivateValidationFeedbackToggle("checkActivateValidationFeedback", model);
     }
 
     protected ShowCaseModel<?> showCaseModel() {
@@ -62,6 +66,22 @@ public class ShowCasePanel extends Panel {
             add(container);
         }
 
+    }
+
+    private void addActivateValidationFeedbackToggle(
+            final String id,
+            final ShowCaseModel<?> showCaseModel) {
+
+        val cb = new AjaxCheckBox(id, LambdaModel.of(
+                showCaseModel::isValidationFeedbackEnabled,
+                showCaseModel::setValidationFeedbackEnabled)) {
+            private static final long serialVersionUID = 1L;
+            @Override protected void onUpdate(final AjaxRequestTarget target) {
+                // no-op
+            }
+        };
+
+        add(cb);
     }
 
 }

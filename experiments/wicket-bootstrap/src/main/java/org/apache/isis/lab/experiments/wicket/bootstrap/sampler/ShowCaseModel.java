@@ -22,6 +22,11 @@ implements Serializable {
     private String title;
     private T valueObject;
     private EnumSet<FormatModifer> formatModifers;
+    private boolean validationFeedbackEnabled;
+
+    public void setValidationFeedbackEnabled(final boolean flag) {
+        this.validationFeedbackEnabled = flag;
+    }
 
     public ScalarModel<T> getScalarModel() {
 
@@ -31,7 +36,6 @@ implements Serializable {
 
             private static final long serialVersionUID = 1L;
             private T pendingValueObject = valueObject;
-            private String validationFeedbackText = null;
 
             @Getter(lazy = true, onMethod_ = {@Override})
             private final IModel<T> value = new IModel<T>() {
@@ -72,17 +76,18 @@ implements Serializable {
                 private static final long serialVersionUID = 1L;
                 @Override
                 public String getObject() {
-                    return validationFeedbackText;
+                    System.err.printf("validate: %s%n", validatePendingValue());
+                    return validatePendingValue();
                 }
             };
 
             @Override
             public String validatePendingValue() {
                 if(pendingValueObject!=null
-                        && pendingValueObject.toString().length()>5) {
-                    return validationFeedbackText = "max char (5) violation";
+                        && isValidationFeedbackEnabled()) {
+                    return "invalid input";
                 }
-                return validationFeedbackText = null;
+                return null;
             }
 
             @Override
@@ -92,5 +97,7 @@ implements Serializable {
 
         };
     }
+
+
 
 }

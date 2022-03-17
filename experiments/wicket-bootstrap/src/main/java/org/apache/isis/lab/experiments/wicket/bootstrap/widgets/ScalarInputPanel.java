@@ -71,7 +71,7 @@ public class ScalarInputPanel<T> extends Panel {
                     val parent = ScalarInputPanel.this.scalarPanel();
                     parent.setFormat(ScalarPanel.Format.OUTPUT);
                 } else {
-                    // TODO show validation feedback
+                    // show validation feedback
 
                     formComponent.add(AttributeModifier.append("class", "is-invalid"));
 
