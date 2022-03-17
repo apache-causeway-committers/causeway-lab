@@ -60,7 +60,7 @@ public class ShowCasePage extends WebPage {
 
     @RequiredArgsConstructor
     static enum ShowCase {
-        STRING("linkToString", "String", String.class, EnumSet.noneOf(FormatModifer.class), "A String"),
+        STRING("linkToString", "String", String.class, EnumSet.of(FormatModifer.FLEX), "A String"),
         MULTILNIE("linkToMultiline", "Multiline", String.class, EnumSet.of(FormatModifer.MULITLINE),
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
                 + "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
@@ -69,15 +69,15 @@ public class ShowCasePage extends WebPage {
                 + "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla "
                 + "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa "
                 + "qui officia deserunt mollit anim id est laborum."),
-        MARKUP("linkToMarkup", "Markup", String.class, EnumSet.of(FormatModifer.MARKUP, FormatModifer.MULITLINE, FormatModifer.WIDE),
+        MARKUP("linkToMarkup", "Markup", String.class, EnumSet.of(FormatModifer.MARKUP, FormatModifer.MULITLINE),
                 "<p>\n"
                 + "\t<span style=\"color:red;\">red</span>\n"
                 + "\t<span style=\"color:blue;\">blue</span>\n"
                 + "\t<span style=\"font-size:24px;\">big</span>\n"
                 + "</p>"),
-        BOOLEAN_BINARY("linkToBooleanBinary", "Boolean(Binary)", boolean.class, EnumSet.noneOf(FormatModifer.class), true),
-        BOOLEAN_TERTIARY("linkToBooleanTertiary", "Boolean(Tertiary)", Boolean.class, EnumSet.of(FormatModifer.TRISTATE), Boolean.TRUE),
-        FILE("linkToFile", "File", File.class, EnumSet.noneOf(FormatModifer.class), new File("sample.docx")),
+        BOOLEAN_BINARY("linkToBooleanBinary", "Boolean(Binary)", boolean.class, EnumSet.of(FormatModifer.FLEX), true),
+        BOOLEAN_TERTIARY("linkToBooleanTertiary", "Boolean(Tertiary)", Boolean.class, EnumSet.of(FormatModifer.TRISTATE,FormatModifer.FLEX), Boolean.TRUE),
+        FILE("linkToFile", "File", File.class, EnumSet.of(FormatModifer.FLEX), new File("sample.docx")),
         ;
 
         @Getter private final String linkId;

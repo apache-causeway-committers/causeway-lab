@@ -17,10 +17,8 @@ public class BootstrapFragment extends Panel {
 
     @RequiredArgsConstructor
     public static enum OutputTemplate implements FragmentMapper {
-        LABEL_FLEX("formatOutput", "labelFlex"),
-        LABEL_WIDE("formatOutput", "labelWide"),
-        MARKUP_FLEX("formatOutput", "markupFlex"),
-        MARKUP_WIDE("formatOutput", "markupWide"),
+        LABEL("formatOutput", "label"),
+        MARKUP("formatOutput", "markup"),
         CHECK_CHECKED("formatOutput", "checkChecked"),
         CHECK_UNCHECKED("formatOutput", "checkUnchecked"),
         CHECK_INTERMEDIATE("formatOutput", "checkIntermediate"),

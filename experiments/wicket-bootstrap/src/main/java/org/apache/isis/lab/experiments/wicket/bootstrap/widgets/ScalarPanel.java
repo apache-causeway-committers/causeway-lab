@@ -1,5 +1,6 @@
 package org.apache.isis.lab.experiments.wicket.bootstrap.widgets;
 
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import lombok.Getter;
@@ -13,7 +14,7 @@ public class ScalarPanel<T> extends Panel {
         MARKUP,
         MULITLINE,
         TRISTATE,
-        WIDE
+        FLEX
     }
 
     static enum Format {
@@ -28,11 +29,16 @@ public class ScalarPanel<T> extends Panel {
 
     public ScalarPanel(
             final String id,
-            final ScalarModel<T> formFieldModel) {
-        super(id, new ScalarModelHolder<>(formFieldModel));
+            final ScalarModel<T> scalarModel) {
+        super(id, new ScalarModelHolder<>(scalarModel));
         setOutputMarkupId(true);
 
-        setFormat(Format.OUTPUT);
+        if(scalarModel.getFormatModifers().contains(FormatModifer.FLEX)) {
+            //TODO add <div class="d-inline-flex"></div>
+            add(AttributeModifier.append("class", "d-inline-flex"));
+        }
+
+        setFormat(Format.OUTPUT); // initial, can be switched via ajax
     }
 
     @SuppressWarnings("unchecked")

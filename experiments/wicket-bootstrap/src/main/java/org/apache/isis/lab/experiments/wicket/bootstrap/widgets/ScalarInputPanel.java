@@ -4,19 +4,19 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.util.string.Strings;
 
+import org.apache.isis.commons.internal.base._Casts;
 import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonGroupTemplate;
 import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonTemplate;
 import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.FeedbackTemplate;
 import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.InputTemplate;
+import org.apache.isis.lab.experiments.wicket.bootstrap.util.WktUtil;
 import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
 
 import lombok.val;
@@ -57,28 +57,11 @@ public class ScalarInputPanel<T> extends Panel {
     }
 
     protected ScalarPanel<T> scalarPanel() {
-        return (ScalarPanel<T>) getParent();
+        return _Casts.uncheckedCast(getParent());
     }
 
     private MarkupContainer createForm(final String id) {
-        val form = new Form<Void>(id){
-            @Override
-            protected void onSubmit() {
-                final ScalarModel<T> scalarModel = scalarModel();
-                val feedback = scalarModel.validatePendingValue();
-                if(Strings.isEmpty(feedback)) {
-                    scalarModel.submitPendingValue();
-                    val parent = ScalarInputPanel.this.scalarPanel();
-                    parent.setFormat(ScalarPanel.Format.OUTPUT);
-                } else {
-                    // show validation feedback
-
-                    formComponent.add(AttributeModifier.append("class", "is-invalid"));
-
-                }
-
-            }
-        };
+        val form = WktUtil.createForm(id, ScalarInputPanel.this::onInputSubmit);
         add(form);
         return form;
     }
@@ -93,20 +76,38 @@ public class ScalarInputPanel<T> extends Panel {
         return formComponent;
     }
 
-    private Component createLinkToCancel(final String id) {
-        val link = new AjaxLink<Void>(id){
-            @Override
-            public void onClick(final AjaxRequestTarget target) {
-                val parent = ScalarInputPanel.this.scalarPanel();
-                parent.setFormat(ScalarPanel.Format.OUTPUT);
-                target.add(parent);
-            }
-        };
-        return link;
-    }
-
     private Component createValidationFeedback(final String id) {
         val link = new Label(id, scalarModel().getValidationFeedback());
         return link;
     }
+
+    private Component createLinkToCancel(final String id) {
+        return WktUtil.createLink(id, this::switchToOutputFormat);
+    }
+
+    private void onInputSubmit() {
+        val scalarModel = scalarModel();
+        val feedback = scalarModel.validatePendingValue();
+        if(Strings.isEmpty(feedback)) {
+            scalarModel.submitPendingValue();
+            switchToOutputFormat();
+        } else {
+            System.err.printf("submission vetoed %n");
+
+            // show validation feedback
+            formComponent.add(AttributeModifier.append("class", "is-invalid"));
+        }
+    }
+
+    private void switchToOutputFormat() {
+        val parent = ScalarInputPanel.this.scalarPanel();
+        parent.setFormat(ScalarPanel.Format.OUTPUT);
+    }
+
+    private void switchToOutputFormat(final AjaxRequestTarget ajaxTarget) {
+        val parent = ScalarInputPanel.this.scalarPanel();
+        parent.setFormat(ScalarPanel.Format.OUTPUT);
+        ajaxTarget.add(parent);
+    }
+
 }

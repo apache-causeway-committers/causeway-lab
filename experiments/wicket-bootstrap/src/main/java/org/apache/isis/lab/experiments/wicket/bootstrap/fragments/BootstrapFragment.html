@@ -11,45 +11,33 @@
 
 		<!-- FRAGMENTS - OUTPUT / LABEL -->
 
-		<wicket:fragment wicket:id="fragment-formatOutput-labelFlex">
-			<div class="d-inline-flex">
-				<label wicket:id="formatOutput" class="form-control"/>
-			</div>
-		</wicket:fragment>
-
-		<wicket:fragment wicket:id="fragment-formatOutput-labelWide">
+		<wicket:fragment wicket:id="fragment-formatOutput-label">
 			<label wicket:id="formatOutput" class="form-control"/>
 		</wicket:fragment>
 		
 		<!-- FRAGMENTS - OUTPUT / MARKUP -->
-		
-		<wicket:fragment wicket:id="fragment-formatOutput-markupFlex">
-			<div class="d-inline-flex">
-				<slot name="markup" wicket:id="formatOutput" class="form-control"/>
-			</div>
-		</wicket:fragment>
 
-		<wicket:fragment wicket:id="fragment-formatOutput-markupWide">
+		<wicket:fragment wicket:id="fragment-formatOutput-markup">
 			<slot name="markup" wicket:id="formatOutput" class="form-control"/>
 		</wicket:fragment>
 		
 		<!-- FRAGMENTS - OUTPUT / CHECK -->
 		
 		<wicket:fragment wicket:id="fragment-formatOutput-checkChecked">
-			<div wicket:id="formatOutput" class="d-inline-flex">
+			<div wicket:id="formatOutput">
 				<label class="form-control" style="color: green;"><i 
 					class="fa-regular fa-check-square"></i></label>
 			</div>
 		</wicket:fragment>
 		
 		<wicket:fragment wicket:id="fragment-formatOutput-checkUnchecked">
-			<div wicket:id="formatOutput" class="d-inline-flex">
+			<div wicket:id="formatOutput">
 				<label class="form-control"><i class="fa-regular fa-square"></i></label>
 			</div>
 		</wicket:fragment>
 		
 		<wicket:fragment wicket:id="fragment-formatOutput-checkIntermediate">
-			<div wicket:id="formatOutput" class="d-inline-flex">
+			<div wicket:id="formatOutput">
 				<label class="form-control" style="color: silver;"><i 
 					class="fa-regular fa-square-minus"></i></label>
 			</div>
@@ -58,9 +46,7 @@
 		<!-- FRAGMENTS - INPUT / TEXT -->
 
 		<wicket:fragment wicket:id="fragment-formatInput-text">
-			<div class="d-inline-flex">
-				<input wicket:id="formatInput" class="form-control" type="text" />
-			</div>
+			<input wicket:id="formatInput" class="form-control" type="text" />
 		</wicket:fragment>
 
 		<wicket:fragment wicket:id="fragment-formatInput-textarea">

@@ -3,7 +3,6 @@ package org.apache.isis.lab.experiments.wicket.bootstrap.widgets;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -12,6 +11,7 @@ import org.apache.isis.commons.internal.functions._Functions.SerializableConsume
 import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonGroupTemplate;
 import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonTemplate;
 import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.OutputTemplate;
+import org.apache.isis.lab.experiments.wicket.bootstrap.util.WktUtil;
 import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
 
 import lombok.val;
@@ -24,11 +24,7 @@ public class ScalarOutputPanel<T> extends Panel {
         super(id, new ScalarModelHolder<>(scalarModel));
 
         if(scalarModel.getFormatModifers().contains(FormatModifer.MARKUP)) {
-            if(scalarModel.getFormatModifers().contains(FormatModifer.WIDE)) {
-                OutputTemplate.MARKUP_WIDE.createComponent(this, this::createOutputAsHtml);
-            } else {
-                OutputTemplate.MARKUP_FLEX.createComponent(this, this::createOutputAsHtml);
-            }
+            OutputTemplate.MARKUP.createComponent(this, this::createOutputAsHtml);
         } else {
 
             if(scalarModel.isBoolean()) {
@@ -62,11 +58,9 @@ public class ScalarOutputPanel<T> extends Panel {
                 }
 
             } else {
-                if(scalarModel.getFormatModifers().contains(FormatModifer.WIDE)) {
-                    OutputTemplate.LABEL_WIDE.createComponent(this, this::createOutputAsLabel);
-                } else {
-                    OutputTemplate.LABEL_FLEX.createComponent(this, this::createOutputAsLabel);
-                }
+
+                OutputTemplate.LABEL.createComponent(this, this::createOutputAsLabel);
+
             }
         }
 
@@ -127,34 +121,26 @@ public class ScalarOutputPanel<T> extends Panel {
     }
 
     private Component createLinkToEdit(final String id) {
-        return createLink(id, ScalarOutputPanel.this::onEditClick);
+        return WktUtil.createLink(id, ScalarOutputPanel.this::onEditClick);
     }
 
     private Component createLinkToCopy(final String id) {
-        return createLink(id, ScalarOutputPanel.this::onCopyClick);
+        return WktUtil.createLink(id, ScalarOutputPanel.this::onCopyClick);
     }
 
     private Component createLinkToCheckSet(final String id) {
-        return createLink(id, ajaxTarget->ScalarOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
+        return WktUtil.createLink(id, ajaxTarget->ScalarOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
     }
 
     private Component createLinkToCheckClear(final String id) {
-        return createLink(id, ajaxTarget->ScalarOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
+        return WktUtil.createLink(id, ajaxTarget->ScalarOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
     }
 
     private Component createLinkToCheckIntermediate(final String id) {
-        return createLink(id, ajaxTarget->ScalarOutputPanel.this.onCheckboxClick(ajaxTarget, (Boolean)null));
+        return WktUtil.createLink(id, ajaxTarget->ScalarOutputPanel.this.onCheckboxClick(ajaxTarget, (Boolean)null));
     }
 
-    private AjaxLink<Void> createLink(final String id, final SerializableConsumer<AjaxRequestTarget> onClick) {
-        val link = new AjaxLink<Void>(id){
-            private static final long serialVersionUID = 1L;
-            @Override public void onClick(final AjaxRequestTarget target) {
-                onClick.accept(target);
-            }
-        };
-        return link;
-    }
+
 
     private void addOnClick(
             final Component component,
@@ -189,7 +175,6 @@ public class ScalarOutputPanel<T> extends Panel {
         val parent = ScalarOutputPanel.this.scalarPanel();
         parent.setFormat(ScalarPanel.Format.INPUT);
         ajaxTarget.add(parent);
-
     }
 
 
