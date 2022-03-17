@@ -13,6 +13,7 @@ public class ScalarPanel<T> extends Panel {
         MARKUP,
         MULITLINE,
         TRISTATE,
+        WIDE
     }
 
     static enum Format {

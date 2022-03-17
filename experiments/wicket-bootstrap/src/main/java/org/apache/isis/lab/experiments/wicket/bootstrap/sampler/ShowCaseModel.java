@@ -89,7 +89,9 @@ implements Serializable {
 
             @Override
             public EnumSet<FormatModifer> getFormatModifers() {
-                return formatModifers;
+                return formatModifers!=null
+                        ? formatModifers
+                        : EnumSet.noneOf(FormatModifer.class);
             }
         };
     }

@@ -17,15 +17,18 @@ public class BootstrapFragment extends Panel {
 
     @RequiredArgsConstructor
     public static enum OutputTemplate implements FragmentMapper {
-        LABEL("formatOutput", "label");
+        LABEL_FLEX("formatOutput", "labelFlex"),
+        LABEL_WIDE("formatOutput", "labelWide"),
+        MARKUP_FLEX("formatOutput", "markupFlex"),
+        MARKUP_WIDE("formatOutput", "markupWide");
         @Getter private final String id;
         @Getter private final String variant;
     }
 
     @RequiredArgsConstructor
     public static enum InputTemplate implements FragmentMapper {
-        TEXT("formValueInput", "text"),
-        TEXTAREA("formValueInput", "textarea");
+        TEXT("formatInput", "text"),
+        TEXTAREA("formatInput", "textarea");
         @Getter private final String id;
         @Getter private final String variant;
     }
@@ -93,7 +96,5 @@ public class BootstrapFragment extends Panel {
         add(fragment);
         return fragment;
     }
-
-
 
 }

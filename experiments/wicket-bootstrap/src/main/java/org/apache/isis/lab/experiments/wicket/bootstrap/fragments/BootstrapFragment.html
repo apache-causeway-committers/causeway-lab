@@ -11,8 +11,36 @@
 
 		<!-- FRAGMENTS - OUTPUT -->
 
-		<wicket:fragment wicket:id="fragment-formatOutput-label">
-			<label wicket:id="formatOutput" class="form-control">[Output Format]</label>
+		<wicket:fragment wicket:id="fragment-formatOutput-labelFlex">
+			<div class="d-inline-flex">
+				<label wicket:id="formatOutput" class="form-control"/>
+			</div>
+		</wicket:fragment>
+
+		<wicket:fragment wicket:id="fragment-formatOutput-labelWide">
+			<label wicket:id="formatOutput" class="form-control"/>
+		</wicket:fragment>
+		
+		<wicket:fragment wicket:id="fragment-formatOutput-markupFlex">
+			<div class="d-inline-flex">
+				<slot name="markup" wicket:id="formatOutput" class="form-control"/>
+			</div>
+		</wicket:fragment>
+
+		<wicket:fragment wicket:id="fragment-formatOutput-markupWide">
+			<slot name="markup" wicket:id="formatOutput" class="form-control"/>
+		</wicket:fragment>
+		
+		<!-- FRAGMENTS - INPUT -->
+
+		<wicket:fragment wicket:id="fragment-formatInput-text">
+			<div class="d-inline-flex">
+				<input wicket:id="formatInput" class="form-control" type="text" />
+			</div>
+		</wicket:fragment>
+
+		<wicket:fragment wicket:id="fragment-formatInput-textarea">
+			<textarea wicket:id="formatInput" class="form-control" />
 		</wicket:fragment>
 
 		<!-- FRAGMENTS - EDIT -->
@@ -44,16 +72,6 @@
 			<button wicket:id="linkToCopy" type="button" class="btn btn-secondary">
 				<i class="fa-solid fa-clone"></i>
 			</button>
-		</wicket:fragment>
-
-		<!-- FRAGMENTS - INPUT -->
-
-		<wicket:fragment wicket:id="fragment-formValueInput-text">
-			<input wicket:id="formValueInput" class="form-control" type="text" />
-		</wicket:fragment>
-
-		<wicket:fragment wicket:id="fragment-formValueInput-textarea">
-			<textarea wicket:id="formValueInput" class="form-control" />
 		</wicket:fragment>
 
 		<!-- FRAGMENTS - SAVE -->

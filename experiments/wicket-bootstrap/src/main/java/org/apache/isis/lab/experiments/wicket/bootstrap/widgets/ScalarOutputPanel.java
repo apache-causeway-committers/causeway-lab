@@ -21,10 +21,21 @@ public class ScalarOutputPanel<T> extends Panel {
     public ScalarOutputPanel(final String id, final ScalarModel<T> scalarModel) {
         super(id, new ScalarModelHolder<>(scalarModel));
 
-        OutputTemplate.LABEL.createComponent(this, this::createOutputAsLabel);
+        if(scalarModel.getFormatModifers().contains(FormatModifer.MARKUP)) {
+            if(scalarModel.getFormatModifers().contains(FormatModifer.WIDE)) {
+                OutputTemplate.MARKUP_WIDE.createComponent(this, this::createOutputAsHtml);
+            } else {
+                OutputTemplate.MARKUP_FLEX.createComponent(this, this::createOutputAsHtml);
+            }
+        } else {
+            if(scalarModel.getFormatModifers().contains(FormatModifer.WIDE)) {
+                OutputTemplate.LABEL_WIDE.createComponent(this, this::createOutputAsLabel);
+            } else {
+                OutputTemplate.LABEL_FLEX.createComponent(this, this::createOutputAsLabel);
+            }
+        }
 
-        if(scalarModel.getFormatModifers()!=null
-                && scalarModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
+        if(scalarModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
             val bg = ButtonGroupTemplate.RIGHT_BELOW_INSIDE.createRepeatingView(this);
             ButtonTemplate.EDIT_GROUPED.createComponent(bg, this::createLinkToEdit);
             ButtonTemplate.COPY_GROUPED.createComponent(bg, this::createLinkToCopy);
@@ -58,6 +69,20 @@ public class ScalarOutputPanel<T> extends Panel {
 
         return label;
     }
+
+    private Component createOutputAsHtml(final String id) {
+        val markup = new PlainHtml(id, scalarModel().getValue());
+
+        markup.add(new AjaxEventBehavior("click") {
+            @Override
+            protected void onEvent(final AjaxRequestTarget target) {
+                ScalarOutputPanel.this.onEditClick(target);
+            }
+        });
+
+        return markup;
+    }
+
 
     private Component createLinkToEdit(final String id) {
         val link = new AjaxLink<Void>(id){
