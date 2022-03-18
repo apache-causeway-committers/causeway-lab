@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wktbs.widgets;
+package org.apache.isis.lab.experiments.wktbs.widgets.field;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
@@ -17,20 +17,20 @@ import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.ButtonT
 import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.FeedbackTemplate;
 import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.InputTemplate;
 import org.apache.isis.lab.experiments.wktbs.util.WktUtil;
-import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
 
 import lombok.val;
 
-public class ScalarInputPanel<T> extends Panel {
+public class FieldInputPanel<T> extends Panel {
 
     private static final long serialVersionUID = 1L;
 
     private FormComponent<T> formComponent;
 
-    public ScalarInputPanel(
+    public FieldInputPanel(
             final String id,
-            final ScalarModel<T> scalarModel) {
-        super(id, new ScalarModelHolder<>(scalarModel));
+            final FieldModel<T> scalarModel) {
+        super(id, new FieldModelHolder<>(scalarModel));
 
         val form = createForm("scalarInputForm");
 
@@ -52,32 +52,32 @@ public class ScalarInputPanel<T> extends Panel {
     }
 
     @SuppressWarnings("unchecked")
-    protected ScalarModel<T> scalarModel() {
-        return (ScalarModel<T>) getDefaultModelObject();
+    protected FieldModel<T> fieldModel() {
+        return (FieldModel<T>) getDefaultModelObject();
     }
 
-    protected ScalarPanel<T> scalarPanel() {
+    protected FieldPanel<T> fieldPanel() {
         return _Casts.uncheckedCast(getParent());
     }
 
     private MarkupContainer createForm(final String id) {
-        val form = WktUtil.createForm(id, ScalarInputPanel.this::onInputSubmit);
+        val form = WktUtil.createForm(id, FieldInputPanel.this::onInputSubmit);
         add(form);
         return form;
     }
 
     private FormComponent<T> createFormValueInputAsText(final String id) {
-        val formComponent = new TextField<>(id, scalarModel().getPendingValue());
+        val formComponent = new TextField<>(id, fieldModel().getPendingValue());
         return formComponent;
     }
 
     private FormComponent<T> createFormValueInputAsTextarea(final String id) {
-        val formComponent = new TextArea<>(id, scalarModel().getPendingValue());
+        val formComponent = new TextArea<>(id, fieldModel().getPendingValue());
         return formComponent;
     }
 
     private Component createValidationFeedback(final String id) {
-        val link = new Label(id, scalarModel().getValidationFeedback());
+        val link = new Label(id, fieldModel().getValidationFeedback());
         return link;
     }
 
@@ -86,7 +86,7 @@ public class ScalarInputPanel<T> extends Panel {
     }
 
     private void onInputSubmit() {
-        val scalarModel = scalarModel();
+        val scalarModel = fieldModel();
         val feedback = scalarModel.validatePendingValue();
         if(Strings.isEmpty(feedback)) {
             scalarModel.submitPendingValue();
@@ -100,13 +100,13 @@ public class ScalarInputPanel<T> extends Panel {
     }
 
     private void switchToOutputFormat() {
-        val parent = ScalarInputPanel.this.scalarPanel();
-        parent.setFormat(ScalarPanel.Format.OUTPUT);
+        val parent = FieldInputPanel.this.fieldPanel();
+        parent.setFormat(FieldPanel.Format.OUTPUT);
     }
 
     private void switchToOutputFormat(final AjaxRequestTarget ajaxTarget) {
-        val parent = ScalarInputPanel.this.scalarPanel();
-        parent.setFormat(ScalarPanel.Format.OUTPUT);
+        val parent = FieldInputPanel.this.fieldPanel();
+        parent.setFormat(FieldPanel.Format.OUTPUT);
         ajaxTarget.add(parent);
     }
 

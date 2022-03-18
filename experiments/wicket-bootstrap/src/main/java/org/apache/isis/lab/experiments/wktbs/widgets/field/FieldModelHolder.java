@@ -1,16 +1,16 @@
-package org.apache.isis.lab.experiments.wktbs.widgets;
+package org.apache.isis.lab.experiments.wktbs.widgets.field;
 
 import org.apache.wicket.model.ChainingModel;
 import org.apache.wicket.model.IModel;
 
-public class ScalarModelHolder<T>
-extends ChainingModel<ScalarModel<T>>
+public class FieldModelHolder<T>
+extends ChainingModel<FieldModel<T>>
 implements
-    IModel<ScalarModel<T>> {
+    IModel<FieldModel<T>> {
 
     private static final long serialVersionUID = 1L;
 
-    public ScalarModelHolder(final ScalarModel<T> modelObject) {
+    public FieldModelHolder(final FieldModel<T> modelObject) {
         super(modelObject);
         // TODO Auto-generated constructor stub
     }

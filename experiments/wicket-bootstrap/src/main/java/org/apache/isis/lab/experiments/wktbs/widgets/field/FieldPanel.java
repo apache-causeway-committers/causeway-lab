@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wktbs.widgets;
+package org.apache.isis.lab.experiments.wktbs.widgets.field;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -6,7 +6,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import lombok.Getter;
 import lombok.NonNull;
 
-public class ScalarPanel<T> extends Panel {
+public class FieldPanel<T> extends Panel {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,10 +27,10 @@ public class ScalarPanel<T> extends Panel {
     @Getter
     private Format format;
 
-    public ScalarPanel(
+    public FieldPanel(
             final String id,
-            final ScalarModel<T> scalarModel) {
-        super(id, new ScalarModelHolder<>(scalarModel));
+            final FieldModel<T> scalarModel) {
+        super(id, new FieldModelHolder<>(scalarModel));
         setOutputMarkupId(true);
 
         if(scalarModel.getFormatModifers().contains(FormatModifer.FLEX)) {
@@ -42,8 +42,8 @@ public class ScalarPanel<T> extends Panel {
     }
 
     @SuppressWarnings("unchecked")
-    protected ScalarModel<T> scalarModel() {
-        return (ScalarModel<T>) getDefaultModelObject();
+    protected FieldModel<T> fieldModel() {
+        return (FieldModel<T>) getDefaultModelObject();
     }
 
     public void setFormat(final @NonNull Format format) {
@@ -55,10 +55,10 @@ public class ScalarPanel<T> extends Panel {
 
         switch (format) {
         case OUTPUT:
-            addOrReplace(new ScalarOutputPanel<T>(id, scalarModel()));
+            addOrReplace(new FieldOutputPanel<T>(id, fieldModel()));
             return;
         case INPUT: {
-            addOrReplace(new ScalarInputPanel<T>(id, scalarModel()));
+            addOrReplace(new FieldInputPanel<T>(id, fieldModel()));
             return;
         }
         default:

@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wktbs.widgets;
+package org.apache.isis.lab.experiments.wktbs.widgets.field;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxEventBehavior;
@@ -12,16 +12,17 @@ import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.ButtonG
 import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.ButtonTemplate;
 import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.OutputTemplate;
 import org.apache.isis.lab.experiments.wktbs.util.WktUtil;
-import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.markup.PlainHtml;
 
 import lombok.val;
 
-public class ScalarOutputPanel<T> extends Panel {
+public class FieldOutputPanel<T> extends Panel {
 
     private static final long serialVersionUID = 1L;
 
-    public ScalarOutputPanel(final String id, final ScalarModel<T> scalarModel) {
-        super(id, new ScalarModelHolder<>(scalarModel));
+    public FieldOutputPanel(final String id, final FieldModel<T> scalarModel) {
+        super(id, new FieldModelHolder<>(scalarModel));
 
         if(scalarModel.getFormatModifers().contains(FormatModifer.MARKUP)) {
             OutputTemplate.MARKUP.createComponent(this, this::createOutputAsHtml);
@@ -32,7 +33,7 @@ public class ScalarOutputPanel<T> extends Panel {
                 val bg = ButtonGroupTemplate.OUTLINED.createRepeatingView(this);
 
                 if(scalarModel.getFormatModifers().contains(FormatModifer.TRISTATE)) {
-                    val triState = scalarModel().asTriState().getValue().getObject();
+                    val triState = fieldModel().asTriState().getValue().getObject();
                     if(triState==null) {
                         OutputTemplate.CHECK_INTERMEDIATE.createComponent(this, this::createOutputAsCheckInactive);
                         ButtonTemplate.CHECK_SET_OUTLINED.createComponent(bg, this::createLinkToCheckSet);
@@ -48,7 +49,7 @@ public class ScalarOutputPanel<T> extends Panel {
                         ButtonTemplate.CHECK_INTERMEDIATE_OUTLINED.createComponent(bg, this::createLinkToCheckIntermediate);
                     }
                 } else {
-                    val binaryState = scalarModel().asBinaryState().getValue().getObject();
+                    val binaryState = fieldModel().asBinaryState().getValue().getObject();
                     if(binaryState) {
                         OutputTemplate.CHECK_CHECKED.createComponent(this, this::createOutputAsCheckSet);
                     } else {
@@ -82,18 +83,18 @@ public class ScalarOutputPanel<T> extends Panel {
     }
 
     @SuppressWarnings("unchecked")
-    protected ScalarModel<T> scalarModel() {
-        return (ScalarModel<T>) getDefaultModelObject();
+    protected FieldModel<T> fieldModel() {
+        return (FieldModel<T>) getDefaultModelObject();
     }
 
     @SuppressWarnings("unchecked")
-    protected ScalarPanel<T> scalarPanel() {
-        return (ScalarPanel<T>) getParent();
+    protected FieldPanel<T> fieldPanel() {
+        return (FieldPanel<T>) getParent();
     }
 
     private Component createOutputAsLabel(final String id) {
-        val label = new Label(id, scalarModel().getValue());
-        addOnClick(label, ScalarOutputPanel.this::onEditClick);
+        val label = new Label(id, fieldModel().getValue());
+        addOnClick(label, FieldOutputPanel.this::onEditClick);
         return label;
     }
 
@@ -104,40 +105,40 @@ public class ScalarOutputPanel<T> extends Panel {
 
     private Component createOutputAsCheckSet(final String id) {
         val label = createOutputAsCheckInactive(id);
-        addOnClick(label, ajaxTarget->ScalarOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
+        addOnClick(label, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
         return label;
     }
 
     private Component createOutputAsCheckClear(final String id) {
         val label = createOutputAsCheckInactive(id);
-        addOnClick(label, ajaxTarget->ScalarOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
+        addOnClick(label, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
         return label;
     }
 
     private Component createOutputAsHtml(final String id) {
-        val markup = new PlainHtml(id, scalarModel().getValue());
-        addOnClick(markup, ScalarOutputPanel.this::onEditClick);
+        val markup = new PlainHtml(id, fieldModel().getValue());
+        addOnClick(markup, FieldOutputPanel.this::onEditClick);
         return markup;
     }
 
     private Component createLinkToEdit(final String id) {
-        return WktUtil.createLink(id, ScalarOutputPanel.this::onEditClick);
+        return WktUtil.createLink(id, FieldOutputPanel.this::onEditClick);
     }
 
     private Component createLinkToCopy(final String id) {
-        return WktUtil.createLink(id, ScalarOutputPanel.this::onCopyClick);
+        return WktUtil.createLink(id, FieldOutputPanel.this::onCopyClick);
     }
 
     private Component createLinkToCheckSet(final String id) {
-        return WktUtil.createLink(id, ajaxTarget->ScalarOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
+        return WktUtil.createLink(id, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
     }
 
     private Component createLinkToCheckClear(final String id) {
-        return WktUtil.createLink(id, ajaxTarget->ScalarOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
+        return WktUtil.createLink(id, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
     }
 
     private Component createLinkToCheckIntermediate(final String id) {
-        return WktUtil.createLink(id, ajaxTarget->ScalarOutputPanel.this.onCheckboxClick(ajaxTarget, (Boolean)null));
+        return WktUtil.createLink(id, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, (Boolean)null));
     }
 
 
@@ -163,17 +164,17 @@ public class ScalarOutputPanel<T> extends Panel {
 
     public void onCheckboxClick(final AjaxRequestTarget ajaxTarget, final Boolean proposedValue) {
         // request the proper bi/tri state model based on semantics
-        if(scalarModel().getFormatModifers().contains(FormatModifer.TRISTATE)) {
-            scalarModel().asTriState().getPendingValue().setObject(proposedValue);
+        if(fieldModel().getFormatModifers().contains(FormatModifer.TRISTATE)) {
+            fieldModel().asTriState().getPendingValue().setObject(proposedValue);
         } else {
-            scalarModel().asBinaryState().getPendingValue().setObject(proposedValue);
+            fieldModel().asBinaryState().getPendingValue().setObject(proposedValue);
         }
         switchToInputFormat(ajaxTarget);
     }
 
     private void switchToInputFormat(final AjaxRequestTarget ajaxTarget) {
-        val parent = ScalarOutputPanel.this.scalarPanel();
-        parent.setFormat(ScalarPanel.Format.INPUT);
+        val parent = FieldOutputPanel.this.fieldPanel();
+        parent.setFormat(FieldPanel.Format.INPUT);
         ajaxTarget.add(parent);
     }
 

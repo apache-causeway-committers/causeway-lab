@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wktbs.widgets;
+package org.apache.isis.lab.experiments.wktbs.widgets.field;
 
 import java.util.EnumSet;
 import java.util.function.Function;
@@ -7,7 +7,7 @@ import org.apache.wicket.model.ChainingModel;
 import org.apache.wicket.model.IModel;
 
 import org.apache.isis.commons.internal.base._Casts;
-import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class ScalarModelAbstract<T> implements ScalarModel<T> {
+public abstract class FieldModelAbstract<T> implements FieldModel<T> {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,11 +23,11 @@ public abstract class ScalarModelAbstract<T> implements ScalarModel<T> {
     @Getter(onMethod_ = {@Override}) private final @NonNull EnumSet<FormatModifer> formatModifers;
 
     @Override
-    public final <R> ScalarModel<R> map(
+    public final <R> FieldModel<R> map(
             final Class<R> resultType,
             final Function<T, R> mapper,
             final Function<R, T> reverseMapper) {
-        return new ScalarModelAbstract<R>(resultType, formatModifers) {
+        return new FieldModelAbstract<R>(resultType, formatModifers) {
 
             private static final long serialVersionUID = 1L;
 
@@ -54,8 +54,8 @@ public abstract class ScalarModelAbstract<T> implements ScalarModel<T> {
 
             // -- HELPER
 
-            protected ScalarModel<T> mappedFrom() {
-                return ScalarModelAbstract.this;
+            protected FieldModel<T> mappedFrom() {
+                return FieldModelAbstract.this;
             }
 
             private IModel<R> mapModel(final IModel<T> source) {

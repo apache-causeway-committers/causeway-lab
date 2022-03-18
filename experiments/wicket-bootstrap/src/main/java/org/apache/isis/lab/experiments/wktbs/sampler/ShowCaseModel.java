@@ -5,9 +5,9 @@ import java.util.EnumSet;
 
 import org.apache.wicket.model.IModel;
 
-import org.apache.isis.lab.experiments.wktbs.widgets.ScalarModel;
-import org.apache.isis.lab.experiments.wktbs.widgets.ScalarModelAbstract;
-import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldModel;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldModelAbstract;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
 
 import lombok.Data;
 import lombok.Getter;
@@ -28,9 +28,9 @@ implements Serializable {
         this.validationFeedbackEnabled = flag;
     }
 
-    public ScalarModel<T> getScalarModel() {
+    public FieldModel<T> getScalarModel() {
 
-        return new ScalarModelAbstract<T>(type, formatModifers!=null
+        return new FieldModelAbstract<T>(type, formatModifers!=null
                 ? formatModifers
                 : EnumSet.noneOf(FormatModifer.class)) {
 

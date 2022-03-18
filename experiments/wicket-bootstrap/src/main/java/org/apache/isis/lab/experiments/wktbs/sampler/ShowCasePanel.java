@@ -13,7 +13,7 @@ import org.apache.wicket.model.Model;
 import org.apache.isis.lab.experiments.wktbs.sampler.bool.BooleanDesign;
 import org.apache.isis.lab.experiments.wktbs.sampler.file.FileDesign;
 import org.apache.isis.lab.experiments.wktbs.sampler.string.StringDesign;
-import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel;
 
 import lombok.val;
 
@@ -39,7 +39,7 @@ public class ShowCasePanel extends Panel {
     private <T extends Serializable> void addScalarPanel(
             final String id,
             final ShowCaseModel<T> showCaseModel) {
-        val scalarPanel = new ScalarPanel<T>(id, showCaseModel.getScalarModel());
+        val scalarPanel = new FieldPanel<T>(id, showCaseModel.getScalarModel());
         add(scalarPanel);
     }
 
