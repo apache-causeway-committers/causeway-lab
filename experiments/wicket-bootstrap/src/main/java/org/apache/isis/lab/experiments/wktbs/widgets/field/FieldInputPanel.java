@@ -16,6 +16,7 @@ import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.ButtonG
 import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.ButtonTemplate;
 import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.FeedbackTemplate;
 import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.InputTemplate;
+import org.apache.isis.lab.experiments.wktbs.fragments.FragmentMapper;
 import org.apache.isis.lab.experiments.wktbs.util.WktUtil;
 import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
 import org.apache.isis.lab.experiments.wktbs.widgets.field.model.FieldModel;
@@ -26,6 +27,58 @@ public class FieldInputPanel<T> extends Panel {
 
     private static final long serialVersionUID = 1L;
 
+    @FunctionalInterface
+    public static interface FormComponentFactory<T> {
+        FormComponent<T> createFormComponent(MarkupContainer container, FieldModel<T> fieldModel);
+    }
+
+    static class FormComponentFactoryBoolean implements FormComponentFactory<Boolean> {
+
+        @Override
+        public FormComponent<Boolean> createFormComponent(
+                final MarkupContainer form,
+                final FieldModel<Boolean> fieldModel) {
+
+            val booleanModel = fieldModel.getFormatModifers().contains(FormatModifer.TRISTATE)
+                    ? fieldModel.asTriState()
+                    : fieldModel.asBinaryState();
+            val booleanFixedPendingValue = booleanModel.getPendingValue().getObject();
+
+            final FragmentMapper fragmentMapper;
+            if(booleanFixedPendingValue==null) {
+                fragmentMapper = InputTemplate.CHECK_INTERMEDIATE;
+            } else if(booleanFixedPendingValue) {
+                fragmentMapper = InputTemplate.CHECK_CHECKED;
+            } else {
+                fragmentMapper = InputTemplate.CHECK_UNCHECKED;
+            }
+
+            return fragmentMapper.createComponent(form,
+                    id->WktUtil.createBooleanFormComponentWithFixedValue(id, booleanFixedPendingValue));
+        }
+
+    }
+
+    static class FormComponentFactoryString implements FormComponentFactory<String> {
+
+        @Override
+        public FormComponent<String> createFormComponent(
+                final MarkupContainer form,
+                final FieldModel<String> fieldModel) {
+
+            if(fieldModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
+                return InputTemplate.TEXTAREA
+                        .createComponent(form, id->new TextArea<>(id, fieldModel.getPendingValue()));
+            } else {
+                return InputTemplate.TEXT
+                        .createComponent(form, id->new TextField<>(id, fieldModel.getPendingValue()));
+            }
+
+        }
+
+    }
+
+
     private FormComponent<T> formComponent;
 
     public FieldInputPanel(
@@ -35,44 +88,26 @@ public class FieldInputPanel<T> extends Panel {
 
         val form = createForm("scalarInputForm");
 
+        if(fieldModel.isBoolean()){
+            formComponent = (FormComponent<T>) new FormComponentFactoryBoolean()
+                    .createFormComponent(form, (FieldModel<Boolean>) fieldModel);
+        } else {
+            formComponent = (FormComponent<T>) new FormComponentFactoryString()
+                    .createFormComponent(form, (FieldModel<String>) fieldModel);
+        }
+
+        FeedbackTemplate.DEFAULT.createComponent(form, this::createValidationFeedback);
+
         if(fieldModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
-            formComponent = InputTemplate.TEXTAREA
-                    .createComponent(form, this::createFormValueInputAsTextarea);
             val bg = ButtonGroupTemplate.RIGHT_BELOW_OUTSIDE.createRepeatingView(form);
             ButtonTemplate.SAVE_GROUPED.createFragment(bg);
             ButtonTemplate.CANCEL_GROUPED.createComponent(bg, this::createLinkToCancel);
         } else {
-
             val bg = ButtonGroupTemplate.OUTLINED.createRepeatingView(form);
             ButtonTemplate.SAVE_OUTLINED.createFragment(bg);
             ButtonTemplate.CANCEL_OUTLINED.createComponent(bg, this::createLinkToCancel);
-
-            if(fieldModel.isBoolean()){
-                if(fieldModel.getFormatModifers().contains(FormatModifer.TRISTATE)) {
-                    val triState = fieldModel().asTriState().getPendingValue().getObject();
-                    if(triState==null) {
-                        formComponent = InputTemplate.CHECK_INTERMEDIATE.createComponent(form, this::createInputAsCheckInactive);
-                    } else if(triState) {
-                        formComponent = InputTemplate.CHECK_CHECKED.createComponent(form, this::createInputAsCheckInactive);
-                    } else {
-                        formComponent = InputTemplate.CHECK_UNCHECKED.createComponent(form, this::createInputAsCheckInactive);
-                    }
-                } else {
-                    val binaryState = fieldModel().asBinaryState().getPendingValue().getObject();
-                    if(binaryState) {
-                        formComponent = InputTemplate.CHECK_CHECKED.createComponent(form, this::createInputAsCheckInactive);
-                    } else {
-                        formComponent = InputTemplate.CHECK_UNCHECKED.createComponent(form, this::createInputAsCheckInactive);
-                    }
-
-                }
-            } else {
-                formComponent = InputTemplate.TEXT
-                        .createComponent(form, this::createFormValueInputAsText);
-            }
         }
 
-        FeedbackTemplate.DEFAULT.createComponent(form, this::createValidationFeedback);
     }
 
     @SuppressWarnings("unchecked")
@@ -97,21 +132,6 @@ public class FieldInputPanel<T> extends Panel {
 
     private FormComponent<T> createFormValueInputAsTextarea(final String id) {
         val formComponent = new TextArea<>(id, fieldModel().getPendingValue());
-        return formComponent;
-    }
-
-    private FormComponent<T> createInputAsCheckInactive(final String id) {
-        val booleanModel = fieldModel().getFormatModifers().contains(FormatModifer.TRISTATE)
-                ? fieldModel().asTriState()
-                : fieldModel().asBinaryState();
-        val booleanFixedValue = booleanModel.getPendingValue().getObject();
-
-        val formComponent = new FormComponent<T>(id, fieldModel().getPendingValue()) {
-            private static final long serialVersionUID = 1L;
-            @Override public void convertInput() {
-                setConvertedInput(_Casts.uncheckedCast(booleanFixedValue));
-            }
-        };
         return formComponent;
     }
 

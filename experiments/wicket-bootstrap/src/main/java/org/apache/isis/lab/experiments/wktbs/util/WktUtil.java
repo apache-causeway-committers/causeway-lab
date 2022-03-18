@@ -3,6 +3,7 @@ package org.apache.isis.lab.experiments.wktbs.util;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.ChainingModel;
 import org.apache.wicket.model.IModel;
 import org.danekja.java.misc.serializable.SerializableRunnable;
@@ -41,7 +42,25 @@ public class WktUtil {
         return form;
     }
 
-    // use Lambda model instead
+    public FormComponent<Boolean> createBooleanFormComponentWithFixedValue(
+            final String id,
+            final Boolean booleanFixedValue) {
+        val formComponent = new FormComponent<Boolean>(id, new IModel<Boolean>() {
+            private static final long serialVersionUID = 1L;
+            @Override public Boolean getObject() {
+                return booleanFixedValue; }
+            @Override public void setObject(final Boolean object) {
+                /* silently ignore */ }
+        }) {
+            private static final long serialVersionUID = 1L;
+            @Override public void convertInput() {
+                setConvertedInput(booleanFixedValue);
+            }
+        };
+        return formComponent;
+    }
+
+    // use LambdaModel instead
     public <T, R> IModel<R> mapModel(
             final IModel<T> source,
             final SerializableFunction<T, R> mapper,
