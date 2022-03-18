@@ -30,7 +30,10 @@ public class BootstrapFragment extends Panel {
     @RequiredArgsConstructor
     public static enum InputTemplate implements FragmentMapper {
         TEXT("formatInput", "text"),
-        TEXTAREA("formatInput", "textarea");
+        TEXTAREA("formatInput", "textarea"),
+        CHECK_CHECKED("formatInput", "checkChecked"),
+        CHECK_UNCHECKED("formatInput", "checkUnchecked"),
+        CHECK_INTERMEDIATE("formatInput", "checkIntermediate");
         @Getter private final String id;
         @Getter private final String variant;
     }

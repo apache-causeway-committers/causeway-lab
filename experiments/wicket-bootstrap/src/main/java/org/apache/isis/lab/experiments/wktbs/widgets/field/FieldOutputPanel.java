@@ -22,18 +22,18 @@ public class FieldOutputPanel<T> extends Panel {
 
     private static final long serialVersionUID = 1L;
 
-    public FieldOutputPanel(final String id, final FieldModel<T> scalarModel) {
-        super(id, new FieldModelHolder<>(scalarModel));
+    public FieldOutputPanel(final String id, final FieldModel<T> fieldModel) {
+        super(id, new FieldModelHolder<>(fieldModel));
 
-        if(scalarModel.getFormatModifers().contains(FormatModifer.MARKUP)) {
+        if(fieldModel.getFormatModifers().contains(FormatModifer.MARKUP)) {
             OutputTemplate.MARKUP.createComponent(this, this::createOutputAsPlainHtml);
         } else {
 
-            if(scalarModel.isBoolean()) {
+            if(fieldModel.isBoolean()) {
 
                 val bg = ButtonGroupTemplate.OUTLINED.createRepeatingView(this);
 
-                if(scalarModel.getFormatModifers().contains(FormatModifer.TRISTATE)) {
+                if(fieldModel.getFormatModifers().contains(FormatModifer.TRISTATE)) {
                     val triState = fieldModel().asTriState().getValue().getObject();
                     if(triState==null) {
                         OutputTemplate.CHECK_INTERMEDIATE.createComponent(this, this::createOutputAsCheckInactive);
@@ -66,11 +66,11 @@ public class FieldOutputPanel<T> extends Panel {
             }
         }
 
-        if(!scalarModel.isBoolean()) {
+        if(!fieldModel.isBoolean()) {
 
             // add default buttons
 
-            if(scalarModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
+            if(fieldModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
                 val bg = ButtonGroupTemplate.RIGHT_BELOW_INSIDE.createRepeatingView(this);
                 ButtonTemplate.EDIT_GROUPED.createComponent(bg, this::createLinkToEdit);
                 ButtonTemplate.COPY_GROUPED.createComponent(bg, this::createLinkToCopy);

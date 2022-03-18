@@ -1,3 +1,4 @@
+/* EDITABLE FIELD HOVER LOGIC */
 .wv-editable-field .form-control {
   border-color: transparent;
   border-style: dashed;
@@ -13,15 +14,14 @@
 .wv-editable-field-hovering,
 .wv-editable-field-hovering .form-control,
 .wv-editable-field-hovering .input-group-hoverable {
-  border-color: rgb(206, 212, 218);
+  border-color: rgb(206, 212, 218); /*TODO use theme variable instead*/
   opacity: unset;
 }
-/* cursor */
+
+/* EDITABLE FIELD CURSOR STYLE */
 .wv-editable-field .wv-cursor-default .form-control {
 	cursor: default;
 }
 .wv-editable-field .wv-cursor-pointer .form-control {
 	cursor: pointer;
 }
-
-

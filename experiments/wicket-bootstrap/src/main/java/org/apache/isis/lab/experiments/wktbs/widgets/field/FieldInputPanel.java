@@ -29,23 +29,46 @@ public class FieldInputPanel<T> extends Panel {
 
     public FieldInputPanel(
             final String id,
-            final FieldModel<T> scalarModel) {
-        super(id, new FieldModelHolder<>(scalarModel));
+            final FieldModel<T> fieldModel) {
+        super(id, new FieldModelHolder<>(fieldModel));
 
         val form = createForm("scalarInputForm");
 
-        if(scalarModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
+        if(fieldModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
             formComponent = InputTemplate.TEXTAREA
                     .createComponent(form, this::createFormValueInputAsTextarea);
             val bg = ButtonGroupTemplate.RIGHT_BELOW_OUTSIDE.createRepeatingView(form);
             ButtonTemplate.SAVE_GROUPED.createFragment(bg);
             ButtonTemplate.CANCEL_GROUPED.createComponent(bg, this::createLinkToCancel);
         } else {
-            formComponent = InputTemplate.TEXT
-                    .createComponent(form, this::createFormValueInputAsText);
+
             val bg = ButtonGroupTemplate.OUTLINED.createRepeatingView(form);
             ButtonTemplate.SAVE_OUTLINED.createFragment(bg);
             ButtonTemplate.CANCEL_OUTLINED.createComponent(bg, this::createLinkToCancel);
+
+            if(fieldModel.isBoolean()){
+                if(fieldModel.getFormatModifers().contains(FormatModifer.TRISTATE)) {
+                    val triState = fieldModel().asTriState().getPendingValue().getObject();
+                    if(triState==null) {
+                        formComponent = InputTemplate.CHECK_INTERMEDIATE.createComponent(form, this::createInputAsCheckInactive);
+                    } else if(triState) {
+                        formComponent = InputTemplate.CHECK_CHECKED.createComponent(form, this::createInputAsCheckInactive);
+                    } else {
+                        formComponent = InputTemplate.CHECK_UNCHECKED.createComponent(form, this::createInputAsCheckInactive);
+                    }
+                } else {
+                    val binaryState = fieldModel().asBinaryState().getPendingValue().getObject();
+                    if(binaryState) {
+                        formComponent = InputTemplate.CHECK_CHECKED.createComponent(form, this::createInputAsCheckInactive);
+                    } else {
+                        formComponent = InputTemplate.CHECK_UNCHECKED.createComponent(form, this::createInputAsCheckInactive);
+                    }
+
+                }
+            } else {
+                formComponent = InputTemplate.TEXT
+                        .createComponent(form, this::createFormValueInputAsText);
+            }
         }
 
         FeedbackTemplate.DEFAULT.createComponent(form, this::createValidationFeedback);
@@ -76,9 +99,16 @@ public class FieldInputPanel<T> extends Panel {
         return formComponent;
     }
 
+    private FormComponent<T> createInputAsCheckInactive(final String id) {
+        val formComponent = new FormComponent<T>(id, fieldModel().getPendingValue()) {
+            private static final long serialVersionUID = 1L;
+        };
+        return formComponent;
+    }
+
     private Component createValidationFeedback(final String id) {
-        val link = new Label(id, fieldModel().getValidationFeedback());
-        return link;
+        val label = new Label(id, fieldModel().getValidationFeedback());
+        return label;
     }
 
     private Component createLinkToCancel(final String id) {
