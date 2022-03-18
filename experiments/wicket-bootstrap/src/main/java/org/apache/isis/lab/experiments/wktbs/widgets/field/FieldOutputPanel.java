@@ -1,7 +1,10 @@
 package org.apache.isis.lab.experiments.wktbs.widgets.field;
 
+import java.io.Serializable;
+
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
+import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -23,63 +26,138 @@ public class FieldOutputPanel<T> extends Panel {
 
     private static final long serialVersionUID = 1L;
 
-    public FieldOutputPanel(final String id, final FieldModel<T> fieldModel) {
-        super(id, new FieldModelHolder<>(fieldModel));
+    @FunctionalInterface
+    public static interface FieldOutputFactory<T> extends Serializable {
+        Component createFieldOutput(MarkupContainer container, FieldModel<T> fieldModel);
+    }
 
-        if(fieldModel.getFormatModifers().contains(FormatModifer.MARKUP)) {
-            OutputTemplate.MARKUP.createComponent(this, this::createOutputAsPlainHtml);
-        } else {
+    class FieldOutputFactoryBoolean implements FieldOutputFactory<Boolean> {
 
-            if(fieldModel.isBoolean()) {
+        private static final long serialVersionUID = 1L;
 
-                val bg = ButtonGroupTemplate.OUTLINED.createRepeatingView(this);
+        @Override
+        public Component createFieldOutput(
+                final MarkupContainer container,
+                final FieldModel<Boolean> fieldModel) {
 
-                if(fieldModel.getFormatModifers().contains(FormatModifer.TRISTATE)) {
-                    val triState = fieldModel().asTriState().getValue().getObject();
-                    if(triState==null) {
-                        OutputTemplate.CHECK_INTERMEDIATE.createComponent(this, this::createOutputAsCheckInactive);
-                        ButtonTemplate.CHECK_SET_OUTLINED.createComponent(bg, this::createLinkToCheckSet);
-                        ButtonTemplate.CHECK_CLEAR_OUTLINED.createComponent(bg, this::createLinkToCheckClear);
-                    } else if(triState) {
-                        OutputTemplate.CHECK_CHECKED.createComponent(this, this::createOutputAsCheckInactive);
-                        ButtonTemplate.CHECK_CLEAR_OUTLINED.createComponent(bg, this::createLinkToCheckClear);
-                        ButtonTemplate.CHECK_INTERMEDIATE_OUTLINED.createComponent(bg, this::createLinkToCheckIntermediate);
+            val bg = ButtonGroupTemplate.OUTLINED.createRepeatingView(container);
 
-                    } else {
-                        OutputTemplate.CHECK_UNCHECKED.createComponent(this, this::createOutputAsCheckInactive);
-                        ButtonTemplate.CHECK_SET_OUTLINED.createComponent(bg, this::createLinkToCheckSet);
-                        ButtonTemplate.CHECK_INTERMEDIATE_OUTLINED.createComponent(bg, this::createLinkToCheckIntermediate);
-                    }
+            final Component component;
+
+            if(fieldModel.getFormatModifers().contains(FormatModifer.TRISTATE)) {
+                val triState = fieldModel().asTriState().getValue().getObject();
+                if(triState==null) {
+                    component = OutputTemplate.CHECK_INTERMEDIATE.createComponent(container, this::createOutputAsCheckInactive);
+                    ButtonTemplate.CHECK_SET_OUTLINED.createComponent(bg, this::createLinkToCheckSet);
+                    ButtonTemplate.CHECK_CLEAR_OUTLINED.createComponent(bg, this::createLinkToCheckClear);
+                } else if(triState) {
+                    component = OutputTemplate.CHECK_CHECKED.createComponent(container, this::createOutputAsCheckInactive);
+                    ButtonTemplate.CHECK_CLEAR_OUTLINED.createComponent(bg, this::createLinkToCheckClear);
+                    ButtonTemplate.CHECK_INTERMEDIATE_OUTLINED.createComponent(bg, this::createLinkToCheckIntermediate);
                 } else {
-                    val binaryState = fieldModel().asBinaryState().getValue().getObject();
-                    if(binaryState) {
-                        OutputTemplate.CHECK_CHECKED.createComponent(this, this::createOutputAsCheckSet);
-                    } else {
-                        OutputTemplate.CHECK_UNCHECKED.createComponent(this, this::createOutputAsCheckClear);
-                    }
-
+                    component = OutputTemplate.CHECK_UNCHECKED.createComponent(container, this::createOutputAsCheckInactive);
+                    ButtonTemplate.CHECK_SET_OUTLINED.createComponent(bg, this::createLinkToCheckSet);
+                    ButtonTemplate.CHECK_INTERMEDIATE_OUTLINED.createComponent(bg, this::createLinkToCheckIntermediate);
                 }
-
             } else {
-
-                OutputTemplate.LABEL.createComponent(this, this::createOutputAsLabel);
-
+                val binaryState = fieldModel().asBinaryState().getValue().getObject();
+                if(binaryState) {
+                    component = OutputTemplate.CHECK_CHECKED.createComponent(container, this::createOutputAsCheckSet);
+                } else {
+                    component = OutputTemplate.CHECK_UNCHECKED.createComponent(container, this::createOutputAsCheckClear);
+                }
             }
+            return component;
         }
 
-        if(!fieldModel.isBoolean()) {
+        private Component createOutputAsCheckInactive(final String id) {
+            val component = new WebMarkupContainer(id);
+            component.add(AttributeModifier.append("class", "wv-cursor-default"));
+            return component;
+        }
+
+        private Component createOutputAsCheckSet(final String id) {
+            val component = new WebMarkupContainer(id);
+            addOnClick(component, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
+            component.add(AttributeModifier.append("class", "wv-cursor-pointer"));
+            return component;
+        }
+
+        private Component createOutputAsCheckClear(final String id) {
+            val component = new WebMarkupContainer(id);
+            addOnClick(component, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
+            component.add(AttributeModifier.append("class", "wv-cursor-pointer"));
+            return component;
+        }
+
+        private Component createLinkToCheckSet(final String id) {
+            return WktUtil.createLink(id, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
+        }
+
+        private Component createLinkToCheckClear(final String id) {
+            return WktUtil.createLink(id, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
+        }
+
+        private Component createLinkToCheckIntermediate(final String id) {
+            return WktUtil.createLink(id, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, (Boolean)null));
+        }
+
+    }
+
+    class FieldOutputFactoryString implements FieldOutputFactory<String> {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Component createFieldOutput(
+                final MarkupContainer container,
+                final FieldModel<String> fieldModel) {
+
+            final Component component;
+
+            if(fieldModel.getFormatModifers().contains(FormatModifer.MARKUP)) {
+                component = OutputTemplate.MARKUP.createComponent(container, this::createOutputAsPlainHtml);
+            } else {
+                component = OutputTemplate.LABEL.createComponent(container, this::createOutputAsLabel);
+            }
 
             // add default buttons
 
             if(fieldModel.getFormatModifers().contains(FormatModifer.MULITLINE)) {
-                val bg = ButtonGroupTemplate.RIGHT_BELOW_INSIDE.createRepeatingView(this);
-                ButtonTemplate.EDIT_GROUPED.createComponent(bg, this::createLinkToEdit);
-                ButtonTemplate.COPY_GROUPED.createComponent(bg, this::createLinkToCopy);
+                val bg = ButtonGroupTemplate.RIGHT_BELOW_INSIDE.createRepeatingView(container);
+                ButtonTemplate.EDIT_GROUPED.createComponent(bg, FieldOutputPanel.this::createLinkToEdit);
+                ButtonTemplate.COPY_GROUPED.createComponent(bg, FieldOutputPanel.this::createLinkToCopy);
             } else {
-                val bg = ButtonGroupTemplate.OUTLINED.createRepeatingView(this);
-                ButtonTemplate.EDIT_OUTLINED.createComponent(bg, this::createLinkToEdit);
-                ButtonTemplate.COPY_OUTLINED.createComponent(bg, this::createLinkToCopy);
+                val bg = ButtonGroupTemplate.OUTLINED.createRepeatingView(container);
+                ButtonTemplate.EDIT_OUTLINED.createComponent(bg, FieldOutputPanel.this::createLinkToEdit);
+                ButtonTemplate.COPY_OUTLINED.createComponent(bg, FieldOutputPanel.this::createLinkToCopy);
             }
+
+            return component;
+        }
+
+        private Component createOutputAsLabel(final String id) {
+            val label = new Label(id, fieldModel().getValue());
+            addOnClick(label, FieldOutputPanel.this::onEditClick);
+            return label;
+        }
+
+        private Component createOutputAsPlainHtml(final String id) {
+            val markup = new PlainHtml(id, fieldModel().getValue());
+            addOnClick(markup, FieldOutputPanel.this::onEditClick);
+            return markup;
+        }
+
+    }
+
+
+    public FieldOutputPanel(final String id, final FieldModel<T> fieldModel) {
+        super(id, new FieldModelHolder<>(fieldModel));
+
+        if(fieldModel.isBoolean()) {
+            new FieldOutputFactoryBoolean().createFieldOutput(this, (FieldModel<Boolean>)fieldModel);
+        } else {
+            new FieldOutputFactoryString().createFieldOutput(this, (FieldModel<String>)fieldModel);
         }
 
     }
@@ -94,38 +172,6 @@ public class FieldOutputPanel<T> extends Panel {
         return (FieldPanel<T>) getParent();
     }
 
-    private Component createOutputAsLabel(final String id) {
-        val label = new Label(id, fieldModel().getValue());
-        addOnClick(label, FieldOutputPanel.this::onEditClick);
-        return label;
-    }
-
-    private Component createOutputAsCheckInactive(final String id) {
-        val component = new WebMarkupContainer(id);
-        component.add(AttributeModifier.append("class", "wv-cursor-default"));
-        return component;
-    }
-
-    private Component createOutputAsCheckSet(final String id) {
-        val component = new WebMarkupContainer(id);
-        addOnClick(component, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
-        component.add(AttributeModifier.append("class", "wv-cursor-pointer"));
-        return component;
-    }
-
-    private Component createOutputAsCheckClear(final String id) {
-        val component = new WebMarkupContainer(id);
-        addOnClick(component, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
-        component.add(AttributeModifier.append("class", "wv-cursor-pointer"));
-        return component;
-    }
-
-    private Component createOutputAsPlainHtml(final String id) {
-        val markup = new PlainHtml(id, fieldModel().getValue());
-        addOnClick(markup, FieldOutputPanel.this::onEditClick);
-        return markup;
-    }
-
     private Component createLinkToEdit(final String id) {
         return WktUtil.createLink(id, FieldOutputPanel.this::onEditClick);
     }
@@ -133,20 +179,6 @@ public class FieldOutputPanel<T> extends Panel {
     private Component createLinkToCopy(final String id) {
         return WktUtil.createLink(id, FieldOutputPanel.this::onCopyClick);
     }
-
-    private Component createLinkToCheckSet(final String id) {
-        return WktUtil.createLink(id, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
-    }
-
-    private Component createLinkToCheckClear(final String id) {
-        return WktUtil.createLink(id, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
-    }
-
-    private Component createLinkToCheckIntermediate(final String id) {
-        return WktUtil.createLink(id, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, (Boolean)null));
-    }
-
-
 
     private void addOnClick(
             final Component component,

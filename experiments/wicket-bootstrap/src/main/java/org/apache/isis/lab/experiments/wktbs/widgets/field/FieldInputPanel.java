@@ -1,5 +1,7 @@
 package org.apache.isis.lab.experiments.wktbs.widgets.field;
 
+import java.io.Serializable;
+
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
@@ -28,11 +30,13 @@ public class FieldInputPanel<T> extends Panel {
     private static final long serialVersionUID = 1L;
 
     @FunctionalInterface
-    public static interface FormComponentFactory<T> {
+    public static interface FormComponentFactory<T> extends Serializable {
         FormComponent<T> createFormComponent(MarkupContainer container, FieldModel<T> fieldModel);
     }
 
     static class FormComponentFactoryBoolean implements FormComponentFactory<Boolean> {
+
+        private static final long serialVersionUID = 1L;
 
         @Override
         public FormComponent<Boolean> createFormComponent(
@@ -60,6 +64,8 @@ public class FieldInputPanel<T> extends Panel {
     }
 
     static class FormComponentFactoryString implements FormComponentFactory<String> {
+
+        private static final long serialVersionUID = 1L;
 
         @Override
         public FormComponent<String> createFormComponent(
