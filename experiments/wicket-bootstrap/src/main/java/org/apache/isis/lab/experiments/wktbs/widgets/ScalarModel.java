@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.widgets;
+package org.apache.isis.lab.experiments.wktbs.widgets;
 
 import java.io.Serializable;
 import java.util.EnumSet;
@@ -9,7 +9,7 @@ import org.apache.wicket.model.IModel;
 
 import org.apache.isis.commons.internal.base._Casts;
 import org.apache.isis.commons.internal.exceptions._Exceptions;
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
 
 public interface ScalarModel<T> extends Serializable {
 

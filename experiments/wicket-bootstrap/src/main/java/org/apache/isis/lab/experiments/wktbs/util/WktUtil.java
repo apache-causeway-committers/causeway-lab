@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.util;
+package org.apache.isis.lab.experiments.wktbs.util;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;

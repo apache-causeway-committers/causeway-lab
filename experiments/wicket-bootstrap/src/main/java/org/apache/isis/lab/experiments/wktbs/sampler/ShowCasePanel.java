@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.sampler;
+package org.apache.isis.lab.experiments.wktbs.sampler;
 
 import java.io.Serializable;
 
@@ -10,10 +10,10 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.LambdaModel;
 import org.apache.wicket.model.Model;
 
-import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.bool.BooleanDesign;
-import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.file.FileDesign;
-import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.string.StringDesign;
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel;
+import org.apache.isis.lab.experiments.wktbs.sampler.bool.BooleanDesign;
+import org.apache.isis.lab.experiments.wktbs.sampler.file.FileDesign;
+import org.apache.isis.lab.experiments.wktbs.sampler.string.StringDesign;
+import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel;
 
 import lombok.val;
 

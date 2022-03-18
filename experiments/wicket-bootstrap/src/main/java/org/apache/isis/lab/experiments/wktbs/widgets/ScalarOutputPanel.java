@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.widgets;
+package org.apache.isis.lab.experiments.wktbs.widgets;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxEventBehavior;
@@ -8,11 +8,11 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import org.apache.isis.commons.internal.functions._Functions.SerializableConsumer;
-import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonGroupTemplate;
-import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonTemplate;
-import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.OutputTemplate;
-import org.apache.isis.lab.experiments.wicket.bootstrap.util.WktUtil;
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.ButtonGroupTemplate;
+import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.ButtonTemplate;
+import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.OutputTemplate;
+import org.apache.isis.lab.experiments.wktbs.util.WktUtil;
+import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
 
 import lombok.val;
 

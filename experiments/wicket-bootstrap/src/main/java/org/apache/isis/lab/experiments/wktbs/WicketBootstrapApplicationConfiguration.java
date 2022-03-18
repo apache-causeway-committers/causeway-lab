@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap;
+package org.apache.isis.lab.experiments.wktbs;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;

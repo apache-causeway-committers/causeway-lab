@@ -1,13 +1,13 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.sampler;
+package org.apache.isis.lab.experiments.wktbs.sampler;
 
 import java.io.Serializable;
 import java.util.EnumSet;
 
 import org.apache.wicket.model.IModel;
 
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarModel;
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarModelAbstract;
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.ScalarModel;
+import org.apache.isis.lab.experiments.wktbs.widgets.ScalarModelAbstract;
+import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
 
 import lombok.Data;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.widgets;
+package org.apache.isis.lab.experiments.wktbs.widgets;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.panel.Panel;

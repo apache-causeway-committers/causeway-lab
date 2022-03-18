@@ -1,10 +1,10 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.sampler.bool;
+package org.apache.isis.lab.experiments.wktbs.sampler.bool;
 
 import java.util.EnumSet;
 
 import org.apache.wicket.markup.html.panel.Panel;
 
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
 
 public class BooleanDesign extends Panel {
 

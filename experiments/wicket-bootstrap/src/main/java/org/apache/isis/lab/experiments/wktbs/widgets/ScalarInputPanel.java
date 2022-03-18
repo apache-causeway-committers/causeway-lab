@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.widgets;
+package org.apache.isis.lab.experiments.wktbs.widgets;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
@@ -12,12 +12,12 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.util.string.Strings;
 
 import org.apache.isis.commons.internal.base._Casts;
-import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonGroupTemplate;
-import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.ButtonTemplate;
-import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.FeedbackTemplate;
-import org.apache.isis.lab.experiments.wicket.bootstrap.fragments.BootstrapFragment.InputTemplate;
-import org.apache.isis.lab.experiments.wicket.bootstrap.util.WktUtil;
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.ButtonGroupTemplate;
+import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.ButtonTemplate;
+import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.FeedbackTemplate;
+import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.InputTemplate;
+import org.apache.isis.lab.experiments.wktbs.util.WktUtil;
+import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
 
 import lombok.val;
 

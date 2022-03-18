@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.fragments;
+package org.apache.isis.lab.experiments.wktbs.fragments;
 
 import java.util.function.Function;
 

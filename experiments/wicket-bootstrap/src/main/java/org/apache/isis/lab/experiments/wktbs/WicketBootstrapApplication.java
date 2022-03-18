@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap;
+package org.apache.isis.lab.experiments.wktbs;
 
 import java.io.File;
 

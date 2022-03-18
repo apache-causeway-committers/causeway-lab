@@ -1,10 +1,10 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.sampler.file;
+package org.apache.isis.lab.experiments.wktbs.sampler.file;
 
 import java.util.EnumSet;
 
 import org.apache.wicket.markup.html.panel.Panel;
 
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
 
 public class FileDesign extends Panel {
 

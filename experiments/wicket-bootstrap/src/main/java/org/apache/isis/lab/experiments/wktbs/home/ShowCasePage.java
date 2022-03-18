@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.home;
+package org.apache.isis.lab.experiments.wktbs.home;
 
 import java.io.File;
 import java.io.Serializable;
@@ -14,9 +14,9 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.string.StringValue;
 
-import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.ShowCaseModel;
-import org.apache.isis.lab.experiments.wicket.bootstrap.sampler.ShowCasePanel;
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.sampler.ShowCaseModel;
+import org.apache.isis.lab.experiments.wktbs.sampler.ShowCasePanel;
+import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

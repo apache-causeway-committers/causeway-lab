@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wicket.bootstrap.widgets;
+package org.apache.isis.lab.experiments.wktbs.widgets;
 
 import java.util.EnumSet;
 import java.util.function.Function;
@@ -7,7 +7,7 @@ import org.apache.wicket.model.ChainingModel;
 import org.apache.wicket.model.IModel;
 
 import org.apache.isis.commons.internal.base._Casts;
-import org.apache.isis.lab.experiments.wicket.bootstrap.widgets.ScalarPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.ScalarPanel.FormatModifer;
 
 import lombok.AccessLevel;
 import lombok.Getter;
