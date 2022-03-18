@@ -16,4 +16,12 @@
   border-color: rgb(206, 212, 218);
   opacity: unset;
 }
+/* cursor */
+.wv-editable-field .wv-cursor-default .form-control {
+	cursor: default;
+}
+.wv-editable-field .wv-cursor-pointer .form-control {
+	cursor: pointer;
+}
+
 

@@ -1,5 +1,6 @@
 package org.apache.isis.lab.experiments.wktbs.widgets.field;
 
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -25,7 +26,7 @@ public class FieldOutputPanel<T> extends Panel {
         super(id, new FieldModelHolder<>(scalarModel));
 
         if(scalarModel.getFormatModifers().contains(FormatModifer.MARKUP)) {
-            OutputTemplate.MARKUP.createComponent(this, this::createOutputAsHtml);
+            OutputTemplate.MARKUP.createComponent(this, this::createOutputAsPlainHtml);
         } else {
 
             if(scalarModel.isBoolean()) {
@@ -99,23 +100,26 @@ public class FieldOutputPanel<T> extends Panel {
     }
 
     private Component createOutputAsCheckInactive(final String id) {
-        val label = new WebMarkupContainer(id);
-        return label;
+        val component = new WebMarkupContainer(id);
+        component.add(AttributeModifier.append("class", "wv-cursor-default"));
+        return component;
     }
 
     private Component createOutputAsCheckSet(final String id) {
-        val label = createOutputAsCheckInactive(id);
-        addOnClick(label, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
-        return label;
+        val component = new WebMarkupContainer(id);
+        addOnClick(component, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.FALSE));
+        component.add(AttributeModifier.append("class", "wv-cursor-pointer"));
+        return component;
     }
 
     private Component createOutputAsCheckClear(final String id) {
-        val label = createOutputAsCheckInactive(id);
-        addOnClick(label, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
-        return label;
+        val component = new WebMarkupContainer(id);
+        addOnClick(component, ajaxTarget->FieldOutputPanel.this.onCheckboxClick(ajaxTarget, Boolean.TRUE));
+        component.add(AttributeModifier.append("class", "wv-cursor-pointer"));
+        return component;
     }
 
-    private Component createOutputAsHtml(final String id) {
+    private Component createOutputAsPlainHtml(final String id) {
         val markup = new PlainHtml(id, fieldModel().getValue());
         addOnClick(markup, FieldOutputPanel.this::onEditClick);
         return markup;
