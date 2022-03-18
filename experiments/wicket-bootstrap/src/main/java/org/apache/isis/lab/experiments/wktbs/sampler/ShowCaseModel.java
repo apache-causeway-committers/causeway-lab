@@ -5,7 +5,7 @@ import java.util.EnumSet;
 
 import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
 import org.apache.isis.lab.experiments.wktbs.widgets.field.model.FieldModel;
-import org.apache.isis.lab.experiments.wktbs.widgets.field.model.FieldModelAbstract2;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.model.FieldModelAbstract;
 
 import lombok.Data;
 import lombok.Getter;
@@ -31,7 +31,7 @@ implements Serializable {
     private final FieldModel<T> fieldModel = createFieldModel();
 
     private FieldModel<T> createFieldModel() {
-        return new FieldModelAbstract2<T>(getType(), formatModifers) {
+        return new FieldModelAbstract<T>(getType(), formatModifers) {
             private static final long serialVersionUID = 1L;
             private T pendingValueObject = valueObject;
 

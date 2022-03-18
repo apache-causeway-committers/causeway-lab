@@ -31,12 +31,11 @@ public class FieldPanel<T> extends Panel {
 
     public FieldPanel(
             final String id,
-            final FieldModel<T> scalarModel) {
-        super(id, new FieldModelHolder<>(scalarModel));
+            final FieldModel<T> fieldModel) {
+        super(id, new FieldModelHolder<>(fieldModel));
         setOutputMarkupId(true);
 
-        if(scalarModel.getFormatModifers().contains(FormatModifer.FLEX)) {
-            //TODO add <div class="d-inline-flex"></div>
+        if(fieldModel.getFormatModifers().contains(FormatModifer.FLEX)) {
             add(AttributeModifier.append("class", "d-inline-flex"));
         }
 

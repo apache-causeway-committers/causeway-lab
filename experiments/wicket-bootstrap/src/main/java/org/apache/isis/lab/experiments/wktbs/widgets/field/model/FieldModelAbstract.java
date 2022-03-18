@@ -1,83 +1,85 @@
 package org.apache.isis.lab.experiments.wktbs.widgets.field.model;
 
 import java.util.EnumSet;
-import java.util.function.Function;
 
-import org.apache.wicket.model.ChainingModel;
 import org.apache.wicket.model.IModel;
+import org.springframework.lang.Nullable;
 
-import org.apache.isis.commons.internal.base._Casts;
 import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.val;
 
-@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class FieldModelAbstract<T> implements FieldModel<T> {
+public abstract class FieldModelAbstract<T>
+extends FieldModelMappable<T> {
 
     private static final long serialVersionUID = 1L;
 
-    @Getter(onMethod_ = {@Override}) private final @NonNull Class<T> type;
-    @Getter(onMethod_ = {@Override}) private final @NonNull EnumSet<FormatModifer> formatModifers;
+    protected FieldModelAbstract(
+            @NonNull final Class<T> type,
+            @Nullable final EnumSet<FormatModifer> formatModifers) {
+        super(type, formatModifers!=null
+                ? formatModifers
+                : EnumSet.noneOf(FormatModifer.class));
+    }
+
+    protected abstract T getValueObject();
+    protected abstract void setValueObject(T newValue);
+
+    protected abstract T getPendingValueObject();
+    protected abstract void setPendingValueObject(T newValue);
+
+    protected abstract String validatePendingValue(T pendingValue);
+
+    @Getter(lazy = true, onMethod_ = {@Override})
+    private final IModel<T> value = new IModel<T>() {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public T getObject() {
+            return getValueObject();
+        }
+
+        @Override
+        public void setObject(final T object) {
+            System.err.printf("value update %s%n", object);
+            setValueObject(object);
+        }
+
+    };
+
+    @Getter(lazy = true, onMethod_ = {@Override})
+    private final IModel<T> pendingValue = new IModel<T>() {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public T getObject() {
+            return getPendingValueObject();
+        }
+
+        @Override
+        public void setObject(final T object) {
+            System.err.printf("pendingValue update %s%n", object);
+            setPendingValueObject(object);
+        }
+
+    };
+
+    @Getter(lazy = true, onMethod_ = {@Override})
+    private final IModel<String> validationFeedback = new IModel<String>() {
+        private static final long serialVersionUID = 1L;
+        @Override
+        public String getObject() {
+            val feedback = validatePendingValue(getPendingValueObject());
+            System.err.printf("validate: %s%n", feedback);
+            return feedback;
+        }
+    };
 
     @Override
-    public final <R> FieldModel<R> map(
-            final Class<R> resultType,
-            final Function<T, R> mapper,
-            final Function<R, T> reverseMapper) {
-        return new FieldModelAbstract<R>(resultType, formatModifers) {
-
-            private static final long serialVersionUID = 1L;
-
-            @Getter(onMethod_ = {@Override}, lazy = true)
-            private final IModel<R> value = mapModel(mappedFrom().getValue());
-
-            @Getter(onMethod_ = {@Override}, lazy = true)
-            private final IModel<R> pendingValue = mapModel(mappedFrom().getPendingValue());
-
-            @Override
-            public IModel<String> getValidationFeedback() {
-                return mappedFrom().getValidationFeedback();
-            }
-
-            @Override
-            public void submitPendingValue() {
-                mappedFrom().submitPendingValue();
-            }
-
-            // -- HELPER
-
-            protected FieldModel<T> mappedFrom() {
-                return FieldModelAbstract.this;
-            }
-
-            private IModel<R> mapModel(final IModel<T> source) {
-                return new ChainingModel<R>(source) {
-
-                    private static final long serialVersionUID = 1L;
-
-                    @Override
-                    public R getObject() {
-                        return mapper.apply(source().getObject());
-                    }
-
-                    @Override
-                    public void setObject(final R object) {
-                        source().setObject(reverseMapper.apply(object));
-                    }
-
-                    // -- HELPER
-
-                    private IModel<T> source() {
-                        return _Casts.uncheckedCast(getTarget());
-                    }
-
-                };
-            }
-
-        };
+    public void submitPendingValue() {
+        getValue().setObject(getPendingValueObject());
     }
 
 }
