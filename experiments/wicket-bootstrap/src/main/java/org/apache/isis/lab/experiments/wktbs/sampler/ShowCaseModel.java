@@ -3,11 +3,9 @@ package org.apache.isis.lab.experiments.wktbs.sampler;
 import java.io.Serializable;
 import java.util.EnumSet;
 
-import org.apache.wicket.model.IModel;
-
-import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldModel;
-import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldModelAbstract;
 import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.model.FieldModel;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.model.FieldModelAbstract2;
 
 import lombok.Data;
 import lombok.Getter;
@@ -18,6 +16,7 @@ implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Getter
     private final Class<T> type;
     private String title;
     private T valueObject;
@@ -28,76 +27,42 @@ implements Serializable {
         this.validationFeedbackEnabled = flag;
     }
 
-    public FieldModel<T> getScalarModel() {
+    @Getter(lazy = true)
+    private final FieldModel<T> fieldModel = createFieldModel();
 
-        return new FieldModelAbstract<T>(type, formatModifers!=null
-                ? formatModifers
-                : EnumSet.noneOf(FormatModifer.class)) {
-
+    private FieldModel<T> createFieldModel() {
+        return new FieldModelAbstract2<T>(getType(), formatModifers) {
             private static final long serialVersionUID = 1L;
             private T pendingValueObject = valueObject;
 
-            @Getter(lazy = true, onMethod_ = {@Override})
-            private final IModel<T> value = new IModel<T>() {
-                private static final long serialVersionUID = 1L;
-
-                @Override
-                public T getObject() {
-                    return valueObject;
-                }
-
-                @Override
-                public void setObject(final T object) {
-                    System.err.printf("value update %s%n", object);
-                    valueObject = object;
-                }
-
-            };
-
-            @Getter(lazy = true, onMethod_ = {@Override})
-            private final IModel<T> pendingValue = new IModel<T>() {
-                private static final long serialVersionUID = 1L;
-
-                @Override
-                public T getObject() {
-                    return pendingValueObject;
-                }
-
-                @Override
-                public void setObject(final T object) {
-                    System.err.printf("pendingValue update %s%n", object);
-                    pendingValueObject = object;
-                }
-
-            };
-
-            @Getter(lazy = true, onMethod_ = {@Override})
-            private final IModel<String> validationFeedback = new IModel<String>() {
-                private static final long serialVersionUID = 1L;
-                @Override
-                public String getObject() {
-                    System.err.printf("validate: %s%n", validatePendingValue());
-                    return validatePendingValue();
-                }
-            };
+            @Override
+            protected T getValueObject() {
+                return valueObject;
+            }
 
             @Override
-            public String validatePendingValue() {
-                if(pendingValueObject!=null
-                        && isValidationFeedbackEnabled()) {
+            protected void setValueObject(final T newValue) {
+                valueObject = newValue;
+            }
+
+            @Override
+            protected T getPendingValueObject() {
+                return pendingValueObject;
+            }
+
+            @Override
+            protected void setPendingValueObject(final T newValue) {
+                this.pendingValueObject = newValue;
+            }
+
+            @Override
+            protected String validatePendingValue(final T pendingValue) {
+                if(isValidationFeedbackEnabled()) {
                     return "invalid input";
                 }
                 return null;
             }
 
-            @Override
-            public void submitPendingValue() {
-                getValue().setObject(pendingValueObject);
-            }
-
         };
     }
-
-
-
 }

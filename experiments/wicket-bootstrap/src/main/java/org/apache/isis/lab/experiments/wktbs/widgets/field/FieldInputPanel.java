@@ -18,6 +18,7 @@ import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.Feedbac
 import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.InputTemplate;
 import org.apache.isis.lab.experiments.wktbs.util.WktUtil;
 import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.model.FieldModel;
 
 import lombok.val;
 
@@ -100,8 +101,16 @@ public class FieldInputPanel<T> extends Panel {
     }
 
     private FormComponent<T> createInputAsCheckInactive(final String id) {
+        val booleanModel = fieldModel().getFormatModifers().contains(FormatModifer.TRISTATE)
+                ? fieldModel().asTriState()
+                : fieldModel().asBinaryState();
+        val booleanFixedValue = booleanModel.getPendingValue().getObject();
+
         val formComponent = new FormComponent<T>(id, fieldModel().getPendingValue()) {
             private static final long serialVersionUID = 1L;
+            @Override public void convertInput() {
+                setConvertedInput(_Casts.uncheckedCast(booleanFixedValue));
+            }
         };
         return formComponent;
     }
@@ -116,10 +125,10 @@ public class FieldInputPanel<T> extends Panel {
     }
 
     private void onInputSubmit() {
-        val scalarModel = fieldModel();
-        val feedback = scalarModel.validatePendingValue();
+        val fieldModel = fieldModel();
+        val feedback = fieldModel.getValidationFeedback().getObject();
         if(Strings.isEmpty(feedback)) {
-            scalarModel.submitPendingValue();
+            fieldModel.submitPendingValue();
             switchToOutputFormat();
         } else {
             System.err.printf("submission vetoed %n");

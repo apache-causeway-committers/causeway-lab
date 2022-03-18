@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wktbs.widgets.field;
+package org.apache.isis.lab.experiments.wktbs.widgets.field.model;
 
 import java.util.EnumSet;
 import java.util.function.Function;
@@ -36,11 +36,6 @@ public abstract class FieldModelAbstract<T> implements FieldModel<T> {
 
             @Getter(onMethod_ = {@Override}, lazy = true)
             private final IModel<R> pendingValue = mapModel(mappedFrom().getPendingValue());
-
-            @Override
-            public String validatePendingValue() {
-                return mappedFrom().validatePendingValue();
-            }
 
             @Override
             public IModel<String> getValidationFeedback() {

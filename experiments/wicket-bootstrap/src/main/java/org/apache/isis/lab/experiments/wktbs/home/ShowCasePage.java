@@ -76,7 +76,7 @@ public class ShowCasePage extends WebPage {
                 + "\t<span style=\"font-size:24px;\">big</span>\n"
                 + "</p>"),
         BOOLEAN_BINARY("linkToBooleanBinary", "Boolean(Binary)", boolean.class, EnumSet.of(FormatModifer.FLEX), true),
-        BOOLEAN_TERTIARY("linkToBooleanTertiary", "Boolean(Tertiary)", Boolean.class, EnumSet.of(FormatModifer.TRISTATE,FormatModifer.FLEX), Boolean.TRUE),
+        BOOLEAN_TERTIARY("linkToBooleanTertiary", "Boolean(Tri-state)", Boolean.class, EnumSet.of(FormatModifer.TRISTATE,FormatModifer.FLEX), Boolean.TRUE),
         FILE("linkToFile", "File", File.class, EnumSet.of(FormatModifer.FLEX), new File("sample.docx")),
         ;
 

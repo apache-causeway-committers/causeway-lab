@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wktbs.widgets.field;
+package org.apache.isis.lab.experiments.wktbs.widgets.field.model;
 
 import java.io.Serializable;
 import java.util.EnumSet;
@@ -11,7 +11,7 @@ import org.apache.isis.commons.internal.base._Casts;
 import org.apache.isis.commons.internal.exceptions._Exceptions;
 import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
 
-public interface FieldOutputModel<T> extends Serializable {
+public interface OutputModel<T> extends Serializable {
 
     EnumSet<FormatModifer> getFormatModifers();
 
@@ -19,21 +19,21 @@ public interface FieldOutputModel<T> extends Serializable {
 
     IModel<T> getValue();
 
-    <R> FieldOutputModel<R> map(Class<R> resultType, Function<T, R> mapper, Function<R, T> reverseMapper);
+    <R> OutputModel<R> map(Class<R> resultType, Function<T, R> mapper, Function<R, T> reverseMapper);
 
     default boolean isBoolean() {
         return getType().equals(Boolean.class)
                 || getType().equals(boolean.class);
     }
 
-    default FieldOutputModel<Boolean> asTriState() {
+    default OutputModel<Boolean> asTriState() {
         if(isBoolean()) {
             return _Casts.uncheckedCast(this);
         }
         throw _Exceptions.illegalArgument("%s cannot be converted to Boolean", getType());
     }
 
-    default FieldOutputModel<Boolean> asBinaryState() {
+    default OutputModel<Boolean> asBinaryState() {
         return asTriState().map(Boolean.class,
             // forward conversion
             t->t==null

@@ -1,4 +1,4 @@
-package org.apache.isis.lab.experiments.wktbs.widgets.field;
+package org.apache.isis.lab.experiments.wktbs.widgets.field.model;
 
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -8,10 +8,9 @@ import org.apache.wicket.model.IModel;
 import org.apache.isis.commons.internal.base._Casts;
 import org.apache.isis.commons.internal.exceptions._Exceptions;
 
-public interface FieldModel<T> extends FieldOutputModel<T> {
+public interface FieldModel<T> extends OutputModel<T> {
 
     IModel<T> getPendingValue();
-    String validatePendingValue();
     IModel<String> getValidationFeedback();
     void submitPendingValue();
 

@@ -3,6 +3,8 @@ package org.apache.isis.lab.experiments.wktbs.widgets.field;
 import org.apache.wicket.model.ChainingModel;
 import org.apache.wicket.model.IModel;
 
+import org.apache.isis.lab.experiments.wktbs.widgets.field.model.FieldModel;
+
 public class FieldModelHolder<T>
 extends ChainingModel<FieldModel<T>>
 implements

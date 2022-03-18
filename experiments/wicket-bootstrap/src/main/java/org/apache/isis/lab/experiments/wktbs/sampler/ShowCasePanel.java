@@ -39,7 +39,7 @@ public class ShowCasePanel extends Panel {
     private <T extends Serializable> void addScalarPanel(
             final String id,
             final ShowCaseModel<T> showCaseModel) {
-        val scalarPanel = new FieldPanel<T>(id, showCaseModel.getScalarModel());
+        val scalarPanel = new FieldPanel<T>(id, showCaseModel.getFieldModel());
         add(scalarPanel);
     }
 
@@ -49,16 +49,16 @@ public class ShowCasePanel extends Panel {
 
         switch (showCaseModel.getType().getSimpleName()) {
         case "String": {
-            add(new StringDesign(id, showCaseModel.getScalarModel().getFormatModifers()));
+            add(new StringDesign(id, showCaseModel.getFieldModel().getFormatModifers()));
             return;
         }
         case "boolean":
         case "Boolean": {
-            add(new BooleanDesign(id, showCaseModel.getScalarModel().getFormatModifers()));
+            add(new BooleanDesign(id, showCaseModel.getFieldModel().getFormatModifers()));
             return;
         }
         case "File": {
-            add(new FileDesign(id, showCaseModel.getScalarModel().getFormatModifers()));
+            add(new FileDesign(id, showCaseModel.getFieldModel().getFormatModifers()));
             return;
         }
         default:

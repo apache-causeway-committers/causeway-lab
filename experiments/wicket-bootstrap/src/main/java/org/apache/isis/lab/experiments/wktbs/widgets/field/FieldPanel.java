@@ -3,6 +3,8 @@ package org.apache.isis.lab.experiments.wktbs.widgets.field;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.panel.Panel;
 
+import org.apache.isis.lab.experiments.wktbs.widgets.field.model.FieldModel;
+
 import lombok.Getter;
 import lombok.NonNull;
 

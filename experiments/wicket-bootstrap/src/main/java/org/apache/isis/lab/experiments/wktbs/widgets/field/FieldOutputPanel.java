@@ -14,6 +14,7 @@ import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.ButtonT
 import org.apache.isis.lab.experiments.wktbs.fragments.BootstrapFragment.OutputTemplate;
 import org.apache.isis.lab.experiments.wktbs.util.WktUtil;
 import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
+import org.apache.isis.lab.experiments.wktbs.widgets.field.model.FieldModel;
 import org.apache.isis.lab.experiments.wktbs.widgets.markup.PlainHtml;
 
 import lombok.val;
