@@ -19,6 +19,7 @@
         <module>experiments/multischema</module>
         <module>experiments/springsecurity</module>
         <module>experiments/vaadin</module>
+        <module>experiments/wicket-bootstrap</module>
         
     </modules>
 
