@@ -1,6 +1,7 @@
 package org.apache.isis.lab.tutorial.secman;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.ActionLayout;
@@ -11,7 +12,8 @@ import org.apache.isis.applib.services.factory.FactoryService;
 
 import lombok.RequiredArgsConstructor;
 
-@DomainService(nature=NatureOfService.VIEW, logicalTypeName = "isisLab.EmployeeMenu")
+@Named("isisLab.EmployeeMenu")
+@DomainService(nature=NatureOfService.VIEW)
 @DomainObjectLayout(named="Employees")
 @RequiredArgsConstructor(onConstructor_ = { @Inject })
 public class EmployeeMenu {
@@ -23,6 +25,6 @@ public class EmployeeMenu {
     public EmployeeManager employeeManager(){
         return factoryService.viewModel(EmployeeManager.class);
     }
-    
+
 
 }
