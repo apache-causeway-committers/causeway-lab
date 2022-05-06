@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://wicket.apache.org" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<wicket:panel>
+		<ul class="list-group">
+
+			<li class="list-group-item">
+				<h5>Output Format - Editable</h5>
+			</li>
+			<li class="list-group-item">
+				<div class="container">
+				<div class="row">
+				<div class="col">
+					<span class="badge bg-light text-dark">Checked</span>
+					<div class="d-inline-flex">
+					<div class="input-group mb-3 wv-editable-field">
+						<label class="form-control" style="color: green;"><i
+							class="fa-regular fa-check-square"></i></label>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-regular fa-square"></i>
+						</button>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-regular fa-square-minus"></i>
+						</button>
+					</div>
+				</div>
+				</div>
+				<div class="col">
+					<span class="badge bg-light text-dark">Unchecked</span>
+					<div class="d-inline-flex">
+					<div class="input-group mb-3 wv-editable-field">
+						<label class="form-control"><i
+							class="fa-regular fa-square"></i></label>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-solid fa-check-square"></i>
+						</button>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-regular fa-square-minus"></i>
+						</button>
+					</div>
+				</div>
+				</div>
+				<div class="col">
+				<span class="badge bg-light text-dark">Intermediate</span>
+					<div class="d-inline-flex">
+					<div class="input-group mb-3 wv-editable-field">
+						<label class="form-control" style="color: silver;"><i
+							class="fa-regular fa-square-minus"></i></label>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-solid fa-check-square"></i>
+						</button>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-regular fa-square"></i>
+						</button>
+					</div>
+				</div>
+				</div>
+				</div>
+				</div>
+			</li>
+
+			<li class="list-group-item">
+				<h5>Output Format - Editable (on hover)</h5>
+			</li>
+			<li class="list-group-item">
+				<div class="container">
+				<div class="row">
+				<div class="col">
+					<span class="badge bg-light text-dark">Checked</span>
+					<div class="d-inline-flex">
+					<div class="input-group mb-3 wv-editable-field wv-editable-field-hovering">
+						<label class="form-control" style="color: green;"><i
+							class="fa-regular fa-check-square"></i></label>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-regular fa-square"></i>
+						</button>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-regular fa-square-minus"></i>
+						</button>
+					</div>
+				</div>
+				</div>
+				<div class="col">
+					<span class="badge bg-light text-dark">Unchecked</span>
+					<div class="d-inline-flex">
+					<div class="input-group mb-3 wv-editable-field wv-editable-field-hovering">
+						<label class="form-control"><i
+							class="fa-regular fa-square"></i></label>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-solid fa-check-square"></i>
+						</button>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-regular fa-square-minus"></i>
+						</button>
+					</div>
+				</div>
+				</div>
+				<div class="col">
+					<span class="badge bg-light text-dark">Intermediate</span>
+					<div class="d-inline-flex">
+					<div class="input-group mb-3 wv-editable-field wv-editable-field-hovering">
+						<label class="form-control" style="color: silver;"><i
+							class="fa-regular fa-square-minus"></i></label>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-solid fa-check-square"></i>
+						</button>
+						<button class="btn btn-outline-primary input-group-hoverable"
+							type="button">
+							<i class="fa-regular fa-square"></i>
+						</button>
+					</div>
+				</div>
+				</div>
+				</div>
+				</div>
+			</li>
+			
+
+			<li class="list-group-item">
+				<h5>Editing Confirmation</h5>
+			</li>
+			<li class="list-group-item">
+				<div class="d-inline-flex">
+					<div class="input-group mb-3 wv-editing-field shadow">
+						<label class="form-control" style="color: green;"> <i
+							class="fa-regular fa-check-square"></i></label>
+						<button class="btn btn-outline-primary" type="button">
+							<i class="fa-solid fa-check"></i>
+						</button>
+						<button class="btn btn-outline-secondary" type="button">
+							<i class="fa-solid fa-x"></i>
+						</button>
+					</div>
+				</div>
+			</li>
+
+			<li class="list-group-item">Feedback</li>
+			<li class="list-group-item">
+				<div class="d-inline-flex">
+					<div
+						class="input-group mb-3 wv-editing-field has-validation shadow">
+						<label class="form-control is-invalid"><i
+							class="fa-regular fa-check-square"></i></label>
+
+						<button class="btn btn-outline-secondary" type="button">
+							<i class="fa-solid fa-x"></i>
+						</button>
+						<div class="invalid-feedback">Invalid input.</div>
+					</div>
+				</div>
+			</li>
+
+		</ul>
+	</wicket:panel>
+</body>
+</html>

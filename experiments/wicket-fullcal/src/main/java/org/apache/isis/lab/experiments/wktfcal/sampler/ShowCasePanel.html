@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://wicket.apache.org" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<wicket:panel>
+     <div class="mb-3 row">
+
+		<h3>Showcase <label wicket:id="showCaseTitle">[title]</label></h3>
+
+		<div class="mb-3 row">
+
+			<ul class="list-group">
+
+				<li class="list-group-item">
+					<h5>Output Format (Editable)</h5>
+				</li>
+				<li class="list-group-item">
+					<div wicket:id="scalarPanel">[ScalarPanel]</div>
+				</li>
+				<li class="list-group-item">
+					<div class="form-check">
+					  <input wicket:id="checkActivateValidationFeedback" 
+					  		class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Activate Validation Feedback
+					  </label>
+					</div>
+				</li>
+	
+			</ul>
+
+		</div>
+		
+		<!-- DESIGNS -->
+
+		<div class="mb-3 row">
+
+			<p>
+				<button class="btn btn-primary" type="button"
+					data-bs-toggle="collapse" data-bs-target="#collapseExample"
+					aria-expanded="false" aria-controls="collapseExample">
+					Designs</button>
+			</p>
+			<div wicket:id="designPanel" class="collapse" id="collapseExample">[no design mapped]</div>
+			
+		</div>
+
+	</div>
+
+</wicket:panel>
+</body>
+</html>
