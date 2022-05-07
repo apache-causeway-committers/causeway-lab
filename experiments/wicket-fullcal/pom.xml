@@ -97,6 +97,19 @@
 			<artifactId>font-awesome</artifactId>
 			<version>6.1.0</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.webjars</groupId>
+			<artifactId>fullcalendar</artifactId>
+			<version>5.10.2</version>
+		</dependency>
+		
+<!-- these are sources only, cannot use -->		
+<!-- 		<dependency> -->
+<!-- 		    <groupId>org.webjars.bowergithub.fullcalendar</groupId> -->
+<!-- 		    <artifactId>fullcalendar</artifactId> -->
+<!-- 		    <version>5.11.0</version> -->
+<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
