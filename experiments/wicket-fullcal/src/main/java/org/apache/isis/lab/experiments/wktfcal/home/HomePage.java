@@ -41,50 +41,14 @@ import net.ftlines.wicket.fullcalendar.selector.EventSourceSelector;
 @WicketHomePage
 public class HomePage extends WebPage {
 
+    private static final long serialVersionUID = 1L;
+
 	public HomePage() {
 
 		final FeedbackPanel feedback = new FeedbackPanel("feedback");
 		feedback.setOutputMarkupId(true);
 		add(feedback);
 
-//		Config config = new Config();
-//		config.setSelectable(true);
-//		config.setSelectHelper(false);
-//
-//		EventSource reservations = new EventSource();
-//		reservations.setTitle("Reservations");
-//		reservations
-//				.setEventsProvider(new RandomEventsProvider("Reservation "));
-//		reservations.setEditable(true);
-//		reservations.setBackgroundColor("#63BA68");
-//		reservations.setBorderColor("#63BA68");
-//		config.add(reservations);
-//
-//		EventSource downtimes = new EventSource();
-//		downtimes.setTitle("Maintenance");
-//		downtimes.setBackgroundColor("#B1ADAC");
-//		downtimes.setBorderColor("#B1ADAC");
-//		downtimes.setEventsProvider(new RandomEventsProvider("Maintenance "));
-//		config.add(downtimes);
-//
-//		EventSource other = new EventSource();
-//		other.setTitle("Other Reservations");
-//		other.setBackgroundColor("#E6CC7F");
-//		other.setBorderColor("#E6CC7F");
-//		other.setEventsProvider(new RandomEventsProvider("Other Reservations "));
-//		config.add(other);
-//
-//		config.getHeaderToolbar().setLeft("prev,next today");
-//		config.getHeaderToolbar().setCenter("title");
-//		config.getHeaderToolbar().setRight("month,agendaWeek,agendaDay");
-//
-//		config.getButtonText().setToday("Week");
-//
-//		config.setLoading("function(bool) { if (bool) $(\"#loading\").show(); else $(\"#loading\").hide(); }");
-//
-//		config.setMinTime(new LocalTime(6, 30));
-//		config.setMaxTime(new LocalTime(17, 30));
-//		config.setAllDaySlot(false);
 		ConfigNew config = new ConfigNew();
 		config.getHeaderToolbar().setCenter("title");
 		config.getHeaderToolbar().setLeft("prev,next today");

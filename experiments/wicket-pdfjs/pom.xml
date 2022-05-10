@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.7</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>org.apache.isis.lab</groupId>
+	<artifactId>isis-lab-experiments-wicket-pdfjs</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>isis-lab-experiments-wicket-pdfjs</name>
+	<description>
+		Demo project for Wicket on Spring Boot.
+	</description>
+	<packaging>jar</packaging>
+
+	<properties>
+		<maven.compiler.release>17</maven.compiler.release>
+	</properties>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.apache.isis.commons</groupId>
+			<artifactId>isis-commons</artifactId>
+			<version>2.0.0-SNAPSHOT</version>
+		</dependency> 
+
+		<dependency>
+			<groupId>com.giffing.wicket.spring.boot.starter</groupId>
+			<artifactId>wicket-spring-boot-starter</artifactId>
+			<version>3.1.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>de.agilecoders.wicket</groupId>
+			<artifactId>wicket-bootstrap-core</artifactId>
+			<version>6.0.0-M6</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.wicket</groupId>
+					<artifactId>wicket-util</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.wicket</groupId>
+					<artifactId>wicket-request</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.wicket</groupId>
+					<artifactId>wicket-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.wicket</groupId>
+					<artifactId>wicket-extensions</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>6.1.0</version>
+		</dependency>
+		
+		<dependency>
+	        <groupId>org.apache.isis.extensions</groupId>
+    		<artifactId>isis-extensions-pdfjs-applib</artifactId>    
+        	<version>2.0.0-SNAPSHOT</version>
+    	</dependency>
+
+		<dependency>
+		    <groupId>org.webjars.bowergithub.mozilla</groupId>
+		    <artifactId>pdfjs-dist</artifactId>
+		    <!--  keep in sync with o.a.i.extensions.pdfjs.wkt.integration.res.PdfJs*Reference -->
+		    <version>1.10.100</version>
+<!-- 			<version>2.9.359</version> -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+
+</project>
+
+
