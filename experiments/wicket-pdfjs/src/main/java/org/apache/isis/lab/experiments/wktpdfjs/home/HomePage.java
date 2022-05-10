@@ -20,6 +20,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
 
 import org.apache.isis.lab.experiments.wktpdfjs.home.res.PdfJsReference;
+import org.apache.isis.lab.experiments.wktpdfjs.home.res.PdfJsViewerCssReference;
 import org.apache.isis.lab.experiments.wktpdfjs.home.res.PdfJsViewerReference;
 
 @WicketHomePage
@@ -34,6 +35,8 @@ public class HomePage extends WebPage {
     @Override
     public void renderHead(final IHeaderResponse response) {
         super.renderHead(response);
+
+        response.render(PdfJsViewerCssReference.asHeaderItem());
 
         response.render(PdfJsReference.asHeaderItem());
         response.render(PdfJsViewerReference.asHeaderItem());

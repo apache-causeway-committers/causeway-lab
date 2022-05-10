@@ -36,7 +36,7 @@ extends WebjarsCssResourceReference {
         new PdfJsViewerCssReference();
 
     private PdfJsViewerCssReference() {
-        super("pdfjs-dist/web/pdf_viewer.css");
+        super("pdfjs-dist/2.13.216/web/pdf_viewer.css");
     }
 
     /**

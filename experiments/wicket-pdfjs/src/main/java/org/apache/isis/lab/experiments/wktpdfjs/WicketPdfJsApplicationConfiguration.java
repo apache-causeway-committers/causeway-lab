@@ -8,10 +8,12 @@ import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.PriorityHeaderItem;
 import org.apache.wicket.markup.html.IHeaderContributor;
+import org.apache.wicket.markup.html.SecurePackageResourceGuard;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.resource.CssResourceReference;
 
 import lombok.Getter;
+import lombok.val;
 import lombok.experimental.Accessors;
 
 import de.agilecoders.wicket.core.Bootstrap;
@@ -33,6 +35,11 @@ implements WicketApplicationInitConfiguration {
       Bootstrap.install(webApplication, settings);
 
       webApplication.getCspSettings().blocking().disabled();
+
+      // pdf.js cmap support
+      val resourceGuard =
+              (SecurePackageResourceGuard) webApplication.getResourceSettings().getPackageResourceGuard();
+      resourceGuard.addPattern("+*.bcmap");
 
       webApplication.getHeaderContributorListeners().add(new IHeaderContributor() {
           private static final long serialVersionUID = 1L;

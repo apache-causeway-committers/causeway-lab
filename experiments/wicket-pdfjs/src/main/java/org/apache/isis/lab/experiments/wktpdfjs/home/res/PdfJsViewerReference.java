@@ -36,7 +36,7 @@ extends WebjarsJavaScriptResourceReference {
         new PdfJsViewerReference();
 
     private PdfJsViewerReference() {
-        super("pdfjs-dist/web/pdf_viewer.js");
+        super("pdfjs-dist/2.13.216/web/pdf_viewer.js");
     }
 
     /**

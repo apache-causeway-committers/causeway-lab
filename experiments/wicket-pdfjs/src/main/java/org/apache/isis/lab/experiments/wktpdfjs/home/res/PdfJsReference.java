@@ -36,7 +36,7 @@ extends WebjarsJavaScriptResourceReference {
         new PdfJsReference();
 
     private PdfJsReference() {
-        super("pdfjs-dist/build/pdf.min.js");
+        super("pdfjs-dist/2.13.216/build/pdf.min.js");
     }
 
     /**
