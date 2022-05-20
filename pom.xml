@@ -14,13 +14,7 @@
 	<modules>
         <module>tutorials/springdata</module>
         <module>tutorials/secman</module>
-        
-        <module>experiments/cssgridlayout</module>
-        <module>experiments/multischema</module>
-        <module>experiments/springsecurity</module>
-        <module>experiments/vaadin</module>
-        <module>experiments/wicket-bootstrap</module>
-        
+        <module>experiments</module>
     </modules>
 
 </project>
