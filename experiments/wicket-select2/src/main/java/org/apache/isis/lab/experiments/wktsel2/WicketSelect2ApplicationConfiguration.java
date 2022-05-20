@@ -13,11 +13,12 @@ import org.apache.wicket.request.resource.CssResourceReference;
 import org.wicketstuff.select2.ChoiceProvider;
 import org.wicketstuff.select2.JsonResourceReference;
 
-import org.apache.isis.lab.experiments.wktsel2.sample.Country;
-import org.apache.isis.lab.experiments.wktsel2.sample.BootstrapPage;
 import org.apache.isis.lab.experiments.wktsel2.sample.BasePage;
+import org.apache.isis.lab.experiments.wktsel2.sample.BootstrapPage;
+import org.apache.isis.lab.experiments.wktsel2.sample.Country;
 
 import lombok.Getter;
+import lombok.val;
 import lombok.experimental.Accessors;
 
 import de.agilecoders.wicket.core.Bootstrap;
@@ -26,6 +27,7 @@ import de.agilecoders.wicket.core.markup.html.references.BootstrapJavaScriptRefe
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
 import de.agilecoders.wicket.core.settings.IBootstrapSettings;
 import de.agilecoders.wicket.webjars.request.resource.WebjarsCssResourceReference;
+import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
 
 @ApplicationInitExtension
 public class WicketSelect2ApplicationConfiguration
@@ -46,11 +48,16 @@ implements WicketApplicationInitConfiguration {
           @Override
           public void renderHead(final IHeaderResponse response) {
               new BootstrapBaseBehavior().renderHead(settings, response);
+              response.render(new PriorityHeaderItem(JavaScriptHeaderItem
+                      .forReference(BootstrapJavaScriptReference.instance())));
               response.render(CssHeaderItem.forReference(FontAwesomeCssReferenceWkt.instance()));
-              response.render(new PriorityHeaderItem(JavaScriptHeaderItem.forReference(BootstrapJavaScriptReference.instance())));
               response.render(CssHeaderItem.forReference(CoreCssResourceReference.instance()));
           }
       });
+
+      val jsSettings = webApplication.getJavaScriptLibrarySettings();
+      // jsSettings.setJQueryReference(JQueryResourceReference.getV3());
+      jsSettings.setJQueryReference(new WebjarsJavaScriptResourceReference("/webjars/jquery/3.5.1/jquery.js"));
 
       webApplication.mountPage("bootstrap", BootstrapPage.class);
 

@@ -46,6 +46,8 @@ import org.wicketstuff.select2.Select2MultiChoice;
 import org.wicketstuff.select2.Settings;
 import org.wicketstuff.select2.StringTextChoiceProvider;
 
+import org.apache.isis.lab.experiments.wktsel2.WicketSelect2Application;
+
 public class BasePage extends WebPage
 {
 	private static final long serialVersionUID = 1L;
@@ -239,7 +241,8 @@ public class BasePage extends WebPage
 	@Override
 	public void renderHead(final IHeaderResponse response) {
 		super.renderHead(response);
-		response.render(CssHeaderItem.forReference(new CssResourceReference(BasePage.class, "bootstrap/css/bootstrap.css")));
+		response.render(CssHeaderItem.forReference(
+		        new CssResourceReference(WicketSelect2Application.class, "css/bootstrap.css")));
 	}
 
 
