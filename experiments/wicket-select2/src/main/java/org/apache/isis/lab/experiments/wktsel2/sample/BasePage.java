@@ -352,7 +352,7 @@ public class BasePage extends WebPage
 		private static final long serialVersionUID = 1L;
 
 		public CountryRenderer() {
-			super("displayName", "name");
+			super("displayName", "id");
 		}
 
 	}

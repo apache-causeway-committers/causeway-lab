@@ -72,15 +72,17 @@ public enum Country {
 
 	private final String displayName;
 
-	private Country(final String name)
-	{
+	private Country(final String name) {
 		this.displayName = name;
 	}
 
-	public String getDisplayName()
-	{
+	public String getDisplayName() {
 		return displayName;
 	}
+
+	public String getId() {
+        return name();
+    }
 
 	public static String MOUNT_PATH = "countries/";
 
