@@ -21,12 +21,14 @@ package org.apache.isis.lab.tutorial.secman;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.isis.applib.annotation.Collection;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.Nature;
 
-@DomainObject(nature=Nature.VIEW_MODEL, logicalTypeName = "isisLab.EmployeeManager")
+@Named("isisLab.EmployeeManager")
+@DomainObject(nature=Nature.VIEW_MODEL)
 //@RequiredArgsConstructor(onConstructor_ = {@Inject}) //XXX not supported for view models yet
 public class EmployeeManager {
 
@@ -35,7 +37,7 @@ public class EmployeeManager {
     public String title() {
         return "Employee Manager";
     }
-    
+
     @Collection
     public List<Employee> getAllEmployees(){
         return employeeRepo.findAll();

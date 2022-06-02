@@ -18,6 +18,7 @@
  */
 package org.apache.isis.lab.experiment.springsecurity;
 
+import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -33,7 +34,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@DomainObject(nature=Nature.ENTITY, logicalTypeName = "isisLab.Employee")
+@Named("isisLab.Employee")
+@DomainObject(nature=Nature.ENTITY)
 @Getter @Setter @ToString @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Employee {
