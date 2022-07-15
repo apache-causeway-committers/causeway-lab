@@ -11,6 +11,7 @@ import org.apache.wicket.model.LambdaModel;
 import org.apache.wicket.model.Model;
 
 import org.apache.isis.lab.experiments.wktbs.sampler.bool.BooleanDesign;
+import org.apache.isis.lab.experiments.wktbs.sampler.datetime.DateTimeDesign;
 import org.apache.isis.lab.experiments.wktbs.sampler.file.FileDesign;
 import org.apache.isis.lab.experiments.wktbs.sampler.string.StringDesign;
 import org.apache.isis.lab.experiments.wktbs.widgets.field.FieldPanel;
@@ -59,6 +60,10 @@ public class ShowCasePanel extends Panel {
         }
         case "File": {
             add(new FileDesign(id, showCaseModel.getFieldModel().getFormatModifers()));
+            return;
+        }
+        case "OffsetDateTime": {
+            add(new DateTimeDesign(id, showCaseModel.getFieldModel().getFormatModifers()));
             return;
         }
         default:

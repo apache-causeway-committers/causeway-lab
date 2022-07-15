@@ -20,6 +20,7 @@ import de.agilecoders.wicket.core.markup.html.references.BootstrapJavaScriptRefe
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
 import de.agilecoders.wicket.core.settings.IBootstrapSettings;
 import de.agilecoders.wicket.webjars.request.resource.WebjarsCssResourceReference;
+import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
 
 @ApplicationInitExtension
 public class WicketBootstrapApplicationConfiguration
@@ -40,9 +41,11 @@ implements WicketApplicationInitConfiguration {
           @Override
           public void renderHead(final IHeaderResponse response) {
               new BootstrapBaseBehavior().renderHead(settings, response);
-              response.render(CssHeaderItem.forReference(FontAwesomeCssReferenceWkt.instance()));
               response.render(new PriorityHeaderItem(JavaScriptHeaderItem.forReference(BootstrapJavaScriptReference.instance())));
+              response.render(CssHeaderItem.forReference(FontAwesomeCssReferenceWkt.instance()));
               response.render(CssHeaderItem.forReference(CoreCssResourceReference.instance()));
+              response.render(JavaScriptHeaderItem.forReference(TempusDominusJsReferenceWkt.instance()));
+              response.render(CssHeaderItem.forReference(TempusDominusCssReferenceWkt.instance()));
           }
       });
 
@@ -50,7 +53,7 @@ implements WicketApplicationInitConfiguration {
 
   static class FontAwesomeCssReferenceWkt extends WebjarsCssResourceReference {
       private static final long serialVersionUID = 1L;
-      public static final String FONTAWESOME_RESOURCE = "font-awesome/6.0.0/css/all.min.css";
+      public static final String FONTAWESOME_RESOURCE = "font-awesome/6.1.1/css/all.min.css";
 
       @Getter(lazy = true) @Accessors(fluent = true)
       private static final FontAwesomeCssReferenceWkt instance = new FontAwesomeCssReferenceWkt();
@@ -58,7 +61,30 @@ implements WicketApplicationInitConfiguration {
       private FontAwesomeCssReferenceWkt() {
           super(FONTAWESOME_RESOURCE);
       }
+  }
 
+  static class TempusDominusJsReferenceWkt extends WebjarsJavaScriptResourceReference {
+      private static final long serialVersionUID = 1L;
+      public static final String TEMPUSDOMINUS_RESOURCE = "tempus-dominus/dist/js/tempus-dominus.js";
+
+      @Getter(lazy = true) @Accessors(fluent = true)
+      private static final TempusDominusJsReferenceWkt instance = new TempusDominusJsReferenceWkt();
+
+      private TempusDominusJsReferenceWkt() {
+          super(TEMPUSDOMINUS_RESOURCE);
+      }
+  }
+
+  static class TempusDominusCssReferenceWkt extends WebjarsCssResourceReference {
+      private static final long serialVersionUID = 1L;
+      public static final String TEMPUSDOMINUS_RESOURCE = "tempus-dominus/dist/css/tempus-dominus.css";
+
+      @Getter(lazy = true) @Accessors(fluent = true)
+      private static final TempusDominusCssReferenceWkt instance = new TempusDominusCssReferenceWkt();
+
+      private TempusDominusCssReferenceWkt() {
+          super(TEMPUSDOMINUS_RESOURCE);
+      }
   }
 
   static class CoreCssResourceReference extends CssResourceReference {

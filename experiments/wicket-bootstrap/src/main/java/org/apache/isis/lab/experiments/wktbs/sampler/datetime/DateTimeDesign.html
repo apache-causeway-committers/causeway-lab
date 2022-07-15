@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://wicket.apache.org" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<wicket:panel>
+
+	<ul class="list-group">
+
+		<li class="list-group-item">
+			<h5>Output Format - Editable</h5>
+		</li>
+		<li class="list-group-item">
+			<div class="d-inline-flex">
+
+				<div class="input-group mb-3 wv-editable-field"
+				id='datetimepicker1'
+     			data-td-target-input='nearest'
+     			data-td-target-toggle='nearest'>
+				
+				   <input
+				     id='datetimepicker1Input'
+				     type='text'
+				     class='form-control'
+				     data-td-target='#datetimepicker1'
+				   />
+				   <span
+				     class='input-group-text input-group-hoverable'
+				     data-td-target='#datetimepicker1'
+				     data-td-toggle='datetimepicker'
+				   >
+				     <span class='fa-regular fa-calendar'></span>
+				   </span>
+				
+					<button 
+						class="btn btn-outline-primary input-group-hoverable" type="button">
+						<i class="fa-regular fa-trash-can"></i>
+					</button>
+				</div>
+				
+			</div>
+		</li>
+
+		<li class="list-group-item">
+			<h5>Output Format - Editable (on hover)</h5>
+		</li>
+		<li class="list-group-item">
+			<div class="d-inline-flex">
+				
+				<div class="input-group mb-3 wv-editable-field wv-editable-field-hovering"
+				id='datetimepicker2'
+     			data-td-target-input='nearest'
+     			data-td-target-toggle='nearest'>
+				
+				   <input
+				     id='datetimepicker2Input'
+				     type='text'
+				     class='form-control'
+				     data-td-target='#datetimepicker1'
+				   />
+				   <span
+				     class='input-group-text input-group-hoverable'
+				     data-td-target='#datetimepicker2'
+				     data-td-toggle='datetimepicker'
+				   >
+				     <span class='fa-regular fa-calendar'></span>
+				   </span>
+				
+					<button 
+						class="btn btn-outline-primary input-group-hoverable" type="button">
+						<i class="fa-regular fa-trash-can"></i>
+					</button>
+				</div>
+				
+				
+			</div>
+		</li>
+
+		<li class="list-group-item">
+			<h5>Input Format</h5>
+		</li>
+		<li class="list-group-item">
+			<div class="d-inline-flex">
+				<div class="input-group mb-3 wv-editing-field shadow">
+					<input class="form-control" type="text" value="String" />
+					<button class="btn btn-outline-primary" type="button">
+						<i class="fa-solid fa-check"></i>
+					</button>
+					<button class="btn btn-outline-secondary" type="button">
+						<i class="fa-solid fa-x"></i>
+					</button>
+				</div>
+			</div>
+		</li>
+
+		<li class="list-group-item">Feedback</li>
+		<li class="list-group-item">
+			<div class="d-inline-flex">
+				<div
+					class="input-group mb-3 wv-editing-field has-validation shadow">
+					<input class="form-control is-invalid" type="text" value="String" />
+					<button class="btn btn-outline-primary" type="button">
+						<i class="fa-solid fa-check"></i>
+					</button>
+					<button class="btn btn-outline-secondary" type="button">
+						<i class="fa-solid fa-x"></i>
+					</button>
+					<div class="invalid-feedback">Please choose a valid time.
+					</div>
+				</div>
+			</div>
+		</li>
+
+	</ul>
+	
+	<script type="text/javascript">
+		new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'),
+		{
+			display: {
+			    buttons: {
+				       today: true,
+				       clear: true,
+				       close: true,
+		     	}
+			}
+		});
+	</script>
+	
+</wicket:panel>
+
+
+
+</body>
+</html>

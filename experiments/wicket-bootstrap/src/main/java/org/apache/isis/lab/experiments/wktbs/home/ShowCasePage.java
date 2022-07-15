@@ -2,6 +2,7 @@ package org.apache.isis.lab.experiments.wktbs.home;
 
 import java.io.File;
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.EnumSet;
 import java.util.Optional;
 
@@ -78,6 +79,7 @@ public class ShowCasePage extends WebPage {
         BOOLEAN_BINARY("linkToBooleanBinary", "Boolean(Binary)", boolean.class, EnumSet.of(FormatModifer.FLEX), true),
         BOOLEAN_TERTIARY("linkToBooleanTertiary", "Boolean(Tri-state)", Boolean.class, EnumSet.of(FormatModifer.TRISTATE,FormatModifer.FLEX), Boolean.TRUE),
         FILE("linkToFile", "File", File.class, EnumSet.of(FormatModifer.FLEX), new File("sample.docx")),
+        DATETIME("linkToDateTime", "DateTime", OffsetDateTime.class, EnumSet.of(FormatModifer.FLEX), OffsetDateTime.now()),
         ;
 
         @Getter private final String linkId;
