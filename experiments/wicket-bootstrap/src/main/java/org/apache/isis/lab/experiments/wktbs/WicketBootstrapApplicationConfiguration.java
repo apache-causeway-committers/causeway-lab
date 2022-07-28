@@ -53,7 +53,7 @@ implements WicketApplicationInitConfiguration {
 
   static class FontAwesomeCssReferenceWkt extends WebjarsCssResourceReference {
       private static final long serialVersionUID = 1L;
-      public static final String FONTAWESOME_RESOURCE = "font-awesome/6.1.1/css/all.min.css";
+      public static final String FONTAWESOME_RESOURCE = "font-awesome/6.1.2/css/all.min.css";
 
       @Getter(lazy = true) @Accessors(fluent = true)
       private static final FontAwesomeCssReferenceWkt instance = new FontAwesomeCssReferenceWkt();
