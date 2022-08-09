@@ -101,7 +101,7 @@ isis:
 
   persistence:
     schema:
-       autoCreateSchemas: isisExtensionsSecman
+       autoCreateSchemas: isisExtSecman
 
   extensions:
     secman:
