@@ -118,6 +118,11 @@
 		</dependency>
 
 		<!-- ISIS EXTENSIONS -->
+		
+		<dependency>
+			<groupId>org.apache.isis.extensions</groupId>
+			<artifactId>isis-extensions-spring-security-oauth2</artifactId>
+		</dependency>
 
 		<!-- TESTING -->
 

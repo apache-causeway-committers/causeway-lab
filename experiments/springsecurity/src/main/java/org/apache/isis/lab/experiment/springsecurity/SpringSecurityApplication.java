@@ -24,14 +24,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.FilterChainProxy;
+import org.springframework.stereotype.Component;
 
+import org.apache.isis.applib.annotation.PriorityPrecedence;
 import org.apache.isis.core.config.presets.IsisPresets;
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
 import org.apache.isis.extensions.secman.encryption.spring.IsisModuleExtSecmanEncryptionSpring;
 import org.apache.isis.extensions.secman.integration.IsisModuleExtSecmanIntegration;
 import org.apache.isis.extensions.secman.integration.authorizor.AuthorizorSecman;
 import org.apache.isis.extensions.secman.jpa.IsisModuleExtSecmanPersistenceJpa;
+import org.apache.isis.extensions.spring.security.oauth2.IsisModuleExtSpringSecurityOAuth2;
+import org.apache.isis.extensions.spring.security.oauth2.authconverters.AuthenticationConverterOfOAuth2UserPrincipal;
 import org.apache.isis.persistence.jpa.eclipselink.IsisModulePersistenceJpaEclipselink;
 import org.apache.isis.security.spring.IsisModuleSecuritySpring;
 import org.apache.isis.testing.fixtures.applib.IsisModuleTestingFixturesApplib;
@@ -46,6 +51,7 @@ import org.apache.isis.viewer.wicket.viewer.integration.WebRequestCycleForIsis;
     IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
     IsisModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
     IsisModuleSecuritySpring.class, // Authorization using Spring Security
+    IsisModuleExtSpringSecurityOAuth2.class, // Spring Security OAuth2 support
 
     // Security Manager Extension (SecMan)
     AuthorizorSecman.class,
@@ -67,7 +73,7 @@ public class SpringSecurityApplication {
         IsisPresets.logging(FilterChainProxy.class, "debug");
 
         IsisPresets.logging(org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.class, "debug");
-        IsisPresets.logging(org.springframework.security.web.context.SecurityContextPersistenceFilter.class, "debug");
+        IsisPresets.logging(org.springframework.security.web.context.SecurityContextHolderFilter.class, "debug");
         IsisPresets.logging(org.springframework.security.web.header.HeaderWriterFilter.class, "debug");
         IsisPresets.logging(org.springframework.security.web.csrf.CsrfFilter.class, "debug");
         IsisPresets.logging(org.springframework.security.web.authentication.logout.LogoutFilter.class, "debug");
@@ -100,5 +106,22 @@ public class SpringSecurityApplication {
             }
         };
     }
+
+    /**
+     * For demo we always replace the user id to 'sven',
+     * as the 'sven' user is seeded with permissions to actually use this demo app.
+     */
+    @Component
+    @javax.annotation.Priority(PriorityPrecedence.EARLY)
+    public static class DemoAuthenticationConverter
+    extends AuthenticationConverterOfOAuth2UserPrincipal {
+
+        @Override
+        protected String usernameFrom(final OAuth2User oAuth2User) {
+            return "sven";
+        }
+
+    }
+
 
 }
