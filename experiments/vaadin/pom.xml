@@ -30,7 +30,7 @@
 			versions -->
 		<node.version>v16.14.0</node.version>
 		<npm.version>8.3.1</npm.version>
-		<jpa.version>2.7.11</jpa.version>
+		<jpa.version>3.0.3</jpa.version>
 	</properties>
 
 	<dependencyManagement>
