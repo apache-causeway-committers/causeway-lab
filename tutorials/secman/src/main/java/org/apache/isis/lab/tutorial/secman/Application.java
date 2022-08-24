@@ -26,10 +26,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import org.apache.isis.core.runtimeservices.IsisModuleCoreRuntimeServices;
+import org.apache.isis.extensions.secman.delegated.shiro.realm.IsisModuleExtSecmanShiroRealm;
 import org.apache.isis.extensions.secman.encryption.spring.IsisModuleExtSecmanEncryptionSpring;
 import org.apache.isis.extensions.secman.integration.IsisModuleExtSecmanIntegration;
 import org.apache.isis.extensions.secman.jpa.IsisModuleExtSecmanPersistenceJpa;
-import org.apache.isis.extensions.secman.shiro.IsisModuleExtSecmanRealmShiro;
 import org.apache.isis.persistence.jpa.eclipselink.IsisModulePersistenceJpaEclipselink;
 import org.apache.isis.security.shiro.IsisModuleSecurityShiro;
 import org.apache.isis.testing.fixtures.applib.IsisModuleTestingFixturesApplib;
@@ -46,7 +46,7 @@ import org.apache.isis.viewer.wicket.viewer.IsisModuleViewerWicketViewer;
 
     // Security Manager Extension (SecMan)
     IsisModuleExtSecmanIntegration.class,
-    IsisModuleExtSecmanRealmShiro.class,
+    IsisModuleExtSecmanShiroRealm.class,
     IsisModuleExtSecmanPersistenceJpa.class,
     IsisModuleExtSecmanEncryptionSpring.class,
 
