@@ -69,8 +69,8 @@ For this tutorial we are using _Apache Shiro_ as the _Security Backend_. Lets ad
 ----
 [main]
 
-authenticationStrategy=org.apache.isis.extensions.secman.shiro.AuthenticationStrategyForIsisModuleSecurityRealm
-isisModuleSecurityRealm=org.apache.isis.extensions.secman.shiro.IsisModuleExtSecmanShiroRealm
+authenticationStrategy=org.apache.isis.extensions.secman.delegated.shiro.realm.AuthenticationStrategyForSecMan
+isisModuleSecurityRealm=org.apache.isis.extensions.secman.delegated.shiro.realm.IsisModuleExtSecmanShiroRealm
 
 securityManager.authenticator.authenticationStrategy = $authenticationStrategy
 securityManager.realms = $isisModuleSecurityRealm
