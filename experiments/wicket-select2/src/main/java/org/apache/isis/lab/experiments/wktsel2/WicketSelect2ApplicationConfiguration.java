@@ -57,7 +57,7 @@ implements WicketApplicationInitConfiguration {
 
       val jsSettings = webApplication.getJavaScriptLibrarySettings();
       // jsSettings.setJQueryReference(JQueryResourceReference.getV3());
-      jsSettings.setJQueryReference(new WebjarsJavaScriptResourceReference("/webjars/jquery/3.5.1/jquery.js"));
+      jsSettings.setJQueryReference(new WebjarsJavaScriptResourceReference("/webjars/jquery/3.6.1/jquery.js"));
 
       webApplication.mountPage("bootstrap", BootstrapPage.class);
 
