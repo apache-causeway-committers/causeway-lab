@@ -78,7 +78,7 @@ public class BasePage extends WebPage
 
 		add(new BookmarkablePageLink<>("homeBootstrapPageLink", BootstrapPage.class));
 
-		// single-select no minimum example
+		// single-select minimum example
 		add(new Label("country0", new PropertyModel<>(this, "country0")));
 
 		Select2Choice<Country> country0 = new Select2Choice<>("country0", new PropertyModel<Country>(
@@ -97,6 +97,7 @@ public class BasePage extends WebPage
 		defaultSelect2Settings(country.getSettings())
 				.setMinimumInputLength(1)
 				.setPlaceholder("Please select country")
+                .setCloseOnSelect(true)
 				.setAllowClear(true);
 		add(new Form<Void>("single").add(country));
 

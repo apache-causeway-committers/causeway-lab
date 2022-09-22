@@ -52,12 +52,19 @@
 						<form wicket:id="single">
 							<div class="form-row">
 								<div class="form-group col-md-7 col-lg-5">
-									<select wicket:id="country"></select>
+									<select id="sel-sample2" wicket:id="country"></select>
 								</div>
 							</div>
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
 					</div>
+					<script>
+						$('#sel-sample2').on('select2:select', function (e) {
+							var data = e.params.data;
+							console.log(data);
+						  	alert("selection-event: " + data.id);
+						});
+					</script>
 				</div>
 			</section>
 			<section class="mb-4">
