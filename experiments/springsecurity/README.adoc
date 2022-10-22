@@ -1,11 +1,11 @@
-= Apache Isis Laboratory - Spring Security Experiment
+= Apache Causeway Laboratory - Spring Security Experiment
 :toc:
 :toc-title: pass:[<h3>Contents</h3>]
 :toc-placement!:
 
-Laboratory for the _Apache Isis_ framework. (Tutorials, Experiments, ...)
+Laboratory for the _Apache Causeway_ framework. (Tutorials, Experiments, ...)
 ____
-http://isis.apache.org[Apache Isis] software is a framework for rapidly developing domain-driven apps in Java.
+http://causeway.apache.org[Apache Causeway] software is a framework for rapidly developing domain-driven apps in Java.
 Write your business logic in entities, domain services and repositories, and the framework dynamically generates a representation of that domain model as a webapp or a RESTful API.
 ____
 

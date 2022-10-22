@@ -10,8 +10,8 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	
-	<groupId>org.apache.isis.lab</groupId>
-	<artifactId>isis-lab-experiments-multischema</artifactId>
+	<groupId>org.apache.causeway.lab</groupId>
+	<artifactId>causeway-lab-experiments-multischema</artifactId>
 	
 	<name>multischema</name>
 	<description>Demo project for Spring Boot</description>

@@ -1,4 +1,4 @@
-= Sample Application using Apache Isis SecMan Extension
+= Sample Application using Apache Causeway SecMan Extension
 :toc:
 :toc-title: pass:[<h3>Contents</h3>]
 :toc-placement!
@@ -9,12 +9,12 @@ toc::[]
 
 == Overview
 
-_Apache Isis_ is a Java framework for creating web applications using 
+_Apache Causeway_ is a Java framework for creating web applications using 
 the https://en.wikipedia.org/wiki/Naked_objects[Naked Objects] pattern.  
 
-In this tutorial, we'll explore how to add the _Apache Isis *SecMan* Extension_, which provides an UI to manage application users, roles and their permissions within the application. 
+In this tutorial, we'll explore how to add the _Apache Causeway *SecMan* Extension_, which provides an UI to manage application users, roles and their permissions within the application. 
  
-For an introduction to Apache Isis refer to the documents at the official site https://isis.apache.org[].
+For an introduction to Apache Causeway refer to the documents at the official site https://causeway.apache.org[].
 
 NOTE: We use _lombok_ (https://projectlombok.org/[]) annotations through out this tutorial.
 If you are not familiar with these yet, just ignore them as these are optional anyway.
@@ -23,7 +23,7 @@ If you are not familiar with these yet, just ignore them as these are optional a
 
 We start by reusing what we have created in the previous tutorial:
 
-xref:spring-data-with-apache-isis-get-started.adoc[Sample Application with Spring Boot and Apache Isis]
+xref:spring-data-with-apache-causeway-get-started.adoc[Sample Application with Spring Boot and Apache Causeway]
 
 === Maven (Shiro + SecMan)
 
@@ -35,28 +35,28 @@ Now let's add _Maven_ dependencies for _Shiro_ and _SecMan_:
 <!-- SHIRO INTEGRATION -->
 
 <dependency>
-	<groupId>org.apache.isis.security</groupId>
-	<artifactId>isis-security-shiro</artifactId>
+	<groupId>org.apache.causeway.security</groupId>
+	<artifactId>causeway-security-shiro</artifactId>
 	<scope>provided</scope>
 </dependency>
 
 <!-- SECMAN POWERED BY JPA -->
 
 <dependency>
-	<groupId>org.apache.isis.extensions</groupId>
-	<artifactId>isis-extensions-secman-model</artifactId>
+	<groupId>org.apache.causeway.extensions</groupId>
+	<artifactId>causeway-extensions-secman-model</artifactId>
 </dependency>
 <dependency>
-	<groupId>org.apache.isis.extensions</groupId>
-	<artifactId>isis-extensions-secman-encryption-jbcrypt</artifactId>
+	<groupId>org.apache.causeway.extensions</groupId>
+	<artifactId>causeway-extensions-secman-encryption-jbcrypt</artifactId>
 </dependency>
 <dependency>
-	<groupId>org.apache.isis.extensions</groupId>
-	<artifactId>isis-extensions-secman-persistence-jpa</artifactId>
+	<groupId>org.apache.causeway.extensions</groupId>
+	<artifactId>causeway-extensions-secman-persistence-jpa</artifactId>
 </dependency>
 <dependency>
-	<groupId>org.apache.isis.extensions</groupId>
-	<artifactId>isis-extensions-secman-shiro-realm</artifactId>
+	<groupId>org.apache.causeway.extensions</groupId>
+	<artifactId>causeway-extensions-secman-shiro-realm</artifactId>
 </dependency>
 ----
 
@@ -69,11 +69,11 @@ For this tutorial we are using _Apache Shiro_ as the _Security Backend_. Lets ad
 ----
 [main]
 
-authenticationStrategy=org.apache.isis.extensions.secman.delegated.shiro.realm.AuthenticationStrategyForSecMan
-isisModuleSecurityRealm=org.apache.isis.extensions.secman.delegated.shiro.realm.IsisModuleExtSecmanShiroRealm
+authenticationStrategy=org.apache.causeway.extensions.secman.delegated.shiro.realm.AuthenticationStrategyForSecMan
+causewayModuleSecurityRealm=org.apache.causeway.extensions.secman.delegated.shiro.realm.CausewayModuleExtSecmanShiroRealm
 
 securityManager.authenticator.authenticationStrategy = $authenticationStrategy
-securityManager.realms = $isisModuleSecurityRealm
+securityManager.realms = $causewayModuleSecurityRealm
 
 [users]
 [roles]
@@ -93,63 +93,63 @@ _SecMan_ provides a bunch of menu entries, lets integrate these with our menubar
     <mb3:menu>
         <mb3:named>Security</mb3:named>
         <mb3:section>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationRoleMenu" id="allRoles">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationRoleMenu" id="allRoles">
                 <cpt:named>All Roles</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationRoleMenu" id="newRole">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationRoleMenu" id="newRole">
                 <cpt:named>New Role</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationRoleMenu" id="findRoles">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationRoleMenu" id="findRoles">
                 <cpt:named>Find Roles</cpt:named>
             </mb3:serviceAction>
         </mb3:section>
         <mb3:section>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationTenancyMenu" id="newTenancy">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationTenancyMenu" id="newTenancy">
                 <cpt:named>New Tenancy</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationTenancyMenu" id="findTenancies">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationTenancyMenu" id="findTenancies">
                 <cpt:named>Find Tenancies</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationTenancyMenu" id="allTenancies">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationTenancyMenu" id="allTenancies">
                 <cpt:named>All Tenancies</cpt:named>
             </mb3:serviceAction>
         </mb3:section>
         <mb3:section>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationPermissionMenu" id="findOrphanedPermissions">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationPermissionMenu" id="findOrphanedPermissions">
                 <cpt:named>Find Orphaned Permissions</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationPermissionMenu" id="allPermissions">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationPermissionMenu" id="allPermissions">
                 <cpt:named>All Permissions</cpt:named>
             </mb3:serviceAction>
         </mb3:section>
         <mb3:section>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationFeatureViewModels" id="allProperties">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationFeatureViewModels" id="allProperties">
                 <cpt:named>All Properties</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationFeatureViewModels" id="allClasses">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationFeatureViewModels" id="allClasses">
                 <cpt:named>All Classes</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationFeatureViewModels" id="allPackages">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationFeatureViewModels" id="allPackages">
                 <cpt:named>All Packages</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationFeatureViewModels" id="allActions">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationFeatureViewModels" id="allActions">
                 <cpt:named>All Actions</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationFeatureViewModels" id="allCollections">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationFeatureViewModels" id="allCollections">
                 <cpt:named>All Collections</cpt:named>
             </mb3:serviceAction>
         </mb3:section>
         <mb3:section>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationUserMenu" id="findUsers">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationUserMenu" id="findUsers">
                 <cpt:named>Find Users</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationUserMenu" id="newLocalUser">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationUserMenu" id="newLocalUser">
                 <cpt:named>New Local User</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationUserMenu" id="allUsers">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationUserMenu" id="allUsers">
                 <cpt:named>All Users</cpt:named>
             </mb3:serviceAction>
-            <mb3:serviceAction objectType="isis.ext.secman.ApplicationUserMenu" id="newDelegateUser">
+            <mb3:serviceAction objectType="causeway.ext.secman.ApplicationUserMenu" id="newDelegateUser">
                 <cpt:named>New Delegate User</cpt:named>
             </mb3:serviceAction>
         </mb3:section>
@@ -161,7 +161,7 @@ _SecMan_ provides a bunch of menu entries, lets integrate these with our menubar
 	<mb3:menu>
 		<mb3:named>Configuration Menu</mb3:named>
 		<mb3:section>
-			<mb3:serviceAction objectType="isis.ext.secman.MeService" id="me"/>
+			<mb3:serviceAction objectType="causeway.ext.secman.MeService" id="me"/>
 			...
 		</mb3:section>
 	</mb3:menu>
@@ -178,21 +178,21 @@ Now let's wire everything up by importing required modules into the main _Applic
 ----
 @SpringBootApplication
 @Import({
-    IsisModuleCoreRuntimeServices.class, // Apache Isis Runtime
-    IsisModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
-    IsisModuleExtModelAnnotation.class, // @Model support
-    IsisModuleViewerWicketViewer.class, // UI (Wicket Viewer)
-    IsisModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
-    IsisModuleSecurityShiro.class, // Security using Shiro
+    CausewayModuleCoreRuntimeServices.class, // Apache Causeway Runtime
+    CausewayModuleJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data 
+    CausewayModuleExtModelAnnotation.class, // @Model support
+    CausewayModuleViewerWicketViewer.class, // UI (Wicket Viewer)
+    CausewayModuleTestingH2ConsoleUi.class, // enables the H2 console menu item
+    CausewayModuleSecurityShiro.class, // Security using Shiro
 
     // Security Manager Extension (SecMan) <.>
-    IsisModuleExtSecmanModel.class,
-    IsisModuleExtSecmanRealmShiro.class,
-    IsisModuleExtSecmanPersistenceJpa.class,
-    IsisModuleExtSecmanEncryptionJbcrypt.class,
+    CausewayModuleExtSecmanModel.class,
+    CausewayModuleExtSecmanRealmShiro.class,
+    CausewayModuleExtSecmanPersistenceJpa.class,
+    CausewayModuleExtSecmanEncryptionJbcrypt.class,
     
     // Default Admin/User/Role Seeding Support for SecMan <.>
-    IsisModuleTestingFixturesApplib.class, 
+    CausewayModuleTestingFixturesApplib.class, 
 })
 @EntityScan(basePackageClasses = { // <.>
         Employee.class,
@@ -205,7 +205,7 @@ Now let's wire everything up by importing required modules into the main _Applic
     public SecurityModuleConfig securityModuleConfigBean() { // <.>
         return SecurityModuleConfig.builder()
                 .adminUserName("sven")
-                .adminAdditionalPackagePermission("org.apache.isis")
+                .adminAdditionalPackagePermission("org.apache.causeway")
                 .build();
     }
 
@@ -228,4 +228,4 @@ Now let's wire everything up by importing required modules into the main _Applic
 In this article, we switched on *Shiro* as security backend and extended the application to use *SecMan*.
 
 The code is available on 
-https://github.com/apache-isis-committers/isis-lab/tree/master/tutorials/secman[GitHub].
+https://github.com/apache-causeway-committers/causeway-lab/tree/master/tutorials/secman[GitHub].

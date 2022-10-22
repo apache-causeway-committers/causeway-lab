@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>org.apache.isis.lab</groupId>
-	<artifactId>isis-lab-experiments-vaadin</artifactId>
+	<groupId>org.apache.causeway.lab</groupId>
+	<artifactId>causeway-lab-experiments-vaadin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>isis-lab-experiments-vaadin</name>
+	<name>causeway-lab-experiments-vaadin</name>
 	<description>
 		Demo project for Vaadin on Spring Boot.
 		
@@ -45,20 +45,20 @@
 			</dependency>
 
 			<dependency>
-				<groupId>org.apache.isis.lab</groupId>
-				<artifactId>isis-lab-experiments-vaadin-dom</artifactId>
+				<groupId>org.apache.causeway.lab</groupId>
+				<artifactId>causeway-lab-experiments-vaadin-dom</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
-				<groupId>org.apache.isis.lab</groupId>
-				<artifactId>isis-lab-experiments-vaadin-ui</artifactId>
+				<groupId>org.apache.causeway.lab</groupId>
+				<artifactId>causeway-lab-experiments-vaadin-ui</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
-				<groupId>org.apache.isis.lab</groupId>
-				<artifactId>isis-lab-experiments-vaadin-viewer</artifactId>
+				<groupId>org.apache.causeway.lab</groupId>
+				<artifactId>causeway-lab-experiments-vaadin-viewer</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

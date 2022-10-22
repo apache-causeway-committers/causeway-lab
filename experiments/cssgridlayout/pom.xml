@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!-- Vaadin project from https://start.vaadin.com/project/53ba035c-3cab-40fa-8eea-4ff0f47bc22b -->
-    <groupId>org.apache.isis.lab</groupId>
-    <artifactId>isis-lab-experiments-layout</artifactId>
+    <groupId>org.apache.causeway.lab</groupId>
+    <artifactId>causeway-lab-experiments-layout</artifactId>
     <name>Project base for Spring Boot and Vaadin Flow</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -16,8 +16,8 @@
     </properties>
 
 	<parent>
-		<groupId>org.apache.isis.app</groupId>
-		<artifactId>isis-app-starter-parent</artifactId>
+		<groupId>org.apache.causeway.app</groupId>
+		<artifactId>causeway-app-starter-parent</artifactId>
 		<version>2.0.0-SNAPSHOT</version>
 		<relativePath />
 	</parent>

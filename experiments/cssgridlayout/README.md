@@ -1,4 +1,4 @@
-# isis-lab-experiments-layout
+# causeway-lab-experiments-layout
 
 This project can be used as a starting point to create your own Vaadin application with Spring Boot.
 It contains all the necessary configuration and some placeholder files to get you started.
@@ -21,7 +21,7 @@ This will build a JAR file with all the dependencies and front-end resources,
 ready to be deployed. The file can be found in the `target` folder after the build completes.
 
 Once the JAR file is built, you can run it using
-`java -jar target/isis-lab-experiments-layout-1.0-SNAPSHOT.jar`
+`java -jar target/causeway-lab-experiments-layout-1.0-SNAPSHOT.jar`
 
 ## Project structure
 

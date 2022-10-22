@@ -1,0 +1,30 @@
+package org.apache.causeway.lab.experiment.springsecurity;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.apache.causeway.applib.annotation.Action;
+import org.apache.causeway.applib.annotation.ActionLayout;
+import org.apache.causeway.applib.annotation.DomainObjectLayout;
+import org.apache.causeway.applib.annotation.DomainService;
+import org.apache.causeway.applib.annotation.NatureOfService;
+import org.apache.causeway.applib.services.factory.FactoryService;
+
+import lombok.RequiredArgsConstructor;
+
+@Named("causewayLab.EmployeeMenu")
+@DomainService(nature=NatureOfService.VIEW)
+@DomainObjectLayout(named="Employees")
+@RequiredArgsConstructor(onConstructor_ = { @Inject })
+public class EmployeeMenu {
+
+    final FactoryService factoryService;
+
+    @Action
+    @ActionLayout(cssClassFa="fa-bolt")
+    public EmployeeManager employeeManager(){
+        return factoryService.viewModel(EmployeeManager.class);
+    }
+
+
+}

@@ -4,14 +4,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.apache.isis.lab</groupId>
-		<artifactId>isis-lab-experiments</artifactId>
+		<groupId>org.apache.causeway.lab</groupId>
+		<artifactId>causeway-lab-experiments</artifactId>
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>isis-lab-experiments-wicket-bootstrap</artifactId>
+	<artifactId>causeway-lab-experiments-wicket-bootstrap</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>isis-lab-experiments-vaadin</name>
+	<name>causeway-lab-experiments-vaadin</name>
 	<description>
 		Demo project for Wicket on Spring Boot.
 	</description>
@@ -41,8 +41,8 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>org.apache.isis.commons</groupId>
-			<artifactId>isis-commons</artifactId>
+			<groupId>org.apache.causeway.commons</groupId>
+			<artifactId>causeway-commons</artifactId>
 			<version>2.0.0-SNAPSHOT</version>
 		</dependency> 
 
@@ -93,7 +93,7 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>font-awesome</artifactId>
-			<version>6.2.0</version> <!-- keep in sync with org.apache.isis.lab.experiments.wktbs.WicketBootstrapApplicationConfiguration.FontAwesomeCssReferenceWkt.FONTAWESOME_RESOURCE -->
+			<version>6.2.0</version> <!-- keep in sync with org.apache.causeway.lab.experiments.wktbs.WicketBootstrapApplicationConfiguration.FontAwesomeCssReferenceWkt.FONTAWESOME_RESOURCE -->
 		</dependency>
 
 		<dependency>

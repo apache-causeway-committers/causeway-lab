@@ -17,7 +17,7 @@
 #
 # See also config/application.properties
 #
-isis:
+causeway:
 
   applib:
     annotation:
@@ -76,15 +76,15 @@ isis:
         favicon-url: images/book_32.png
         brand-logo-header: images/book_48.png
         brand-logo-signin: images/book_256.png
-        name: Apache Isis Spring Data Tutorial
+        name: Apache Causeway Spring Data Tutorial
         css: css/application.css
         js: scripts/application.js
-        about: Apache Isis Spring Data Tutorial
+        about: Apache Causeway Spring Data Tutorial
 
       credit:
-        - url:  http://isis.apache.org
-          image: images/apache-isis/logo-48x48.png
-          name: Apache Isis
+        - url:  http://causeway.apache.org
+          image: images/apache-causeway/logo-48x48.png
+          name: Apache Causeway
 
       themes:
         initial: Flatly
@@ -104,14 +104,14 @@ isis:
 
   persistence:
     schema:
-       autoCreateSchemas: isisExtSecman
+       autoCreateSchemas: causewayExtSecman
   
   extensions:
     secman:
       seed:
         admin:
           user-name: sven
-          namespace-permissions.additional: isisLab
+          namespace-permissions.additional: causewayLab
 
 resteasy:
   jaxrs:
@@ -126,7 +126,7 @@ spring:
   banner:
     location: banner.txt
 #  datasource:
-#    url: jdbc:postgresql://lan.corax.at:5432/isis
+#    url: jdbc:postgresql://lan.corax.at:5432/causeway
 #    driver-class-name: org.postgresql.Driver
 #    username: postgres
 #    password: postgres
