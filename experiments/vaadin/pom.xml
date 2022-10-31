@@ -25,11 +25,12 @@
 
 	<properties>
 		<maven.compiler.release>17</maven.compiler.release>
-		<vaadin.version>23.2.5</vaadin.version>
+		<vaadin.version>23.2.6</vaadin.version>
+		
 		<!-- See https://nodejs.org/en/download/ for latest node and npm (lts) 
 			versions -->
-		<node.version>v16.14.0</node.version>
-		<npm.version>8.3.1</npm.version>
+		<node.version>v18.12.0</node.version>
+		<npm.version>8.19.2</npm.version>
 		<jpa.version>2.7.11</jpa.version>
 	</properties>
 
