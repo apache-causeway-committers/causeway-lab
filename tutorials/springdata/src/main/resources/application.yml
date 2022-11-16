@@ -67,22 +67,23 @@ causeway:
           mode: disabled
 
   viewer:
-    wicket:
+    common:
       application:
-        menubars-layout-xml: menubars.layout.xml
+        menubars-layout-file: menubars.layout.xml
         favicon-url: images/book_32.png
         brand-logo-header: images/book_48.png
         brand-logo-signin: images/book_256.png
         name: Apache Causeway Spring Data Tutorial
-        css: css/application.css
-        js: scripts/application.js
         about: Apache Causeway Spring Data Tutorial
 
       credit:
         - url:  http://causeway.apache.org
           image: images/apache-causeway/logo-48x48.png
           name: Apache Causeway
-
+   
+    wicket:
+      css: css/application.css
+      js: scripts/application.js
       themes:
         initial: Flatly
         showChooser: true

@@ -25,11 +25,10 @@ import org.apache.wicket.request.cycle.RequestCycle;
 
 import org.apache.causeway.extensions.pdfjs.applib.config.PdfJsConfig;
 
+import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
 import lombok.Getter;
 import lombok.val;
 import lombok.experimental.Accessors;
-
-import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
 
 public class PdfJsWorkerReference
 extends WebjarsJavaScriptResourceReference {
@@ -41,7 +40,7 @@ extends WebjarsJavaScriptResourceReference {
         new PdfJsWorkerReference();
 
     private PdfJsWorkerReference() {
-        super("pdfjs-dist/2.13.216/build/pdf.worker.min.js");
+        super("pdfjs-dist/" + PdfJsVersion.CURRENT.versionLiteral() + "/build/pdf.worker.min.js");
     }
 
     /**

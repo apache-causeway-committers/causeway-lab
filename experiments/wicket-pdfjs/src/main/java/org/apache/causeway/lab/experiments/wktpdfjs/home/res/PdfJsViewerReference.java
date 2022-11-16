@@ -21,10 +21,9 @@ package org.apache.causeway.lab.experiments.wktpdfjs.home.res;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 
+import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
 import lombok.Getter;
 import lombok.experimental.Accessors;
-
-import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
 
 public class PdfJsViewerReference
 extends WebjarsJavaScriptResourceReference {
@@ -36,7 +35,7 @@ extends WebjarsJavaScriptResourceReference {
         new PdfJsViewerReference();
 
     private PdfJsViewerReference() {
-        super("pdfjs-dist/2.13.216/web/pdf_viewer.js");
+        super("pdfjs-dist/" + PdfJsVersion.CURRENT.versionLiteral() + "/web/pdf_viewer.js");
     }
 
     /**
