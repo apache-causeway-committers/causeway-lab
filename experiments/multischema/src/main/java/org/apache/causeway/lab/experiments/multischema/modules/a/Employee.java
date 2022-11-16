@@ -1,9 +1,8 @@
 package org.apache.causeway.lab.experiments.multischema.modules.a;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,7 @@ public class Employee {
 
     @NonNull
     private String firstName;
-    
+
     @NonNull
     private String lastName;
 }

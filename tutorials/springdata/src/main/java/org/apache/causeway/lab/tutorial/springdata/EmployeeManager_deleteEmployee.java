@@ -13,12 +13,12 @@ import lombok.RequiredArgsConstructor;
 public class EmployeeManager_deleteEmployee {
 
     @Inject private EmployeeRepository employeeRepo;
-    
+
     private final EmployeeManager holder;
-    
-    public EmployeeManager act(List<Employee> employeesToRemove) {
+
+    public EmployeeManager act(final List<Employee> employeesToRemove) {
         employeesToRemove.forEach(employeeRepo::delete);
         return holder;
     }
-    
+
 }

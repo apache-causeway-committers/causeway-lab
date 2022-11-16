@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.5</version>
+		<version>3.0.0-RC2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	
@@ -19,6 +19,17 @@
 		<java.version>17</java.version>
 		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
+	
+    <repositories>
+        <repository>
+			<!-- temporary till Nov 24, 2022 -->
+            <id>spring.snapshots</id>
+            <name>Spring Milestones Repository</name>
+            <url>https://repo.spring.io/milestone/</url>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+    </repositories>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -48,7 +59,7 @@
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>org.eclipse.persistence.jpa</artifactId>
-			<version>2.7.11</version>
+			<version>4.0.0</version>
 		</dependency>
 
 
