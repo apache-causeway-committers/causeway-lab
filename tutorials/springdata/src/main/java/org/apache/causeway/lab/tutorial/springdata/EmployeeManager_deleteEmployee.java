@@ -2,7 +2,7 @@ package org.apache.causeway.lab.tutorial.springdata;
 
 import java.util.List;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.apache.causeway.applib.annotation.Action;
 
