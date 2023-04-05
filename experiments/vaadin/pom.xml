@@ -6,7 +6,11 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
+<<<<<<< HEAD
 		<version>3.0.0-RC2</version>
+=======
+		<version>2.7.6</version>
+>>>>>>> refs/remotes/origin/master
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -25,7 +29,7 @@
 
 	<properties>
 		<maven.compiler.release>17</maven.compiler.release>
-		<vaadin.version>23.2.8</vaadin.version>
+		<vaadin.version>23.2.10</vaadin.version>
 		
 		<!-- See https://nodejs.org/en/download/ for latest node and npm (lts) 
 			versions -->
