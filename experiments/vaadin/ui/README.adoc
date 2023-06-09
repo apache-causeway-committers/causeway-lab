@@ -1,9 +1,0 @@
-= Vaadin UI Build Notes
-
-For all the frontend files to be properly generated (by Vite) make sure to build with Maven
-
-[source, bash]
-.Execute at the project root
-----
-mvn install ...
-----  

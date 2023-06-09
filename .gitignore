@@ -69,3 +69,5 @@ gradlew.*
 #Lombok (don't accept config alterations, might lead to a maintenance hell)
 lombok.config
 /.asciidoctorconfig.adoc
+
+.temp*
