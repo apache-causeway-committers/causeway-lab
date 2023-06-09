@@ -35,10 +35,6 @@ import org.apache.causeway.lab.experiments.wktsel2.sample.BasePage;
 import org.apache.causeway.lab.experiments.wktsel2.sample.BootstrapPage;
 import org.apache.causeway.lab.experiments.wktsel2.sample.Country;
 
-import lombok.Getter;
-import lombok.val;
-import lombok.experimental.Accessors;
-
 import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.markup.html.bootstrap.behavior.BootstrapBaseBehavior;
 import de.agilecoders.wicket.core.markup.html.references.BootstrapJavaScriptReference;
@@ -46,6 +42,9 @@ import de.agilecoders.wicket.core.settings.BootstrapSettings;
 import de.agilecoders.wicket.core.settings.IBootstrapSettings;
 import de.agilecoders.wicket.webjars.request.resource.WebjarsCssResourceReference;
 import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
+import lombok.Getter;
+import lombok.val;
+import lombok.experimental.Accessors;
 
 @ApplicationInitExtension
 public class WicketSelect2ApplicationConfiguration
@@ -75,7 +74,7 @@ implements WicketApplicationInitConfiguration {
 
       val jsSettings = webApplication.getJavaScriptLibrarySettings();
       // jsSettings.setJQueryReference(JQueryResourceReference.getV3());
-      jsSettings.setJQueryReference(new WebjarsJavaScriptResourceReference("/webjars/jquery/3.6.1/jquery.js"));
+      jsSettings.setJQueryReference(new WebjarsJavaScriptResourceReference("/webjars/jquery/3.6.4/jquery.js"));
 
       webApplication.mountPage("bootstrap", BootstrapPage.class);
 
