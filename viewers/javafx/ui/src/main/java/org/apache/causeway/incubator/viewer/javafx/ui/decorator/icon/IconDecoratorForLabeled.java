@@ -24,6 +24,7 @@ import jakarta.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
+import org.apache.causeway.applib.fa.FontAwesomeLayers;
 import org.apache.causeway.incubator.viewer.javafx.model.icon.IconService;
 import org.apache.causeway.incubator.viewer.javafx.model.util._fx;
 import org.apache.causeway.viewer.commons.model.decorators.IconDecorator;
@@ -40,7 +41,7 @@ public class IconDecoratorForLabeled implements IconDecorator<Labeled, Labeled> 
     private final IconService iconService;
 
     @Override
-    public Labeled decorate(final Labeled uiComponent, final Optional<FontAwesomeDecorationModel> fontAwesomeDecorationModel) {
+    public Labeled decorate(final Labeled uiComponent, final Optional<FontAwesomeLayers> fontAwesomeDecorationModel) {
         fontAwesomeDecorationModel.ifPresent(fa->{
             var icon = iconService.fontAwesome(fa);
             icon

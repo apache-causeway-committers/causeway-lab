@@ -25,7 +25,6 @@ import jakarta.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import org.apache.causeway.applib.annotation.LabelPosition;
 import org.apache.causeway.commons.handler.ChainOfResponsibility;
 import org.apache.causeway.core.config.environment.CausewaySystemEnvironment;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedMember;
@@ -111,8 +110,7 @@ public class UiComponentFactoryFx implements UiComponentFactory<Node, Node> {
 
     @Override
     public LabelAndPosition<Node> labelFor(final ComponentRequest request) {
-        val labelPosition = Facets.labelAt(request.getManagedFeature().getMetaModel())
-                .orElse(LabelPosition.LEFT);
+        val labelPosition = Facets.labelAt(request.getManagedFeature().getMetaModel());
         val uiLabel = new Label(request.getFriendlyName());
         return LabelAndPosition.of(labelPosition, uiLabel);
     }

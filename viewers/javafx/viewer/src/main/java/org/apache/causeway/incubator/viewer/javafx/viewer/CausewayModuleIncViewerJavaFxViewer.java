@@ -23,7 +23,11 @@ import org.springframework.context.annotation.Import;
 
 import org.apache.causeway.incubator.viewer.javafx.headless.SpringBootJavaFxApplication;
 import org.apache.causeway.incubator.viewer.javafx.ui.CausewayModuleIncViewerJavaFxUi;
-import org.apache.causeway.viewer.commons.services.CausewayModuleViewerCommonsServices;
+import org.apache.causeway.viewer.commons.applib.CausewayModuleViewerCommonsApplib;
+import org.apache.causeway.viewer.commons.services.branding.BrandingUiServiceDefault;
+import org.apache.causeway.viewer.commons.services.header.HeaderUiServiceDefault;
+import org.apache.causeway.viewer.commons.services.menu.MenuUiServiceDefault;
+import org.apache.causeway.viewer.commons.services.userprof.UserProfileUiServiceDefault;
 
 /**
  *
@@ -33,7 +37,16 @@ import org.apache.causeway.viewer.commons.services.CausewayModuleViewerCommonsSe
 @Import({
         // Modules
         CausewayModuleIncViewerJavaFxUi.class,
-        CausewayModuleViewerCommonsServices.class,
+
+        //CausewayModuleViewerCommonsServices.class,
+        // adds object impersonation mixins
+        CausewayModuleViewerCommonsApplib.class,
+
+        // @Service's
+        BrandingUiServiceDefault.class,
+        UserProfileUiServiceDefault.class,
+        MenuUiServiceDefault.class,
+        HeaderUiServiceDefault.class,
 })
 public class CausewayModuleIncViewerJavaFxViewer {
 

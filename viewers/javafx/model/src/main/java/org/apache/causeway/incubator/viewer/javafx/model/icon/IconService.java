@@ -20,12 +20,12 @@ package org.apache.causeway.incubator.viewer.javafx.model.icon;
 
 import java.util.Optional;
 
-import org.apache.causeway.viewer.commons.model.decorators.IconDecorator.FontAwesomeDecorationModel;
+import org.apache.causeway.applib.fa.FontAwesomeLayers;
 
 import javafx.scene.image.Image;
 
 public interface IconService {
 
-    Optional<Image> fontAwesome(FontAwesomeDecorationModel fontAwesomeDecorationModel);
+    Optional<Image> fontAwesome(FontAwesomeLayers fontAwesomeLayers);
 
 }

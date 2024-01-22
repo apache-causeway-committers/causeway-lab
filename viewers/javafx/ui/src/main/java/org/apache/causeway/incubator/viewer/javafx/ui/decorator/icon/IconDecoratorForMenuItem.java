@@ -24,6 +24,7 @@ import jakarta.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
+import org.apache.causeway.applib.fa.FontAwesomeLayers;
 import org.apache.causeway.incubator.viewer.javafx.model.icon.IconService;
 import org.apache.causeway.incubator.viewer.javafx.model.util._fx;
 import org.apache.causeway.viewer.commons.model.decorators.IconDecorator;
@@ -40,7 +41,7 @@ public class IconDecoratorForMenuItem implements IconDecorator<MenuItem, MenuIte
     private final IconService iconService;
 
     @Override
-    public MenuItem decorate(final MenuItem menuItem, final Optional<FontAwesomeDecorationModel> fontAwesomeDecorationModel) {
+    public MenuItem decorate(final MenuItem menuItem, final Optional<FontAwesomeLayers> fontAwesomeDecorationModel) {
         // TODO honor icon position
 
         fontAwesomeDecorationModel.ifPresent(fa->{

@@ -30,8 +30,8 @@
 	</description>
 
 	<properties>
-		<maven.compiler.release>17</maven.compiler.release>
-		<javafx.version>17.0.2</javafx.version> 
+		<maven.compiler.release>21</maven.compiler.release>
+		<javafx.version>21.0.1</javafx.version> 
 		<jar-plugin.automaticModuleName>org.apache.causeway.incubator.viewer.javafx</jar-plugin.automaticModuleName>
 		<git-plugin.propertiesDir>org/apache/causeway/incubator/viewer/javafx</git-plugin.propertiesDir>
 	</properties>

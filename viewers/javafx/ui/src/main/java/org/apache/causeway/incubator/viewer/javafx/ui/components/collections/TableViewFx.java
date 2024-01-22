@@ -30,7 +30,6 @@ import org.apache.causeway.commons.internal.base._NullSafe;
 import org.apache.causeway.commons.internal.collections._Multimaps;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedCollection;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
-import org.apache.causeway.core.metamodel.object.ManagedObjects;
 import org.apache.causeway.core.metamodel.spec.ObjectSpecification;
 import org.apache.causeway.core.metamodel.spec.feature.MixedIn;
 import org.apache.causeway.core.metamodel.spec.feature.ObjectAssociation;
@@ -72,7 +71,7 @@ public class TableViewFx extends VBox {
         val objects = Facets.collectionStream(collection)
                 .collect(Can.toCan());
 
-        return ManagedObjects.commonSpecification(objects)
+        return collection.getElementSpecification()
                 .map(elementSpec->new TableViewFx(uiContext, elementSpec, objects, where))
                 .orElseGet(TableViewFx::empty);
     }

@@ -54,7 +54,7 @@ public class MenuBuilderFx implements MenuVisitor {
 
     @Override
     public void onMenuAction(final MenuAction menuDto) {
-        val managedAction = menuDto.managedAction();
+        val managedAction = menuDto.managedAction().orElseThrow();
 
         log.debug("sub menu {}", menuDto.name());
 

@@ -26,9 +26,9 @@ import jakarta.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import org.apache.causeway.applib.fa.FontAwesomeLayers;
 import org.apache.causeway.commons.internal.collections._Maps;
 import org.apache.causeway.incubator.viewer.javafx.model.icon.IconService;
-import org.apache.causeway.viewer.commons.model.decorators.IconDecorator.FontAwesomeDecorationModel;
 
 import javafx.scene.image.Image;
 import lombok.Getter;
@@ -58,8 +58,8 @@ public class IconServiceDefault implements IconService {
     }
 
     @Override
-    public Optional<Image> fontAwesome(final FontAwesomeDecorationModel fontAwesomeDecorationModel) {
-        return Optional.ofNullable(faIconCache.get(fontAwesomeDecorationModel.getCssClassesSpaceSeparated()));
+    public Optional<Image> fontAwesome(final FontAwesomeLayers fontAwesomeLayers) {
+        return Optional.ofNullable(faIconCache.get(fontAwesomeLayers.toQuickNotation()));
     }
 
 }

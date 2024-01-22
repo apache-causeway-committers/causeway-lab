@@ -18,10 +18,13 @@
  */
 package demoapp.javafx;
 
+import java.util.List;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
+import org.apache.causeway.applib.services.i18n.TranslationsResolver;
 import org.apache.causeway.commons.internal.debug._Probe;
 import org.apache.causeway.core.config.presets.CausewayPresets;
 import org.apache.causeway.core.runtimeservices.session.InteractionServiceDefault;
@@ -57,6 +60,11 @@ public class DemoAppJavaFx {
                 .brandingIcon(_fx.imageFromClassPath(DemoAppJavaFx.class, "gift_32.png"))
                 .objectFallbackIcon(_fx.imageFromClassPath(DemoAppJavaFx.class, "object_fallback_icon.png"))
                 .build();
+    }
+
+    @Bean
+    public TranslationsResolver translationsResolverNoOp() {
+        return file->List.of();
     }
 
     public static void main(final String[] args) {

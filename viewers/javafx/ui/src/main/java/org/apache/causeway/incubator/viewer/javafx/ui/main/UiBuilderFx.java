@@ -25,9 +25,6 @@ import jakarta.inject.Inject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import org.apache.causeway.applib.services.iactn.Interaction;
-import org.apache.causeway.commons.internal.debug._Probe;
-import org.apache.causeway.core.interaction.scope.TransactionBoundaryAware;
 import org.apache.causeway.incubator.viewer.javafx.headless.PrimaryStageInitializer;
 import org.apache.causeway.incubator.viewer.javafx.model.events.JavaFxViewerConfig;
 
@@ -43,7 +40,7 @@ import lombok.extern.log4j.Log4j2;
 @Component
 @RequiredArgsConstructor(onConstructor_ = {@Inject})
 @Log4j2
-public class UiBuilderFx implements PrimaryStageInitializer, TransactionBoundaryAware {
+public class UiBuilderFx implements PrimaryStageInitializer /*, TransactionBoundaryAware */{
 
     private final ApplicationContext springContext;
     private final JavaFxViewerConfig viewerConfig;
@@ -64,19 +61,19 @@ public class UiBuilderFx implements PrimaryStageInitializer, TransactionBoundary
         setupIcon(primaryStage);
     }
 
-    @Override
-    public void beforeEnteringTransactionalBoundary(final Interaction interaction) {
-        //TODO this would be the place to indicate to the user, that a long running task has started
-        //scene.getRoot().cursorProperty().set(Cursor.WAIT);
-        _Probe.errOut("Transaction HAS_STARTED conversationId=%s", interaction.getInteractionId());
-    }
-
-    @Override
-    public void afterLeavingTransactionalBoundary(final Interaction interaction) {
-        //TODO this would be the place to indicate to the user, that a long running task has ended
-        //scene.getRoot().cursorProperty().set(Cursor.DEFAULT);
-        _Probe.errOut("Transaction IS_ENDING interactionId=%s", interaction.getInteractionId());
-    }
+//    @Override
+//    public void beforeEnteringTransactionalBoundary(final Interaction interaction) {
+//        //TODO this would be the place to indicate to the user, that a long running task has started
+//        //scene.getRoot().cursorProperty().set(Cursor.WAIT);
+//        _Probe.errOut("Transaction HAS_STARTED conversationId=%s", interaction.getInteractionId());
+//    }
+//
+//    @Override
+//    public void afterLeavingTransactionalBoundary(final Interaction interaction) {
+//        //TODO this would be the place to indicate to the user, that a long running task has ended
+//        //scene.getRoot().cursorProperty().set(Cursor.DEFAULT);
+//        _Probe.errOut("Transaction IS_ENDING interactionId=%s", interaction.getInteractionId());
+//    }
 
     // -- HELPER
 

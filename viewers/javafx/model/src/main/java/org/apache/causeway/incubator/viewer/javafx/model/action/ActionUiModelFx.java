@@ -49,7 +49,7 @@ implements UiAction<MenuItem, Node> {
         val menuItem = new MenuItem(getManagedAction().getFriendlyName());
 
         return uiContext.getIconDecoratorForMenuItem()
-                .decorate(menuItem, getFontAwesomeUiModel());
+                .decorate(menuItem, lookupFontAwesomeLayers(false));
     }
 
     @Override
@@ -58,7 +58,7 @@ implements UiAction<MenuItem, Node> {
         val uiLabel = new Label(getManagedAction().getFriendlyName());
 
         return uiContext.getIconDecoratorForLabeled()
-                .decorate(uiLabel, getFontAwesomeUiModel());
+                .decorate(uiLabel, lookupFontAwesomeLayers(false));
     }
 
 
