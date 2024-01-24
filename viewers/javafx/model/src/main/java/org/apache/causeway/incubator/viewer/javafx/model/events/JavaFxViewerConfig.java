@@ -21,6 +21,9 @@ package org.apache.causeway.incubator.viewer.javafx.model.events;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
+import org.apache.causeway.applib.services.sudo.SudoService;
+import org.apache.causeway.applib.services.user.UserMemento;
+
 import javafx.scene.image.Image;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,5 +39,8 @@ public class JavaFxViewerConfig {
     @Builder.Default
     private Resource uiLayout = new ClassPathResource("/ui.fxml");
 
+    @Builder.Default
+    private UserMemento userMemento = UserMemento.system()
+        .withRoleAdded(SudoService.ACCESS_ALL_ROLE.getName());
 
 }

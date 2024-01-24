@@ -106,7 +106,7 @@ public class UiActionHandlerFx {
             final ManagedAction managedAction,
             final Can<ManagedObject> params) {
 
-        interactionService.runAnonymous(()->{
+        interactionService.run(uiContext.newInteractionContext(), ()->{
 
             //Thread.sleep(1000); // simulate long running
 
@@ -117,6 +117,5 @@ public class UiActionHandlerFx {
 
         });
     }
-
 
 }

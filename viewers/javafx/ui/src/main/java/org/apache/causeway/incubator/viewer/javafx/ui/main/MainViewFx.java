@@ -81,7 +81,8 @@ public class MainViewFx {
         contentView.setVbarPolicy(ScrollBarPolicy.ALWAYS);
         contentPane.setFillWidth(true);
         //_fx.borderDashed(contentPane, Color.CRIMSON); //debug
-        interactionService.runAnonymous(this::buildMenu);
+        interactionService.run(uiContext.newInteractionContext(),
+                this::buildMenu);
 
         renderHomepage();
     }

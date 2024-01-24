@@ -22,6 +22,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import org.apache.causeway.applib.services.iactnlayer.InteractionContext;
 import org.apache.causeway.applib.services.iactnlayer.InteractionService;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
 import org.apache.causeway.incubator.viewer.javafx.model.action.ActionUiModelFactoryFx;
@@ -59,7 +60,7 @@ public interface UiContextFx {
     PrototypingDecorator<Button, Node> getPrototypingDecoratorForButton();
     PrototypingDecorator<Node, Node> getPrototypingDecoratorForFormField();
 
-
-
-
+    default InteractionContext newInteractionContext() {
+        return InteractionContext.ofUserWithSystemDefaults(getJavaFxViewerConfig().getUserMemento());
+    }
 }
