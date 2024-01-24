@@ -33,8 +33,10 @@ import org.apache.causeway.incubator.viewer.javafx.model.events.JavaFxViewerConf
 import org.apache.causeway.incubator.viewer.javafx.model.util._fx;
 import org.apache.causeway.incubator.viewer.javafx.viewer.CausewayModuleIncViewerJavaFxViewer;
 import org.apache.causeway.security.bypass.CausewayModuleSecurityBypass;
+import org.apache.causeway.valuetypes.asciidoc.metamodel.semantics.AsciiDocValueSemantics;
 
 import demoapp.dom.DemoModuleJpa;
+import demoapp.dom._infra.resources.AsciiDocValueSemanticsWithPreprocessing;
 
 /**
  * Bootstrap the application.
@@ -43,11 +45,13 @@ import demoapp.dom.DemoModuleJpa;
 @Import({
     DemoModuleJpa.class,
 
-    // INCUBATING
     CausewayModuleSecurityBypass.class,
     // Security Manager Extension (secman)
     CausewayModuleExtSecmanPersistenceJpa.class,
     CausewayModuleIncViewerJavaFxViewer.class,
+
+    AsciiDocValueSemantics.class,
+    AsciiDocValueSemanticsWithPreprocessing.class,
 
 })
 public class DemoAppJavaFx {
