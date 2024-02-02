@@ -45,6 +45,7 @@ hs_err_pid*
 .settings
 .classpath
 .project
+.factorypath
 
 # Node
 package-lock.json
