@@ -23,9 +23,9 @@ import java.time.LocalDate;
 import jakarta.inject.Inject;
 
 import org.apache.causeway.applib.annotation.PriorityPrecedence;
+import org.apache.causeway.applib.value.semantics.TemporalCharacteristicsProvider.OffsetCharacteristic;
+import org.apache.causeway.applib.value.semantics.TemporalCharacteristicsProvider.TemporalCharacteristic;
 import org.apache.causeway.applib.value.semantics.TemporalValueSemantics;
-import org.apache.causeway.applib.value.semantics.TemporalValueSemantics.OffsetCharacteristic;
-import org.apache.causeway.applib.value.semantics.TemporalValueSemantics.TemporalCharacteristic;
 import org.apache.causeway.core.metamodel.util.Facets;
 import org.apache.causeway.incubator.viewer.javafx.model.binding.BindingsFx;
 import org.apache.causeway.incubator.viewer.javafx.model.util._fx;
@@ -33,11 +33,12 @@ import org.apache.causeway.incubator.viewer.javafx.ui.components.UiComponentHand
 import org.apache.causeway.viewer.commons.model.binding.BindingConverterForManagedObject;
 import org.apache.causeway.viewer.commons.model.components.UiComponentFactory.ComponentRequest;
 
+import lombok.RequiredArgsConstructor;
+import lombok.val;
+
 import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.VBox;
-import lombok.RequiredArgsConstructor;
-import lombok.val;
 
 @org.springframework.stereotype.Component
 @jakarta.annotation.Priority(PriorityPrecedence.MIDPOINT)
