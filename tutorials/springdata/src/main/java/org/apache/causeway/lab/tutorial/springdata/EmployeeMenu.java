@@ -13,7 +13,7 @@ import org.apache.causeway.applib.services.factory.FactoryService;
 import lombok.RequiredArgsConstructor;
 
 @Named("causewayLab.EmployeeMenu")
-@DomainService(nature=NatureOfService.VIEW)
+@DomainService
 @DomainObjectLayout(named="Employees")
 @RequiredArgsConstructor(onConstructor_ = { @Inject })
 public class EmployeeMenu {

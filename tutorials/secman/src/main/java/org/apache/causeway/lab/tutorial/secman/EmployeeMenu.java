@@ -12,7 +12,7 @@ import jakarta.inject.Named;
 import lombok.RequiredArgsConstructor;
 
 @Named("causewayLab.EmployeeMenu")
-@DomainService(nature=NatureOfService.VIEW)
+@DomainService
 @DomainObjectLayout(named="Employees")
 @RequiredArgsConstructor(onConstructor_ = { @Inject })
 public class EmployeeMenu {

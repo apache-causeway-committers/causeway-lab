@@ -1,18 +1,18 @@
 package org.apache.causeway.lab.experiment.springsecurity;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+
 import org.apache.causeway.applib.annotation.Action;
 import org.apache.causeway.applib.annotation.ActionLayout;
 import org.apache.causeway.applib.annotation.DomainObjectLayout;
 import org.apache.causeway.applib.annotation.DomainService;
-import org.apache.causeway.applib.annotation.NatureOfService;
 import org.apache.causeway.applib.services.factory.FactoryService;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
 import lombok.RequiredArgsConstructor;
 
 @Named("causewayLab.EmployeeMenu")
-@DomainService(nature=NatureOfService.VIEW)
+@DomainService
 @DomainObjectLayout(named="Employees")
 @RequiredArgsConstructor(onConstructor_ = { @Inject })
 public class EmployeeMenu {
@@ -24,6 +24,5 @@ public class EmployeeMenu {
     public EmployeeManager employeeManager(){
         return factoryService.viewModel(EmployeeManager.class);
     }
-
 
 }
