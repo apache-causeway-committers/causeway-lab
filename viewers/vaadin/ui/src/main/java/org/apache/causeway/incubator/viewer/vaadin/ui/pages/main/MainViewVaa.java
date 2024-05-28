@@ -36,8 +36,8 @@ import org.apache.causeway.commons.internal.exceptions._Exceptions;
 import org.apache.causeway.core.metamodel.context.HasMetaModelContext;
 import org.apache.causeway.core.metamodel.context.MetaModelContext;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
-import org.apache.causeway.core.metamodel.interactions.managed.nonscalar.DataTableModel;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
+import org.apache.causeway.core.metamodel.tabular.interactive.DataTableInteractive;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.MemberInvocationHandler;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.UiComponentFactoryVaa;
@@ -139,7 +139,7 @@ implements
     public Component handle(final ManagedAction managedAction, final Can<ManagedObject> params, final ManagedObject actionResult) {
         if (actionResult.getSpecification().isPlural()) {
 
-            val dataTableModel = DataTableModel.forAction(managedAction, params, actionResult);
+            val dataTableModel = DataTableInteractive.forAction(managedAction, params, actionResult);
 
             return TableViewVaa.forDataTableModel(uiContext, dataTableModel, Where.STANDALONE_TABLES);
         } else {

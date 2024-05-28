@@ -27,7 +27,7 @@ import lombok.experimental.UtilityClass;
 public final class PrismResourcesVaa {
 
     @Getter(lazy = true) private static final LocalResourceUtil.ResourceDescriptor cssResourceReference =
-            LocalResourceUtil.ResourceDescriptor.webjars(Prism.COY.cssFile());
+            LocalResourceUtil.ResourceDescriptor.webjars(Prism.COY.cssPrimaryFile());
 
 
     @Getter(lazy = true) private static final LocalResourceUtil.ResourceDescriptor jsResourceReference =

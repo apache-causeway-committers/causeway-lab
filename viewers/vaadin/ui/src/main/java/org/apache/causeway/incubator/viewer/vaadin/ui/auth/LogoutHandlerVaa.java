@@ -53,7 +53,7 @@ public class LogoutHandlerVaa implements LogoutHandler {
         .ifPresent(auth->{
             log.info("logging out {}", auth.getUser().getName());
             // logout AuthenticationManager
-            metaModelContext.getAuthenticationManager().closeSession(auth);
+            metaModelContext.getAuthenticationManager().closeSession(auth.getUser());
             AuthSessionStoreUtil.clear();
         });
 

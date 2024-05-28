@@ -25,10 +25,11 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import org.apache.causeway.applib.annotation.Where;
-import org.apache.causeway.core.metamodel.interactions.managed.nonscalar.DataRow;
-import org.apache.causeway.core.metamodel.interactions.managed.nonscalar.DataTableModel;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
 import org.apache.causeway.core.metamodel.spec.feature.ObjectAssociation;
+import org.apache.causeway.core.metamodel.tabular.interactive.DataColumn;
+import org.apache.causeway.core.metamodel.tabular.interactive.DataRow;
+import org.apache.causeway.core.metamodel.tabular.interactive.DataTableInteractive;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
 
 import lombok.AccessLevel;
@@ -51,12 +52,10 @@ public class TableViewVaa extends VerticalLayout {
 
     /**
      * Constructs a (page-able) {@link Grid} from given {@code managedCollection}
-     * @param managedCollection
-     * @param where
      */
     public static Component forDataTableModel(
             final @NonNull UiContextVaa uiContext,
-            final @NonNull DataTableModel dataTableModel,
+            final @NonNull DataTableInteractive dataTableModel,
             final @NonNull Where where) { //TODO not used yet (or is redundant)
         return dataTableModel.getElementCount()==0
                 ? empty()
@@ -69,7 +68,7 @@ public class TableViewVaa extends VerticalLayout {
      * @param objects - (wrapped) domain objects to be rendered by this table
      */
     private TableViewVaa(
-            final @NonNull DataTableModel dataTableModel) {
+            final @NonNull DataTableInteractive dataTableModel) {
 
         //            final ComboBox<ManagedObject> listBox = new ComboBox<>();
         //            listBox.setLabel(label + " #" + objects.size());
@@ -98,14 +97,21 @@ public class TableViewVaa extends VerticalLayout {
         });
 
         // property columns
-        columns.forEach(column->{
-            val property = column.getPropertyMetaModel();
-            objectGrid.addColumn(row -> {
-                log.debug("about to get property value for property {}", property.getId());
-                return stringifyPropertyValue(property, row.getRowElement());
-            })
-            .setHeader(property.getCanonicalFriendlyName());
-            //TODO add column description as is provided via property.getColumnDescription()
+        columns.forEach((DataColumn column)->{
+            val association = column.getAssociationMetaModel();
+            association.getSpecialization().accept(
+                prop->{
+                    objectGrid.addColumn(row -> {
+                        log.debug("about to get property value for property {}", prop.getId());
+                        return stringifyPropertyValue(prop, row.getRowElement());
+                    })
+                    .setHeader(prop.getCanonicalFriendlyName());
+                    //TODO add column description as is provided via property.getColumnDescription()
+                },
+                coll->{
+                  //TODO Causeway programming model changes: it is now allowed for table-cells to render collections (OneToMany Assoc.)
+
+                });
         });
 
         // populate the model

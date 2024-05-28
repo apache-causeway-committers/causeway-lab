@@ -61,11 +61,11 @@ class MenuBuilderVaa implements MenuVisitor {
 
     @Override
     public void onMenuAction(final MenuAction menuAction) {
-        val managedAction = menuAction.managedAction();
-
-        val actionUiModel = actionUiModelFactory.newActionUiModel(managedAction);
-        currentTopLevelMenu.getSubMenu()
-        .addItem(actionUiModel.createMenuUiComponent(), e->menuActionEventHandler.accept(managedAction));
+        menuAction.managedAction().ifPresent(managedAction->{
+            val actionUiModel = actionUiModelFactory.newActionUiModel(managedAction);
+            currentTopLevelMenu.getSubMenu()
+            .addItem(actionUiModel.createMenuUiComponent(), e->menuActionEventHandler.accept(managedAction));
+        });
     }
 
     @Override

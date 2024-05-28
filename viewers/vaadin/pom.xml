@@ -34,6 +34,12 @@
 		<git-plugin.propertiesDir>org/apache/causeway/incubator/viewer/vaadin</git-plugin.propertiesDir>
 		<enforcer.skip>true</enforcer.skip>
         
+        <eirslett-frontend-maven-plugin.version>1.15.0</eirslett-frontend-maven-plugin.version>
+        <!-- See https://nodejs.org/en/download/ for latest node and npm (lts) 
+            versions -->
+        <node.version>v20.14.0</node.version>
+        <npm.version>10.7.0</npm.version>
+        
         <vaadin.version>24.3.11</vaadin.version>
         
 	</properties>
