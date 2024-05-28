@@ -29,14 +29,13 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
+import org.apache.causeway.applib.fa.FontAwesomeLayers;
 import org.apache.causeway.applib.layout.component.CssClassFaPosition;
 import org.apache.causeway.core.metamodel.context.MetaModelContext;
 import org.apache.causeway.viewer.commons.applib.services.userprof.UserProfileUiModel;
 import org.apache.causeway.viewer.commons.applib.services.userprof.UserProfileUiService;
 import org.apache.causeway.viewer.commons.model.decorators.IconDecorator;
-import org.apache.causeway.viewer.commons.model.decorators.IconDecorator.FontAwesomeDecorationModel;
 import org.apache.causeway.viewer.commons.model.decorators.TooltipDecorator;
-import org.apache.causeway.viewer.commons.model.decorators.TooltipDecorator.TooltipDecorationModel;
 
 import lombok.Getter;
 import lombok.val;
@@ -71,15 +70,21 @@ public class Decorators {
         @Override
         public Component decorate(
                 final Component uiComponent,
-                final Optional<FontAwesomeDecorationModel> fontAwesomeDecorationModel) {
+                final Optional<FontAwesomeLayers> faLayers) {
 
-            val decoratedUiComponent = fontAwesomeDecorationModel
+            //TODO Causeway programming model changed from single fa-icon based icons to support for layered fa-icons,
+            // which is not reflected in code here (in contrast to the Wicket Viewer implementation)
+
+            val decoratedUiComponent = faLayers
             .map(fontAwesome->{
 
                 val faIcon = new Span();
 
-                fontAwesome.streamCssClasses()
-                .forEach(faIcon::addClassName);
+                fontAwesome.getSpanEntries().stream()
+                .findFirst()
+                .ifPresent(spanEntry->{
+                    faIcon.addClassName(spanEntry.getCssClasses());
+                });
 
                 return CssClassFaPosition.isLeftOrUnspecified(fontAwesome.getPosition())
                         ? new HorizontalLayout(faIcon, uiComponent)
@@ -165,11 +170,6 @@ public class Decorators {
             return userIcon;
         }
 
-
-
     }
-
-
-
 
 }

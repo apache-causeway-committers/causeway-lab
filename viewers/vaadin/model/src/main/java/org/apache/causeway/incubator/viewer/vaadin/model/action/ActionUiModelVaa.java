@@ -49,9 +49,7 @@ public class ActionUiModelVaa implements UiAction<Component, Component> {
     @Override
     public Component createRegularUiComponent() {
         val uiLabel = new Label(getManagedAction().getFriendlyName());
-
-        return Decorators.getIcon().decorate(uiLabel, getFontAwesomeUiModel());
+        return Decorators.getIcon().decorate(uiLabel, lookupFontAwesomeLayers(false));
     }
-
 
 }

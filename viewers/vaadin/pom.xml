@@ -16,10 +16,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.apache.causeway.incubator</groupId>
-		<artifactId>causeway-incubator</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
-		<relativePath>../../pom.xml</relativePath>
+        <groupId>org.apache.causeway.core</groupId>
+        <artifactId>causeway-core</artifactId>
+        <version>3.0.0-SNAPSHOT</version>
+		<relativePath/>
 	</parent>
 
 	<groupId>org.apache.causeway.incubator.viewer</groupId>
@@ -33,13 +33,32 @@
 		<jar-plugin.automaticModuleName>org.apache.causeway.incubator.viewer.vaadin</jar-plugin.automaticModuleName>
 		<git-plugin.propertiesDir>org/apache/causeway/incubator/viewer/vaadin</git-plugin.propertiesDir>
 		<enforcer.skip>true</enforcer.skip>
+        
+        <vaadin.version>24.3.11</vaadin.version>
+        
 	</properties>
 
 	<packaging>pom</packaging>
 
 	<dependencyManagement>
 		<dependencies>
-
+            
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin</artifactId>
+                <version>${vaadin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-core</artifactId>
+                <version>${vaadin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-spring</artifactId>
+                <version>${vaadin.version}</version>
+            </dependency>
+            
 			<dependency>
 				<groupId>org.apache.causeway.incubator.viewer</groupId>
 				<artifactId>causeway-viewer-vaadin-model</artifactId>
