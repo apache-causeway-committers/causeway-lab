@@ -31,7 +31,6 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
 
 import org.apache.causeway.core.metamodel.context.MetaModelContext;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
-import org.apache.causeway.incubator.viewer.vaadin.model.util.Vaa;
 import org.apache.causeway.viewer.commons.applib.services.branding.BrandingUiModel;
 import org.apache.causeway.viewer.commons.applib.services.header.HeaderUiModel;
 
@@ -44,10 +43,12 @@ final class MainView_createHeader {
             final MetaModelContext commonContext,
             final HeaderUiModel headerUiModel,
             final Consumer<ManagedAction> menuActionEventHandler,
-            final Runnable onHomepageLinkClick) {
+            final Runnable onHomepageLinkClick
+    ) {
 
         val titleOrLogo = createTitleOrLogo(commonContext, headerUiModel.branding());
-        Vaa.setOnClick(titleOrLogo, onHomepageLinkClick);
+        // FIXME Alf
+        // Vaa.setOnClick(titleOrLogo, onHomepageLinkClick);
 
         val leftMenuBar = new MenuBar();
         val horizontalSpacer = new Div();
@@ -82,16 +83,14 @@ final class MainView_createHeader {
 
     // -- HELPER
 
-
     private static Component createTitleOrLogo(
             final MetaModelContext commonContext,
             final BrandingUiModel brandingUiModel) {
 
-
         val brandingName = brandingUiModel.getName();
         val brandingLogo = brandingUiModel.getLogoHref();
 
-        if(brandingLogo.isPresent()) {
+        if (brandingLogo.isPresent()) {
             val webAppContextPath = commonContext.getWebAppContextPath();
             val logo = new Image(
                     webAppContextPath.prependContextPathIfLocal(brandingLogo.get()),
@@ -103,6 +102,5 @@ final class MainView_createHeader {
         return new Text(brandingName.orElse("App"));
 
     }
-
 
 }

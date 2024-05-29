@@ -26,57 +26,52 @@ import org.springframework.context.annotation.Import;
 import org.apache.causeway.commons.internal.os._OsUtil;
 import org.apache.causeway.core.config.presets.CausewayPresets;
 import org.apache.causeway.core.config.util.SpringProfileUtil;
-import org.apache.causeway.extensions.commandlog.applib.CausewayModuleExtCommandLogApplib;
+import org.apache.causeway.core.runtimeservices.CausewayModuleCoreRuntimeServices;
 import org.apache.causeway.extensions.sse.wicket.CausewayModuleExtSseWicket;
 import org.apache.causeway.incubator.viewer.vaadin.viewer.CausewayModuleIncViewerVaadinViewer;
+import org.apache.causeway.persistence.jpa.eclipselink.CausewayModulePersistenceJpaEclipselink;
+import org.apache.causeway.security.bypass.CausewayModuleSecurityBypass;
 import org.apache.causeway.valuetypes.asciidoc.metamodel.CausewayModuleValAsciidocMetaModel;
-import org.apache.causeway.valuetypes.asciidoc.persistence.jdo.dn.CausewayModuleValAsciidocPersistenceJdoDn;
 import org.apache.causeway.valuetypes.asciidoc.ui.wkt.CausewayModuleValAsciidocUiWkt;
 import org.apache.causeway.valuetypes.markdown.metamodel.CausewayModuleValMarkdownMetaModel;
-import org.apache.causeway.valuetypes.markdown.persistence.jdo.dn.CausewayModuleValMarkdownPersistenceJdoDn;
-import org.apache.causeway.valuetypes.vega.metamodel.CausewayModuleValVegaMetaModel;
-import org.apache.causeway.valuetypes.vega.persistence.jdo.dn.CausewayModuleValVegaPersistenceJdoDn;
 import org.apache.causeway.viewer.wicket.viewer.CausewayModuleViewerWicketViewer;
-
-import demoapp.dom.DemoModuleCommon;
-import demoapp.web.DemoAppManifestJdo;
 
 /**
  * Bootstrap the application.
  */
 @SpringBootApplication
 @Import({
-    DemoModuleCommon.class,
-    DemoAppManifestJdo.class,
+        //    DemoModuleCommon.class,
+        //    DemoAppManifestJdo.class,
+        CausewayModuleCoreRuntimeServices.class, // Apache Causeway Runtime
+        CausewayModulePersistenceJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data
+        CausewayModuleSecurityBypass.class, // Bypass security
 
-    // Metamodel
-    CausewayModuleValAsciidocMetaModel.class,
-    CausewayModuleValMarkdownMetaModel.class,
-    CausewayModuleValVegaMetaModel.class,
-    //TODO CausewayModuleExtFullCalendarVaadin.class,
+        // Metamodel
+        CausewayModuleValAsciidocMetaModel.class,
+        CausewayModuleValMarkdownMetaModel.class,
+        //    CausewayModuleValVegaMetaModel.class,
+        //TODO CausewayModuleExtFullCalendarVaadin.class,
 
-    // INCUBATING
-    CausewayModuleIncViewerVaadinViewer.class, // vaadin viewer
+        // INCUBATING
+        CausewayModuleIncViewerVaadinViewer.class, // vaadin viewer
 
-    // Persistence (JDO/DN5)
-    CausewayModuleValAsciidocPersistenceJdoDn.class,
-    CausewayModuleValMarkdownPersistenceJdoDn.class,
-    CausewayModuleValVegaPersistenceJdoDn.class,
+        // Persistence (JDO/DN5)
+        //    CausewayModuleValAsciidocPersistenceJdoDn.class,
+        //    CausewayModuleValMarkdownPersistenceJdoDn.class,
+        //    CausewayModuleValVegaPersistenceJdoDn.class,
 
-
-    // WICKET INTEGRATION ... to allow side by side comparison
-    CausewayModuleViewerWicketViewer.class, // wicket viewer
-    CausewayModuleExtSseWicket.class, // server sent events
-    CausewayModuleValAsciidocUiWkt.class, // ascii-doc rendering support (for Wicket)
+        // WICKET INTEGRATION ... to allow side by side comparison
+        CausewayModuleViewerWicketViewer.class, // wicket viewer
+        CausewayModuleExtSseWicket.class, // server sent events
+        CausewayModuleValAsciidocUiWkt.class, // ascii-doc rendering support (for Wicket)
 
 })
 public class DemoAppVaadin extends SpringBootServletInitializer {
 
     /**
-     *
-     * @param args
-     * @implNote this is to support the <em>Spring Boot Maven Plugin</em>, which auto-detects an
-     * entry point by searching for classes having a {@code main(...)}
+     * @implNote this is to support the <em>Spring Boot Maven Plugin</em>, which auto-detects an entry point by
+     * searching for classes having a {@code main(...)}
      */
     public static void main(final String[] args) {
 
@@ -86,12 +81,12 @@ public class DemoAppVaadin extends SpringBootServletInitializer {
         CausewayPresets.prototyping();
         //CausewayPresets.logging(WebRequestCycleForCauseway.class, "debug");
 
-        SpringProfileUtil.removeActiveProfile("demo-jpa"); // just in case
-        SpringProfileUtil.addActiveProfile("demo-jdo");
+        SpringProfileUtil.removeActiveProfile("demo-jdo"); // just in case
+        SpringProfileUtil.addActiveProfile("demo-jpa");
 
-        CausewayModuleExtCommandLogApplib.honorSystemEnvironment();
+        //CausewayModuleExtCommandLogApplib.honorSystemEnvironment();
 
-        SpringApplication.run(new Class[] { DemoAppVaadin.class }, args);
+        SpringApplication.run(new Class[]{DemoAppVaadin.class}, args);
     }
 
 }

@@ -19,6 +19,7 @@
 package org.apache.causeway.incubator.viewer.vaadin.model.decorator;
 
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
@@ -49,10 +50,14 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class Decorators {
 
-    @Getter(lazy = true) private final static Tooltip tooltip = new Tooltip();
-    @Getter(lazy = true) private final static Icon icon = new Icon();
-    @Getter(lazy = true) private final static Menu menu = new Menu();
-    @Getter(lazy = true) private final static User user = new User();
+    @Getter(lazy = true)
+    private final static Tooltip tooltip = new Tooltip();
+    @Getter(lazy = true)
+    private final static Icon icon = new Icon();
+    @Getter(lazy = true)
+    private final static Menu menu = new Menu();
+    @Getter(lazy = true)
+    private final static User user = new User();
 
     // -- DECORATOR CLASSES
 
@@ -76,30 +81,31 @@ public class Decorators {
             // which is not reflected in code here (in contrast to the Wicket Viewer implementation)
 
             val decoratedUiComponent = faLayers
-            .map(fontAwesome->{
+                    .map(fontAwesome -> {
 
-                val faIcon = new Span();
+                        val faIcon = new Span();
+                        // FIXME Alf
+                        Optional.ofNullable(fontAwesome.getSpanEntries()).orElse(List.of())
+                                .stream()
+                                .findFirst()
+                                .ifPresent(spanEntry -> {
+                                    faIcon.addClassName(spanEntry.getCssClasses());
+                                });
 
-                fontAwesome.getSpanEntries().stream()
-                .findFirst()
-                .ifPresent(spanEntry->{
-                    faIcon.addClassName(spanEntry.getCssClasses());
-                });
+                        return CssClassFaPosition.isLeftOrUnspecified(fontAwesome.getPosition())
+                                ? new HorizontalLayout(faIcon, uiComponent)
+                                : new HorizontalLayout(uiComponent, faIcon);
 
-                return CssClassFaPosition.isLeftOrUnspecified(fontAwesome.getPosition())
-                        ? new HorizontalLayout(faIcon, uiComponent)
-                        : new HorizontalLayout(uiComponent, faIcon);
+                    })
+                    .orElseGet(() -> {
 
-            })
-            .orElseGet(()->{
+                        // TODO add spacer, to account for missing fa icon?
+                        // but then where to add, left or right?
 
-                // TODO add spacer, to account for missing fa icon?
-                // but then where to add, left or right?
+                        return new HorizontalLayout(uiComponent);
+                    });
 
-                return new HorizontalLayout(uiComponent);
-            });
-
-            return (HorizontalLayout)decoratedUiComponent;
+            return (HorizontalLayout) decoratedUiComponent;
 
         }
 
@@ -110,7 +116,7 @@ public class Decorators {
         public Component decorateTopLevel(
                 final Label label) {
             val icon = getTopLevelMenuIcon();
-            val layout =  new HorizontalLayout(label, icon);
+            val layout = new HorizontalLayout(label, icon);
             layout.setVerticalComponentAlignment(Alignment.END, icon);
             return layout;
         }
@@ -140,21 +146,21 @@ public class Decorators {
                 final Optional<UserProfileUiModel> userProfileUiModel) {
 
             val decoratedUiComponent = userProfileUiModel
-            .map(userProfile->{
+                    .map(userProfile -> {
 
-                label.setText(userProfile.getUserProfileName());
+                        label.setText(userProfile.getUserProfileName());
 
-                val userIcon = userProfile.avatarUrl()
-                .map(this::getUserIcon)
-                .orElseGet(this::getFallbackUserIcon);
+                        val userIcon = userProfile.avatarUrl()
+                                .map(this::getUserIcon)
+                                .orElseGet(this::getFallbackUserIcon);
 
-                return (Component) new HorizontalLayout(userIcon, label);
+                        return (Component) new HorizontalLayout(userIcon, label);
 
-            })
-            .orElseGet(()->{
-                label.setText("<anonymous>");
-                return label;
-            });
+                    })
+                    .orElseGet(() -> {
+                        label.setText("<anonymous>");
+                        return label;
+                    });
 
             return (Component) decoratedUiComponent;
 

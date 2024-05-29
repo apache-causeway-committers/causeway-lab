@@ -10,45 +10,64 @@
 	OF ANY KIND, either express or implied. See the License for the specific
 	language governing permissions and limitations under the License. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
+    <parent>
         <groupId>org.apache.causeway.core</groupId>
         <artifactId>causeway-core</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-		<relativePath/>
-	</parent>
+        <relativePath/>
+    </parent>
 
-	<groupId>org.apache.causeway.incubator.viewer</groupId>
-	<artifactId>causeway-viewer-vaadin</artifactId>
-	<name>Apache Causeway Inc - Viewer Vaadin</name>
-	<description>
-		Initial sketches
-	</description>
+    <groupId>org.apache.causeway.incubator.viewer</groupId>
+    <artifactId>causeway-viewer-vaadin</artifactId>
+    <name>Apache Causeway Inc - Viewer Vaadin</name>
+    <description>
+        Initial sketches
+    </description>
 
-	<properties>
-		<jar-plugin.automaticModuleName>org.apache.causeway.incubator.viewer.vaadin</jar-plugin.automaticModuleName>
-		<git-plugin.propertiesDir>org/apache/causeway/incubator/viewer/vaadin</git-plugin.propertiesDir>
-		<enforcer.skip>true</enforcer.skip>
-        
+    <properties>
+        <jar-plugin.automaticModuleName>org.apache.causeway.incubator.viewer.vaadin</jar-plugin.automaticModuleName>
+        <git-plugin.propertiesDir>org/apache/causeway/incubator/viewer/vaadin</git-plugin.propertiesDir>
+        <enforcer.skip>true</enforcer.skip>
+
         <eirslett-frontend-maven-plugin.version>1.15.0</eirslett-frontend-maven-plugin.version>
-        <!-- See https://nodejs.org/en/download/ for latest node and npm (lts) 
+        <!-- See https://nodejs.org/en/download/ for latest node and npm (lts)
             versions -->
         <node.version>v20.14.0</node.version>
         <npm.version>10.7.0</npm.version>
-        
         <vaadin.version>24.3.11</vaadin.version>
-        
-	</properties>
+        <spring.boot.version>3.2.4</spring.boot.version>
+    </properties>
 
-	<packaging>pom</packaging>
+    <packaging>pom</packaging>
 
-	<dependencyManagement>
-		<dependencies>
-            
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Exclude default logging -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring.boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- Use Log4J2 instead -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+            </dependency>
+
+
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin</artifactId>
@@ -64,30 +83,31 @@
                 <artifactId>vaadin-spring</artifactId>
                 <version>${vaadin.version}</version>
             </dependency>
-            
-			<dependency>
-				<groupId>org.apache.causeway.incubator.viewer</groupId>
-				<artifactId>causeway-viewer-vaadin-model</artifactId>
-				<version>3.0.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.causeway.incubator.viewer</groupId>
-				<artifactId>causeway-viewer-vaadin-ui</artifactId>
-				<version>3.0.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.causeway.incubator.viewer</groupId>
-				<artifactId>causeway-viewer-vaadin-viewer</artifactId>
-				<version>3.0.0-SNAPSHOT</version>
-			</dependency>
 
-		</dependencies>
-	</dependencyManagement>
+            <dependency>
+                <groupId>org.apache.causeway.incubator.viewer</groupId>
+                <artifactId>causeway-viewer-vaadin-model</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.causeway.incubator.viewer</groupId>
+                <artifactId>causeway-viewer-vaadin-ui</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.causeway.incubator.viewer</groupId>
+                <artifactId>causeway-viewer-vaadin-viewer</artifactId>
+                <version>3.0.0-SNAPSHOT</version>
+            </dependency>
 
-	<modules>
-		<module>model</module>
-		<module>viewer</module>
-		<module>ui</module>
-	</modules>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>model</module>
+        <module>viewer</module>
+        <module>ui</module>
+        <module>demo</module>
+    </modules>
 
 </project>
