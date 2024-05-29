@@ -20,10 +20,9 @@ package org.apache.causeway.incubator.viewer.vaadin.ui.pages.login;
 
 import jakarta.inject.Inject;
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -42,12 +41,9 @@ import lombok.val;
 
 /**
  * Yet a minimal working version of a login page.
- *
  */
 @Route("login")
 public class VaadinLoginView extends VerticalLayout {
-
-    private static final long serialVersionUID = 1L;
 
     private final transient VaadinAuthenticationHandler vaadinAuthenticationHandler;
 
@@ -55,64 +51,83 @@ public class VaadinLoginView extends VerticalLayout {
     public VaadinLoginView(
             final CausewayConfiguration causewayConfiguration,
             final WebAppContextPath webAppContextPath,
-            final VaadinAuthenticationHandler vaadinAuthenticationHandler) {
-
+            final VaadinAuthenticationHandler vaadinAuthenticationHandler
+    ) {
         this.vaadinAuthenticationHandler = vaadinAuthenticationHandler;
 
         addTitleAndLogo(causewayConfiguration, webAppContextPath);
 
-        val usernameField = new TextField("Username");
-        val passwordField = new PasswordField("Password");
+        val usernameField = new TextField("Username"){{
+            setMinWidth(20f, Unit.EM);
+        }};
+        val passwordField = new PasswordField("Password"){{
+           setMinWidth(20f, Unit.EM);
+        }};
 
-        val loginButton = new Button("Login");
-        loginButton.getElement().setAttribute("theme", "primary");
-        loginButton.addClickListener((ComponentEventListener<ClickEvent<Button>>)
+        val loginButton = new Button("Login") {{
+            addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        }};
+
+        val loginAsSvenButton = new Button("Login (as Sven)") {{
+            addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        }};
+
+        val buttonsLayout = new HorizontalLayout(){{
+            add(loginButton);
+            add(loginAsSvenButton);
+        }};
+
+        val loginForm = new VerticalLayout(){{
+            add(usernameField);
+            add(passwordField);
+            add(buttonsLayout);
+            setAlignItems(Alignment.CENTER);
+//            setAlignSelf(Alignment.START, buttonsLayout);
+        }};
+        add(loginForm);
+
+        setAlignItems(Alignment.CENTER);
+        // -- focus
+        usernameField.focus();
+
+        // -- binding
+        loginButton.addClickListener(
                 buttonClickEvent -> doLogin(
                         usernameField.getValue(),
-                        passwordField.getValue()));
+                        passwordField.getValue())
+        );
 
-        val loginAsSvenButton = new Button("Login (as Sven)");
-        loginAsSvenButton.getElement().setAttribute("theme", "primary");
-        loginAsSvenButton.addClickListener((ComponentEventListener<ClickEvent<Button>>)
-                buttonClickEvent -> doLoginAsSven());
-
-        val buttonsLayout = new HorizontalLayout(loginButton, loginAsSvenButton);
-        val divLayout = new VerticalLayout(usernameField, passwordField, buttonsLayout);
-        divLayout.setAlignSelf(Alignment.START, buttonsLayout);
-        val loginDiv = new Div(divLayout);
-        setAlignItems(Alignment.CENTER);
-        usernameField.focus();
-        add(loginDiv);
-
+        loginAsSvenButton.addClickListener(
+                buttonClickEvent -> doLoginAsSven()
+        );
     }
 
     // -- HELPER
 
     private void doLogin(final String userName, final String secret) {
         val authenticationRequest = new AuthenticationRequestPassword(userName, secret);
-        if(vaadinAuthenticationHandler.loginToSession(authenticationRequest)) {
-            getUI().ifPresent(ui->ui.navigate(MainViewVaa.class));
+        if (vaadinAuthenticationHandler.loginToSession(authenticationRequest)) {
+            getUI().ifPresent(ui -> ui.navigate(MainViewVaa.class));
         } else {
             // TODO indicate to the user: login failed
         }
     }
 
-    /** @deprecated early development only */
+    /**
+     * @deprecated early development only
+     */
     @Deprecated
     private void doLoginAsSven() {
         doLogin("sven", "pass");
     }
 
     private void addTitleAndLogo(final CausewayConfiguration causewayConfiguration, final WebAppContextPath webAppContextPath) {
-        val applicationName = causewayConfiguration.getViewer().getCommon().getApplication().getName();
         val applicationLogo = causewayConfiguration.getViewer().getCommon().getApplication().getBrandLogoSignin();
+        applicationLogo.ifPresent(logoUrl ->
+                add(new Image(webAppContextPath.prependContextPathIfLocal(logoUrl), "logo"))
+        );
 
-        applicationLogo.ifPresent(logoUrl->{
-            add(new Image(webAppContextPath.prependContextPathIfLocal(logoUrl), "logo"));
-        });
-
+        val applicationName = causewayConfiguration.getViewer().getCommon().getApplication().getName();
         add(new H1(applicationName));
-
     }
-
 }
