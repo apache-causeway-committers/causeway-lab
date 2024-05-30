@@ -44,8 +44,6 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class TableViewVaa extends VerticalLayout {
 
-    private static final long serialVersionUID = 1L;
-
     private static final String NULL_LITERAL = "<NULL>";
 
     public static TableViewVaa empty() {
@@ -147,6 +145,7 @@ public class TableViewVaa extends VerticalLayout {
                     ? NULL_LITERAL
                     : propertyValue.getTitle();
         } catch (Exception e) {
+            log.debug("Failed to get property value for property {}", property.getId(), e);
             return Optional.ofNullable(e.getMessage()).orElse(e.getClass().getName());
         }
     }

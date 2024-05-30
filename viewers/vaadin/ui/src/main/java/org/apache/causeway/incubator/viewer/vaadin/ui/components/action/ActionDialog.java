@@ -85,7 +85,7 @@ public class ActionDialog extends Dialog {
     }
 
     // -- HELPER
-    record HeaderParts(String title, Component buttons){}
+    private record HeaderParts(String title, Component buttons){}
     private HeaderParts header(
             final ManagedAction managedAction,
             final Can<Component> hideableComponents
@@ -121,9 +121,11 @@ public class ActionDialog extends Dialog {
             final Predicate<Can<ManagedObject>> submitCallback
     ) {
 
+        // TODO translate
         val okButton = new Button("Ok") {{
             addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         }};
+        // TODO translate
         val cancelButton = new Button("Cancel") {{
             addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         }};
