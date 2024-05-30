@@ -36,6 +36,7 @@ import org.apache.causeway.core.metamodel.context.HasMetaModelContext;
 import org.apache.causeway.core.metamodel.context.MetaModelContext;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
+import org.apache.causeway.core.metamodel.object.ManagedObjects;
 import org.apache.causeway.core.metamodel.tabular.interactive.DataTableInteractive;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.MemberInvocationHandler;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
@@ -136,7 +137,8 @@ implements
 
     @Override
     public Component handle(final ManagedAction managedAction, final Can<ManagedObject> params, final ManagedObject actionResult) {
-        if (actionResult.getSpecification().isPlural()) {
+
+        if (ManagedObjects.isPacked(actionResult)) {
 
             val dataTableModel = DataTableInteractive.forAction(managedAction, params, actionResult);
 
