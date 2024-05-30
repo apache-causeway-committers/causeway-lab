@@ -35,19 +35,20 @@ import org.apache.causeway.core.metamodel.tabular.interactive.DataTableInteracti
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
 
 import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.val;
 import lombok.extern.log4j.Log4j2;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Log4j2
 public class TableViewVaa extends VerticalLayout {
 
     private static final String NULL_LITERAL = "<NULL>";
+    private final UiContextVaa uiContext;
 
-    public static TableViewVaa empty() {
-        return new TableViewVaa();
+    public static TableViewVaa empty(UiContextVaa uiContext) {
+        return new TableViewVaa(uiContext);
     }
 
     /**
@@ -60,8 +61,8 @@ public class TableViewVaa extends VerticalLayout {
             final @NonNull Where where
     ) {
         return dataTableModel.getElementCount() == 0
-                ? empty()
-                : new TableViewVaa(dataTableModel);
+                ? empty(uiContext)
+                : new TableViewVaa(dataTableModel, uiContext);
     }
 
     private static String createTableId(final String str) {
@@ -70,8 +71,10 @@ public class TableViewVaa extends VerticalLayout {
     }
 
     private TableViewVaa(
-            final @NonNull DataTableInteractive dataTableModel
+            final @NonNull DataTableInteractive dataTableModel,
+            final @NonNull UiContextVaa uiContext
     ) {
+        this.uiContext = uiContext;
         setId("table-view-" + createTableId(dataTableModel.getTitle().getValue()));
         setSizeFull();
         //            final ComboBox<ManagedObject> listBox = new ComboBox<>();
@@ -95,13 +98,15 @@ public class TableViewVaa extends VerticalLayout {
 
         val columns = dataTableModel.getDataColumns().getValue();
         val gridCols = new ArrayList<Grid.Column<DataRow>>();
-        // object link as first columnval gridCols = new ArrayList<Grid.Column<DataRow>>();
-        val objectLinkCol = objectGrid.addColumn(row -> {
-            // TODO provide icon with link
-            return "obj. ref [" + row.getRowElement().getBookmark().orElse(null) + "]";
-        });
-        gridCols.add(objectLinkCol);
 
+        if(false) {
+            // object link as first columnval gridCols = new ArrayList<Grid.Column<DataRow>>();
+            val objectLinkCol = objectGrid.addColumn(row -> {
+                // TODO provide icon with link
+                return "obj. ref [" + row.getRowElement().getBookmark().orElse(null) + "]";
+            });
+            gridCols.add(objectLinkCol);
+        }
         // property columns
 
         columns.forEach((DataColumn column) -> {
@@ -134,6 +139,11 @@ public class TableViewVaa extends VerticalLayout {
             gridCols.get(0).setFooter("Count: " + rowList.size());
         }
 
+        // -- binding
+        objectGrid.addItemClickListener(event -> {
+            val row = event.getItem();
+            uiContext.route(row.getRowElement());
+        });
     }
 
     private String stringifyPropertyValue(
