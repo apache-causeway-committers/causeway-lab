@@ -69,7 +69,7 @@ public class UiContextVaaDefault implements UiContextVaa {
 
     @Override
     public void route(final ManagedAction managedAction, final Can<ManagedObject> params, final ManagedObject actionResult) {
-        log.info("about to render object {}", actionResult);
+        log.info("about to render object {} from action {}", actionResult, managedAction.getAction());
         newPage(pageFactory()
                 .map(pageFactory->pageFactory.handle(managedAction, params, actionResult))
                 .orElse(null));

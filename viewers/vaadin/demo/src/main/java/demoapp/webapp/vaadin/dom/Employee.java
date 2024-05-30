@@ -18,6 +18,8 @@ import jakarta.persistence.Id;
 import org.springframework.lang.NonNull;
 
 import org.apache.causeway.applib.annotation.DomainObject;
+import org.apache.causeway.applib.annotation.PropertyLayout;
+import org.apache.causeway.applib.annotation.Where;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -38,22 +40,27 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
+    @PropertyLayout(hidden = Where.ANYWHERE)
     private Long id;
 
     @NonNull
     @Column(nullable = false)
+    @PropertyLayout(sequence = "1")
     private String firstName;
     
     @NonNull
     @Column(nullable = false)
+    @PropertyLayout(sequence = "2")
     private String lastName;
 
     @NonNull
     @Column(nullable = false)
+    @PropertyLayout(sequence = "3")
     private LocalDate birthDate;
 
     @Enumerated(EnumType.ORDINAL)
     @ElementCollection(fetch = FetchType.EAGER)
+    @PropertyLayout(sequence = "4")
     private Set<Department> departments = new LinkedHashSet<>();
 
 }

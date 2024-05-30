@@ -40,7 +40,9 @@ public class UiComponentFactoryVaa implements UiComponentFactory<Component, Comp
 
     private final ChainOfResponsibility<ComponentRequest, Component> chainOfHandlers;
 
-    /** handlers in order of precedence (debug info)*/
+    /**
+     * handlers in order of precedence (debug info)
+     */
     @Getter
     private final List<Class<?>> registeredHandlers;
 
@@ -61,14 +63,14 @@ public class UiComponentFactoryVaa implements UiComponentFactory<Component, Comp
 
         val uiButton = Vaa.newButton(managedAction.getFriendlyName());
 
-        disablingUiModelIfAny.ifPresent(disablingUiModel->{
+        disablingUiModelIfAny.ifPresent(disablingUiModel -> {
 //            uiContext.getDisablingDecoratorForButton()
 //                .decorate(uiButton, disablingUiModel);
             uiButton.setEnabled(false);
         });
 
-        if(!disablingUiModelIfAny.isPresent()) {
-            uiButton.addClickListener(event->actionEventHandler.accept(managedAction));
+        if (disablingUiModelIfAny.isEmpty()) {
+            uiButton.addClickListener(event -> actionEventHandler.accept(managedAction));
         }
 
         return uiButton;

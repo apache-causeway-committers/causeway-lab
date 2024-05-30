@@ -18,8 +18,6 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.ui.pages.main;
 
-import java.util.Optional;
-
 import jakarta.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -46,7 +44,6 @@ public class UiActionHandlerVaa {
     private final UiComponentFactoryVaa uiComponentFactory;
 
     public void handleActionLinkClicked(final ManagedAction managedAction) {
-
         log.info("about to build an action prompt for {}", managedAction.getIdentifier());
 
         final int paramCount = managedAction.getAction().getParameterCount();
@@ -65,30 +62,22 @@ public class UiActionHandlerVaa {
                         return true; //TODO handle vetoes
                     });
             actionDialog.open();
-
-
-            return;
         }
-
     }
 
     private void invoke(
             final ManagedAction managedAction,
-            final Can<ManagedObject> params) {
+            final Can<ManagedObject> params
+    ) {
 
         interactionService.runAnonymous(() -> {
 
-            //Thread.sleep(1000); // simulate long running
-
-            val actionResultOrVeto = managedAction.invoke(params);
-
-            final Optional<ManagedObject> success = actionResultOrVeto.getSuccess();
-            success
+            managedAction.invoke(params)
+                    .getSuccess()
                     .ifPresent(actionResult ->
                             uiContext.route(managedAction, params, actionResult)
                     );
 
         });
     }
-
 }

@@ -19,18 +19,16 @@
 package org.apache.causeway.incubator.viewer.vaadin.ui.components.action;
 
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Footer;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.theme.lumo.Lumo;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.Scroller;
 
 import org.apache.causeway.commons.collections.Can;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
@@ -42,12 +40,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 
-// FIXME Alf
-//@CssImport(value = "./css/dialog-overlay.css", themeFor = "vaadin-dialog-overlay")
-//@CssImport("./css/action-dialog.css")
 public class ActionDialog extends Dialog {
-
-    private static final long serialVersionUID = 1L;
 
     public static ActionDialog forManagedAction(
             final @NonNull UiComponentFactoryVaa uiComponentFactory,
@@ -61,84 +54,90 @@ public class ActionDialog extends Dialog {
     protected ActionDialog(
             final UiComponentFactoryVaa uiComponentFactory,
             final ManagedAction managedAction,
-            final Predicate<Can<ManagedObject>> submitCallback) {
-
+            final Predicate<Can<ManagedObject>> submitCallback
+    ) {
         setDraggable(true);
-        setModal(false);
+//        setModal(true);
         setResizable(true);
+        setCloseOnEsc(true);
 
         // Dialog Theme
-
-        getElement().getThemeList().add("action-dialog");
-        setWidth("600px");
+        setWidth(60, Unit.EM);
         setHeight("auto");
+        setMinWidth(30, Unit.EM);
+        setMinHeight(5, Unit.EM);
+        // -- Header
 
-        // Content
+        val hideableComponents = Can.<Component>of();
+        val header = header(managedAction, hideableComponents);
+        getHeader().add(header.buttons);
+        setHeaderTitle(header.title);
+        // -- Content
 
         val actionForm = ActionForm.forManagedAction(uiComponentFactory, managedAction);
-        val content = new Div(actionForm);
-        content.addClassName("dialog-content");
-
-        // Footer
-
+        add(new Scroller(actionForm){{
+            setScrollDirection(ScrollDirection.VERTICAL);
+        }});
+        // -- Footer
         val footer = footer(managedAction, actionForm.getPendingArgs(), submitCallback);
+        getFooter().add(footer);
 
-        // Header
-
-        val hidableComponents = Can.of(content, footer);
-        val header = header(managedAction, hidableComponents);
-
-        // Add to Layout
-
-        add(header, content, footer);
     }
 
     // -- HELPER
-
-    private Component header(final ManagedAction managedAction, final Can<Component> hidableComponents) {
-
-        val resizeHandler = DialogResizeHandler.of(this, hidableComponents);
-
-        val title = new H2(managedAction.getFriendlyName());
-        title.addClassName("dialog-title");
-
+    record HeaderParts(String title, Component buttons){}
+    private HeaderParts header(
+            final ManagedAction managedAction,
+            final Can<Component> hideableComponents
+    ) {
         val minButton = new Button(VaadinIcon.ANGLE_DOWN.create());
         val maxButton = new Button(VaadinIcon.EXPAND_SQUARE.create());
         val closeButton = new Button(VaadinIcon.CLOSE_SMALL.create());
 
-        val header = new Header(title, minButton, maxButton, closeButton);
-        header.getElement().getThemeList().add(Lumo.DARK);
+        // -- layout
+        val header = new HorizontalLayout() {{
+            setWidthFull();
+            val spacer = new Div();
+            spacer.getStyle().set("margin", "auto");
+            add(spacer);
+            add(minButton);
+            add(maxButton);
+            add(closeButton);
+        }};
 
-        // Button Themes
-        Stream.of(minButton, maxButton, closeButton)
-        .forEach(button->
-            button.addThemeVariants(ButtonVariant.LUMO_CONTRAST, ButtonVariant.LUMO_TERTIARY));
-
-        // Button Events
+        // -- binding
+        val resizeHandler = DialogResizeHandler.of(this, hideableComponents);
         resizeHandler.bindMinimise(minButton);
         resizeHandler.bindMaximise(maxButton);
         closeButton.addClickListener(event -> close());
 
-        return header;
+        val title = managedAction.getFriendlyName();
+        return new HeaderParts(title, header);
     }
 
     private Component footer(
             final ManagedAction managedAction,
             final ParameterNegotiationModel pendingArgs,
-            final Predicate<Can<ManagedObject>> submitCallback) {
+            final Predicate<Can<ManagedObject>> submitCallback
+    ) {
 
-        val okButton = new Button("Ok");
-        val cancelButton = new Button("Cancel");
-        val footer = new Footer(okButton, cancelButton);
+        val okButton = new Button("Ok") {{
+            addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        }};
+        val cancelButton = new Button("Cancel") {{
+            addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        }};
+        // -- layout
+        okButton.getStyle().set("margin-right", "auto");
+        val footer = new HorizontalLayout(okButton, cancelButton) {{
+            setWidthFull();
+        }};
 
-        // Button Themes
-        okButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        cancelButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
 
-        // Button Events
+        // -- binding
         okButton.addClickListener(event -> {
             //invoke the action and route to the result page
-            if(submitCallback.test(pendingArgs.getParamValues())) {
+            if (submitCallback.test(pendingArgs.getParamValues())) {
                 close();
             } else {
                 //TODO handle validation feedback (vetos)
@@ -198,7 +197,7 @@ public class ActionDialog extends Dialog {
             }
             isDocked = !isDocked;
             isFullScreen = false;
-            hidableComponents.forEach(comp->comp.setVisible(!isDocked));
+            hidableComponents.forEach(comp -> comp.setVisible(!isDocked));
         }
 
         private void maximise() {
@@ -211,7 +210,7 @@ public class ActionDialog extends Dialog {
                 maxButton.setIcon(VaadinIcon.COMPRESS_SQUARE.create());
                 dialog.getElement().getThemeList().add(FULLSCREEN);
                 dialog.setSizeFull();
-                hidableComponents.forEach(comp->comp.setVisible(true));
+                hidableComponents.forEach(comp -> comp.setVisible(true));
             }
             isFullScreen = !isFullScreen;
             isDocked = false;

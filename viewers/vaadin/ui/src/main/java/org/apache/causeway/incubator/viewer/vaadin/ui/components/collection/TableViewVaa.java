@@ -68,8 +68,9 @@ public class TableViewVaa extends VerticalLayout {
      * @param objects - (wrapped) domain objects to be rendered by this table
      */
     private TableViewVaa(
-            final @NonNull DataTableInteractive dataTableModel) {
-
+            final @NonNull DataTableInteractive dataTableModel
+    ) {
+        setSizeFull();
         //            final ComboBox<ManagedObject> listBox = new ComboBox<>();
         //            listBox.setLabel(label + " #" + objects.size());
         //            listBox.setItems(objects);
