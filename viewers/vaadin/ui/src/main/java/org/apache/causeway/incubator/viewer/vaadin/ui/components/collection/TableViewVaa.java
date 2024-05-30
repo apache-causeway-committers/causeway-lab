@@ -18,10 +18,12 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.ui.components.collection;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import org.apache.causeway.applib.annotation.Where;
@@ -56,20 +58,23 @@ public class TableViewVaa extends VerticalLayout {
     public static Component forDataTableModel(
             final @NonNull UiContextVaa uiContext,
             final @NonNull DataTableInteractive dataTableModel,
-            final @NonNull Where where) { //TODO not used yet (or is redundant)
-        return dataTableModel.getElementCount()==0
+            //TODO not used yet (or is redundant)
+            final @NonNull Where where
+    ) {
+        return dataTableModel.getElementCount() == 0
                 ? empty()
                 : new TableViewVaa(dataTableModel);
     }
 
-    /**
-     *
-     * @param elementSpec - as is common to all given {@code objects} aka elements
-     * @param objects - (wrapped) domain objects to be rendered by this table
-     */
+    private static String createTableId(final String str) {
+        // replace all non-alphanumeric characters with '-'
+        return str.replaceAll("[^a-zA-Z0-9]", "-").toLowerCase();
+    }
+
     private TableViewVaa(
             final @NonNull DataTableInteractive dataTableModel
     ) {
+        setId("table-view-" + createTableId(dataTableModel.getTitle().getValue()));
         setSizeFull();
         //            final ComboBox<ManagedObject> listBox = new ComboBox<>();
         //            listBox.setLabel(label + " #" + objects.size());
@@ -79,46 +84,57 @@ public class TableViewVaa extends VerticalLayout {
         //            }
         //            listBox.setItemLabelGenerator(o -> o.titleString());
 
-        val objectGrid = new Grid<DataRow>();
+        val objectGrid = new Grid<DataRow>() {{
+            setId("grid" + createTableId(dataTableModel.getTitle().getValue()));
+            setColumnReorderingAllowed(true);
+            setSelectionMode(SelectionMode.SINGLE);
+            addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
+            addThemeVariants(GridVariant.LUMO_COMPACT);
+        }};
         add(objectGrid);
 
         val rows = dataTableModel.getDataRowsFiltered().getValue();
 
-        if (rows.isEmpty()) {
-            //TODO show placeholder: "No rows to display"
-            return;
-        }
-
         val columns = dataTableModel.getDataColumns().getValue();
-
-        // object link as first column
-        objectGrid.addColumn(row->{
+        val gridCols = new ArrayList<Grid.Column<DataRow>>();
+        // object link as first columnval gridCols = new ArrayList<Grid.Column<DataRow>>();
+        val objectLinkCol = objectGrid.addColumn(row -> {
             // TODO provide icon with link
             return "obj. ref [" + row.getRowElement().getBookmark().orElse(null) + "]";
         });
+        gridCols.add(objectLinkCol);
 
         // property columns
-        columns.forEach((DataColumn column)->{
+
+        columns.forEach((DataColumn column) -> {
             val association = column.getAssociationMetaModel();
             association.getSpecialization().accept(
-                prop->{
-                    objectGrid.addColumn(row -> {
-                        log.debug("about to get property value for property {}", prop.getId());
-                        return stringifyPropertyValue(prop, row.getRowElement());
-                    })
-                    .setHeader(prop.getCanonicalFriendlyName());
-                    //TODO add column description as is provided via property.getColumnDescription()
-                },
-                coll->{
-                  //TODO Causeway programming model changes: it is now allowed for table-cells to render collections (OneToMany Assoc.)
+                    prop -> {
+                        val col = objectGrid.addColumn(row -> {
+                            log.debug("about to get property value for property {}", prop.getId());
+                            return stringifyPropertyValue(prop, row.getRowElement());
+                        });
+                        col.setHeader(prop.getCanonicalFriendlyName());
+                        col.setSortable(true);
+                        gridCols.add(col);
+                        //TODO add column description as is provided via property.getColumnDescription()
+                    },
+                    coll -> {
+                        //TODO Causeway programming model changes: it is now allowed for table-cells to render collections (OneToMany Assoc.)
 
-                });
+                    });
         });
 
         // populate the model
-        objectGrid.setItems(rows.toList());
+        val rowList = rows.toList();
+        val dataview = objectGrid.setItems(rowList);
         objectGrid.recalculateColumnWidths();
-        objectGrid.setColumnReorderingAllowed(true);
+
+        if(!gridCols.isEmpty()) {
+            // TODO translate
+            // TODO make customizable e.g. sum/count/avg/min/max
+            gridCols.get(0).setFooter("Count: " + rowList.size());
+        }
 
     }
 

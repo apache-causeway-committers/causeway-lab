@@ -23,7 +23,7 @@ import jakarta.inject.Inject;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
@@ -72,7 +72,14 @@ implements
     private final transient UiComponentFactoryVaa uiComponentFactory;
     private final transient HeaderUiService headerUiService;
 
-    private final Div pageContent = new Div();
+    private final VerticalLayout pageContent = new VerticalLayout(){
+        {
+            setId("main-view-content");
+            setSizeFull();
+            setPadding(false);
+            setSpacing(false);
+        }
+    };
 
     /**
      * Constructs the main view of the web-application, with the menu-bar and page content.
@@ -107,7 +114,8 @@ implements
                 metaModelContext,
                 headerUiService.getHeader(),
                 uiActionHandler::handleActionLinkClicked,
-                this::renderHomepage);
+                this::renderHomepage
+        );
 
         addToNavbar(menuBarContainer);
         setContent(pageContent);
@@ -132,7 +140,8 @@ implements
                 uiContext,
                 uiComponentFactory,
                 uiActionHandler::handleActionLinkClicked,
-                object);
+                object
+        );
     }
 
     @Override
