@@ -33,6 +33,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-dev-server</artifactId>
+            <version>${vaadin.version}</version>
+        </dependency>
 
         <!-- DEMO DOMAIN + WEB -->
 
@@ -225,10 +230,6 @@
                     </plugin>
                 </plugins>
             </build>
-
         </profile>
-
-
     </profiles>
-
 </project>

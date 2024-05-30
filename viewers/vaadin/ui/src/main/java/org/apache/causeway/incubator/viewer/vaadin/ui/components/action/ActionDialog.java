@@ -24,7 +24,6 @@ import java.util.stream.Stream;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Footer;
@@ -43,8 +42,9 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 
-@CssImport(value = "./css/dialog-overlay.css", themeFor = "vaadin-dialog-overlay")
-@CssImport("./css/action-dialog.css")
+// FIXME Alf
+//@CssImport(value = "./css/dialog-overlay.css", themeFor = "vaadin-dialog-overlay")
+//@CssImport("./css/action-dialog.css")
 public class ActionDialog extends Dialog {
 
     private static final long serialVersionUID = 1L;

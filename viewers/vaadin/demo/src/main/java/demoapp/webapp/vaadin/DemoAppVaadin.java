@@ -23,29 +23,34 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Import;
 
+import org.apache.causeway.applib.CausewayModuleApplibMixins;
 import org.apache.causeway.commons.internal.os._OsUtil;
 import org.apache.causeway.core.config.presets.CausewayPresets;
 import org.apache.causeway.core.config.util.SpringProfileUtil;
+import org.apache.causeway.core.metamodel.inspect.CausewayModuleCoreMetamodelMixins;
 import org.apache.causeway.core.runtimeservices.CausewayModuleCoreRuntimeServices;
-import org.apache.causeway.extensions.sse.wicket.CausewayModuleExtSseWicket;
 import org.apache.causeway.incubator.viewer.vaadin.viewer.CausewayModuleIncViewerVaadinViewer;
 import org.apache.causeway.persistence.jpa.eclipselink.CausewayModulePersistenceJpaEclipselink;
 import org.apache.causeway.security.bypass.CausewayModuleSecurityBypass;
 import org.apache.causeway.valuetypes.asciidoc.metamodel.CausewayModuleValAsciidocMetaModel;
-import org.apache.causeway.valuetypes.asciidoc.ui.wkt.CausewayModuleValAsciidocUiWkt;
 import org.apache.causeway.valuetypes.markdown.metamodel.CausewayModuleValMarkdownMetaModel;
-import org.apache.causeway.viewer.wicket.viewer.CausewayModuleViewerWicketViewer;
+
+import demoapp.webapp.vaadin.dom.EmployeeJpaConfiguration;
 
 /**
  * Bootstrap the application.
  */
 @SpringBootApplication
 @Import({
-        //    DemoModuleCommon.class,
-        //    DemoAppManifestJdo.class,
+        EmployeeJpaConfiguration.class,
+
         CausewayModuleCoreRuntimeServices.class, // Apache Causeway Runtime
         CausewayModulePersistenceJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data
         CausewayModuleSecurityBypass.class, // Bypass security
+        CausewayModulePersistenceJpaEclipselink.class, // JPA persistence
+
+        CausewayModuleApplibMixins.class,
+        CausewayModuleCoreMetamodelMixins.class,
 
         // Metamodel
         CausewayModuleValAsciidocMetaModel.class,
@@ -62,9 +67,9 @@ import org.apache.causeway.viewer.wicket.viewer.CausewayModuleViewerWicketViewer
         //    CausewayModuleValVegaPersistenceJdoDn.class,
 
         // WICKET INTEGRATION ... to allow side by side comparison
-        CausewayModuleViewerWicketViewer.class, // wicket viewer
-        CausewayModuleExtSseWicket.class, // server sent events
-        CausewayModuleValAsciidocUiWkt.class, // ascii-doc rendering support (for Wicket)
+        // CausewayModuleViewerWicketViewer.class, // wicket viewer
+        // CausewayModuleExtSseWicket.class, // server sent events
+        // CausewayModuleValAsciidocUiWkt.class, // ascii-doc rendering support (for Wicket)
 
 })
 public class DemoAppVaadin extends SpringBootServletInitializer {

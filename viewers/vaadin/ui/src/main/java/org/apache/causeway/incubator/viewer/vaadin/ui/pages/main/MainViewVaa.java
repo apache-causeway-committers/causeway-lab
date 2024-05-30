@@ -22,7 +22,6 @@ import jakarta.inject.Inject;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.BeforeEnterEvent;
@@ -56,7 +55,7 @@ import lombok.extern.log4j.Log4j2;
 @Route("main")
 @RouteAlias("")
 @JsModule("@vaadin/vaadin-lumo-styles/presets/compact.js")
-@CssImport("./css/menu.css")
+// FIXME Alf @CssImport("./css/menu.css")
 @Log4j2
 public class MainViewVaa extends AppLayout
 implements
@@ -72,7 +71,7 @@ implements
     private final transient UiComponentFactoryVaa uiComponentFactory;
     private final transient HeaderUiService headerUiService;
 
-    private Div pageContent = new Div();
+    private final Div pageContent = new Div();
 
     /**
      * Constructs the main view of the web-application, with the menu-bar and page content.
@@ -83,8 +82,8 @@ implements
             final UiActionHandlerVaa uiActionHandler,
             final HeaderUiService headerUiService,
             final UiContextVaa uiContext,
-            final UiComponentFactoryVaa uiComponentFactory) {
-
+            final UiComponentFactoryVaa uiComponentFactory
+    ) {
         this.metaModelContext = metaModelContext;
         this.uiActionHandler = uiActionHandler;
         this.headerUiService = headerUiService;
@@ -110,7 +109,7 @@ implements
                 this::renderHomepage);
 
         addToNavbar(menuBarContainer);
-        setContent(pageContent = new Div());
+        setContent(pageContent);
         setDrawerOpened(false);
         renderHomepage();
     }

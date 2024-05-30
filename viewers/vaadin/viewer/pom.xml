@@ -74,10 +74,6 @@
             <artifactId>vaadin-core</artifactId>
             <exclusions>
                 <exclusion>
-                    <groupId>com.vaadin</groupId>
-                    <artifactId>vaadin-dev-server</artifactId>
-                </exclusion>
-                <exclusion>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-models</artifactId>
                 </exclusion>

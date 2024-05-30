@@ -23,14 +23,11 @@ import java.util.function.Consumer;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.formlayout.FormLayout.ResponsiveStep;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.tabs.Tab;
-import com.vaadin.flow.component.tabs.Tabs;
 
 import org.apache.causeway.applib.annotation.Where;
 import org.apache.causeway.applib.layout.component.ActionLayoutData;
@@ -95,11 +92,11 @@ public class ObjectViewVaa extends VerticalLayout {
         // force new row
         //formLayout.getElement().appendChild(ElementFactory.createBr());
 
-        val gridVisitor = new UiGridLayout.Visitor<HasComponents, Tabs>(this) {
+        val gridVisitor = new UiGridLayout.Visitor<HasComponents, VerticalLayout>(this) {
 
             @Override
             protected void onObjectTitle(final HasComponents container, final DomainObjectLayoutData domainObjectData) {
-                val uiTitle = Vaa.add(container, new H1(objectTitle));
+                val uiTitle = Vaa.add(container, new H3(objectTitle));
                 //                uiTitle.addThemeVariants(
                 //                        ButtonVariant.LUMO_LARGE,
                 //                        ButtonVariant.LUMO_TERTIARY_INLINE);
@@ -146,16 +143,20 @@ public class ObjectViewVaa extends VerticalLayout {
             }
 
             @Override
-            protected Tabs newTabGroup(final HasComponents container, final BSTabGroup tabGroupData) {
-                val uiTabGroup = Vaa.add(container, new Tabs());
+            protected VerticalLayout newTabGroup(final HasComponents container, final BSTabGroup tabGroupData) {
+                // FIXME Alf final var component = new Tabs();
+                val component = new VerticalLayout(){{
+                    setSizeFull();
+                }};
+                val uiTabGroup = Vaa.add(container, component);
 
-                uiTabGroup.setOrientation(Tabs.Orientation.HORIZONTAL);
+                // FIXME Alf uiTabGroup.setOrientation(Tabs.Orientation.HORIZONTAL);
                 return uiTabGroup;
             }
 
             @Override
-            protected Tab newTab(final Tabs container, final BSTab tabData) {
-                val uiTab = Vaa.add(container, new Tab(tabData.getName()));
+            protected VerticalLayout newTab(final VerticalLayout container, final BSTab tabData) {
+                val uiTab = Vaa.add(container, new VerticalLayout());
                 return uiTab;
             }
 

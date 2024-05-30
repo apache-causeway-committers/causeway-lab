@@ -18,6 +18,8 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.ui.pages.main;
 
+import java.util.Optional;
+
 import jakarta.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -49,7 +51,7 @@ public class UiActionHandlerVaa {
 
         final int paramCount = managedAction.getAction().getParameterCount();
 
-        if(paramCount==0) {
+        if (paramCount == 0) {
             invoke(managedAction, Can.empty());
         } else {
             // get an ActionPrompt, then on invocation show the result in the content view
@@ -57,7 +59,7 @@ public class UiActionHandlerVaa {
             val actionDialog = ActionDialog.forManagedAction(
                     uiComponentFactory,
                     managedAction,
-                    params->{
+                    params -> {
                         log.info("param negotiation done");
                         invoke(managedAction, params);
                         return true; //TODO handle vetoes
@@ -74,14 +76,17 @@ public class UiActionHandlerVaa {
             final ManagedAction managedAction,
             final Can<ManagedObject> params) {
 
-        interactionService.runAnonymous(()->{
+        interactionService.runAnonymous(() -> {
 
             //Thread.sleep(1000); // simulate long running
 
             val actionResultOrVeto = managedAction.invoke(params);
 
-            actionResultOrVeto.getSuccess()
-            .ifPresent(actionResult->uiContext.route(managedAction, params, actionResult));
+            final Optional<ManagedObject> success = actionResultOrVeto.getSuccess();
+            success
+                    .ifPresent(actionResult ->
+                            uiContext.route(managedAction, params, actionResult)
+                    );
 
         });
     }
