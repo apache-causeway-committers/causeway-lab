@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 
 import org.springframework.lang.NonNull;
 
+import org.apache.causeway.applib.annotation.CollectionLayout;
 import org.apache.causeway.applib.annotation.DomainObject;
 import org.apache.causeway.applib.annotation.PropertyLayout;
 import org.apache.causeway.applib.annotation.Where;
@@ -60,7 +61,8 @@ public class Employee {
 
     @Enumerated(EnumType.ORDINAL)
     @ElementCollection(fetch = FetchType.EAGER)
-    @PropertyLayout(sequence = "4")
+    @CollectionLayout(sequence = "4")
     private Set<Department> departments = new LinkedHashSet<>();
+
 
 }

@@ -44,35 +44,31 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 import org.apache.causeway.applib.services.iactnlayer.InteractionService;
 import org.apache.causeway.incubator.viewer.vaadin.ui.CausewayModuleIncViewerVaadinUi;
 
+import lombok.RequiredArgsConstructor;
 import lombok.val;
 
 /**
- *
  * @since 2.0
  */
 @Configuration
 @Import({
         // Modules
         CausewayModuleIncViewerVaadinUi.class,
-
         VaadinConfigurationProperties.class
 
         // @Service's
 
-
         // @Mixin's
-
-
 })
 @PropertySource("classpath:/vaadin.properties")
 //disable standard vaadin spring boot bootstrapping
-@EnableAutoConfiguration(exclude = { SpringBootAutoConfiguration.class })
+@EnableAutoConfiguration(exclude = {SpringBootAutoConfiguration.class})
+@RequiredArgsConstructor(onConstructor_ = {@Inject})
 public class CausewayModuleIncViewerVaadinViewer {
 
-
-    @Inject private WebApplicationContext context;
-    @Inject private VaadinConfigurationProperties configurationProperties;
-    @Inject private InteractionService interactionService;
+    private final WebApplicationContext context;
+    private final VaadinConfigurationProperties configurationProperties;
+    private final InteractionService interactionService;
 
     /**
      * Creates a {@link ServletContextInitializer} instance.
