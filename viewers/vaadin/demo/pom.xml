@@ -18,7 +18,6 @@
         <groupId>org.apache.causeway.incubator.viewer</groupId>
         <artifactId>causeway-viewer-vaadin</artifactId>
         <version>3.0.0-SNAPSHOT</version>
-        <relativePath/>
     </parent>
 
     <artifactId>demo-vaadin</artifactId>
