@@ -24,6 +24,7 @@ import java.util.function.Consumer;
 import jakarta.inject.Inject;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -61,18 +62,23 @@ public class UiContextVaaDefault implements UiContextVaa {
 
     @Override
     public void route(final ManagedObject object) {
-        log.info("about to render object {}", object);
-        newPage(pageFactory()
-                .map(pageFactory->pageFactory.handle(object))
-                .orElse(null));
+        UI.getCurrent().access(() -> {
+            log.info("about to render object {}", object);
+            newPage(pageFactory()
+                    .map(pageFactory -> pageFactory.handle(object))
+                    .orElse(null));
+        });
     }
 
     @Override
     public void route(final ManagedAction managedAction, final Can<ManagedObject> params, final ManagedObject actionResult) {
-        log.info("about to render object {} from action {}", actionResult, managedAction.getAction());
-        newPage(pageFactory()
-                .map(pageFactory->pageFactory.handle(managedAction, params, actionResult))
-                .orElse(null));
+        UI.getCurrent().access(() -> {
+
+            log.info("about to render object {} from action {}", actionResult, managedAction.getAction());
+            newPage(pageFactory()
+                    .map(pageFactory -> pageFactory.handle(managedAction, params, actionResult))
+                    .orElse(null));
+        });
     }
 
 //    public void route(final Supplier<ManagedObject> objectSupplier) {
@@ -102,7 +108,7 @@ public class UiContextVaaDefault implements UiContextVaa {
     // -- HELPER
 
     private void newPage(final @Nullable Component content) {
-        if(newPageHandler!=null && content!=null) {
+        if (newPageHandler != null && content != null) {
             newPageHandler.accept(content);
         }
     }
