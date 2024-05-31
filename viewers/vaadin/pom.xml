@@ -34,19 +34,22 @@
         <git-plugin.propertiesDir>org/apache/causeway/incubator/viewer/vaadin</git-plugin.propertiesDir>
         <enforcer.skip>true</enforcer.skip>
 
-        <eirslett-frontend-maven-plugin.version>1.15.0</eirslett-frontend-maven-plugin.version>
-        <!-- See https://nodejs.org/en/download/ for latest node and npm (lts)
-            versions -->
-        <node.version>v20.14.0</node.version>
-        <npm.version>10.7.0</npm.version>
-        <vaadin.version>24.3.11</vaadin.version>
-        <spring.boot.version>3.2.4</spring.boot.version>
+       <vaadin.version>24.3.12</vaadin.version>
+        <spring.boot.version>3.3.0</spring.boot.version>
     </properties>
 
     <packaging>pom</packaging>
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
             <!-- Exclude default logging -->
             <dependency>
@@ -61,27 +64,13 @@
                 </exclusions>
             </dependency>
 
+
+
+
             <!-- Use Log4J2 instead -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-log4j2</artifactId>
-            </dependency>
-
-
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin</artifactId>
-                <version>${vaadin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-core</artifactId>
-                <version>${vaadin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-spring</artifactId>
-                <version>${vaadin.version}</version>
             </dependency>
 
             <dependency>

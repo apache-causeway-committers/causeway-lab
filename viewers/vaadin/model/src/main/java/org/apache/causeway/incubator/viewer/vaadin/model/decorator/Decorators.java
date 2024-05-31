@@ -124,7 +124,7 @@ public class Decorators {
         private Component getTopLevelMenuIcon() {
             val menuIcon = new com.vaadin.flow.component.icon.Icon(VaadinIcon.CARET_DOWN);
             menuIcon.setSize("1em");
-            menuIcon.getElement().getStyle().set("margin-left", "2px");
+            menuIcon.getStyle().setMarginLeft("2px");
             return menuIcon;
         }
 

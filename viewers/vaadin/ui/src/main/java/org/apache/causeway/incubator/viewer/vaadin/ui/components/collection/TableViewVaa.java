@@ -90,7 +90,7 @@ public class TableViewVaa extends VerticalLayout {
             setColumnReorderingAllowed(true);
             setSelectionMode(SelectionMode.SINGLE);
             addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
-            addThemeVariants(GridVariant.LUMO_COMPACT);
+            //addThemeVariants(GridVariant.LUMO_COMPACT);
         }};
         add(objectGrid);
 

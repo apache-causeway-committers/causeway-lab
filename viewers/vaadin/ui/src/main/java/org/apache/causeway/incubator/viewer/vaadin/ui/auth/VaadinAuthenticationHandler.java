@@ -48,9 +48,8 @@ import lombok.extern.log4j.Log4j2;
  *
  */
 @Component
-@PWA(name = "Example Project", shortName = "Example Project")
-//@Theme(themeClass = Material.class, variant = Material.DARK)
-@Theme(themeClass = Lumo.class, variant = Lumo.LIGHT)
+//@PWA(name = "Example Project", shortName = "Example Project")
+@Theme("causeway")
 @Log4j2
 public class VaadinAuthenticationHandler
 implements

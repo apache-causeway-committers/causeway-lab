@@ -55,7 +55,6 @@ import lombok.extern.log4j.Log4j2;
  */
 @Route("main")
 @RouteAlias("")
-@JsModule("@vaadin/vaadin-lumo-styles/presets/compact.js")
 // FIXME Alf @CssImport("./css/menu.css")
 @Log4j2
 public class MainViewVaa extends AppLayout

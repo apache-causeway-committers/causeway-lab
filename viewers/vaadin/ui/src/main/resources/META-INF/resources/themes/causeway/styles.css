@@ -1,0 +1,15 @@
+html {
+    /* compact theme with color scheme more along with the Causeway branding */
+      --lumo-size-xl: 3rem;
+      --lumo-size-l: 2.5rem;
+      --lumo-size-m: 2rem;
+      --lumo-size-s: 1.75rem;
+      --lumo-size-xs: 1.5rem;
+      --lumo-space-xl: 1.875rem;
+      --lumo-space-l: 1.25rem;
+      --lumo-space-m: 0.625rem;
+      --lumo-space-s: 0.3125rem;
+      --lumo-space-xs: 0.1875rem;
+      --lumo-primary-color: rgb(143,57,133);
+      --lumo-primary-text-color: rgb(143,57,133);
+}
