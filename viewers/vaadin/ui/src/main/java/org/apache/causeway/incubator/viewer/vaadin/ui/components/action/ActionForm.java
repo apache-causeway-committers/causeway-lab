@@ -45,9 +45,6 @@ public class ActionForm extends FormLayout {
             final @NonNull UiComponentFactoryVaa uiComponentFactory,
             final @NonNull ManagedAction managedAction
     ) {
-
-
-
         pendingArgs = managedAction.startParameterNegotiation();
 
         pendingArgs.getParamModels().forEach(paramModel->{

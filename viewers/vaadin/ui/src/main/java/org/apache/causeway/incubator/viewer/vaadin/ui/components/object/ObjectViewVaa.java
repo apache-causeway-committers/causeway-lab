@@ -18,15 +18,16 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.ui.components.object;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.formlayout.FormLayout.ResponsiveStep;
-import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import org.apache.causeway.applib.annotation.Where;
@@ -74,6 +75,7 @@ public class ObjectViewVaa extends VerticalLayout {
 
     /**
      * Constructs given domain object's view, with all its visible members and actions.
+     *
      * @param managedObject - domain object
      */
     protected ObjectViewVaa(
@@ -96,41 +98,46 @@ public class ObjectViewVaa extends VerticalLayout {
 
             @Override
             protected void onObjectTitle(final HasComponents container, final DomainObjectLayoutData domainObjectData) {
-                val uiTitle = Vaa.add(container, new H3(objectTitle));
-                //                uiTitle.addThemeVariants(
-                //                        ButtonVariant.LUMO_LARGE,
-                //                        ButtonVariant.LUMO_TERTIARY_INLINE);
+                val uiTitle = Vaa.add(container, new HorizontalLayout(new H3(objectTitle)){{
+                    setWidthFull();
+                }});
             }
 
             @Override
             protected HasComponents newRow(final HasComponents container, final BSRow bsRow) {
-                val uiRow = Vaa.add(container, new FlexLayout());
-
-                uiRow.setWidthFull();
-                uiRow.setFlexWrap(FlexWrap.WRAP); // allow line breaking
-
-                // instead of a FlexLayout we need to convert to a layout where we can control
-                // the responsive steps
-                //                val steps = _Lists.of(
-                //                        new ResponsiveStep("0", 1),
-                //                        new ResponsiveStep("50em", 2)
-                //                        );
-
-                return uiRow;
+//                val uiRow = Vaa.add(container, new FlexLayout(){{
+//                    setSizeFull();
+//                    setFlexWrap(FlexWrap.WRAP); // allow line breaking
+//                }});
+//
+//                // instead of a FlexLayout we need to convert to a layout where we can control
+//                // the responsive steps
+//                //                val steps = _Lists.of(
+//                //                        new ResponsiveStep("0", 1),
+//                //                        new ResponsiveStep("50em", 2)
+//                //                        );
+//
+//                return uiRow;
+                return container;
             }
 
             @Override
             protected HasComponents newCol(final HasComponents container, final BSCol bscol) {
 
-                val uiCol = Vaa.add(container, new VerticalLayout());
-
-                final int span = bscol.getSpan();
-                ((FlexLayout)container).setFlexGrow(span, uiCol);
-                val widthEm = String.format("%dem", span * 3); // 1em ~ 16px
-                uiCol.setWidth(null); // clear preset width style
-                uiCol.setMinWidth(widthEm);
-
-                return uiCol;
+//                val uiCol = Vaa.add(container, new VerticalLayout(){{
+//                    setSizeFull();
+//                    setPadding(false);
+//                    setSpacing(true);
+//                }});
+//                // TODO Alf fix the width of the column
+////                final int span = bscol.getSpan();
+////                ((FlexLayout) container).setFlexGrow(span, uiCol);
+////                val widthEm = String.format("%dem", span * 3); // 1em ~ 16px
+////                uiCol.setWidth(null); // clear preset width style
+////                uiCol.setMinWidth(widthEm);
+//
+//                return uiCol;
+                return container;
             }
 
             @Override
@@ -145,8 +152,10 @@ public class ObjectViewVaa extends VerticalLayout {
             @Override
             protected VerticalLayout newTabGroup(final HasComponents container, final BSTabGroup tabGroupData) {
                 // FIXME Alf final var component = new Tabs();
-                val component = new VerticalLayout(){{
+                val component = new VerticalLayout() {{
                     setSizeFull();
+                    setPadding(true);
+                    setSpacing(true);
                 }};
                 val uiTabGroup = Vaa.add(container, component);
 
@@ -156,25 +165,47 @@ public class ObjectViewVaa extends VerticalLayout {
 
             @Override
             protected VerticalLayout newTab(final VerticalLayout container, final BSTab tabData) {
-                val uiTab = Vaa.add(container, new VerticalLayout());
+                val uiTab = Vaa.add(container, new VerticalLayout() {{
+                    setSizeFull();
+                    setPadding(true);
+                    setSpacing(true);
+
+                }});
                 return uiTab;
             }
 
             @Override
             protected HasComponents newFieldSet(final HasComponents container, final FieldSet fieldSetData) {
+                //val section = new Section(new H3(fieldSetData.getName()));
+                final var content = new VerticalLayout() {{
 
-                Vaa.add(container, new H2(fieldSetData.getName()));
+                    setSizeFull();
+                    setPadding(true);
+                    setSpacing(true);
+                }};
+                // FIXME Alf derive from causeway/bs
+                val closedNamed = List.of("Metadata","Identity","Details");
+                final var sectionName = fieldSetData.getName();
+                val section = new Details(sectionName, content){{
+                    setOpened(!closedNamed.contains(sectionName));
+                    getStyle().set("border-top", "1px solid #eee");
+                    setPadding(true);
+                    setWidthFull();
+                }};
+                Vaa.add(container, section);
 
                 // handle associated actions
-                val actionBar = newActionPanel(container);
-                for(val actionData : fieldSetData.getActions()) {
+                val actionBar = newActionPanel(content);
+                int actionCount = fieldSetData.getActions().size();
+                for (val actionData : fieldSetData.getActions()) {
                     onAction(actionBar, actionData);
                 }
 
-                val uiFieldSet = Vaa.add(container, new FormLayout());
-
-                uiFieldSet.setResponsiveSteps(
-                        new ResponsiveStep("0", 1)); // single column only
+                val uiFieldSet = Vaa.add(content, new FormLayout(){{
+                    setResponsiveSteps(
+                            new ResponsiveStep("0", 1)); // single column only
+                    setSizeFull();
+                }});
 
                 return uiFieldSet;
             }
@@ -192,18 +223,18 @@ public class ObjectViewVaa extends VerticalLayout {
                 val owner = managedObject;
                 val interaction = ActionInteraction.start(owner, actionData.getId(), Where.OBJECT_FORMS);
                 interaction.checkVisibility()
-                .getManagedAction()
-                .ifPresent(managedAction -> {
+                        .getManagedAction()
+                        .ifPresent(managedAction -> {
 
-                    interaction.checkUsability();
+                            interaction.checkUsability();
 
-                    val uiButton = Vaa.add(container,
-                            uiComponentFactory.buttonFor(
-                                    UiComponentFactory.ButtonRequest.of(
-                                            managedAction,
-                                            DisablingDecorationModel.of(interaction),
-                                            actionEventHandler)));
-                });
+                            val uiButton = Vaa.add(container,
+                                    uiComponentFactory.buttonFor(
+                                            UiComponentFactory.ButtonRequest.of(
+                                                    managedAction,
+                                                    DisablingDecorationModel.of(interaction),
+                                                    actionEventHandler)));
+                        });
 
             }
 
@@ -215,27 +246,27 @@ public class ObjectViewVaa extends VerticalLayout {
 
                 val interaction = PropertyInteraction.start(owner, propertyData.getId(), Where.OBJECT_FORMS);
                 interaction.checkVisibility()
-                .getManagedProperty()
-                .ifPresent(managedProperty -> {
+                        .getManagedProperty()
+                        .ifPresent(managedProperty -> {
 
-                    interaction.checkUsability();
+                            interaction.checkUsability();
 
-                    val propNeg = managedProperty.startNegotiation();
+                            val propNeg = managedProperty.startNegotiation();
 
-                    val uiProperty = Vaa.add(container,
-                            uiComponentFactory.componentFor(
-                                    UiComponentFactory.ComponentRequest.of(
-                                            propNeg,
-                                            managedProperty,
-                                            DisablingDecorationModel.of(interaction))));
+                            val uiProperty = Vaa.add(container,
+                                    uiComponentFactory.componentFor(
+                                            UiComponentFactory.ComponentRequest.of(
+                                                    propNeg,
+                                                    managedProperty,
+                                                    DisablingDecorationModel.of(interaction))));
 
-                    // handle associated actions
-                    val actionBar = newActionPanel(container);
-                    for(val actionData : propertyData.getActions()) {
-                        onAction(actionBar, actionData);
-                    }
+                            // handle associated actions
+                            val actionBar = newActionPanel(container);
+                            for (val actionData : propertyData.getActions()) {
+                                onAction(actionBar, actionData);
+                            }
 
-                });
+                        });
             }
 
             @Override
@@ -244,24 +275,24 @@ public class ObjectViewVaa extends VerticalLayout {
                 val owner = managedObject;
 
                 CollectionInteraction.start(owner, collectionData.getId(), Where.OBJECT_FORMS)
-                .checkVisibility()
-                .getManagedCollection()
-                .ifPresent(managedCollection -> {
-                    Vaa.add(container, new H3(managedCollection.getFriendlyName()));
+                        .checkVisibility()
+                        .getManagedCollection()
+                        .ifPresent(managedCollection -> {
+                            Vaa.add(container, new H3(managedCollection.getFriendlyName()));
 
-                    // handle associated actions
-                    val actionBar = newActionPanel(container);
-                    for(val actionData : collectionData.getActions()) {
-                        onAction(actionBar, actionData);
-                    }
+                            // handle associated actions
+                            val actionBar = newActionPanel(container);
+                            for (val actionData : collectionData.getActions()) {
+                                onAction(actionBar, actionData);
+                            }
 
-                    val uiCollection = Vaa.add(container,
-                            TableViewVaa.forDataTableModel(
-                                    uiContext,
-                                    managedCollection.createDataTableModel(),
-                                    Where.PARENTED_TABLES));
+                            val uiCollection = Vaa.add(container,
+                                    TableViewVaa.forDataTableModel(
+                                            uiContext,
+                                            managedCollection.createDataTableModel(),
+                                            Where.PARENTED_TABLES));
 
-                });
+                        });
 
             }
 
@@ -271,7 +302,6 @@ public class ObjectViewVaa extends VerticalLayout {
         setWidthFull();
 
     }
-
 
 
 }
