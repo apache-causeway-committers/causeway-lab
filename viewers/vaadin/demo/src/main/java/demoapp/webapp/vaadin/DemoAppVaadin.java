@@ -18,6 +18,8 @@
  */
 package demoapp.webapp.vaadin;
 
+import java.util.Arrays;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -90,7 +92,9 @@ public class DemoAppVaadin extends SpringBootServletInitializer {
         SpringProfileUtil.addActiveProfile("demo-jpa");
 
         //CausewayModuleExtCommandLogApplib.honorSystemEnvironment();
-
+        if(Arrays.asList(args).contains("--autologin")) {
+            System.setProperty("causeway.autologin", "true");
+        }
         SpringApplication.run(new Class[]{DemoAppVaadin.class}, args);
     }
 
