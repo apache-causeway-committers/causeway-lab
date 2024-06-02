@@ -22,12 +22,20 @@ import jakarta.inject.Inject;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.router.BeforeEvent;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.theme.lumo.LumoUtility;
 
 import org.apache.causeway.applib.annotation.Where;
 import org.apache.causeway.commons.collections.Can;
@@ -55,23 +63,22 @@ import lombok.extern.log4j.Log4j2;
  */
 @Route("main")
 @RouteAlias("")
-// FIXME Alf @CssImport("./css/menu.css")
 @Log4j2
 public class MainViewVaa extends AppLayout
-implements
-    HasMetaModelContext,
-    BeforeEnterObserver,
-    MemberInvocationHandler<Component> {
+        implements
+        HasMetaModelContext,
+        BeforeEnterObserver,
+        HasUrlParameter<String>,
+        MemberInvocationHandler<Component> {
 
-    private static final long serialVersionUID = 1L;
+    private final MetaModelContext metaModelContext;
+    private final UiContextVaa uiContext;
+    private final UiActionHandlerVaa uiActionHandler;
+    private final UiComponentFactoryVaa uiComponentFactory;
+    private final HeaderUiService headerUiService;
+    private final MainViewVaaState state;
 
-    private final transient MetaModelContext metaModelContext;
-    private final transient UiContextVaa uiContext;
-    private final transient UiActionHandlerVaa uiActionHandler;
-    private final transient UiComponentFactoryVaa uiComponentFactory;
-    private final transient HeaderUiService headerUiService;
-
-    private final VerticalLayout pageContent = new VerticalLayout(){
+    private final VerticalLayout pageContent = new VerticalLayout() {
         {
             setId("main-view-content");
             setSizeFull();
@@ -89,17 +96,51 @@ implements
             final UiActionHandlerVaa uiActionHandler,
             final HeaderUiService headerUiService,
             final UiContextVaa uiContext,
-            final UiComponentFactoryVaa uiComponentFactory
+            final UiComponentFactoryVaa uiComponentFactory,
+            final MainViewVaaState state
     ) {
         this.metaModelContext = metaModelContext;
         this.uiActionHandler = uiActionHandler;
         this.headerUiService = headerUiService;
         this.uiContext = uiContext;
         this.uiComponentFactory = uiComponentFactory;
+        this.state = state;
 
         uiContext.setNewPageHandler(this::replaceContent);
         uiContext.setPageFactory(this);
     }
+
+    @Override
+    public void setParameter(
+            BeforeEvent event,
+            @OptionalParameter String parameter
+    ) {
+        if (parameter == null) {
+            // FIXME Alf
+        } else if (parameter.startsWith("object")) {
+            // FIXME Alf
+        } else {
+            log.warn("unknown parameter: {}", parameter);
+        }
+    }
+
+
+    enum MenuVariant {
+        DRAWER,
+        MENU_BAR
+    }
+
+    private final MenuVariant menuVariant = MenuVariant.DRAWER;
+    private final Div drawerContent = new Div() {{
+        setId("main-view-drawer");
+    }};
+    private final HorizontalLayout navbarContent = new HorizontalLayout() {
+        {
+            setId("main-view-navbar");
+            setPadding(false);
+            setSpacing(false);
+        }
+    };
 
     @Override
     public void beforeEnter(final BeforeEnterEvent event) {
@@ -107,18 +148,52 @@ implements
         val faStyleSheet = LocalResourceUtil.ResourceDescriptor.webjars(IconDecorator.FONTAWESOME_RESOURCE);
         LocalResourceUtil.addStyleSheet(faStyleSheet);
 
-        setPrimarySection(Section.NAVBAR);
+        setPrimarySection(Section.DRAWER);
 
-        val menuBarContainer = MainView_createHeader.createHeader(
-                metaModelContext,
-                headerUiService.getHeader(),
-                uiActionHandler::handleActionLinkClicked,
-                this::renderHomepage
-        );
+        if (menuVariant == MenuVariant.DRAWER) {
+            setDrawerOpened(true);
+            val toggle = new DrawerToggle();
+            val appName = metaModelContext.getConfiguration().getViewer().getCommon().getApplication().getName();
 
-        addToNavbar(menuBarContainer);
+            val title = new H1(appName) {{
+                // FIXME Alf: move to css
+                getStyle()
+                        .set("font-size", "var(--lumo-font-size-l)")
+                        .set("margin", "0")
+                        .setMarginTop("var(--lumo-space-s)")
+                        .setLineHeight("var(--lumo-line-height-l)");
+
+            }};
+            val drawer = MainView_createMenuAsDrawer.apply(
+                    metaModelContext,
+                    headerUiService.getHeader(),
+                    uiActionHandler
+            );
+
+            val drawerScroller = new Scroller(drawer) {{
+                setClassName(LumoUtility.Padding.SMALL);
+            }};
+            // FIXME Alf: add more logic to not replace the content
+            drawerContent.removeAll();
+            drawerContent.add(drawerScroller);
+            addToDrawer(drawerContent);
+            navbarContent.removeAll();
+            navbarContent.add(toggle, title);
+            addToNavbar(navbarContent);
+        } else {
+            val menuBarContainer = MainView_createMenuAsTopBar.apply(
+                    metaModelContext,
+                    headerUiService.getHeader(),
+                    uiActionHandler::handleActionLinkClicked,
+                    this::renderHomepage
+            );
+
+            addToNavbar(menuBarContainer);
+            setDrawerOpened(false);
+        }
+
         setContent(pageContent);
-        setDrawerOpened(false);
+        setDrawerOpened(true);
         renderHomepage();
     }
 
@@ -158,12 +233,10 @@ implements
 
     @Override
     public MetaModelContext getMetaModelContext() {
-        if(metaModelContext==null) {
+        if (metaModelContext == null) {
             // TODO needs static recovery
             throw _Exceptions.notImplemented();
         }
         return metaModelContext;
     }
-
-
 }

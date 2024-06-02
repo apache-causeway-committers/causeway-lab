@@ -38,18 +38,28 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor(onConstructor_ = {@Inject})
 @Log4j2
 public class UiActionHandlerVaa {
-
+    // -- injected services
     private final UiContextVaa uiContext;
     private final InteractionService interactionService;
     private final UiComponentFactoryVaa uiComponentFactory;
 
-    public void handleActionLinkClicked(final ManagedAction managedAction) {
+
+    public void handleActionLinkClicked(
+            final ManagedAction managedAction
+    ) {
         log.info("about to build an action prompt for {}", managedAction.getIdentifier());
 
         final int paramCount = managedAction.getAction().getParameterCount();
 
         if (paramCount == 0) {
-            invoke(managedAction, Can.empty());
+            final Can<ManagedObject> noArgs = Can.empty();
+            interactionService.runAnonymous(() ->
+                    managedAction
+                            .invoke(noArgs)
+                            .getSuccess()
+                            .ifPresent(actionResult ->
+                                    uiContext.route(managedAction, noArgs, actionResult)
+                            ));
         } else {
             // get an ActionPrompt, then on invocation show the result in the content view
 
@@ -58,26 +68,16 @@ public class UiActionHandlerVaa {
                     managedAction,
                     params -> {
                         log.info("param negotiation done");
-                        invoke(managedAction, params);
+                        interactionService.runAnonymous(() ->
+                                managedAction.invoke(params)
+                                        .getSuccess()
+                                        .ifPresent(actionResult ->
+                                                uiContext.route(managedAction, params, actionResult)
+                                        ));
                         return true; //TODO handle vetoes
                     });
             actionDialog.open();
         }
     }
 
-    private void invoke(
-            final ManagedAction managedAction,
-            final Can<ManagedObject> params
-    ) {
-
-        interactionService.runAnonymous(() -> {
-
-            managedAction.invoke(params)
-                    .getSuccess()
-                    .ifPresent(actionResult ->
-                            uiContext.route(managedAction, params, actionResult)
-                    );
-
-        });
-    }
 }

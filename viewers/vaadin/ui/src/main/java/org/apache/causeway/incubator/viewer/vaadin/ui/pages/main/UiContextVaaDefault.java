@@ -46,6 +46,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class UiContextVaaDefault implements UiContextVaa {
 
+    // -- interface field implementation
     @Getter(onMethod_ = {@Override})
     private final InteractionService interactionService;
 
@@ -54,6 +55,8 @@ public class UiContextVaaDefault implements UiContextVaa {
 
     @Setter(onMethod_ = {@Override})
     private MemberInvocationHandler<Component> pageFactory;
+
+    private final MainViewVaaState mainViewVaaState;
 
     // might not be initialized yet
     private Optional<MemberInvocationHandler<Component>> pageFactory() {

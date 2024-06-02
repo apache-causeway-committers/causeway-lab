@@ -18,67 +18,40 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.ui.pages.main;
 
-import java.util.function.Consumer;
-
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Text;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.menubar.MenuBar;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
-import com.vaadin.flow.component.orderedlayout.FlexLayout;
-import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import org.apache.causeway.core.metamodel.context.MetaModelContext;
-import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
 import org.apache.causeway.viewer.commons.applib.services.branding.BrandingUiModel;
 import org.apache.causeway.viewer.commons.applib.services.header.HeaderUiModel;
 
 import lombok.val;
 
 //@Log4j2
-final class MainView_createHeader {
+final class MainView_createMenuAsDrawer {
 
-    static Component createHeader(
+    static Component apply(
             final MetaModelContext commonContext,
             final HeaderUiModel headerUiModel,
-            final Consumer<ManagedAction> menuActionEventHandler,
-            final Runnable onHomepageLinkClick
+            final UiActionHandlerVaa uiActionHandlerVaa
     ) {
+        val drawerLayout = new VerticalLayout(){{
+            setHeightFull();
+            setPadding(false);
+            setMargin(false);
+            setSpacing(false);
+        }};
 
-        val titleOrLogo = createTitleOrLogo(commonContext, headerUiModel.branding());
-        // FIXME Alf
-        // Vaa.setOnClick(titleOrLogo, onHomepageLinkClick);
-
-        val leftMenuBar = new MenuBar();
-        val horizontalSpacer = new Div();
-        //        horizontalSpacer.setWidthFull();
-        val rightMenuBar = new MenuBar();
-
-        leftMenuBar.setOpenOnHover(true);
-        rightMenuBar.setOpenOnHover(true);
-
-        // holds the top level left and right aligned menu parts
-        // TODO does not honor small displays yet, overflow is just not visible
-        val menuBarContainer = new FlexLayout(titleOrLogo, leftMenuBar, horizontalSpacer, rightMenuBar);
-        menuBarContainer.setFlexWrap(FlexWrap.WRAP);
-        menuBarContainer.setAlignSelf(Alignment.CENTER, leftMenuBar);
-        menuBarContainer.setAlignSelf(Alignment.CENTER, rightMenuBar);
-
-        // right align using css
-        rightMenuBar.getStyle().set("margin-left", "auto");
-
-        menuBarContainer.setWidthFull();
-
-        val leftMenuBuilder = MenuBuilderVaa.of(commonContext, menuActionEventHandler, leftMenuBar);
-        val rightMenuBuilder = MenuBuilderVaa.of(commonContext, menuActionEventHandler, rightMenuBar);
+        val leftMenuBuilder = CustomMenuBuilderVaa.of(commonContext, drawerLayout, uiActionHandlerVaa, true);
+        val rightMenuBuilder = CustomMenuBuilderVaa.of(commonContext, drawerLayout, uiActionHandlerVaa, false);
 
         headerUiModel.navbar().primary().visitMenuItems(leftMenuBuilder);
         headerUiModel.navbar().secondary().visitMenuItems(rightMenuBuilder);
         headerUiModel.navbar().tertiary().visitMenuItems(rightMenuBuilder);
 
-        return menuBarContainer;
-
+        return drawerLayout;
     }
 
     // -- HELPER

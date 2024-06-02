@@ -34,6 +34,7 @@ import org.apache.causeway.incubator.viewer.vaadin.ui.components.other.FallbackF
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.temporal.TemporalFieldFactory;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.text.TextFieldFactory;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.text.uuid.UuidFieldFactory;
+import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.MainViewVaaState;
 import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.UiActionHandlerVaa;
 import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.UiContextVaaDefault;
 import org.apache.causeway.viewer.commons.services.CausewayModuleViewerCommonsServices;
@@ -44,6 +45,7 @@ import org.apache.causeway.viewer.commons.services.CausewayModuleViewerCommonsSe
         // Modules
         CausewayModuleViewerCommonsServices.class,
         CausewayModuleIncViewerVaadinModel.class,
+        MainViewVaaState.class,
 
         // @Service's
         VaadinAuthenticationHandler.class,

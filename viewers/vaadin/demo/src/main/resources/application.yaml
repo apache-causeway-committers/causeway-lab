@@ -19,3 +19,7 @@ causeway:
     # if weaving subproperties are required, then specify all eclipselink.weaving
     # properties using application.properties instead (it's not possible to
     # specify both eclipselink.weaving property and its subproperties using yaml syntax)
+  viewer:
+    common:
+      application:
+        name: "Causeway Vaadin Demo"
