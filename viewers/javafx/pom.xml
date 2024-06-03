@@ -15,12 +15,12 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.apache.causeway.incubator</groupId>
-		<artifactId>causeway-incubator</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
-		<relativePath>../../pom.xml</relativePath>
-	</parent>
+    <parent>
+        <groupId>org.apache.causeway.core</groupId>
+        <artifactId>causeway-core</artifactId>
+        <version>3.0.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
 
 	<groupId>org.apache.causeway.incubator.viewer</groupId>
 	<artifactId>causeway-viewer-javafx</artifactId>
@@ -31,7 +31,7 @@
 
 	<properties>
 		<maven.compiler.release>21</maven.compiler.release>
-		<javafx.version>21.0.1</javafx.version> 
+		<javafx.version>23-ea+20</javafx.version> <!-- see https://issues.apache.org/jira/browse/MNG-8131 --> 
 		<jar-plugin.automaticModuleName>org.apache.causeway.incubator.viewer.javafx</jar-plugin.automaticModuleName>
 		<git-plugin.propertiesDir>org/apache/causeway/incubator/viewer/javafx</git-plugin.propertiesDir>
 	</properties>
