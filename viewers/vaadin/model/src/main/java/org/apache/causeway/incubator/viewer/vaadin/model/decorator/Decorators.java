@@ -18,9 +18,6 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.model.decorator;
 
-import java.net.URL;
-import java.util.Optional;
-
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
@@ -28,7 +25,10 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-
+import lombok.Getter;
+import lombok.experimental.UtilityClass;
+import lombok.extern.log4j.Log4j2;
+import lombok.val;
 import org.apache.causeway.applib.fa.FontAwesomeLayers;
 import org.apache.causeway.applib.layout.component.CssClassFaPosition;
 import org.apache.causeway.core.metamodel.context.MetaModelContext;
@@ -37,10 +37,8 @@ import org.apache.causeway.viewer.commons.applib.services.userprof.UserProfileUi
 import org.apache.causeway.viewer.commons.model.decorators.IconDecorator;
 import org.apache.causeway.viewer.commons.model.decorators.TooltipDecorator;
 
-import lombok.Getter;
-import lombok.val;
-import lombok.experimental.UtilityClass;
-import lombok.extern.log4j.Log4j2;
+import java.net.URL;
+import java.util.Optional;
 
 /**
  *

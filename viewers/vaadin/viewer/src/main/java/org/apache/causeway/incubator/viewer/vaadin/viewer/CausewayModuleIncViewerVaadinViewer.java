@@ -18,18 +18,18 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.viewer;
 
-
-import java.util.HashMap;
-
-import jakarta.inject.Inject;
-
 import com.vaadin.flow.spring.RootMappedCondition;
 import com.vaadin.flow.spring.SpringBootAutoConfiguration;
 import com.vaadin.flow.spring.SpringServlet;
 import com.vaadin.flow.spring.VaadinConfigurationProperties;
 import com.vaadin.flow.spring.VaadinServletContextInitializer;
 import com.vaadin.flow.spring.VaadinWebsocketEndpointExporter;
-
+import jakarta.inject.Inject;
+import lombok.val;
+import org.apache.causeway.applib.services.iactnlayer.InteractionService;
+import org.apache.causeway.core.runtimeservices.transaction.TransactionServiceSpring;
+import org.apache.causeway.core.runtimeservices.urlencoding.UrlEncodingServiceWithCompression;
+import org.apache.causeway.incubator.viewer.vaadin.ui.CausewayModuleIncViewerVaadinUi;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -41,10 +41,7 @@ import org.springframework.util.ClassUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
-import org.apache.causeway.applib.services.iactnlayer.InteractionService;
-import org.apache.causeway.incubator.viewer.vaadin.ui.CausewayModuleIncViewerVaadinUi;
-
-import lombok.val;
+import java.util.HashMap;
 
 /**
  *
@@ -54,15 +51,13 @@ import lombok.val;
 @Import({
         // Modules
         CausewayModuleIncViewerVaadinUi.class,
-
-        VaadinConfigurationProperties.class
+//        VaadinConfigurationProperties.class,
 
         // @Service's
-
+        TransactionServiceSpring.class,
+        UrlEncodingServiceWithCompression.class
 
         // @Mixin's
-
-
 })
 @PropertySource("classpath:/vaadin.properties")
 //disable standard vaadin spring boot bootstrapping

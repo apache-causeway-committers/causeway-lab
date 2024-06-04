@@ -18,6 +18,8 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.model;
 
+import org.apache.causeway.core.runtimeservices.transaction.TransactionServiceSpring;
+import org.apache.causeway.core.runtimeservices.urlencoding.UrlEncodingServiceWithCompression;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -27,6 +29,8 @@ import org.apache.causeway.core.webapp.CausewayModuleCoreWebapp;
 @Import({
         // Modules
         CausewayModuleCoreWebapp.class,
+        TransactionServiceSpring.class,
+        UrlEncodingServiceWithCompression.class
 })
 public class CausewayModuleIncViewerVaadinModel {
 

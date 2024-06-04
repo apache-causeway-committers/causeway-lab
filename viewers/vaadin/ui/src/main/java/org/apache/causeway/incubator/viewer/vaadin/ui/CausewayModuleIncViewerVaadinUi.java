@@ -20,6 +20,8 @@ package org.apache.causeway.incubator.viewer.vaadin.ui;
 
 import com.vaadin.flow.spring.annotation.EnableVaadin;
 
+import org.apache.causeway.core.runtimeservices.transaction.TransactionServiceSpring;
+import org.apache.causeway.core.runtimeservices.urlencoding.UrlEncodingServiceWithCompression;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -51,6 +53,8 @@ import org.apache.causeway.viewer.commons.services.CausewayModuleViewerCommonsSe
         UiComponentFactoryVaa.class,
         UiActionHandlerVaa.class,
         UiContextVaaDefault.class,
+        TransactionServiceSpring.class,
+        UrlEncodingServiceWithCompression.class,
 
         // Component Factories
         BlobFieldFactory.class,
