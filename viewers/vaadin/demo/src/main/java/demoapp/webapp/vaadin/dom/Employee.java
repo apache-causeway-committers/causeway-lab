@@ -17,10 +17,16 @@ import jakarta.persistence.Id;
 
 import org.springframework.lang.NonNull;
 
+import org.apache.causeway.applib.annotation.Action;
+import org.apache.causeway.applib.annotation.ActionLayout;
+import org.apache.causeway.applib.annotation.Collection;
 import org.apache.causeway.applib.annotation.CollectionLayout;
 import org.apache.causeway.applib.annotation.DomainObject;
+import org.apache.causeway.applib.annotation.MemberSupport;
 import org.apache.causeway.applib.annotation.PropertyLayout;
 import org.apache.causeway.applib.annotation.Where;
+
+import static org.apache.causeway.applib.annotation.SemanticsOf.IDEMPOTENT;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -48,7 +54,7 @@ public class Employee {
     @Column(nullable = false)
     @PropertyLayout(sequence = "1")
     private String firstName;
-    
+
     @NonNull
     @Column(nullable = false)
     @PropertyLayout(sequence = "2")
@@ -61,8 +67,28 @@ public class Employee {
 
     @Enumerated(EnumType.ORDINAL)
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionLayout(sequence = "4")
+    @CollectionLayout(sequence = "4", hidden = Where.NOWHERE)
+    @Collection(typeOf = Department.class)
     private Set<Department> departments = new LinkedHashSet<>();
 
+
+    @jakarta.persistence.ManyToMany(fetch = FetchType.EAGER)
+    @CollectionLayout(sequence = "4", hidden = Where.NOWHERE)
+    @Collection(typeOf = DepartmentEntity.class)
+    private Set<DepartmentEntity> departmentEntities = new LinkedHashSet<>();
+
+    @Action(semantics = IDEMPOTENT)
+    @ActionLayout(associateWith = "departmentEntities")
+    @MemberSupport
+    public void addDepartmentEntity(DepartmentEntity department) {
+        departmentEntities.add(department);
+    }
+
+    @Action(semantics = IDEMPOTENT)
+    @ActionLayout(associateWith = "departmentEntities")
+    @MemberSupport
+    public void removeDepartmentEntity(DepartmentEntity department) {
+        departmentEntities.remove(department);
+    }
 
 }

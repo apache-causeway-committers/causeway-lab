@@ -41,6 +41,7 @@ import org.apache.causeway.applib.layout.grid.bootstrap.BSCol;
 import org.apache.causeway.applib.layout.grid.bootstrap.BSRow;
 import org.apache.causeway.applib.layout.grid.bootstrap.BSTab;
 import org.apache.causeway.applib.layout.grid.bootstrap.BSTabGroup;
+import org.apache.causeway.applib.services.title.TitleService;
 import org.apache.causeway.commons.internal.assertions._Assert;
 import org.apache.causeway.core.metamodel.interactions.managed.ActionInteraction;
 import org.apache.causeway.core.metamodel.interactions.managed.CollectionInteraction;
@@ -63,14 +64,14 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class ObjectViewVaa extends VerticalLayout {
 
-    private static final long serialVersionUID = 1L;
-
     public static ObjectViewVaa fromObject(
             final @NonNull UiContextVaa uiContext,
             final @NonNull UiComponentFactoryVaa uiComponentFactory,
+            final @NonNull TitleService titleService,
             final @NonNull Consumer<ManagedAction> actionEventHandler,
-            final @NonNull ManagedObject managedObject) {
-        return new ObjectViewVaa(uiContext, uiComponentFactory, actionEventHandler, managedObject);
+            final @NonNull ManagedObject managedObject
+    ) {
+        return new ObjectViewVaa(uiContext, uiComponentFactory, titleService, actionEventHandler, managedObject);
     }
 
     /**
@@ -81,9 +82,10 @@ public class ObjectViewVaa extends VerticalLayout {
     protected ObjectViewVaa(
             final UiContextVaa uiContext,
             final UiComponentFactoryVaa uiComponentFactory,
+            final TitleService titleService,
             final Consumer<ManagedAction> actionEventHandler,
-            final ManagedObject managedObject) {
-
+            final ManagedObject managedObject
+    ) {
         log.info("binding object interaction to owner {}", managedObject.getSpecification().getFeatureIdentifier());
         _Assert.assertTrue(uiContext.getInteractionService().isInInteraction(), "requires an active interaction");
 
@@ -289,6 +291,7 @@ public class ObjectViewVaa extends VerticalLayout {
                             val uiCollection = Vaa.add(container,
                                     TableViewVaa.forDataTableModel(
                                             uiContext,
+                                            titleService,
                                             managedCollection.createDataTableModel(),
                                             Where.PARENTED_TABLES));
 
@@ -300,8 +303,5 @@ public class ObjectViewVaa extends VerticalLayout {
 
         uiGridLayout.visit(gridVisitor);
         setWidthFull();
-
     }
-
-
 }

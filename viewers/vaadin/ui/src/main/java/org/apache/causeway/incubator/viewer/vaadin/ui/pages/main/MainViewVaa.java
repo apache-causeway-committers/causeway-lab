@@ -38,6 +38,7 @@ import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
 import org.apache.causeway.applib.annotation.Where;
+import org.apache.causeway.applib.services.title.TitleService;
 import org.apache.causeway.commons.collections.Can;
 import org.apache.causeway.commons.internal.exceptions._Exceptions;
 import org.apache.causeway.core.metamodel.context.HasMetaModelContext;
@@ -55,6 +56,7 @@ import org.apache.causeway.incubator.viewer.vaadin.ui.util.LocalResourceUtil;
 import org.apache.causeway.viewer.commons.applib.services.header.HeaderUiService;
 import org.apache.causeway.viewer.commons.model.decorators.IconDecorator;
 
+import lombok.NonNull;
 import lombok.val;
 import lombok.extern.log4j.Log4j2;
 
@@ -77,6 +79,7 @@ public class MainViewVaa extends AppLayout
     private final UiComponentFactoryVaa uiComponentFactory;
     private final HeaderUiService headerUiService;
     private final MainViewVaaState state;
+    private final TitleService titleService;
 
     private final VerticalLayout pageContent = new VerticalLayout() {
         {
@@ -92,18 +95,20 @@ public class MainViewVaa extends AppLayout
      */
     @Inject
     public MainViewVaa(
-            final MetaModelContext metaModelContext,
-            final UiActionHandlerVaa uiActionHandler,
-            final HeaderUiService headerUiService,
-            final UiContextVaa uiContext,
-            final UiComponentFactoryVaa uiComponentFactory,
-            final MainViewVaaState state
+            final @NonNull MetaModelContext metaModelContext,
+            final @NonNull UiActionHandlerVaa uiActionHandler,
+            final @NonNull HeaderUiService headerUiService,
+            final @NonNull UiContextVaa uiContext,
+            final @NonNull UiComponentFactoryVaa uiComponentFactory,
+            final @NonNull TitleService titleService,
+            final @NonNull MainViewVaaState state
     ) {
         this.metaModelContext = metaModelContext;
         this.uiActionHandler = uiActionHandler;
         this.headerUiService = headerUiService;
         this.uiContext = uiContext;
         this.uiComponentFactory = uiComponentFactory;
+        this.titleService = titleService;
         this.state = state;
 
         uiContext.setNewPageHandler(this::replaceContent);
@@ -213,6 +218,7 @@ public class MainViewVaa extends AppLayout
         return ObjectViewVaa.fromObject(
                 uiContext,
                 uiComponentFactory,
+                titleService,
                 uiActionHandler::handleActionLinkClicked,
                 object
         );
@@ -222,10 +228,8 @@ public class MainViewVaa extends AppLayout
     public Component handle(final ManagedAction managedAction, final Can<ManagedObject> params, final ManagedObject actionResult) {
 
         if (ManagedObjects.isPacked(actionResult)) {
-
             val dataTableModel = DataTableInteractive.forAction(managedAction, params, actionResult);
-
-            return TableViewVaa.forDataTableModel(uiContext, dataTableModel, Where.STANDALONE_TABLES);
+            return TableViewVaa.forDataTableModel(uiContext, titleService, dataTableModel, Where.STANDALONE_TABLES);
         } else {
             return handle(actionResult);
         }

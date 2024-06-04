@@ -9,21 +9,34 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import lombok.val;
+
 @Configuration
-@EnableJpaRepositories(basePackageClasses = {EmployeeRepository.class})
+@EnableJpaRepositories(basePackageClasses = {EmployeeRepository.class, DepartmentEntityRepository.class})
 @EntityScan(basePackageClasses = {Employee.class})
 public class EmployeeJpaConfiguration {
 
     @Bean
-    public CommandLineRunner loadData(EmployeeRepository employeeRepository) {
+    public CommandLineRunner saveDemoData(DepartmentEntityRepository departmentEntityRepository, EmployeeRepository employeeRepository) {
         return (args) -> {
+            // -- departments
+            departmentEntityRepository.saveAll(DepartmentEntityFixture.allValues());
+            val allDeps = departmentEntityRepository.findAll();
+            val it = allDeps.stream().filter(dep -> dep.getKey().equals("IT")).findFirst().get();
+            val sales = allDeps.stream().filter(dep -> dep.getKey().equals("SALES")).findFirst().get();
+            val marketing = allDeps.stream().filter(dep -> dep.getKey().equals("MARKETING")).findFirst().get();
+
             // -- tech bros
             final var bill = new Employee("Bill", "Gates", LocalDate.of(1955, 10, 28));
             bill.setDepartments(Set.of(Department.IT, Department.SALES));
+            bill.addDepartmentEntity(it);
+            bill.addDepartmentEntity(sales);
             employeeRepository.save(bill);
 
             final var mark = new Employee("Mark", "Zuckerberg", LocalDate.of(1984, 5, 14));
             mark.setDepartments(Set.of(Department.IT, Department.MARKETING));
+            mark.addDepartmentEntity(it);
+            mark.addDepartmentEntity(marketing);
             employeeRepository.save(mark);
 
             employeeRepository.save(new Employee("Sundar", "Pichai", LocalDate.of(1972, 6, 10)));
