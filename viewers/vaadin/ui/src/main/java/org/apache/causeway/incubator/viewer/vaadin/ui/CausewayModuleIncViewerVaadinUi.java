@@ -20,8 +20,6 @@ package org.apache.causeway.incubator.viewer.vaadin.ui;
 
 import com.vaadin.flow.spring.annotation.EnableVaadin;
 
-import org.apache.causeway.core.runtimeservices.transaction.TransactionServiceSpring;
-import org.apache.causeway.core.runtimeservices.urlencoding.UrlEncodingServiceWithCompression;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -36,6 +34,7 @@ import org.apache.causeway.incubator.viewer.vaadin.ui.components.other.FallbackF
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.temporal.TemporalFieldFactory;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.text.TextFieldFactory;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.text.uuid.UuidFieldFactory;
+import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.MainViewVaaState;
 import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.UiActionHandlerVaa;
 import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.UiContextVaaDefault;
 import org.apache.causeway.viewer.commons.services.CausewayModuleViewerCommonsServices;
@@ -46,6 +45,7 @@ import org.apache.causeway.viewer.commons.services.CausewayModuleViewerCommonsSe
         // Modules
         CausewayModuleViewerCommonsServices.class,
         CausewayModuleIncViewerVaadinModel.class,
+        MainViewVaaState.class,
 
         // @Service's
         VaadinAuthenticationHandler.class,
@@ -53,8 +53,6 @@ import org.apache.causeway.viewer.commons.services.CausewayModuleViewerCommonsSe
         UiComponentFactoryVaa.class,
         UiActionHandlerVaa.class,
         UiContextVaaDefault.class,
-        TransactionServiceSpring.class,
-        UrlEncodingServiceWithCompression.class,
 
         // Component Factories
         BlobFieldFactory.class,

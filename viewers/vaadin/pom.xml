@@ -16,98 +16,29 @@
          limitations under the License.
          -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<modelVersion>4.0.0</modelVersion>
+    <name>Apache Causeway Inc - Viewer Vaadin</name>
+    <artifactId>causeway-viewer-vaadin</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+    <description>
+        Aggregator for Modules
+    </description>
+    <modules>
+        <module>demo</module>
+        <module>model</module>
+        <module>viewer</module>
+        <module>ui</module>
+    </modules>
 
-	<parent>
-        <groupId>org.apache.causeway.core</groupId>
-        <artifactId>causeway-core</artifactId>
-        <version>3.0.0</version>
-	</parent>
-
-	<groupId>org.apache.causeway.incubator.viewer</groupId>
-	<artifactId>causeway-viewer-vaadin</artifactId>
-	<version>${revision}</version>
-	<name>Apache Causeway Inc - Viewer Vaadin</name>
-	<description>
-		Initial sketches
-	</description>
-
-	<properties>
-		<revision>3.0.0-SNAPSHOT</revision>
-		<causeway.version>3.0.0</causeway.version>
-		<lombok.version>1.18.32</lombok.version>
-
-		<jar-plugin.automaticModuleName>org.apache.causeway.incubator.viewer.vaadin</jar-plugin.automaticModuleName>
-		<git-plugin.propertiesDir>org/apache/causeway/incubator/viewer/vaadin</git-plugin.propertiesDir>
-		<enforcer.skip>true</enforcer.skip>
-
-		<flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
-		<eirslett-frontend-maven-plugin.version>1.15.0</eirslett-frontend-maven-plugin.version>
-		<!-- See https://nodejs.org/en/download/ for latest node and npm (lts)
-            versions -->
-		<node.version>v20.14.0</node.version>
-		<npm.version>10.7.0</npm.version>
-
-		<vaadin.version>24.3.11</vaadin.version>
-		<swagger.version>1.0.67</swagger.version>
-		<swagger-parser.version>2.1.15</swagger-parser.version>
-		<jackson.version>1.8</jackson.version>
-	</properties>
-
-	<packaging>pom</packaging>
-
-	<build>
-		<plugins>
-			<!-- flatten-maven-plugin contains allows to reference versions (revision) in submodules -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-				<version>${flatten-maven-plugin.version}</version>
-			</plugin>
-		</plugins>
-	</build>
-
-	<dependencyManagement>
-		<dependencies>
-
-			<!-- com.vaadin:vaadin
-			* contains proprietary code that
-			* may require licenses which
-			* may lead to build issues -->
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin</artifactId>
-				<version>${vaadin.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-core</artifactId>
-				<version>${vaadin.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-spring</artifactId>
-				<version>${vaadin.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-				<scope>provided</scope>
-				<version>${lombok.version}</version>
-			</dependency>
-
-		</dependencies>
-	</dependencyManagement>
-
-	<modules>
-		<module>demo</module>
-		<module>model</module>
-		<module>viewer</module>
-		<module>ui</module>
-	</modules>
+    <parent>
+        <groupId>org.apache.causeway.incubator.viewer</groupId>
+        <artifactId>causeway-viewer-vaadin-parent</artifactId>
+        <version>${revision}</version>
+        <relativePath>parent</relativePath>
+    </parent>
 
 </project>

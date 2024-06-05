@@ -20,44 +20,39 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.apache.causeway.incubator.viewer</groupId>
-		<artifactId>causeway-viewer-vaadin</artifactId>
-		<version>${revision}</version>
-	</parent>
-
 	<name>Apache Causeway Inc - Viewer Vaadin (Demo)</name>
 	<artifactId>demo-vaadin</artifactId>
 	<version>${revision}</version>
 	<packaging>jar</packaging>
 
-	<properties>
-		<maven.deploy.skip>true</maven.deploy.skip>
-		<sonar.skip>true</sonar.skip>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
-	</properties>
+	<parent>
+		<groupId>org.apache.causeway.incubator.viewer</groupId>
+		<artifactId>causeway-viewer-vaadin-parent</artifactId>
+		<version>${revision}</version>
+		<relativePath>../parent</relativePath>
+	</parent>
 
 	<dependencies>
+		<!-- group -->
+		<dependency>
+			<groupId>org.apache.causeway.incubator.viewer</groupId>
+			<artifactId>causeway-viewer-vaadin-viewer</artifactId>
+			<version>${revision}</version>
+		</dependency>
 
+		<!-- causeway -->
 		<dependency>
 			<groupId>org.apache.causeway.core</groupId>
 			<artifactId>causeway-core-config</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.causeway.core</groupId>
-			<artifactId>causeway-applib</artifactId>
+			<groupId>org.apache.causeway.security</groupId>
+			<artifactId>causeway-security-bypass</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.causeway.core</groupId>
 			<artifactId>causeway-core-runtimeservices</artifactId>
 		</dependency>
-		<!--dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>simpleapp-jpa-module-simple</artifactId>
-		</dependency-->
-
-		<!-- causeway -->
 		<dependency>
 			<groupId>org.apache.causeway.mavendeps</groupId>
 			<artifactId>causeway-mavendeps-webapp</artifactId>
@@ -65,32 +60,21 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.causeway.viewer</groupId>
-			<artifactId>causeway-viewer-wicket-viewer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.viewer</groupId>
 			<artifactId>causeway-viewer-restfulobjects-jaxrsresteasy</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.causeway.persistence</groupId>
 			<artifactId>causeway-persistence-jpa-eclipselink</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.apache.causeway.viewer</groupId>
-			<artifactId>causeway-viewer-wicket-applib</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.apache.causeway.testing</groupId>
 			<artifactId>causeway-testing-h2console-ui</artifactId>
 		</dependency>
 
-		<dependency>
+		<!--dependency>
 			<groupId>org.apache.causeway.extensions</groupId>
 			<artifactId>causeway-extensions-flyway-impl</artifactId>
-		</dependency>
+		</dependency-->
 
 		<dependency>
 			<groupId>org.apache.causeway.extensions</groupId>
@@ -101,25 +85,11 @@
 			<groupId>org.apache.causeway.valuetypes</groupId>
 			<artifactId>causeway-valuetypes-asciidoc-metamodel</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.valuetypes</groupId>
-			<artifactId>causeway-valuetypes-asciidoc-ui-wkt</artifactId>
-		</dependency>
 
-		<dependency>
+		<!--dependency>
 			<groupId>org.apache.causeway.extensions</groupId>
 			<artifactId>causeway-extensions-tabular-excel</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-fullcalendar-wicket-ui</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-pdfjs-wicket-ui</artifactId>
-		</dependency>
+		</dependency-->
 
 		<dependency>
 			<groupId>org.apache.causeway.extensions</groupId>
@@ -160,16 +130,15 @@
 			<artifactId>causeway-viewer-graphql-viewer</artifactId>
 		</dependency>
 
+		<!-- spring/framework -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-actuator-autoconfigure</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-quartz</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -180,12 +149,10 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-instrument</artifactId>
@@ -195,10 +162,10 @@
 			<groupId>com.github.gavlyukovskiy</groupId>
 			<artifactId>datasource-proxy-spring-boot-starter</artifactId>
 		</dependency>
-		<dependency>
+		<!--dependency>
 			<groupId>com.github.vertical-blank</groupId>
 			<artifactId>sql-formatter</artifactId>
-		</dependency>
+		</dependency-->
 
 
 		<!-- DEMO DOMAIN + WEB -->
@@ -210,24 +177,10 @@
 
 		<!-- INCUBATOR: VAADIN VIEWER -->
 
-		<dependency>
-			<groupId>org.apache.causeway.incubator.viewer</groupId>
-			<artifactId>causeway-viewer-vaadin-viewer</artifactId>
-			<version>${revision}</version>
-		</dependency>
-
 		<!-- EXTENSIONS VAA -->
 
 		<!-- EXTENSIONS WKT -->
 
-		<dependency>
-			<groupId>org.apache.causeway.valuetypes</groupId>
-			<artifactId>causeway-valuetypes-markdown-ui-wkt</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-sse-wicket</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.apache.causeway.extensions</groupId>
 			<artifactId>causeway-extensions-commandlog-applib</artifactId>
@@ -276,11 +229,11 @@
 		</dependency>
 
 		<!-- vaadin -->
-		<dependency>
+		<!--dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-dev-server</artifactId>
-			<version>${vaadin.version}</version>
-		</dependency>
+			<version>24.3.11</version>
+		</dependency-->
         <dependency>
             <groupId>org.apache.causeway.security</groupId>
             <artifactId>causeway-security-spring</artifactId>
@@ -288,6 +241,36 @@
 		<dependency>
 			<groupId>org.apache.causeway.security</groupId>
 			<artifactId>causeway-security-shiro</artifactId>
+		</dependency>
+
+		<!-- wicket -->
+		<dependency>
+			<groupId>org.apache.causeway.viewer</groupId>
+			<artifactId>causeway-viewer-wicket-viewer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.causeway.viewer</groupId>
+			<artifactId>causeway-viewer-wicket-applib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.causeway.extensions</groupId>
+			<artifactId>causeway-extensions-fullcalendar-wicket-ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.causeway.extensions</groupId>
+			<artifactId>causeway-extensions-pdfjs-wicket-ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.causeway.extensions</groupId>
+			<artifactId>causeway-extensions-sse-wicket</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.causeway.valuetypes</groupId>
+			<artifactId>causeway-valuetypes-asciidoc-ui-wkt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.causeway.valuetypes</groupId>
+			<artifactId>causeway-valuetypes-markdown-ui-wkt</artifactId>
 		</dependency>
 
 	</dependencies>
@@ -336,15 +319,6 @@
             <properties>
                 <vaadin.productionMode>true</vaadin.productionMode>
             </properties>
-
-            <!--dependencies>
-                <dependency>
-                    <groupId>com.vaadin</groupId>
-                    <artifactId>flow-server-production-mode</artifactId>
-					<version>24.3.11</version>
-                </dependency>
-            </dependencies-->
-
             <build>
                 <plugins>
                     <plugin>
@@ -357,10 +331,10 @@
                     <plugin>
                         <groupId>com.vaadin</groupId>
                         <artifactId>vaadin-maven-plugin</artifactId>
-						<!--version>3.9.7</version-->
                         <executions>
                             <execution>
                                 <goals>
+                                    <goal>prepare-frontend</goal>
                                     <goal>build-frontend</goal>
                                 </goals>
                                 <phase>compile</phase>
@@ -383,7 +357,6 @@
 					<plugin>
 						<groupId>com.google.cloud.tools</groupId>
 						<artifactId>jib-maven-plugin</artifactId>
-						<version>3.4.2</version>
 						<configuration>
 							<from>
 								<image>openjdk:18-jdk-slim-bullseye</image>

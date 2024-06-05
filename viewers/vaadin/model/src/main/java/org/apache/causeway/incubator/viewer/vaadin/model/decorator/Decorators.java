@@ -18,6 +18,10 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.model.decorator;
 
+import java.net.URL;
+import java.util.List;
+import java.util.Optional;
+
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
@@ -25,10 +29,7 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import lombok.Getter;
-import lombok.experimental.UtilityClass;
-import lombok.extern.log4j.Log4j2;
-import lombok.val;
+
 import org.apache.causeway.applib.fa.FontAwesomeLayers;
 import org.apache.causeway.applib.layout.component.CssClassFaPosition;
 import org.apache.causeway.core.metamodel.context.MetaModelContext;
@@ -37,8 +38,10 @@ import org.apache.causeway.viewer.commons.applib.services.userprof.UserProfileUi
 import org.apache.causeway.viewer.commons.model.decorators.IconDecorator;
 import org.apache.causeway.viewer.commons.model.decorators.TooltipDecorator;
 
-import java.net.URL;
-import java.util.Optional;
+import lombok.Getter;
+import lombok.val;
+import lombok.experimental.UtilityClass;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
@@ -47,10 +50,14 @@ import java.util.Optional;
 @Log4j2
 public class Decorators {
 
-    @Getter(lazy = true) private final static Tooltip tooltip = new Tooltip();
-    @Getter(lazy = true) private final static Icon icon = new Icon();
-    @Getter(lazy = true) private final static Menu menu = new Menu();
-    @Getter(lazy = true) private final static User user = new User();
+    @Getter(lazy = true)
+    private final static Tooltip tooltip = new Tooltip();
+    @Getter(lazy = true)
+    private final static Icon icon = new Icon();
+    @Getter(lazy = true)
+    private final static Menu menu = new Menu();
+    @Getter(lazy = true)
+    private final static User user = new User();
 
     // -- DECORATOR CLASSES
 
@@ -74,30 +81,31 @@ public class Decorators {
             // which is not reflected in code here (in contrast to the Wicket Viewer implementation)
 
             val decoratedUiComponent = faLayers
-            .map(fontAwesome->{
+                    .map(fontAwesome -> {
 
-                val faIcon = new Span();
+                        val faIcon = new Span();
+                        // FIXME Alf
+                        Optional.ofNullable(fontAwesome.getSpanEntries()).orElse(List.of())
+                                .stream()
+                                .findFirst()
+                                .ifPresent(spanEntry -> {
+                                    faIcon.addClassName(spanEntry.getCssClasses());
+                                });
 
-                fontAwesome.getSpanEntries().stream()
-                .findFirst()
-                .ifPresent(spanEntry->{
-                    faIcon.addClassName(spanEntry.getCssClasses());
-                });
+                        return CssClassFaPosition.isLeftOrUnspecified(fontAwesome.getPosition())
+                                ? new HorizontalLayout(faIcon, uiComponent)
+                                : new HorizontalLayout(uiComponent, faIcon);
 
-                return CssClassFaPosition.isLeftOrUnspecified(fontAwesome.getPosition())
-                        ? new HorizontalLayout(faIcon, uiComponent)
-                        : new HorizontalLayout(uiComponent, faIcon);
+                    })
+                    .orElseGet(() -> {
 
-            })
-            .orElseGet(()->{
+                        // TODO add spacer, to account for missing fa icon?
+                        // but then where to add, left or right?
 
-                // TODO add spacer, to account for missing fa icon?
-                // but then where to add, left or right?
+                        return new HorizontalLayout(uiComponent);
+                    });
 
-                return new HorizontalLayout(uiComponent);
-            });
-
-            return (HorizontalLayout)decoratedUiComponent;
+            return (HorizontalLayout) decoratedUiComponent;
 
         }
 
@@ -108,7 +116,7 @@ public class Decorators {
         public Component decorateTopLevel(
                 final Label label) {
             val icon = getTopLevelMenuIcon();
-            val layout =  new HorizontalLayout(label, icon);
+            val layout = new HorizontalLayout(label, icon);
             layout.setVerticalComponentAlignment(Alignment.END, icon);
             return layout;
         }
@@ -116,7 +124,7 @@ public class Decorators {
         private Component getTopLevelMenuIcon() {
             val menuIcon = new com.vaadin.flow.component.icon.Icon(VaadinIcon.CARET_DOWN);
             menuIcon.setSize("1em");
-            menuIcon.getElement().getStyle().set("margin-left", "2px");
+            menuIcon.getStyle().setMarginLeft("2px");
             return menuIcon;
         }
 
@@ -138,21 +146,21 @@ public class Decorators {
                 final Optional<UserProfileUiModel> userProfileUiModel) {
 
             val decoratedUiComponent = userProfileUiModel
-            .map(userProfile->{
+                    .map(userProfile -> {
 
-                label.setText(userProfile.getUserProfileName());
+                        label.setText(userProfile.getUserProfileName());
 
-                val userIcon = userProfile.avatarUrl()
-                .map(this::getUserIcon)
-                .orElseGet(this::getFallbackUserIcon);
+                        val userIcon = userProfile.avatarUrl()
+                                .map(this::getUserIcon)
+                                .orElseGet(this::getFallbackUserIcon);
 
-                return (Component) new HorizontalLayout(userIcon, label);
+                        return (Component) new HorizontalLayout(userIcon, label);
 
-            })
-            .orElseGet(()->{
-                label.setText("<anonymous>");
-                return label;
-            });
+                    })
+                    .orElseGet(() -> {
+                        label.setText("<anonymous>");
+                        return label;
+                    });
 
             return (Component) decoratedUiComponent;
 

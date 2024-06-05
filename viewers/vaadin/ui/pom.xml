@@ -18,27 +18,64 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
-
-	<parent>
-		<groupId>org.apache.causeway.incubator.viewer</groupId>
-		<artifactId>causeway-viewer-vaadin</artifactId>
-		<version>${revision}</version>
-	</parent>
 
 	<name>Apache Causeway Inc - Viewer Vaadin (UI Components)</name>
 	<artifactId>causeway-viewer-vaadin-ui</artifactId>
 	<version>${revision}</version>
 	<packaging>jar</packaging>
 
+	<parent>
+		<groupId>org.apache.causeway.incubator.viewer</groupId>
+		<artifactId>causeway-viewer-vaadin-parent</artifactId>
+		<version>${revision}</version>
+		<relativePath>../parent</relativePath>
+	</parent>
+
 	<properties>
 		<jar-plugin.automaticModuleName>org.apache.causeway.incubator.viewer.vaadin.ui</jar-plugin.automaticModuleName>
 		<git-plugin.propertiesDir>org/apache/causeway/incubator/viewer/vaadin/ui</git-plugin.propertiesDir>
-		<enforcer.skip>true</enforcer.skip>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
+
+	<dependencies>
+		<!-- group -->
+		<dependency>
+			<groupId>org.apache.causeway.incubator.viewer</groupId>
+			<artifactId>causeway-viewer-vaadin-model</artifactId>
+			<version>${revision}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.causeway.core</groupId>
+			<artifactId>causeway-applib</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.causeway.core</groupId>
+			<artifactId>causeway-core-runtimeservices</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.causeway.viewer</groupId>
+			<artifactId>causeway-viewer-commons-services</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.causeway.viewer</groupId>
+			<artifactId>causeway-viewer-commons-prism</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -104,50 +141,5 @@
 			
 		</plugins>
 	</build>
-
-	<dependencies>
-
-		<dependency>
-			<groupId>org.apache.causeway.core</groupId>
-			<artifactId>causeway-applib</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.causeway.incubator.viewer</groupId>
-			<artifactId>causeway-viewer-vaadin-model</artifactId>
-			<version>${revision}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.causeway.core</groupId>
-			<artifactId>causeway-core-runtimeservices</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.causeway.viewer</groupId>
-            <artifactId>causeway-viewer-commons-services</artifactId>
-        </dependency>
-        
-        <dependency>
-			<groupId>org.apache.causeway.viewer</groupId>
-            <artifactId>causeway-viewer-commons-prism</artifactId>
-        </dependency>
-
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-spring</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>compile</scope>
-		</dependency>
-
-	</dependencies>
 
 </project>

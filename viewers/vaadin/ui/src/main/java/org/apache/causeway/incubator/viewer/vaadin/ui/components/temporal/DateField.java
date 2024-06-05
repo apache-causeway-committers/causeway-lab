@@ -27,8 +27,6 @@ import org.springframework.lang.Nullable;
 
 public class DateField extends CustomField<LocalDate> {
 
-    private static final long serialVersionUID = 1L;
-
     private final DatePicker datePicker = new DatePicker();
 
     public DateField(String label) {

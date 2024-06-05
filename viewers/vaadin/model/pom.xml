@@ -16,21 +16,21 @@
          limitations under the License.
          -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<parent>
-		<groupId>org.apache.causeway.incubator.viewer</groupId>
-		<artifactId>causeway-viewer-vaadin</artifactId>
-		<version>${revision}</version>
-	</parent>
 
 	<name>Apache Causeway Inc - Viewer Vaadin (Model)</name>
 	<artifactId>causeway-viewer-vaadin-model</artifactId>
 	<version>${revision}</version>
 	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>org.apache.causeway.incubator.viewer</groupId>
+		<artifactId>causeway-viewer-vaadin-parent</artifactId>
+		<version>${revision}</version>
+		<relativePath>../parent</relativePath>
+	</parent>
 
 	<properties>
 		<jar-plugin.automaticModuleName>org.apache.causeway.incubator.viewer.vaadin.model
@@ -39,28 +39,7 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
-		<!-- causeway -->
-		<dependency>
-			<groupId>org.apache.causeway.core</groupId>
-			<artifactId>causeway-applib</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.core</groupId>
-			<artifactId>causeway-core-runtimeservices</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.core</groupId>
-			<artifactId>causeway-core-metamodel</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.apache.causeway.core</groupId>
 			<artifactId>causeway-core-webapp</artifactId>
@@ -69,44 +48,24 @@
 			<groupId>org.apache.causeway.viewer</groupId>
 			<artifactId>causeway-viewer-commons-model</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.viewer</groupId>
-			<artifactId>causeway-viewer-commons-applib</artifactId>
-		</dependency>
 
-		<!-- vaadin -->
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin</artifactId>
+			<artifactId>vaadin-core</artifactId>
 		</dependency>
 
 		<!-- TEST DEPENDENCIES -->
-<!--
-		[INFO]  dependency:3.6.1:analyze (default-cli) @ causeway-viewer-vaadin-model
-		[WARNING] Used undeclared dependencies found:
-		[WARNING]    com.vaadin:vaadin-tabs-flow:jar:24.3.11:compile
-		[WARNING]    org.apache.causeway.viewer:causeway-viewer-commons-applib:jar:3.0.1:compile
-		[WARNING]    org.apache.logging.log4j:log4j-api:jar:2.21.1:compile
-		[WARNING]    org.apache.causeway.core:causeway-applib:jar:3.0.1:compile
-		[WARNING]    com.vaadin:vaadin-button-flow:jar:24.3.11:compile
-		[WARNING]    com.vaadin:vaadin-icons-flow:jar:24.3.11:compile
-		[WARNING]    com.vaadin:flow-html-components:jar:24.3.10:compile
-		[WARNING]    com.vaadin:vaadin-ordered-layout-flow:jar:24.3.11:compile
-		[WARNING]    org.springframework:spring-context:jar:6.1.6:compile
-		[WARNING]    org.apache.causeway.commons:causeway-commons:jar:3.0.1:compile
-		[WARNING]    com.vaadin:flow-server:jar:24.3.10:compile
-		[WARNING]    com.vaadin:vaadin-flow-components-base:jar:24.3.11:compile
-		[WARNING] Unused declared dependencies found:
-		[WARNING]    org.projectlombok:lombok:jar:1.18.32:provided
-		[WARNING]    com.vaadin:vaadin:jar:24.3.11:compile
-		[WARNING]    org.apache.causeway.core:causeway-core-internaltestsupport:jar:3.0.1:test
-		[WARNING]    org.apache.causeway.core:causeway-core-runtimeservices:jar:3.0.1:compile
-		<dependency>
+		<!--dependency>
 			<groupId>org.apache.causeway.core</groupId>
 			<artifactId>causeway-core-internaltestsupport</artifactId>
 			<scope>test</scope>
+		</dependency-->
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 		</dependency>
--->
+
     </dependencies>
 
 </project>

@@ -31,23 +31,20 @@ import lombok.val;
 
 public class ActionForm extends FormLayout {
 
-    private static final long serialVersionUID = 1L;
-
     @Getter
     private final ParameterNegotiationModel pendingArgs;
 
     public static ActionForm forManagedAction(
             final @NonNull UiComponentFactoryVaa uiComponentFactory,
-            final @NonNull ManagedAction managedAction) {
-
-        val actionForm = new ActionForm(uiComponentFactory, managedAction);
-        return actionForm;
+            final @NonNull ManagedAction managedAction
+    ) {
+        return new ActionForm(uiComponentFactory, managedAction);
     }
 
     protected ActionForm(
-            final UiComponentFactoryVaa uiComponentFactory,
-            final ManagedAction managedAction) {
-
+            final @NonNull UiComponentFactoryVaa uiComponentFactory,
+            final @NonNull ManagedAction managedAction
+    ) {
         pendingArgs = managedAction.startParameterNegotiation();
 
         pendingArgs.getParamModels().forEach(paramModel->{
@@ -59,7 +56,6 @@ public class ActionForm extends FormLayout {
             //val labelAndPosition = uiComponentFactory.labelFor(request);
             val uiField = uiComponentFactory.parameterFor(request);
             super.add(uiField);
-
         });
 
     }

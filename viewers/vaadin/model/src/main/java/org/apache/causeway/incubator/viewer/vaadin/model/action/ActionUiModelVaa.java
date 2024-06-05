@@ -20,13 +20,15 @@ package org.apache.causeway.incubator.viewer.vaadin.model.action;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Label;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.val;
+
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
 import org.apache.causeway.core.metamodel.spec.feature.ObjectAction;
 import org.apache.causeway.incubator.viewer.vaadin.model.decorator.Decorators;
 import org.apache.causeway.viewer.commons.model.action.UiAction;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.val;
 
 @RequiredArgsConstructor(staticName = "of")
 public class ActionUiModelVaa implements UiAction<Component, Component> {

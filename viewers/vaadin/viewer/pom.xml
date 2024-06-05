@@ -18,19 +18,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
-
-	<parent>
-		<groupId>org.apache.causeway.incubator.viewer</groupId>
-		<artifactId>causeway-viewer-vaadin</artifactId>
-		<version>${revision}</version>
-	</parent>
 
 	<name>Apache Causeway Inc - Viewer Vaadin (Viewer)</name>
 	<artifactId>causeway-viewer-vaadin-viewer</artifactId>
 	<version>${revision}</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>org.apache.causeway.incubator.viewer</groupId>
+		<artifactId>causeway-viewer-vaadin-parent</artifactId>
+		<version>${revision}</version>
+		<relativePath>../parent</relativePath>
+	</parent>
 
 	<properties>
 		<jar-plugin.automaticModuleName>org.apache.causeway.incubator.viewer.vaadin.viewer
@@ -39,11 +39,30 @@
 	</properties>
 
 	<dependencies>
-
+		<!-- spring/fw -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<!-- group -->
+        <dependency>
+            <groupId>org.apache.causeway.incubator.viewer</groupId>
+            <artifactId>causeway-viewer-vaadin-model</artifactId>
+			<version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.causeway.incubator.viewer</groupId>
+            <artifactId>causeway-viewer-vaadin-ui</artifactId>
+			<version>${revision}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -59,17 +78,11 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-core</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>com.vaadin</groupId>
-					<artifactId>vaadin-dev-server</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
+
 		<dependency>
-			<groupId>org.apache.causeway.incubator.viewer</groupId>
-			<artifactId>causeway-viewer-vaadin-ui</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 		</dependency>
 
 	</dependencies>
