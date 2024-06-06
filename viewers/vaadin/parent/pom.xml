@@ -39,6 +39,7 @@
         <revision>3.0.0-SNAPSHOT</revision>
         <causeway.version>3.0.0</causeway.version>
         <lombok.version>1.18.32</lombok.version>
+        <spring-boot.version>3.3.0</spring-boot.version>
 
         <jar-plugin.automaticModuleName>org.apache.causeway.incubator.viewer.vaadin</jar-plugin.automaticModuleName>
         <git-plugin.propertiesDir>org/apache/causeway/incubator/viewer/vaadin</git-plugin.propertiesDir>
@@ -59,6 +60,18 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Exclude default logging -->
+            <!--dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency-->
 
             <!-- com.vaadin:vaadin
             * contains proprietary code that

@@ -11,10 +11,6 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: password
-  security:
-    user:
-      name: sven
-      password: pass
 causeway:
   eclipseLink:
     # if enabled, then must be run with JVM arg:

@@ -69,9 +69,9 @@ import demoapp.webapp.vaadin.dom.EmployeeJpaConfiguration;
         //    CausewayModuleValVegaPersistenceJdoDn.class,
 
         // WICKET INTEGRATION ... to allow side by side comparison
-        //CausewayModuleViewerWicketViewer.class, // wicket viewer
-        //CausewayModuleExtSseWicket.class, // server sent events
-        //CausewayModuleValAsciidocUiWkt.class, // ascii-doc rendering support (for Wicket)
+        // CausewayModuleViewerWicketViewer.class, // wicket viewer
+        // CausewayModuleExtSseWicket.class, // server sent events
+        // CausewayModuleValAsciidocUiWkt.class, // ascii-doc rendering support (for Wicket)
 
 })
 public class DemoAppVaadin extends SpringBootServletInitializer {
@@ -95,7 +95,7 @@ public class DemoAppVaadin extends SpringBootServletInitializer {
         if(Arrays.asList(args).contains("--autologin")) {
             System.setProperty("causeway.autologin", "true");
         }
-        SpringApplication.run(new Class[] { DemoAppVaadin.class }, args);
+        SpringApplication.run(new Class[]{DemoAppVaadin.class}, args);
     }
 
 }

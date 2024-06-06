@@ -54,7 +54,7 @@ import lombok.val;
 @Import({
         // Modules
         CausewayModuleIncViewerVaadinUi.class,
-        //VaadinConfigurationProperties.class
+        VaadinConfigurationProperties.class
 
         // @Service's
 

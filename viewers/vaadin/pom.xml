@@ -28,10 +28,10 @@
         Aggregator for Modules
     </description>
     <modules>
-        <module>demo</module>
         <module>model</module>
         <module>viewer</module>
         <module>ui</module>
+        <module>demo</module>
     </modules>
 
     <parent>

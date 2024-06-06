@@ -32,162 +32,64 @@
 		<relativePath>../parent</relativePath>
 	</parent>
 
-	<dependencies>
-		<!-- group -->
-		<dependency>
-			<groupId>org.apache.causeway.incubator.viewer</groupId>
-			<artifactId>causeway-viewer-vaadin-viewer</artifactId>
-			<version>${revision}</version>
-		</dependency>
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <sonar.skip>true</sonar.skip>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
 
-		<!-- causeway -->
+	<dependencies>
+        <!-- DEMO DOMAIN + WEB -->
+
+        <!--		<dependency>-->
+        <!--			<groupId>org.apache.causeway.examples.apps</groupId>-->
+        <!--			<artifactId>demo-web</artifactId>-->
+        <!--		</dependency>-->
+
 		<dependency>
 			<groupId>org.apache.causeway.core</groupId>
-			<artifactId>causeway-core-config</artifactId>
+            <artifactId>causeway-core-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.causeway.security</groupId>
 			<artifactId>causeway-security-bypass</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.core</groupId>
-			<artifactId>causeway-core-runtimeservices</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.mavendeps</groupId>
-			<artifactId>causeway-mavendeps-webapp</artifactId>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.viewer</groupId>
-			<artifactId>causeway-viewer-restfulobjects-jaxrsresteasy</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.apache.causeway.persistence</groupId>
 			<artifactId>causeway-persistence-jpa-eclipselink</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.causeway.testing</groupId>
-			<artifactId>causeway-testing-h2console-ui</artifactId>
-		</dependency>
-
-		<!--dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-flyway-impl</artifactId>
-		</dependency-->
-
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-layoutloaders-github</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.causeway.valuetypes</groupId>
-			<artifactId>causeway-valuetypes-asciidoc-metamodel</artifactId>
+            <groupId>org.apache.causeway.core</groupId>
+            <artifactId>causeway-core-runtimeservices</artifactId>
 		</dependency>
 
-		<!--dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-tabular-excel</artifactId>
-		</dependency-->
+        <!-- INCUBATOR: VAADIN VIEWER -->
 
 		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-secman-encryption-spring</artifactId>
+            <groupId>org.apache.causeway.incubator.viewer</groupId>
+            <artifactId>causeway-viewer-vaadin-viewer</artifactId>
+            <!-- incubator version is not managed by app starter bundles -->
+            <version>${project.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.apache.causeway.valuetypes</groupId>
+            <artifactId>causeway-valuetypes-asciidoc-ui-wkt</artifactId>
+		</dependency>
+
+		<dependency>
+            <groupId>org.apache.causeway.valuetypes</groupId>
+            <artifactId>causeway-valuetypes-markdown-ui-wkt</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-secman-persistence-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-sessionlog-persistence-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-audittrail-persistence-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-commandlog-persistence-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-executionlog-persistence-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-executionoutbox-persistence-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.causeway.viewer</groupId>
-			<artifactId>causeway-viewer-graphql-viewer</artifactId>
-		</dependency>
-
-		<!-- spring/framework -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-actuator-autoconfigure</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-quartz</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-instrument</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.gavlyukovskiy</groupId>
-			<artifactId>datasource-proxy-spring-boot-starter</artifactId>
-		</dependency>
-		<!--dependency>
-			<groupId>com.github.vertical-blank</groupId>
-			<artifactId>sql-formatter</artifactId>
-		</dependency-->
-
-
-		<!-- DEMO DOMAIN + WEB -->
-
-		<!--dependency>
-			<groupId>org.apache.causeway.examples.apps</groupId>
-			<artifactId>demo-web</artifactId>
-		</dependency-->
-
-		<!-- INCUBATOR: VAADIN VIEWER -->
-
-		<!-- EXTENSIONS VAA -->
-
-		<!-- EXTENSIONS WKT -->
-
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-commandlog-applib</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.persistence</groupId>
-			<artifactId>causeway-persistence-jdo-applib</artifactId>
+            <artifactId>causeway-extensions-sse-wicket</artifactId>
 		</dependency>
 
 		<!-- OTHER DEPENDENCIES -->
@@ -196,83 +98,24 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
-			<version>${lombok.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.commons</groupId>
-			<artifactId>causeway-commons</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.valuetypes</groupId>
-			<artifactId>causeway-valuetypes-vega-metamodel</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.valuetypes</groupId>
-			<artifactId>causeway-valuetypes-asciidoc-persistence-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.valuetypes</groupId>
-			<artifactId>causeway-valuetypes-markdown-persistence-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.valuetypes</groupId>
-			<artifactId>causeway-valuetypes-vega-persistence-jpa</artifactId>
-		</dependency>
-
-		<!-- vaadin -->
-		<!--dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-dev-server</artifactId>
-			<version>24.3.11</version>
-		</dependency-->
-        <dependency>
-            <groupId>org.apache.causeway.security</groupId>
-            <artifactId>causeway-security-spring</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>org.apache.causeway.security</groupId>
-			<artifactId>causeway-security-shiro</artifactId>
-		</dependency>
-
-		<!-- wicket -->
 		<dependency>
 			<groupId>org.apache.causeway.viewer</groupId>
 			<artifactId>causeway-viewer-wicket-viewer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.viewer</groupId>
-			<artifactId>causeway-viewer-wicket-applib</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-fullcalendar-wicket-ui</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-pdfjs-wicket-ui</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.extensions</groupId>
-			<artifactId>causeway-extensions-sse-wicket</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.valuetypes</groupId>
-			<artifactId>causeway-valuetypes-asciidoc-ui-wkt</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.valuetypes</groupId>
-			<artifactId>causeway-valuetypes-markdown-ui-wkt</artifactId>
+            <version>${causeway.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-flow-components</artifactId>
+			<version>${vaadin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>flow-server</artifactId>
+			<version>24.3.11</version>
+		</dependency>
 	</dependencies>
 
 	<profiles>
