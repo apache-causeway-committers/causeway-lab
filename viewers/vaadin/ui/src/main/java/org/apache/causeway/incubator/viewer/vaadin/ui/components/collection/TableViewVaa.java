@@ -18,19 +18,20 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.ui.components.collection;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
-
+import lombok.AccessLevel;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import lombok.val;
 import org.apache.causeway.applib.annotation.Where;
 import org.apache.causeway.applib.services.title.TitleService;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
@@ -41,11 +42,10 @@ import org.apache.causeway.core.metamodel.tabular.interactive.DataRow;
 import org.apache.causeway.core.metamodel.tabular.interactive.DataTableInteractive;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
 
-import lombok.AccessLevel;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.val;
-import lombok.extern.log4j.Log4j2;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Log4j2
@@ -114,17 +114,18 @@ public class TableViewVaa extends VerticalLayout {
         val columns = dataTableModel.getDataColumns().getValue();
         val gridCols = new ArrayList<Grid.Column<DataRow>>();
 
-        // FIXME provide icon with link
-        if (false) {
-            // object link as first columnval gridCols = new ArrayList<Grid.Column<DataRow>>();
-            val objectLinkCol = objectGrid.addColumn(row -> {
+        // icon with link
+        objectGrid.addComponentColumn(item -> {
+                    Icon icon = new Icon();
+                    icon.getElement().setAttribute("class", "fa fa-user");
+                    icon.setColor("green"); //color seems to be overridden by link style
+                    Anchor link = new Anchor("https://causeway.apache.org/", icon);
+                    return link;
+                })
+                .setKey("icon")
+                .setHeader("Icon");
 
-                return "obj. ref [" + row.getRowElement().getBookmark().orElse(null) + "]";
-            });
-            gridCols.add(objectLinkCol);
-        }
         // property columns
-
         columns.forEach((DataColumn column) -> {
             val association = column.getAssociationMetaModel();
             association.getSpecialization().accept(

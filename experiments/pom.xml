@@ -63,7 +63,7 @@
         <module>cssgridlayout</module>
         <module>multischema</module>
         <module>springsecurity</module>
-        <module>vaadin</module>
+        <!--module>vaadin</module-->
         <module>wicket-bootstrap</module>
         <module>wicket-fullcal</module>
         <module>wicket-pdfjs</module>

@@ -41,12 +41,6 @@
 
 	<dependencies>
         <!-- DEMO DOMAIN + WEB -->
-
-        <!--		<dependency>-->
-        <!--			<groupId>org.apache.causeway.examples.apps</groupId>-->
-        <!--			<artifactId>demo-web</artifactId>-->
-        <!--		</dependency>-->
-
 		<dependency>
 			<groupId>org.apache.causeway.core</groupId>
             <artifactId>causeway-core-security</artifactId>
@@ -103,18 +97,15 @@
 		<dependency>
 			<groupId>org.apache.causeway.viewer</groupId>
 			<artifactId>causeway-viewer-wicket-viewer</artifactId>
-            <version>${causeway.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-flow-components</artifactId>
-			<version>${vaadin.version}</version>
+			<artifactId>vaadin-flow-components-base</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>flow-server</artifactId>
-			<version>24.3.11</version>
 		</dependency>
 	</dependencies>
 

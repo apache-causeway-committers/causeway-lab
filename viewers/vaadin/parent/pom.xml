@@ -52,7 +52,7 @@
         <node.version>v20.14.0</node.version>
         <npm.version>10.7.0</npm.version>
 
-        <vaadin.version>24.3.12</vaadin.version>
+        <vaadin.version>24.3.11</vaadin.version>
         <swagger.version>1.0.67</swagger.version>
         <swagger-parser.version>2.1.15</swagger-parser.version>
         <jackson.version>1.8</jackson.version>
@@ -60,19 +60,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Exclude default logging -->
-            <!--dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-                <version>${spring-boot.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-logging</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency-->
-
             <!-- com.vaadin:vaadin
             * contains proprietary code that
             * may require licenses which
@@ -89,8 +76,33 @@
             </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
+                <artifactId>flow-server</artifactId>
+                <version>${vaadin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-spring</artifactId>
-                <version>24.3.11</version>
+                <version>${vaadin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.flowingcode.addons</groupId>
+                <artifactId>font-awesome-iron-iconset</artifactId>
+                <version>5.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-flow-components-base</artifactId>
+                <version>${vaadin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-grid-flow</artifactId>
+                <version>${vaadin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-renderer-flow</artifactId>
+                <version>${vaadin.version}</version>
             </dependency>
 
             <dependency>

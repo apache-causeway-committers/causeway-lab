@@ -74,6 +74,23 @@
 			<artifactId>vaadin-spring</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.flowingcode.addons</groupId>
+			<artifactId>font-awesome-iron-iconset</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-flow-components-base</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-grid-flow</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-renderer-flow</artifactId>
+		</dependency>
+
 		<!-- VAADIN ADDONS -->
 
 		<!-- <dependency> -->
@@ -86,6 +103,20 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-renderer-flow</artifactId>
+			<version>23.2.10</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-renderer-flow</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-renderer-flow</artifactId>
 		</dependency>
 
 	</dependencies>
