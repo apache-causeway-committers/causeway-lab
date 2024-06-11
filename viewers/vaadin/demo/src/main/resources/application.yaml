@@ -23,3 +23,5 @@ causeway:
     common:
       application:
         name: "Causeway Vaadin Demo"
+vaadin:
+  allowed-packages: com/flowingcode/vaadin/addons/fontawesome

@@ -28,9 +28,7 @@ import com.vaadin.flow.component.details.DetailsVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
-import org.apache.causeway.applib.fa.FontAwesomeLayers;
 import org.apache.causeway.core.metamodel.context.MetaModelContext;
-import org.apache.causeway.core.metamodel.spec.feature.ObjectAction;
 import org.apache.causeway.viewer.commons.applib.services.menu.MenuVisitor;
 import org.apache.causeway.viewer.commons.applib.services.menu.model.MenuAction;
 import org.apache.causeway.viewer.commons.applib.services.menu.model.MenuDropdown;
@@ -84,21 +82,7 @@ class CustomMenuBuilderVaa implements MenuVisitor {
 
             currentTopLevelMenu.add(button);
 
-            ObjectAction.Util.cssClassFaFactoryFor(
-                            managedAction.getAction(),
-                            managedAction.getOwner()).ifPresent(faLayersProvider -> {
-
-                FontAwesomeLayers layers = faLayersProvider.getLayers();
-                FontAwesomeLayers.IconType iconType = layers.getIconType();
-                if(iconType == FontAwesomeLayers.IconType.SINGLE) {
-                    // only SINGLE expected/handled
-                    if(layers.getIconEntries() != null) {
-                        String cssClasses = layers.getIconEntries().get(0).getCssClasses();
-                        button.setIcon(new FaIcon(cssClasses));
-                    }
-                }
-            });
-
+            // FIXME add icon
             button.addClickListener(event -> {
                 uiActionHandlerVaa.handleActionLinkClicked(managedAction);
             });
