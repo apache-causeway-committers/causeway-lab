@@ -50,7 +50,7 @@ import lombok.Setter;
 public class Employee {
 
     public String iconName() {
-        val musicians = new ArrayList<>( List.of("Lennon", "McCartney", "Harrison", "Starr", "Jagger", "Mercury", "Jackson", "Presley", "Bowie", "Dylan", "Rogers Nelson") );
+        val musicians = new ArrayList<>( List.of("Lennon", "McCartney", "Harrison", "Starr", "Jagger", "Mercury", "Jackson", "Presley", "Bowie", "Dylan", "Rogers Nelson", "Hendrix", "Clapton") );
         if (musicians.contains(lastName)) return "music";
         return "briefcase";
     }

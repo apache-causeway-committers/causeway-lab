@@ -22,7 +22,6 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -152,6 +151,7 @@ public class TableViewVaa extends VerticalLayout {
                             }
                         });
                         col.setHeader(coll.getCanonicalFriendlyName());
+                        col.setAutoWidth(true);
                         gridCols.add(col);
                     });
         });
