@@ -1,7 +1,9 @@
 package demoapp.webapp.vaadin.dom;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.inject.Named;
@@ -15,6 +17,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import lombok.val;
+import org.apache.causeway.applib.annotation.DomainObjectLayout;
 import org.springframework.lang.NonNull;
 
 import org.apache.causeway.applib.annotation.Action;
@@ -41,8 +45,15 @@ import lombok.Setter;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @DomainObject
+@DomainObjectLayout(describedAs = "An E. works for a corporation")
 @Named(EmployeeModule.NAMESPACE + ".Employee")
 public class Employee {
+
+    public String iconName() {
+        val musicians = new ArrayList<>( List.of("Lennon", "McCartney", "Harrison", "Starr", "Jagger", "Mercury", "Jackson", "Presley", "Bowie", "Dylan", "Rogers Nelson") );
+        if (musicians.contains(lastName)) return "music";
+        return "briefcase";
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

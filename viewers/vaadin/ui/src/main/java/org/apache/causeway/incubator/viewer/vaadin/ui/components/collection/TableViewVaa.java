@@ -41,6 +41,7 @@ import org.apache.causeway.core.metamodel.tabular.interactive.DataColumn;
 import org.apache.causeway.core.metamodel.tabular.interactive.DataRow;
 import org.apache.causeway.core.metamodel.tabular.interactive.DataTableInteractive;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
+import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.FaIcon;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -116,9 +117,9 @@ public class TableViewVaa extends VerticalLayout {
 
         // icon with link
         objectGrid.addComponentColumn(item -> {
-                    Icon icon = new Icon();
-                    icon.getElement().setAttribute("class", "fa fa-user");
-                    icon.setColor("green"); //color seems to be overridden by link style
+                    final String iconName = item.getRowElement().getIconName();
+                    FaIcon icon = new FaIcon("fa fa-"+ iconName);
+                    //icon.getStyle().set("color", "#green");
                     Anchor link = new Anchor("https://causeway.apache.org/", icon);
                     return link;
                 })
