@@ -76,6 +76,7 @@ public class UiActionHandlerVaa {
                                         ));
                         return true; //TODO handle vetoes
                     });
+            actionDialog.getElement().setAttribute("draggable", "true");
             actionDialog.open();
         }
     }

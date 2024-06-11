@@ -18,6 +18,8 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.ui.pages.main;
 
+import com.vaadin.flow.component.tabs.TabSheet;
+import com.vaadin.flow.component.tabs.TabsVariant;
 import jakarta.inject.Inject;
 
 import com.vaadin.flow.component.Component;
@@ -204,7 +206,13 @@ public class MainViewVaa extends AppLayout
 
     private void replaceContent(final Component component) {
         pageContent.removeAll();
-        pageContent.add(component);
+        val tab = new TabSheet();
+        tab.getElement().getThemeList().add(TabsVariant.LUMO_ICON_ON_TOP.getVariantName());
+        tab.setWidth("100%");
+        tab.setHeight("100%");
+        val title = component.getId().orElse("title");
+        tab.add(title, component);
+        pageContent.add(tab);
     }
 
     private void renderHomepage() {
