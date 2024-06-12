@@ -30,7 +30,7 @@ public class GridLayoutView extends VerticalLayout {
         layout.setSizeFull();
         layout.getElement().getStyle().set("display", "grid");
         setSizeFull();
-        add(layout);
+        //add(layout);
     }
 }
 
