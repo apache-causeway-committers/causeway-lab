@@ -18,19 +18,21 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.ui.components.collection;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.Grid.SelectionMode;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import lombok.AccessLevel;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
-import lombok.val;
+
 import org.apache.causeway.applib.annotation.Where;
 import org.apache.causeway.applib.services.title.TitleService;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
@@ -42,10 +44,11 @@ import org.apache.causeway.core.metamodel.tabular.interactive.DataTableInteracti
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
 import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.FaIcon;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import lombok.AccessLevel;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.val;
+import lombok.extern.log4j.Log4j2;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Log4j2
@@ -55,7 +58,7 @@ public class TableViewVaa extends VerticalLayout {
     private final UiContextVaa uiContext;
     private final TitleService titleService;
 
-    public static TableViewVaa empty(UiContextVaa uiContext, TitleService titleService) {
+    public static TableViewVaa empty(final UiContextVaa uiContext, final TitleService titleService) {
         return new TableViewVaa(uiContext, titleService);
     }
 
@@ -126,7 +129,7 @@ public class TableViewVaa extends VerticalLayout {
                 .setHeader("Icon");
 
         // property columns
-        columns.forEach((DataColumn column) -> {
+        columns.forEach((final DataColumn column) -> {
             val association = column.getAssociationMetaModel();
             association.getSpecialization().accept(
                     prop -> {
@@ -167,7 +170,7 @@ public class TableViewVaa extends VerticalLayout {
                 return true;
             }
             val lowerCaseRowCell = new ArrayList<String>();
-            columns.forEach((DataColumn column) -> {
+            columns.forEach((final DataColumn column) -> {
                 val association = column.getAssociationMetaModel();
                 association.getSpecialization().accept(
                         prop -> {
@@ -212,7 +215,7 @@ public class TableViewVaa extends VerticalLayout {
         }
     }
 
-    private String stringifyCollectionValue(DataRow row, OneToManyAssociation coll) {
+    private String stringifyCollectionValue(final DataRow row, final OneToManyAssociation coll) {
         try {
             val owningManagedObject = row.getRowElement();
             val collectionManagedObject = coll.get(owningManagedObject);

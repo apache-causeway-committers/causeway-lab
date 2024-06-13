@@ -12,7 +12,7 @@
     <properties>
         <java.version>17</java.version>
         <maven.compiler.release>17</maven.compiler.release>
-        <vaadin.version>23.2.10</vaadin.version>
+        <vaadin.version>24.4.1</vaadin.version>
     </properties>
 
 	<parent>
@@ -122,7 +122,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.3.1</version>
+            <version>5.8.0</version>
             <scope>test</scope>
         </dependency>
         
