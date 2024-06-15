@@ -18,10 +18,6 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.ui.pages.main;
 
-import com.vaadin.flow.component.tabs.TabSheet;
-import com.vaadin.flow.component.tabs.TabsVariant;
-import jakarta.inject.Inject;
-
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -30,6 +26,8 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.tabs.TabSheet;
+import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.BeforeEvent;
@@ -38,7 +36,10 @@ import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.theme.lumo.LumoUtility;
-
+import jakarta.inject.Inject;
+import lombok.NonNull;
+import lombok.extern.log4j.Log4j2;
+import lombok.val;
 import org.apache.causeway.applib.annotation.Where;
 import org.apache.causeway.applib.services.title.TitleService;
 import org.apache.causeway.commons.collections.Can;
@@ -57,10 +58,6 @@ import org.apache.causeway.incubator.viewer.vaadin.ui.components.object.ObjectVi
 import org.apache.causeway.incubator.viewer.vaadin.ui.util.LocalResourceUtil;
 import org.apache.causeway.viewer.commons.applib.services.header.HeaderUiService;
 import org.apache.causeway.viewer.commons.model.decorators.IconDecorator;
-
-import lombok.NonNull;
-import lombok.val;
-import lombok.extern.log4j.Log4j2;
 
 /**
  * top-level view
@@ -89,8 +86,17 @@ public class MainViewVaa extends AppLayout
             setSizeFull();
             setPadding(false);
             setSpacing(false);
+            initTabs();
         }
     };
+
+    private void initTabs() {
+        val tabSheet = new TabSheet();
+        tabSheet.getElement().getThemeList().add(TabsVariant.LUMO_ICON_ON_TOP.getVariantName());
+        tabSheet.setWidth("100%");
+        tabSheet.setHeight("100%");
+        pageContent.add(tabSheet);
+    }
 
     /**
      * Constructs the main view of the web-application, with the menu-bar and page content.
@@ -113,7 +119,7 @@ public class MainViewVaa extends AppLayout
         this.titleService = titleService;
         this.state = state;
 
-        uiContext.setNewPageHandler(this::replaceContent);
+        uiContext.setNewPageHandler(this::addContent);
         uiContext.setPageFactory(this);
     }
 
@@ -130,7 +136,6 @@ public class MainViewVaa extends AppLayout
             log.warn("unknown parameter: {}", parameter);
         }
     }
-
 
     enum MenuVariant {
         DRAWER,
@@ -151,12 +156,9 @@ public class MainViewVaa extends AppLayout
 
     @Override
     public void beforeEnter(final BeforeEnterEvent event) {
-
         val faStyleSheet = LocalResourceUtil.ResourceDescriptor.webjars(IconDecorator.FONTAWESOME_RESOURCE);
         LocalResourceUtil.addStyleSheet(faStyleSheet);
-
         setPrimarySection(Section.DRAWER);
-
         if (menuVariant == MenuVariant.DRAWER) {
             setDrawerOpened(true);
             val toggle = new DrawerToggle();
@@ -169,7 +171,6 @@ public class MainViewVaa extends AppLayout
                         .set("margin", "0")
                         .setMarginTop("var(--lumo-space-s)")
                         .setLineHeight("var(--lumo-line-height-l)");
-
             }};
             val drawer = MainView_createMenuAsDrawer.apply(
                     metaModelContext,
@@ -194,25 +195,18 @@ public class MainViewVaa extends AppLayout
                     uiActionHandler::handleActionLinkClicked,
                     this::renderHomepage
             );
-
             addToNavbar(menuBarContainer);
             setDrawerOpened(false);
         }
-
         setContent(pageContent);
         setDrawerOpened(true);
         renderHomepage();
     }
 
-    private void replaceContent(final Component component) {
-        pageContent.removeAll();
-        val tab = new TabSheet();
-        tab.getElement().getThemeList().add(TabsVariant.LUMO_ICON_ON_TOP.getVariantName());
-        tab.setWidth("100%");
-        tab.setHeight("100%");
+    private void addContent(final Component component) {
+        val tabSheet = (TabSheet) pageContent.getComponentAt(0);
         val title = component.getId().orElse("title");
-        tab.add(title, component);
-        pageContent.add(tab);
+        tabSheet.add(title, component);
     }
 
     private void renderHomepage() {
