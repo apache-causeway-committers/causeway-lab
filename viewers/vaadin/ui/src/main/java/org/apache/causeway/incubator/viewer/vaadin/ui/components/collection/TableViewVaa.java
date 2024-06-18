@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.Grid.SelectionMode;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -92,7 +91,7 @@ public class TableViewVaa extends VerticalLayout {
 
         setId("table-view-" + createTableId(dataTableModel.getTitle().getValue()));
         setSizeFull();
-
+        // FIXME AR use dataTableModel.getTableDecoratorIfAny(); to get the table decorator??
         val searchField = new TextField() {{
             setPrefixComponent(VaadinIcon.SEARCH.create());
             setPlaceholder("Search");
@@ -100,7 +99,7 @@ public class TableViewVaa extends VerticalLayout {
             setValueChangeMode(ValueChangeMode.LAZY);
             setValueChangeTimeout(600);
             setWidthFull();
-            // FIXME bind to view state??
+            // FIXME AR bind to view state??, how to handle multiple tables on the same page?
         }};
         add(searchField);
         val objectGrid = new Grid<DataRow>() {{
@@ -123,10 +122,13 @@ public class TableViewVaa extends VerticalLayout {
                     FaIcon icon = new FaIcon("fa fa-"+ iconName);
                     //icon.getStyle().set("color", "#green");
                     Anchor link = new Anchor("https://causeway.apache.org/", icon);
+                    // FIXME AR extract to CSS
+                    link.getStyle().set("margin-left", "5px");
                     return link;
                 })
                 .setKey("icon")
-                .setHeader("Icon");
+                .setAutoWidth(true)
+                .setHeader("");
 
         // property columns
         columns.forEach((final DataColumn column) -> {
@@ -137,6 +139,7 @@ public class TableViewVaa extends VerticalLayout {
                                 stringifyPropertyValue(prop, row.getRowElement())
                         );
                         col.setHeader(prop.getCanonicalFriendlyName());
+                        col.setAutoWidth(true);
                         col.setSortable(true);
                         gridCols.add(col);
                         //TODO add column description as is provided via property.getColumnDescription()
