@@ -17,8 +17,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import lombok.val;
-import org.apache.causeway.applib.annotation.DomainObjectLayout;
 import org.springframework.lang.NonNull;
 
 import org.apache.causeway.applib.annotation.Action;
@@ -26,8 +24,10 @@ import org.apache.causeway.applib.annotation.ActionLayout;
 import org.apache.causeway.applib.annotation.Collection;
 import org.apache.causeway.applib.annotation.CollectionLayout;
 import org.apache.causeway.applib.annotation.DomainObject;
+import org.apache.causeway.applib.annotation.DomainObjectLayout;
 import org.apache.causeway.applib.annotation.MemberSupport;
 import org.apache.causeway.applib.annotation.PropertyLayout;
+import org.apache.causeway.applib.annotation.Title;
 import org.apache.causeway.applib.annotation.Where;
 
 import static org.apache.causeway.applib.annotation.SemanticsOf.IDEMPOTENT;
@@ -37,6 +37,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.val;
 
 @Entity
 @NoArgsConstructor
@@ -102,4 +103,9 @@ public class Employee {
         departmentEntities.remove(department);
     }
 
+
+    @Title
+    public String title() {
+        return getFirstName() + " " + getLastName();
+    }
 }

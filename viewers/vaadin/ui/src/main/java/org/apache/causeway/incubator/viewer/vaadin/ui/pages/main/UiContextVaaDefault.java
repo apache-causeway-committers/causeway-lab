@@ -19,21 +19,17 @@
 package org.apache.causeway.incubator.viewer.vaadin.ui.pages.main;
 
 import java.util.Optional;
-import java.util.function.Consumer;
 
 import jakarta.inject.Inject;
 
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import org.apache.causeway.applib.services.iactnlayer.InteractionService;
 import org.apache.causeway.commons.collections.Can;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
-import org.apache.causeway.incubator.viewer.vaadin.model.context.MemberInvocationHandler;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
 
 import lombok.Getter;
@@ -50,24 +46,20 @@ public class UiContextVaaDefault implements UiContextVaa {
     @Getter(onMethod_ = {@Override})
     private final InteractionService interactionService;
 
-    @Setter(onMethod_ = {@Override})
-    private Consumer<Component> newPageHandler;
-
-    @Setter(onMethod_ = {@Override})
-    private MemberInvocationHandler<Component> pageFactory;
+    @Setter(onMethod_ = {})
+    private MainViewVaa mainView;
 
     // might not be initialized yet
-    private Optional<MemberInvocationHandler<Component>> pageFactory() {
-        return Optional.ofNullable(pageFactory);
+    private Optional<MainViewVaa> mainView() {
+        return Optional.ofNullable(mainView);
     }
 
     @Override
     public void route(final ManagedObject object) {
         UI.getCurrent().access(() -> {
             log.info("about to render object {}", object);
-            newPage(pageFactory()
-                    .map(pageFactory -> pageFactory.handle(object))
-                    .orElse(null));
+            mainView()
+                    .ifPresent(pageFactory -> pageFactory.handle(object));
         });
     }
 
@@ -76,9 +68,8 @@ public class UiContextVaaDefault implements UiContextVaa {
         UI.getCurrent().access(() -> {
 
             log.info("about to render object {} from action {}", actionResult, managedAction.getAction());
-            newPage(pageFactory()
-                    .map(pageFactory -> pageFactory.handle(managedAction, params, actionResult))
-                    .orElse(null));
+            mainView()
+                    .ifPresent(pageFactory -> pageFactory.handle(managedAction, params, actionResult));
         });
     }
 
@@ -108,10 +99,5 @@ public class UiContextVaaDefault implements UiContextVaa {
 
     // -- HELPER
 
-    private void newPage(final @Nullable Component content) {
-        if (newPageHandler != null && content != null) {
-            newPageHandler.accept(content);
-        }
-    }
 
 }

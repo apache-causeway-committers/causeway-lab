@@ -18,10 +18,6 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.model.context;
 
-import java.util.function.Consumer;
-
-import com.vaadin.flow.component.Component;
-
 import org.apache.causeway.applib.services.iactnlayer.InteractionService;
 import org.apache.causeway.commons.collections.Can;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
@@ -31,11 +27,9 @@ public interface UiContextVaa {
 
     InteractionService getInteractionService();
 
-    void setNewPageHandler(Consumer<Component> onNewPage);
-    void setPageFactory(MemberInvocationHandler<Component> pageFactory);
-
     void route(ManagedObject object);
     void route(ManagedAction managedAction, Can<ManagedObject> params, ManagedObject actionResult);
+
 //    void route(Supplier<ManagedObject> objectSupplier);
 
     // -- DECORATORS

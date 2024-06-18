@@ -28,6 +28,8 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.tabs.TabSheet;
+import com.vaadin.flow.component.tabs.TabSheetVariant;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.BeforeEvent;
@@ -47,7 +49,6 @@ import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
 import org.apache.causeway.core.metamodel.object.ManagedObjects;
 import org.apache.causeway.core.metamodel.tabular.interactive.DataTableInteractive;
-import org.apache.causeway.incubator.viewer.vaadin.model.context.MemberInvocationHandler;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.UiComponentFactoryVaa;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.collection.TableViewVaa;
@@ -70,8 +71,7 @@ public class MainViewVaa extends AppLayout
         implements
         HasMetaModelContext,
         BeforeEnterObserver,
-        HasUrlParameter<String>,
-        MemberInvocationHandler<Component> {
+        HasUrlParameter<String> {
 
     private final MetaModelContext metaModelContext;
     private final UiContextVaa uiContext;
@@ -110,20 +110,20 @@ public class MainViewVaa extends AppLayout
         this.uiComponentFactory = uiComponentFactory;
         this.titleService = titleService;
         this.state = state;
+        // FIXME Alf: MainViewVaa and UiContextVaa should be live in one package and not abstracted away
+        ((UiContextVaaDefault) uiContext).setMainView(this);
 
-        uiContext.setNewPageHandler(this::replaceContent);
-        uiContext.setPageFactory(this);
     }
 
+    // FIXME Alf: How to handle deep links
     @Override
     public void setParameter(
             BeforeEvent event,
             @OptionalParameter String parameter
     ) {
         if (parameter == null) {
-            // FIXME Alf
-        } else if (parameter.startsWith("object")) {
-            // FIXME Alf
+            // FIXME Alf: How to handle deep links
+            log.info("no parameter");
         } else {
             log.warn("unknown parameter: {}", parameter);
         }
@@ -146,6 +146,11 @@ public class MainViewVaa extends AppLayout
             setSpacing(false);
         }
     };
+
+    private final TabSheet tabSheet = new CloseableTabSheet() {{
+        addThemeVariants(TabSheetVariant.LUMO_TABS_MINIMAL, TabSheetVariant.LUMO_TABS_SMALL);
+        setSizeFull();
+    }};
 
     @Override
     public void beforeEnter(final BeforeEnterEvent event) {
@@ -198,13 +203,16 @@ public class MainViewVaa extends AppLayout
         }
 
         setContent(pageContent);
+
+        pageContent.add(tabSheet);
+
         setDrawerOpened(true);
         renderHomepage();
     }
 
-    private void replaceContent(final Component component) {
-        pageContent.removeAll();
-        pageContent.add(component);
+    private void addNewTab(final Component component, String tabTitle) {
+        val tab = tabSheet.add(tabTitle, component);
+        tabSheet.setSelectedTab(tab);
     }
 
     private void renderHomepage() {
@@ -213,26 +221,38 @@ public class MainViewVaa extends AppLayout
         uiContext.route(homepage);
     }
 
-    @Override
-    public Component handle(final ManagedObject object) {
+    public void handle(final ManagedObject object) {
+        val objectState = state.addManagedObject(object);
+        val component = createAndAddComponent(objectState);
+        val tabTitle = titleService.titleOf(object);
+        addNewTab(component, tabTitle);
+    }
+
+    private ObjectViewVaa createAndAddComponent(MainViewVaaState.NavigationState.ObjectState objectState) {
         return ObjectViewVaa.fromObject(
                 uiContext,
                 uiComponentFactory,
                 titleService,
                 uiActionHandler::handleActionLinkClicked,
-                object
+                objectState.object()
         );
     }
 
-    @Override
-    public Component handle(final ManagedAction managedAction, final Can<ManagedObject> params, final ManagedObject actionResult) {
+    public void handle(final ManagedAction managedAction, final Can<ManagedObject> params, final ManagedObject actionResult) {
 
         if (ManagedObjects.isPacked(actionResult)) {
-            val dataTableModel = DataTableInteractive.forAction(managedAction, params, actionResult);
-            return TableViewVaa.forDataTableModel(uiContext, titleService, dataTableModel, Where.STANDALONE_TABLES);
+            val component = registerAndCreateComponentForResultList(managedAction, params, actionResult);
+            val tabTitle = managedAction.getFriendlyName();//titleService.titleOf(actionResult);
+            addNewTab(component, tabTitle);
         } else {
-            return handle(actionResult);
+            handle(actionResult);
         }
+    }
+
+    private Component registerAndCreateComponentForResultList(ManagedAction managedAction, Can<ManagedObject> params, ManagedObject actionResult) {
+        val actionState = state.addActionResult(actionResult, managedAction, params);
+        val dataTableModel = DataTableInteractive.forAction(actionState.managedAction(), actionState.params(), actionState.actionResult());
+        return TableViewVaa.forDataTableModel(uiContext, titleService, dataTableModel, Where.STANDALONE_TABLES);
     }
 
     @Override

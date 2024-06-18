@@ -22,9 +22,9 @@ import org.apache.causeway.commons.collections.Can;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
 
-public interface MemberInvocationHandler<T> {
+public interface MemberInvocationHandler {
 
-    T handle(ManagedObject object);
-    T handle(ManagedAction managedAction, Can<ManagedObject> params, ManagedObject actionResult);
+    void handle(ManagedObject object);
+    void handle(ManagedAction managedAction, Can<ManagedObject> params, ManagedObject actionResult);
 
 }
