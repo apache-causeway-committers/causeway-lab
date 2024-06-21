@@ -48,6 +48,19 @@ public class ActionDialog extends Dialog {
             final @NonNull Predicate<Can<ManagedObject>> submitCallback) {
 
         val actionDialog = new ActionDialog(uiComponentFactory, managedAction, submitCallback);
+
+        // Add a listener to make the dialog transparent, while moved
+        actionDialog.getElement().addEventListener("dragstart", event -> {
+            actionDialog.addClassName("transparent-dialog");
+            //actionDialog.getElement().getStyle().set("background-color", "transparent");
+            //actionDialog.getElement().getStyle().set("opacity", "0.5");
+        });
+        actionDialog.getElement().addEventListener("dragend", event -> {
+            actionDialog.removeClassName("transparent-dialog");
+            //actionDialog.getElement().getStyle().set("background-color", "opaque");
+            //actionDialog.getElement().getStyle().set("opacity", "1");
+        });
+
         return actionDialog;
     }
 
@@ -75,7 +88,7 @@ public class ActionDialog extends Dialog {
         // -- Content
 
         val actionForm = ActionForm.forManagedAction(uiComponentFactory, managedAction);
-        add(new Scroller(actionForm){{
+        add(new Scroller(actionForm) {{
             setScrollDirection(ScrollDirection.VERTICAL);
         }});
         // -- Footer

@@ -13,3 +13,16 @@ html {
       --lumo-primary-color: rgb(143,57,133);
       --lumo-primary-text-color: rgb(143,57,133);
 }
+
+div.overlay {
+      opacity: 0.5 !important;
+      color: #ff4b01;
+}
+
+/*.resizer-container {
+      background: transparent !important;
+      opacity: 0.5 !important;
+      overflow: auto;
+      flex-grow: 1;
+      border-radius: inherit;
+}*/
