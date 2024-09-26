@@ -60,7 +60,7 @@
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>
 			<artifactId>wicket-bootstrap-core</artifactId>
-			<version>7.0.5</version>
+			<version>7.0.8</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.apache.wicket</groupId>
