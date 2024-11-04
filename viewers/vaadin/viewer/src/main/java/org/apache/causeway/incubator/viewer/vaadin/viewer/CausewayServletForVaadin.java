@@ -56,7 +56,6 @@ public class CausewayServletForVaadin extends SpringServlet {
         this.interactionService = interactionService;
     }
 
-
     @Override
     protected void service(final HttpServletRequest request,
             final HttpServletResponse response) throws ServletException, IOException {

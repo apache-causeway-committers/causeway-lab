@@ -87,5 +87,4 @@ public class JpaConfiguration extends JpaBaseConfiguration {
         return properties;
     }
 
-
 }

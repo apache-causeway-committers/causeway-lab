@@ -118,7 +118,6 @@ public class VaadinAuthenticationHandler
         callAuthenticated(callable);
     }
 
-
     // -- HELPER
 
     private void beforeEnter(BeforeEnterEvent event) {
@@ -158,6 +157,5 @@ public class VaadinAuthenticationHandler
     private void beforeLeave(BeforeLeaveEvent event) {
         //causewayInteractionFactory.closeSessionStack();
     }
-
 
 }

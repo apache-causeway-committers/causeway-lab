@@ -39,7 +39,6 @@ import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.UiActionHandler
 import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.UiContextVaaDefault;
 import org.apache.causeway.viewer.commons.services.CausewayModuleViewerCommonsServices;
 
-
 @Configuration
 @Import({
         // Modules
@@ -63,7 +62,6 @@ import org.apache.causeway.viewer.commons.services.CausewayModuleViewerCommonsSe
         UuidFieldFactory.class,
         // last in chain
         FallbackFieldFactory.class,
-
 
 })
 @EnableVaadin("org.apache.causeway.incubator.viewer.vaadin.ui") // scan for vaadin annotations

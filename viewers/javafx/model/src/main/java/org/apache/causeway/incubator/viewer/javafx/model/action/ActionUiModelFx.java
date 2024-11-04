@@ -21,18 +21,18 @@ package org.apache.causeway.incubator.viewer.javafx.model.action;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
 import org.apache.causeway.core.metamodel.spec.feature.ObjectAction;
 import org.apache.causeway.incubator.viewer.javafx.model.context.UiContextFx;
-import org.apache.causeway.viewer.commons.model.action.UiAction;
+import org.apache.causeway.viewer.commons.model.action.HasManagedAction;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.val;
 
 @RequiredArgsConstructor(staticName = "of")
 public class ActionUiModelFx
-implements UiAction<MenuItem, Node> {
+implements HasManagedAction {
 
     private final UiContextFx uiContext;
 
@@ -44,18 +44,15 @@ implements UiAction<MenuItem, Node> {
         return managedAction.getMetaModel();
     }
 
-    @Override
     public MenuItem createMenuUiComponent() {
-        val menuItem = new MenuItem(getManagedAction().getFriendlyName());
+        var menuItem = new MenuItem(getManagedAction().getFriendlyName());
 
         return uiContext.getIconDecoratorForMenuItem()
                 .decorate(menuItem, lookupFontAwesomeLayers(false));
     }
 
-    @Override
     public Node createRegularUiComponent() {
-
-        val uiLabel = new Label(getManagedAction().getFriendlyName());
+        var uiLabel = new Label(getManagedAction().getFriendlyName());
 
         return uiContext.getIconDecoratorForLabeled()
                 .decorate(uiLabel, lookupFontAwesomeLayers(false));

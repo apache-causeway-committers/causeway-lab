@@ -34,15 +34,16 @@ import org.apache.causeway.incubator.viewer.javafx.ui.components.UiComponentFact
 import org.apache.causeway.incubator.viewer.javafx.ui.components.dialog.Dialogs;
 import org.apache.causeway.viewer.commons.model.decorators.PrototypingDecorator.PrototypingDecorationModel;
 
+import lombok.RequiredArgsConstructor;
+import lombok.Value;
+import lombok.val;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
-import lombok.val;
 
 @Component
 @RequiredArgsConstructor(onConstructor_ = {@Inject})
@@ -52,8 +53,8 @@ public class PrototypingInfoPopupProvider {
 
     public void showPrototypingPopup(final PrototypingDecorationModel prototypingDecorationModel) {
         val infoNode = getPrototypingInfoUiComponent(prototypingDecorationModel);
-        val headerText = prototypingDecorationModel.getFeatureFriendlyIdentifier();
-        val contentText = prototypingDecorationModel.getFeatureType().toString();
+        val headerText = prototypingDecorationModel.featureFriendlyIdentifier();
+        val contentText = prototypingDecorationModel.featureType().toString();
         Dialogs.message("Inspect Metamodel", headerText, contentText, infoNode);
     }
 
@@ -130,6 +131,5 @@ public class PrototypingInfoPopupProvider {
         }
         return sb.toString();
     }
-
 
 }

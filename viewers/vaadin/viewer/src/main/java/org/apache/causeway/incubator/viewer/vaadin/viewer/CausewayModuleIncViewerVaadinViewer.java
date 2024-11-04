@@ -18,7 +18,6 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.viewer;
 
-
 import java.util.HashMap;
 
 import jakarta.inject.Inject;

@@ -62,6 +62,4 @@ public class DemoFxTestConfig_usingJdo {
         return  null;
     }
 
-
-
 }

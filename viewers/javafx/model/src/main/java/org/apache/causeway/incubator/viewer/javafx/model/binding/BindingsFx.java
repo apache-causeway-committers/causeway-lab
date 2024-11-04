@@ -106,7 +106,6 @@ public class BindingsFx {
             return rightRef.get();
         }
 
-
         public InternalBidirBinding(
                 final @NonNull Property<L> left,
                 final @NonNull Bindable<R> right,
@@ -236,6 +235,5 @@ public class BindingsFx {
         }
 
     }
-
 
 }

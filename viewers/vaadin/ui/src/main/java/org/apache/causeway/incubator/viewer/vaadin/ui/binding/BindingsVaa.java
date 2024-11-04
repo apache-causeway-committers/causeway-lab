@@ -65,7 +65,6 @@ public final class BindingsVaa {
             @Nullable UnaryOperator<BindingBuilder<Observable<ManagedObject>, V>> customizer
     ) {
 
-
         uiField.setReadOnly(true);
         val binder = new Binder<Observable<ManagedObject>>();
         val internalBinding = InternalUnidirBinding.<V>of();
@@ -244,7 +243,6 @@ public final class BindingsVaa {
         bindFeatureWithConverter(uiField, managedFeature, null, null);
     }
 
-
     /**
      * @param <P>                field/presentation value type
      * @param <M>                model value type
@@ -326,7 +324,6 @@ public final class BindingsVaa {
     @RequiredArgsConstructor(staticName = "of")
     private static class InternalUnidirBinding<V>
             implements ValueProvider<Observable<ManagedObject>, V> {
-
 
         //GETTER
         @Override

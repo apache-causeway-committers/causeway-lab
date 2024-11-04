@@ -115,5 +115,4 @@ public class UiComponentFactoryFx implements UiComponentFactory<Node, Node> {
         return LabelAndPosition.of(labelPosition, uiLabel);
     }
 
-
 }

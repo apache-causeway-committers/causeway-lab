@@ -64,7 +64,6 @@ public class EmployeeJpaConfiguration {
             employeeRepository.save(new Employee("Robert", "Plant", LocalDate.of(1948, 8, 20)));
             employeeRepository.save(new Employee("Mick", "Jagger", LocalDate.of(1943, 7, 26)));
 
-
             // -- computer scientists
             employeeRepository.save(new Employee("Alan", "Turing", LocalDate.of(1912, 6, 23)));
             employeeRepository.save(new Employee("Grace", "Hopper", LocalDate.of(1906, 12, 9)));

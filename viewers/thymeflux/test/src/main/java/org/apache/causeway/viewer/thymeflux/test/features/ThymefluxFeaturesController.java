@@ -41,7 +41,6 @@ public class ThymefluxFeaturesController {
         return "features";
     }
 
-
     @PostMapping("/tflux-features/htmx/greeting")
     public String htmxGreeting(final Model model){
 

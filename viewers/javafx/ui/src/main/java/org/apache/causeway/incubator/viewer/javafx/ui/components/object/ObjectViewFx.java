@@ -159,7 +159,6 @@ public class ObjectViewFx extends VBox {
                 return uiFieldSet;
             }
 
-
             @Override
             protected void onClearfix(final Pane container, final BSClearFix clearFixData) {
                 // TODO Auto-generated method stub
@@ -187,7 +186,6 @@ public class ObjectViewFx extends VBox {
                     } else {
                         _fx.add(container, uiButton);
                     }
-
 
                 });
             }

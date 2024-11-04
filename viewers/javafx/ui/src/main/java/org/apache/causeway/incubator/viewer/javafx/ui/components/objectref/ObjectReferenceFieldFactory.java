@@ -73,5 +73,4 @@ public class ObjectReferenceFieldFactory implements UiComponentHandlerFx {
         return uiComponent;
     }
 
-
 }

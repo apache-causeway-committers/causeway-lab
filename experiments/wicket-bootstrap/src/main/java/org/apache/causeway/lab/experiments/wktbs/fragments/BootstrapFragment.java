@@ -76,7 +76,6 @@ public class BootstrapFragment extends Panel {
         @Getter private final String variant;
     }
 
-
     public BootstrapFragment(final String id) {
         super(id);
     }

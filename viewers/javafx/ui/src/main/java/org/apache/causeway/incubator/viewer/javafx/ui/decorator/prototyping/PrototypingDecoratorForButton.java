@@ -53,5 +53,4 @@ public class PrototypingDecoratorForButton implements PrototypingDecorator<Butto
         return span;
     }
 
-
 }

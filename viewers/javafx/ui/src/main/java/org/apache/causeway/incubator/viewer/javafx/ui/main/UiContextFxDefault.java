@@ -107,5 +107,4 @@ public class UiContextFxDefault implements UiContextFx {
                 : null;
     }
 
-
 }

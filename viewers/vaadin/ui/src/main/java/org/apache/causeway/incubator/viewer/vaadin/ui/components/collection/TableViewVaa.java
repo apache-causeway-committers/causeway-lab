@@ -202,7 +202,6 @@ public class TableViewVaa extends VerticalLayout {
         });
     }
 
-
     private String stringifyPropertyValue(
             final ObjectAssociation property,
             final ManagedObject targetObject

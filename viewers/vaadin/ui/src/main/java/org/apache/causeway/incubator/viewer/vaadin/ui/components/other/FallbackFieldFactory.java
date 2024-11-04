@@ -72,7 +72,6 @@ public class FallbackFieldFactory implements UiComponentHandlerVaa {
                     summarize(facet));
         });
 
-
         val uiField = new DebugField(request.getManagedFeature().getFriendlyName());
         uiField.setValue(debugUiModel);
         return uiField;
@@ -90,6 +89,5 @@ public class FallbackFieldFactory implements UiComponentHandlerVaa {
         }
         return sb.toString();
     }
-
 
 }

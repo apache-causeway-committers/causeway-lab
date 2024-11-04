@@ -52,7 +52,6 @@ public class DepartmentEntity {
         return key.hashCode();
     }
 
-
     public String title() {
         return name;
     }

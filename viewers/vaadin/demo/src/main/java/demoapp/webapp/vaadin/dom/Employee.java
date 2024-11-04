@@ -83,7 +83,6 @@ public class Employee {
     @Collection(typeOf = Department.class)
     private Set<Department> departments = new LinkedHashSet<>();
 
-
     @jakarta.persistence.ManyToMany(fetch = FetchType.EAGER)
     @CollectionLayout(sequence = "4", hidden = Where.NOWHERE)
     @Collection(typeOf = DepartmentEntity.class)
@@ -102,7 +101,6 @@ public class Employee {
     public void removeDepartmentEntity(DepartmentEntity department) {
         departmentEntities.remove(department);
     }
-
 
     @Title
     public String title() {

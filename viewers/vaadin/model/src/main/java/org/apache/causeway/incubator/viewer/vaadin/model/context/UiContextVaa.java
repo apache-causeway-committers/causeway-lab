@@ -43,6 +43,4 @@ public interface UiContextVaa {
 //    PrototypingDecorator<Button, Node> getPrototypingDecoratorForButton();
 //    PrototypingDecorator<Node, Node> getPrototypingDecoratorForFormField();
 
-
-
 }

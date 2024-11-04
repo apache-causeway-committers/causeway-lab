@@ -75,5 +75,4 @@ public class DebugField extends CustomField<UiMockup> {
 
     }
 
-
 }

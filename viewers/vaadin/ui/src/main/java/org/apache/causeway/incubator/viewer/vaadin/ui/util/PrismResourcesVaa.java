@@ -29,13 +29,11 @@ public final class PrismResourcesVaa {
     @Getter(lazy = true) private static final LocalResourceUtil.ResourceDescriptor cssResourceReference =
             LocalResourceUtil.ResourceDescriptor.webjars(Prism.COY.cssPrimaryFile());
 
-
     @Getter(lazy = true) private static final LocalResourceUtil.ResourceDescriptor jsResourceReference =
             LocalResourceUtil.ResourceDescriptor.webjars(Prism.COY.jsFile());
 
 //    public static InputStream readJsResource() {
 //        return PrismResourcesVaa.class.getResourceAsStream("/static/prism/" + Prism.VAADIN.jsFile());
 //    }
-
 
 }

@@ -106,5 +106,4 @@ public class ShowCasePage extends WebPage {
         return button;
     }
 
-
 }

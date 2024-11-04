@@ -138,7 +138,6 @@ public class MarkupFieldFactory implements UiComponentHandlerFx {
             }
         }
 
-
         private void adjustHeight() {
             getContentHeight().ifPresent(contentHeight->webview.setPrefHeight(contentHeight + 20));
         }
@@ -158,8 +157,6 @@ public class MarkupFieldFactory implements UiComponentHandlerFx {
             return OptionalInt.empty();
         }
 
-
-
         private String getHtml(final String content) {
             return "<html><body>" +
                     "<div id=\"mydiv\">" + content + "</div>" +
@@ -168,6 +165,5 @@ public class MarkupFieldFactory implements UiComponentHandlerFx {
         */
 
     }
-
 
 }

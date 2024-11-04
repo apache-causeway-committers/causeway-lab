@@ -129,7 +129,6 @@ public class MainViewVaa extends AppLayout
         }
     }
 
-
     enum MenuVariant {
         DRAWER,
         MENU_BAR

@@ -84,7 +84,6 @@ public class FieldInputPanel<T> extends Panel {
 
     }
 
-
     private FormComponent<T> formComponent;
 
     public FieldInputPanel(

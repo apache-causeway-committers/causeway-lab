@@ -87,7 +87,6 @@ public class TableViewFx extends VBox {
             final @NonNull ManagedCollection managedCollection,
             final @NonNull Where where) {
 
-
         val elementSpec = managedCollection.getElementType();
         val elements = managedCollection.streamElements()
                 .collect(Can.toCan());

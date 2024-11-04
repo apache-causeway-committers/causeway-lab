@@ -91,5 +91,4 @@ public class UiBuilderFx implements PrimaryStageInitializer /*, TransactionBound
         stage.getIcons().add(icon);
     }
 
-
 }

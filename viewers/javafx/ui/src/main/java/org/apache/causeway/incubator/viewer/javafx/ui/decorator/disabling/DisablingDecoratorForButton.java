@@ -24,10 +24,11 @@ import org.springframework.stereotype.Component;
 
 import org.apache.causeway.viewer.commons.model.decorators.DisablingDecorator;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Tooltip;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 
 @Component
 @RequiredArgsConstructor(onConstructor_ = {@Inject})
@@ -36,7 +37,7 @@ public class DisablingDecoratorForButton implements DisablingDecorator<Button> {
     @Override
     public void decorate(final Button uiButton, final DisablingDecorationModel disableUiModel) {
 
-        val reason = disableUiModel.getReason();
+        val reason = disableUiModel.reason();
 
         uiButton.setTooltip(new Tooltip(reason));
         uiButton.disableProperty().set(true);

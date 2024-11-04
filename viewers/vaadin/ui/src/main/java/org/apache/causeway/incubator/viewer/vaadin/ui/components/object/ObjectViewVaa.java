@@ -212,7 +212,6 @@ public class ObjectViewVaa extends VerticalLayout {
                 return uiFieldSet;
             }
 
-
             @Override
             protected void onClearfix(final HasComponents container, final BSClearFix clearFixData) {
                 // TODO Auto-generated method stub

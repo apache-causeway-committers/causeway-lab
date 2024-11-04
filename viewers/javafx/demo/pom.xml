@@ -16,7 +16,7 @@
 
 	<parent>
 		<groupId>org.apache.causeway.examples.apps</groupId>
-		<artifactId>reference-app-parent</artifactId>
+        <artifactId>reference-app-parent</artifactId>
 		<version>3.0.0</version>
 		<relativePath></relativePath>
 	</parent>

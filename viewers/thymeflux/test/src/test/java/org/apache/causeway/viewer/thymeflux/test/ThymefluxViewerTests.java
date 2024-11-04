@@ -71,7 +71,6 @@ class ThymefluxViewerTests {
         System.err.printf("== navbar: %n%s====%n", YamlUtils.toStringUtf8(navbar.primary()));
     }
 
-
 //    @Test
 //    void responseOkOnRoot() {
 ////        Mockito
@@ -85,4 +84,3 @@ class ThymefluxViewerTests {
 //            .expectStatus().isOk();
 //    }
 }
-

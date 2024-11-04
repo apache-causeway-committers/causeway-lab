@@ -135,7 +135,6 @@ public class ActionDialog extends Dialog {
             setWidthFull();
         }};
 
-
         // -- binding
         okButton.addClickListener(event -> {
             //invoke the action and route to the result page

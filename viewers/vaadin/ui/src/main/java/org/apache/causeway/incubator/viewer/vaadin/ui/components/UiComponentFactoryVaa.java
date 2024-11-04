@@ -93,5 +93,4 @@ public class UiComponentFactoryVaa implements UiComponentFactory<Component, Comp
                 + "since Field components already have their own label");
     }
 
-
 }

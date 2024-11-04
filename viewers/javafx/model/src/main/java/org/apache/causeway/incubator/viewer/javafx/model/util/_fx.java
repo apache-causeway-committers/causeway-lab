@@ -200,7 +200,6 @@ public final class _fx {
         return component;
     }
 
-
     /**
      * @param <S> The type of the TableView generic type (i.e. S == TableView&lt;S&gt;)
      * @param <T> The type of the content in all cells in this TableColumn.
@@ -298,7 +297,6 @@ public final class _fx {
 //        return !component.isVisible();
 //    }
 
-
     public static void hideUntilPopulated(Pane component) {
         component.setVisible(false);
         component.getChildren().addListener((Change<? extends Node> change) -> {
@@ -310,7 +308,6 @@ public final class _fx {
 //                .forEach(newPane->{
 //                    _Probe.errOut("newPane %s", ""+newPane);
 //                });
-
 
                 component.setVisible(true);
             }
@@ -328,7 +325,6 @@ public final class _fx {
 //        });
 
     }
-
 
     // -- STYLES
 
@@ -374,6 +370,5 @@ public final class _fx {
 
         menu.setOnAction(action);
     }
-
 
 }

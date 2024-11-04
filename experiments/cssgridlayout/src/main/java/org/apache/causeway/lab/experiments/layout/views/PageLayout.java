@@ -1,6 +1,5 @@
 package org.apache.causeway.lab.experiments.layout.views;
 
-
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.router.PageTitle;
@@ -46,8 +45,6 @@ public class PageLayout extends AppLayout {
     }
 
     // -- HELPER
-
-
 
     private String getCurrentPageTitle() {
         PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);

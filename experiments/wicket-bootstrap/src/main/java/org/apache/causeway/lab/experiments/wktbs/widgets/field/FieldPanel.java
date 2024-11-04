@@ -67,5 +67,4 @@ public class FieldPanel<T> extends Panel {
         }
     }
 
-
 }

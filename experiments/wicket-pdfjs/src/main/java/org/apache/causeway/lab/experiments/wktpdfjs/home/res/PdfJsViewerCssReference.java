@@ -45,5 +45,4 @@ extends WebjarsCssResourceReference {
         return CssHeaderItem.forReference(instance());
     }
 
-
 }

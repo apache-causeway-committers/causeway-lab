@@ -37,7 +37,6 @@ public abstract class CustomFieldFx<T> extends Pane {
         getChildren().add(this.label);
     }
 
-
 //    /**
 //     * Sets the value of this object. If the new value is not equal to
 //     * {@code getValue()}, fires a value change event. May throw
@@ -72,7 +71,6 @@ public abstract class CustomFieldFx<T> extends Pane {
      */
     protected abstract T generateModelValue();
 
-
     /**
      * This method should be implemented to set the value of the fields contained
      * in this custom field according to the value of the parameter.
@@ -82,7 +80,5 @@ public abstract class CustomFieldFx<T> extends Pane {
      * @param value - the new presentation value.
      */
     protected abstract void setPresentationValue(T value);
-
-
 
 }

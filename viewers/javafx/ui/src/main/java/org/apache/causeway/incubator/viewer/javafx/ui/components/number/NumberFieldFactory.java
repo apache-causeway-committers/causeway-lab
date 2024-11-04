@@ -68,5 +68,4 @@ public class NumberFieldFactory implements UiComponentHandlerFx {
         return uiComponent;
     }
 
-
 }

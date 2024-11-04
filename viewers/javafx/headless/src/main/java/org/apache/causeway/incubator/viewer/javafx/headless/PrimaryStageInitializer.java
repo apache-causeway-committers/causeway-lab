@@ -22,7 +22,6 @@ import org.springframework.context.ApplicationListener;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import lombok.val;
 
 /**
  *
@@ -34,7 +33,7 @@ extends ApplicationListener<PrimaryStageReadyEvent> {
 
     @Override
     public default void onApplicationEvent(final PrimaryStageReadyEvent event) {
-        val primaryStage = event.getStage();
+        var primaryStage = event.getStage();
         onPrimaryStageReady(primaryStage);
         primaryStage.show();
     }

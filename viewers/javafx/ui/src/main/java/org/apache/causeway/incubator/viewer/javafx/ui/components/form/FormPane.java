@@ -107,7 +107,6 @@ public class FormPane extends GridPane {
         return this;
     }
 
-
     // -- HELPER
 
     private GridPane grid() {
@@ -126,10 +125,5 @@ public class FormPane extends GridPane {
         grid().add(right, 1, rowCount);
         ++rowCount;
     }
-
-
-
-
-
 
 }

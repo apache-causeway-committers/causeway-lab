@@ -43,7 +43,6 @@ public class UiActionHandlerVaa {
     private final InteractionService interactionService;
     private final UiComponentFactoryVaa uiComponentFactory;
 
-
     public void handleActionLinkClicked(
             final ManagedAction managedAction
     ) {

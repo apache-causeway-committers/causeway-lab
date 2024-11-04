@@ -24,9 +24,10 @@ import org.springframework.stereotype.Component;
 
 import org.apache.causeway.viewer.commons.model.decorators.DisablingDecorator;
 
-import javafx.scene.Node;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
+
+import javafx.scene.Node;
 
 @Component
 @RequiredArgsConstructor(onConstructor_ = {@Inject})
@@ -35,16 +36,13 @@ public class DisablingDecoratorForFormField implements DisablingDecorator<Node> 
     @Override
     public void decorate(final Node formField, final DisablingDecorationModel disableUiModel) {
 
-        val reason = disableUiModel.getReason();
+        val reason = disableUiModel.reason();
 
             //formField.setDisabledReason(); //TODO lookup vaadin api as rolemodel
             //formField.getStyleClass().add("button-disabled");
             //uiButton.setTooltip(new Tooltip(reason));
             //uiButton.disableProperty().set(true);
 
-
-
     }
-
 
 }

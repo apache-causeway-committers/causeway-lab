@@ -26,5 +26,4 @@ public class EmployeeMenu {
         return factoryService.viewModel(EmployeeManager.class);
     }
 
-
 }

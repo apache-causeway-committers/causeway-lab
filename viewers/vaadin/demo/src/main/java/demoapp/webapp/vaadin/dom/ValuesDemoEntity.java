@@ -1,6 +1,5 @@
 package demoapp.webapp.vaadin.dom;
 
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
