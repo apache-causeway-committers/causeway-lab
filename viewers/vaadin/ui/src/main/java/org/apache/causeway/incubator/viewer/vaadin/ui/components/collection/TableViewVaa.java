@@ -33,6 +33,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
 import org.apache.causeway.applib.annotation.Where;
+import org.apache.causeway.applib.services.layout.LayoutService;
 import org.apache.causeway.applib.services.title.TitleService;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
 import org.apache.causeway.core.metamodel.spec.feature.ObjectAssociation;
@@ -56,9 +57,10 @@ public class TableViewVaa extends VerticalLayout {
     private static final String NULL_LITERAL = "<NULL>";
     private final UiContextVaa uiContext;
     private final TitleService titleService;
+    private final LayoutService layoutService;
 
-    public static TableViewVaa empty(final UiContextVaa uiContext, final TitleService titleService) {
-        return new TableViewVaa(uiContext, titleService);
+    public static TableViewVaa empty(final UiContextVaa uiContext, final TitleService titleService, final LayoutService layoutService) {
+        return new TableViewVaa(uiContext, titleService, layoutService);
     }
 
     /**
@@ -69,11 +71,12 @@ public class TableViewVaa extends VerticalLayout {
             final @NonNull TitleService titleService,
             final @NonNull DataTableInteractive dataTableModel,
             //TODO not used yet (or is redundant)
-            final @NonNull Where where
+            final @NonNull Where where,
+            final @NonNull LayoutService layoutService
     ) {
         return dataTableModel.getElementCount() == 0
-                ? empty(uiContext, titleService)
-                : new TableViewVaa(dataTableModel, uiContext, titleService);
+                ? empty(uiContext, titleService, layoutService)
+                : new TableViewVaa(dataTableModel, uiContext, titleService, layoutService);
     }
 
     private static String createTableId(final String str) {
@@ -84,10 +87,12 @@ public class TableViewVaa extends VerticalLayout {
     private TableViewVaa(
             final @NonNull DataTableInteractive dataTableModel,
             final @NonNull UiContextVaa uiContext,
-            final @NonNull TitleService titleService
+            final @NonNull TitleService titleService,
+            final @NonNull LayoutService layoutService
     ) {
         this.uiContext = uiContext;
         this.titleService = titleService;
+        this.layoutService = layoutService;
 
         setId("table-view-" + createTableId(dataTableModel.getTitle().getValue()));
         setSizeFull();

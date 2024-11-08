@@ -28,7 +28,10 @@ import com.vaadin.flow.component.details.DetailsVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
+import org.apache.causeway.applib.Identifier;
+import org.apache.causeway.applib.id.LogicalType;
 import org.apache.causeway.core.metamodel.context.MetaModelContext;
+import org.apache.causeway.core.metamodel.facets.members.iconfa.FaFacet;
 import org.apache.causeway.viewer.commons.applib.services.menu.MenuVisitor;
 import org.apache.causeway.viewer.commons.applib.services.menu.model.MenuAction;
 import org.apache.causeway.viewer.commons.applib.services.menu.model.MenuDropdown;
@@ -81,12 +84,50 @@ class CustomMenuBuilderVaa implements MenuVisitor {
             }};
 
             currentTopLevelMenu.add(button);
-
-            // FIXME add icon
+            val iconName = getIconName(menuAction);
+            button.setIcon(new FaIcon(iconName));
             button.addClickListener(event -> {
                 uiActionHandlerVaa.handleActionLinkClicked(managedAction);
             });
         });
+    }
+
+    /**
+     * workaround for missing cssClassFa - to be fixed
+     *
+     * @param menuAction
+     * @return
+     */
+    private String getIconName(final MenuAction menuAction) {
+        var specLoader = MetaModelContext.instanceElseFail().getSpecificationLoader();
+
+        final Identifier id = menuAction.actionId();
+        final LogicalType lt = id.getLogicalType();
+        final Class<?> clazz = lt.getCorrespondingClass();
+
+        var spec = specLoader.loadSpecification(clazz);
+        var valueSampleAct = spec.getAction(id.getMemberLogicalName()).orElseThrow();
+        final FaFacet faFacet = valueSampleAct.getFacet(FaFacet.class);
+
+        final String iconName = extractElementFromFacet("classes", faFacet);
+        return iconName;
+    }
+
+    // ugly hack to get a hold of the fa class name
+    private String extractElementFromFacet(String element, FaFacet faFacet) {
+        final String elementsStr = faFacet.toString()
+                .replace("FaFacetForActionLayoutAnnotation[", "")
+                .replace("]", "");
+        final String[] elements = elementsStr.split(";");
+        for (String s : elements) {
+            String t = s.trim();
+            if (t.startsWith(element)) {
+                final String value = t.split("=")[1].trim();
+                if (!value.startsWith("!"))
+                    return "fas fa-" + value;
+            }
+        }
+        return "fa-question";
     }
 
     @Override

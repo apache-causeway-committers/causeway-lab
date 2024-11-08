@@ -32,6 +32,7 @@
         <module>viewer</module>
         <module>ui</module>
         <module>demo</module>
+        <module>wicket-stubs</module>
     </modules>
 
     <parent>

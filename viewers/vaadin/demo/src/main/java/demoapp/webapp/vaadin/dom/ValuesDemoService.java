@@ -18,7 +18,7 @@ public class ValuesDemoService {
     private final ValuesDemoRepository valuesDemoRepository;
 
     @Action
-    @ActionLayout(named = "Value Sample5")
+    @ActionLayout(cssClassFa="star", named = "Value Sample5")
     public ValuesDemoEntity valueSample() {
         val valuesDemo = new ValuesDemoEntity();
         return valuesDemoRepository.save(valuesDemo);

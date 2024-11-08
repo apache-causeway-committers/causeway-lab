@@ -48,11 +48,17 @@
 
 	<dependencies>
 
-		<dependency>
-			<groupId>org.apache.causeway.incubator.viewer</groupId>
-			<artifactId>causeway-viewer-vaadin-model</artifactId>
-			<version>${revision}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.causeway.incubator.viewer</groupId>
+            <artifactId>causeway-viewer-vaadin-model</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.causeway.incubator.viewer</groupId>
+            <artifactId>wicket-stubs</artifactId>
+            <version>${revision}</version>
+        </dependency>
 
 		<dependency>
 			<groupId>org.apache.causeway.core</groupId>
@@ -86,10 +92,6 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-grid-flow</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-renderer-flow</artifactId>
-		</dependency>
 
 		<!-- VAADIN ADDONS -->
 
@@ -103,20 +105,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-renderer-flow</artifactId>
-			<version>23.2.10</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-renderer-flow</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-renderer-flow</artifactId>
 		</dependency>
 
 	</dependencies>

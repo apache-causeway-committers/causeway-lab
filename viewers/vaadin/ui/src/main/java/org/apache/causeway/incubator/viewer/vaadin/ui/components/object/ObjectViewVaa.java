@@ -38,17 +38,23 @@ import org.apache.causeway.applib.layout.component.FieldSet;
 import org.apache.causeway.applib.layout.component.PropertyLayoutData;
 import org.apache.causeway.applib.layout.grid.bootstrap.BSClearFix;
 import org.apache.causeway.applib.layout.grid.bootstrap.BSCol;
+import org.apache.causeway.applib.layout.grid.bootstrap.BSGrid;
 import org.apache.causeway.applib.layout.grid.bootstrap.BSRow;
 import org.apache.causeway.applib.layout.grid.bootstrap.BSTab;
 import org.apache.causeway.applib.layout.grid.bootstrap.BSTabGroup;
+import org.apache.causeway.applib.services.layout.LayoutExportStyle;
+import org.apache.causeway.applib.services.layout.LayoutService;
 import org.apache.causeway.applib.services.title.TitleService;
+import org.apache.causeway.applib.value.NamedWithMimeType;
 import org.apache.causeway.commons.internal.assertions._Assert;
+import org.apache.causeway.core.metamodel.facets.object.grid.GridFacet;
 import org.apache.causeway.core.metamodel.interactions.managed.ActionInteraction;
 import org.apache.causeway.core.metamodel.interactions.managed.CollectionInteraction;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
 import org.apache.causeway.core.metamodel.interactions.managed.PropertyInteraction;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
 import org.apache.causeway.core.metamodel.object.MmTitleUtils;
+import org.apache.causeway.core.metamodel.spec.ObjectSpecification;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
 import org.apache.causeway.incubator.viewer.vaadin.model.util.Vaa;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.UiComponentFactoryVaa;
@@ -69,9 +75,10 @@ public class ObjectViewVaa extends VerticalLayout {
             final @NonNull UiComponentFactoryVaa uiComponentFactory,
             final @NonNull TitleService titleService,
             final @NonNull Consumer<ManagedAction> actionEventHandler,
-            final @NonNull ManagedObject managedObject
+            final @NonNull ManagedObject managedObject,
+            final @NonNull LayoutService layoutService
     ) {
-        return new ObjectViewVaa(uiContext, uiComponentFactory, titleService, actionEventHandler, managedObject);
+        return new ObjectViewVaa(uiContext, uiComponentFactory, titleService, actionEventHandler, managedObject, layoutService);
     }
 
     /**
@@ -84,15 +91,19 @@ public class ObjectViewVaa extends VerticalLayout {
             final UiComponentFactoryVaa uiComponentFactory,
             final TitleService titleService,
             final Consumer<ManagedAction> actionEventHandler,
-            final ManagedObject managedObject
+            final ManagedObject managedObject,
+            final LayoutService layoutService
     ) {
         log.info("binding object interaction to owner {}", managedObject.getSpecification().getFeatureIdentifier());
         _Assert.assertTrue(uiContext.getInteractionService().isInInteraction(), "requires an active interaction");
 
         val objectTitle = MmTitleUtils.titleOf(managedObject);
 
-        val uiGridLayout = UiGridLayout.bind(managedObject);
-
+/*        val uiGridLayout = UiGridLayout.bind(managedObject);
+        val style = LayoutExportStyle.COMPLETE;
+        val format = NamedWithMimeType.CommonMimeType.XML;
+        final String grid = layoutService.objectLayout(managedObject.getClass(), style, format);*/
+        ObjectSpecification. getFacet(GridFacet.class);
         // force new row
         //formLayout.getElement().appendChild(ElementFactory.createBr());
 
@@ -208,10 +219,8 @@ public class ObjectViewVaa extends VerticalLayout {
                             new ResponsiveStep("0", 1)); // single column only
                     setSizeFull();
                 }});
-
                 return uiFieldSet;
             }
-
 
             @Override
             protected void onClearfix(final HasComponents container, final BSClearFix clearFixData) {
@@ -287,20 +296,16 @@ public class ObjectViewVaa extends VerticalLayout {
                             for (val actionData : collectionData.getActions()) {
                                 onAction(actionBar, actionData);
                             }
-
                             val uiCollection = Vaa.add(container,
                                     TableViewVaa.forDataTableModel(
                                             uiContext,
                                             titleService,
                                             managedCollection.createDataTableModel(),
-                                            Where.PARENTED_TABLES));
-
+                                            Where.PARENTED_TABLES,
+                                            layoutService));
                         });
-
             }
-
         };
-
         uiGridLayout.visit(gridVisitor);
         setWidthFull();
     }

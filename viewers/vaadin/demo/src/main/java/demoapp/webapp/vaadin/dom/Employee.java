@@ -90,14 +90,14 @@ public class Employee {
     private Set<DepartmentEntity> departmentEntities = new LinkedHashSet<>();
 
     @Action(semantics = IDEMPOTENT)
-    @ActionLayout(associateWith = "departmentEntities")
+    @ActionLayout(cssClassFa = "user", associateWith = "departmentEntities")
     @MemberSupport
     public void addDepartmentEntity(DepartmentEntity department) {
         departmentEntities.add(department);
     }
 
     @Action(semantics = IDEMPOTENT)
-    @ActionLayout(associateWith = "departmentEntities")
+    @ActionLayout(cssClassFa = "user", associateWith = "departmentEntities")
     @MemberSupport
     public void removeDepartmentEntity(DepartmentEntity department) {
         departmentEntities.remove(department);

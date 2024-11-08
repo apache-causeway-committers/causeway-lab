@@ -22,7 +22,7 @@ import lombok.val;
 @Named(MetaModelModule.NAMESPACE + ".MetaModelService")
 public class MetaModelService implements BeanFactoryPostProcessor {
     @Action
-    @ActionLayout(named = "Refresh Meta Model")
+    @ActionLayout(cssClassFa = "question", named = "Refresh Meta Model")
     public void refreshMetaModel() {
         _ClassCache.invalidate();
         // next lines does not work atm, bc: CausewayComponentScanInterceptorImpl is one shot only atm

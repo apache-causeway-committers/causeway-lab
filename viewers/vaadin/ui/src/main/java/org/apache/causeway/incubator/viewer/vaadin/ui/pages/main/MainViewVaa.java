@@ -40,6 +40,7 @@ import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
 import org.apache.causeway.applib.annotation.Where;
+import org.apache.causeway.applib.services.layout.LayoutService;
 import org.apache.causeway.applib.services.title.TitleService;
 import org.apache.causeway.commons.collections.Can;
 import org.apache.causeway.commons.internal.exceptions._Exceptions;
@@ -80,6 +81,7 @@ public class MainViewVaa extends AppLayout
     private final HeaderUiService headerUiService;
     private final MainViewVaaState state;
     private final TitleService titleService;
+    private final LayoutService layoutService;
 
     private final VerticalLayout pageContent = new VerticalLayout() {
         {
@@ -101,7 +103,7 @@ public class MainViewVaa extends AppLayout
             final @NonNull UiContextVaa uiContext,
             final @NonNull UiComponentFactoryVaa uiComponentFactory,
             final @NonNull TitleService titleService,
-            final @NonNull MainViewVaaState state
+            final @NonNull MainViewVaaState state, LayoutService layoutService
     ) {
         this.metaModelContext = metaModelContext;
         this.uiActionHandler = uiActionHandler;
@@ -110,9 +112,10 @@ public class MainViewVaa extends AppLayout
         this.uiComponentFactory = uiComponentFactory;
         this.titleService = titleService;
         this.state = state;
+        this.layoutService = layoutService;
         // FIXME Alf: MainViewVaa and UiContextVaa should be live in one package and not abstracted away
         ((UiContextVaaDefault) uiContext).setMainView(this);
-
+//        final Grid grid = layoutService.objectLayout()
     }
 
     // FIXME Alf: How to handle deep links
@@ -234,7 +237,8 @@ public class MainViewVaa extends AppLayout
                 uiComponentFactory,
                 titleService,
                 uiActionHandler::handleActionLinkClicked,
-                objectState.object()
+                objectState.object(),
+                layoutService
         );
     }
 
@@ -252,7 +256,7 @@ public class MainViewVaa extends AppLayout
     private Component registerAndCreateComponentForResultList(ManagedAction managedAction, Can<ManagedObject> params, ManagedObject actionResult) {
         val actionState = state.addActionResult(actionResult, managedAction, params);
         val dataTableModel = DataTableInteractive.forAction(actionState.managedAction(), actionState.params(), actionState.actionResult());
-        return TableViewVaa.forDataTableModel(uiContext, titleService, dataTableModel, Where.STANDALONE_TABLES);
+        return TableViewVaa.forDataTableModel(uiContext, titleService, dataTableModel, Where.STANDALONE_TABLES, layoutService);
     }
 
     @Override
