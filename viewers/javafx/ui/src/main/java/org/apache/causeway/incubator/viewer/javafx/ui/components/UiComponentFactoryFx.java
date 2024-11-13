@@ -26,6 +26,7 @@ import jakarta.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import org.apache.causeway.commons.handler.ChainOfResponsibility;
+import org.apache.causeway.commons.handler.ChainOfResponsibility.Handler;
 import org.apache.causeway.core.config.environment.CausewaySystemEnvironment;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedMember;
 import org.apache.causeway.core.metamodel.util.Facets;
@@ -33,11 +34,12 @@ import org.apache.causeway.incubator.viewer.javafx.model.context.UiContextFx;
 import org.apache.causeway.viewer.commons.model.components.UiComponentFactory;
 import org.apache.causeway.viewer.commons.model.decorators.PrototypingDecorator.PrototypingDecorationModel;
 
+import lombok.Getter;
+import lombok.val;
+
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import lombok.Getter;
-import lombok.val;
 
 @Service
 public class UiComponentFactoryFx implements UiComponentFactory<Node, Node> {
@@ -58,7 +60,7 @@ public class UiComponentFactoryFx implements UiComponentFactory<Node, Node> {
 
         this.isPrototyping = causewaySystemEnvironment.isPrototyping();
         this.uiContext = uiContext;
-        this.chainOfHandlers = ChainOfResponsibility.named("Component Mapper", handlers);
+        this.chainOfHandlers = new ChainOfResponsibility<UiComponentFactory.ComponentRequest, Node>("Component Mapper", handlers);
         this.registeredHandlers = handlers.stream()
                 .map(Handler::getClass)
                 .collect(Collectors.toList());
