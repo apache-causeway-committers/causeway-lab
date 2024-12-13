@@ -26,7 +26,6 @@ import jakarta.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import org.apache.causeway.commons.handler.ChainOfResponsibility;
-import org.apache.causeway.commons.handler.ChainOfResponsibility.Handler;
 import org.apache.causeway.core.config.environment.CausewaySystemEnvironment;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedMember;
 import org.apache.causeway.core.metamodel.util.Facets;
@@ -69,7 +68,7 @@ public class UiComponentFactoryFx implements UiComponentFactory<Node, Node> {
     @Override
     public Node componentFor(final ComponentRequest request) {
 
-        val formField = chainOfHandlers.handle(request);
+        val formField = chainOfHandlers.handleElseFail(request);
         val managedMember = (ManagedMember) request.getManagedFeature();
 
         request.getDisablingUiModelIfAny().ifPresent(disablingUiModel->{
@@ -106,7 +105,7 @@ public class UiComponentFactoryFx implements UiComponentFactory<Node, Node> {
 
     @Override
     public Node parameterFor(final ComponentRequest request) {
-        val formField = chainOfHandlers.handle(request);
+        val formField = chainOfHandlers.handleElseFail(request);
         return formField;
     }
 
