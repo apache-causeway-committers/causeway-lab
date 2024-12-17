@@ -22,16 +22,10 @@ import lombok.val;
 
 import org.apache.causeway.core.metamodel.util.Facets;
 import org.apache.causeway.incubator.viewer.vaadin.model.models.UiObjectVdn;
+import org.apache.causeway.incubator.viewer.vaadin.ui.ComponentFactory;
 import org.apache.causeway.viewer.commons.model.components.UiComponentType;
-//import org.apache.causeway.viewer.commons.model.object.UiObject;
-//import org.apache.causeway.viewer.wicket.model.models.UiObjectWkt;
-import org.apache.causeway.viewer.wicket.ui.ComponentFactory;
-import org.apache.causeway.viewer.wicket.ui.components.entity.EntityComponentFactoryAbstract;
-import org.apache.causeway.wicketstubs.api.Component;
+import org.apache.causeway.incubator.viewer.vaadin.ui.components.entity.collection.EntityComponentFactoryAbstract;
 import org.apache.causeway.wicketstubs.api.IModel;
-
-//import org.apache.wicket.Component;
-//import org.apache.wicket.model.IModel;
 
 /**
  * {@link ComponentFactory} for {@link BSGridPanel}.
@@ -42,19 +36,18 @@ public class BSGridPanelFactory extends EntityComponentFactoryAbstract {
         super(UiComponentType.ENTITY, BSGridPanel.class);
     }
 
-    @Override protected ApplicationAdvice appliesTo(final IModel<?> model) {
+    protected ComponentFactory.ApplicationAdvice appliesTo(final IModel<?> model) {
         final UiObjectVdn entityModel = (UiObjectVdn) model;
 
         val objectAdapter = entityModel.getObject();
         val objectSpec = entityModel.getTypeOfSpecification();
 
-        return ApplicationAdvice.appliesIf(
+        return ComponentFactory.ApplicationAdvice.appliesIf(
                 Facets.bootstrapGrid(objectSpec, objectAdapter)
                 .isPresent());
     }
 
-    @Override
-    public Component createComponent(final String id, final IModel<?> model) {
+    public BSGridPanel createComponent(final String id, final IModel<?> model) {
         final UiObjectVdn entityModel = (UiObjectVdn) model;
 
         val objectAdapter = entityModel.getObject();

@@ -19,17 +19,12 @@
 package org.apache.causeway.incubator.viewer.vaadin.ui.pages;
 
 import org.apache.causeway.commons.internal.base._Strings;
-
 import org.apache.causeway.incubator.viewer.vaadin.model.models.HasCommonContext;
 import org.apache.causeway.wicketstubs.api.AjaxRequestTarget;
-import org.apache.causeway.wicketstubs.api.IEvent;
 import org.apache.causeway.wicketstubs.api.IHeaderResponse;
 import org.apache.causeway.wicketstubs.api.IModel;
 import org.apache.causeway.wicketstubs.api.MetaDataHeaderItem;
-import org.apache.causeway.wicketstubs.api.PageParameters;
 import org.apache.causeway.wicketstubs.api.WebPage;
-
-//import org.apache.wicket.markup.head.MetaDataHeaderItem;
 
 /**
  * Provides all the system dependencies for sub-classes.
@@ -41,12 +36,12 @@ implements HasCommonContext {
 
     private static final long serialVersionUID = 1L;
 
-    protected WebPageBase(final PageParameters parameters) {
-        super(parameters);
+    protected WebPageBase() {
+        super();
     }
 
     protected WebPageBase(final IModel<?> model) {
-        super((PageParameters) model);
+        super();
     }
 
     @Override
@@ -81,9 +76,6 @@ implements HasCommonContext {
                 : getMetaModelContext().lookupServiceElseFail(type);
     }
 
-    public abstract void onEvent(org.apache.wicket.event.IEvent<?> event);
-
     public abstract void closePrompt(AjaxRequestTarget target);
 
-    public abstract void onEvent(IEvent<?> event);
 }

@@ -1,189 +1,92 @@
 package org.apache.causeway.wicketstubs;
 
-import org.apache.causeway.wicketstubs.api.StringValue;
-
-import java.lang.reflect.Array;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.causeway.wicketstubs.api.StringValue;
+
 public class ValueMap extends LinkedHashMap<String, Object> implements IValueMap {
     public static final ValueMap EMPTY_MAP = new ValueMap();
-    private static final long serialVersionUID = 1L;
     private boolean immutable;
 
     public ValueMap() {
         this.immutable = false;
     }
 
-    public ValueMap(Map<? extends String, ?> map) {
-        this.immutable = false;
-        super.putAll(map);
-    }
-
-    public ValueMap(String keyValuePairs) {
-        this(keyValuePairs, ",");
-    }
-
-    public ValueMap(String keyValuePairs, String delimiter) {
-        this.immutable = false;
-        int start = 0;
-        int equalsIndex = keyValuePairs.indexOf(61);
-        int delimiterIndex = keyValuePairs.indexOf(delimiter, equalsIndex);
-        if (delimiterIndex == -1) {
-            delimiterIndex = keyValuePairs.length();
-        }
-
-        while (equalsIndex != -1) {
-            if (delimiterIndex < keyValuePairs.length()) {
-                int equalsIndex2 = keyValuePairs.indexOf(61, delimiterIndex + 1);
-                if (equalsIndex2 != -1) {
-                    delimiterIndex = keyValuePairs.lastIndexOf(delimiter, equalsIndex2);
-                } else {
-                    delimiterIndex = keyValuePairs.length();
-                }
-            }
-
-            String key = keyValuePairs.substring(start, equalsIndex);
-            String value = keyValuePairs.substring(equalsIndex + 1, delimiterIndex);
-            this.add(key, value);
-            if (delimiterIndex < keyValuePairs.length()) {
-                start = delimiterIndex + 1;
-                equalsIndex = keyValuePairs.indexOf(61, start);
-                if (equalsIndex != -1) {
-                    delimiterIndex = keyValuePairs.indexOf(delimiter, equalsIndex);
-                    if (delimiterIndex == -1) {
-                        delimiterIndex = keyValuePairs.length();
-                    }
-                }
-            } else {
-                equalsIndex = -1;
-            }
-        }
-
-    }
-
-    public ValueMap(String keyValuePairs, String delimiter, MetaPattern valuePattern) {
-        this.immutable = false;
-        StringList pairs = StringList.tokenize(keyValuePairs, delimiter);
-        IStringIterator iterator = pairs.iterator();
-
-        while (iterator.hasNext()) {
-            String pair = iterator.next();
-            VariableAssignmentParser parser = new VariableAssignmentParser(pair, valuePattern);
-            if (!parser.matches()) {
-                throw new IllegalArgumentException("Invalid key value list: '" + keyValuePairs + "'");
-            }
-
-            this.put((String) parser.getKey(), parser.getValue());
-        }
-
-    }
 
     public final void clear() {
-        this.checkMutability();
-        super.clear();
     }
 
-    public final boolean getBoolean(String key) throws StringValueConversionException {
-        return this.getStringValue(key).toBoolean();
+    @Override
+    public boolean getBoolean(String var1) throws StringValueConversionException {
+        return false;
     }
 
-    public final double getDouble(String key) throws StringValueConversionException {
-        return this.getStringValue(key).toDouble();
+    @Override
+    public double getDouble(String var1) throws StringValueConversionException {
+        return 0;
     }
 
-    public final double getDouble(String key, double defaultValue) {
-        return this.getStringValue(key).toDouble(defaultValue);
+    @Override
+    public double getDouble(String var1, double var2) throws StringValueConversionException {
+        return 0;
     }
 
-    public final Duration getDuration(String key) throws StringValueConversionException {
-        return this.getStringValue(key).toDuration();
+    @Override
+    public Duration getDuration(String var1) throws StringValueConversionException {
+        return null;
     }
 
-    public final int getInt(String key) throws StringValueConversionException {
-        return this.getStringValue(key).toInt();
+    @Override
+    public int getInt(String var1) throws StringValueConversionException {
+        return 0;
     }
 
-    public final int getInt(String key, int defaultValue) {
-        return this.getStringValue(key).toInt(defaultValue);
+    @Override
+    public int getInt(String var1, int var2) throws StringValueConversionException {
+        return 0;
     }
 
-    public final long getLong(String key) throws StringValueConversionException {
-        return this.getStringValue(key).toLong();
+    @Override
+    public long getLong(String var1) throws StringValueConversionException {
+        return 0;
     }
 
-    public final long getLong(String key, long defaultValue) {
-        return this.getStringValue(key).toLong(defaultValue);
+    @Override
+    public long getLong(String var1, long var2) throws StringValueConversionException {
+        return 0;
     }
 
-    public final String getString(String key, String defaultValue) {
-        String value = this.getString(key);
-        return value != null ? value : defaultValue;
+    @Override
+    public String getString(String var1, String var2) {
+        return "";
     }
 
-    public final String getString(String key) {
-        Object o = this.get(key);
-        if (o == null) {
-            return null;
-        } else if (o.getClass().isArray() && Array.getLength(o) > 0) {
-            Object arrayValue = Array.get(o, 0);
-            return arrayValue == null ? null : arrayValue.toString();
-        } else {
-            return o.toString();
-        }
+    @Override
+    public String getString(String var1) {
+        return "";
     }
 
-    public final CharSequence getCharSequence(String key) {
-        Object o = this.get(key);
-        if (o == null) {
-            return null;
-        } else if (o.getClass().isArray() && Array.getLength(o) > 0) {
-            Object arrayValue = Array.get(o, 0);
-            if (arrayValue == null) {
-                return null;
-            } else {
-                return (CharSequence) (arrayValue instanceof CharSequence ? (CharSequence) arrayValue : arrayValue.toString());
-            }
-        } else {
-            return (CharSequence) (o instanceof CharSequence ? (CharSequence) o : o.toString());
-        }
+    @Override
+    public CharSequence getCharSequence(String var1) {
+        return null;
     }
 
-    public String[] getStringArray(String key) {
-        Object o = this.get(key);
-        if (o == null) {
-            return null;
-        } else if (o instanceof String[]) {
-            return (String[]) o;
-        } else if (o.getClass().isArray()) {
-            int length = Array.getLength(o);
-            String[] array = new String[length];
-
-            for (int i = 0; i < length; ++i) {
-                Object arrayValue = Array.get(o, i);
-                if (arrayValue != null) {
-                    array[i] = arrayValue.toString();
-                }
-            }
-
-            return array;
-        } else {
-            return new String[]{o.toString()};
-        }
+    @Override
+    public String[] getStringArray(String var1) {
+        return new String[0];
     }
 
-    public StringValue getStringValue(String key) {
-        return StringValue.valueOf(this.getString(key));
+    @Override
+    public StringValue getStringValue(String var1) {
+        return null;
     }
 
-    public final Instant getInstant(String key) throws StringValueConversionException {
-        return this.getStringValue(key).toInstant();
+    @Override
+    public Instant getInstant(String var1) throws StringValueConversionException {
+        return null;
     }
 
     public final boolean isImmutable() {
@@ -191,8 +94,87 @@ public class ValueMap extends LinkedHashMap<String, Object> implements IValueMap
     }
 
     public final IValueMap makeImmutable() {
-        this.immutable = true;
         return this;
+    }
+
+    @Override
+    public String getKey(String var1) {
+        return "";
+    }
+
+    @Override
+    public Boolean getAsBoolean(String var1) {
+        return null;
+    }
+
+    @Override
+    public boolean getAsBoolean(String var1, boolean var2) {
+        return false;
+    }
+
+    @Override
+    public Integer getAsInteger(String var1) {
+        return 0;
+    }
+
+    @Override
+    public int getAsInteger(String var1, int var2) {
+        return 0;
+    }
+
+    @Override
+    public Long getAsLong(String var1) {
+        return 0L;
+    }
+
+    @Override
+    public long getAsLong(String var1, long var2) {
+        return 0;
+    }
+
+    @Override
+    public Double getAsDouble(String var1) {
+        return 0.0;
+    }
+
+    @Override
+    public double getAsDouble(String var1, double var2) {
+        return 0;
+    }
+
+    @Override
+    public Duration getAsDuration(String var1) {
+        return null;
+    }
+
+    @Override
+    public Duration getAsDuration(String var1, Duration var2) {
+        return null;
+    }
+
+    @Override
+    public Instant getAsInstant(String var1) {
+        return null;
+    }
+
+    @Override
+    public Instant getAsTime(String var1, Instant var2) {
+        return null;
+    }
+
+    @Override
+    public <T extends Enum<T>> T getAsEnum(String var1, Class<T> var2) {
+        return null;
+    }
+
+    @Override
+    public <T extends Enum<T>> T getAsEnum(String var1, T var2) {
+        return null;
+    }
+
+    @Override
+    public <T extends Enum<T>> T getAsEnum(String var1, Class<T> var2, T var3) {
+        return null;
     }
 
     public Object put(String key, Object value) {
@@ -201,237 +183,21 @@ public class ValueMap extends LinkedHashMap<String, Object> implements IValueMap
     }
 
     public final Object add(String key, String value) {
-        this.checkMutability();
-        Object o = this.get(key);
-        if (o == null) {
-            return this.put((String) key, value);
-        } else if (o.getClass().isArray()) {
-            int length = Array.getLength(o);
-            String[] destArray = new String[length + 1];
-
-            for (int i = 0; i < length; ++i) {
-                Object arrayValue = Array.get(o, i);
-                if (arrayValue != null) {
-                    destArray[i] = arrayValue.toString();
-                }
-            }
-
-            destArray[length] = value;
-            return this.put((String) key, destArray);
-        } else {
-            return this.put((String) key, new String[]{o.toString(), value});
-        }
+        return put(key, value);
     }
 
     public void putAll(Map<? extends String, ?> map) {
-        this.checkMutability();
-        super.putAll(map);
     }
 
     public Object remove(Object key) {
-        this.checkMutability();
-        return super.remove(key);
-    }
-
-    public String getKey(String key) {
-        Iterator var2 = this.keySet().iterator();
-
-        String other;
-        do {
-            if (!var2.hasNext()) {
-                return null;
-            }
-
-            other = (String) var2.next();
-        } while (!other.equalsIgnoreCase(key));
-
-        return other;
+        return null;
     }
 
     public String toString() {
-        AppendingStringBuffer buffer = new AppendingStringBuffer();
-        boolean first = true;
-
-        for (Iterator var3 = this.entrySet().iterator(); var3.hasNext(); buffer.append('"')) {
-            Map.Entry<String, Object> entry = (Map.Entry) var3.next();
-            if (!first) {
-                buffer.append(' ');
-            }
-
-            first = false;
-            buffer.append((String) entry.getKey());
-            buffer.append(" = \"");
-            Object value = entry.getValue();
-            if (value == null) {
-                buffer.append("null");
-            } else if (value.getClass().isArray()) {
-                buffer.append(Arrays.asList((Object[]) value));
-            } else {
-                buffer.append(value);
-            }
-        }
-
-        return buffer.toString();
+        return null;
     }
 
     private void checkMutability() {
-        if (this.immutable) {
-            throw new UnsupportedOperationException("Map is immutable");
-        }
-    }
-
-    public Boolean getAsBoolean(String key) {
-        if (!this.containsKey(key)) {
-            return null;
-        } else {
-            try {
-                return this.getBoolean(key);
-            } catch (StringValueConversionException var3) {
-                return null;
-            }
-        }
-    }
-
-    public boolean getAsBoolean(String key, boolean defaultValue) {
-        if (!this.containsKey(key)) {
-            return defaultValue;
-        } else {
-            try {
-                return this.getBoolean(key);
-            } catch (StringValueConversionException var4) {
-                return defaultValue;
-            }
-        }
-    }
-
-    public Integer getAsInteger(String key) {
-        if (!this.containsKey(key)) {
-            return null;
-        } else {
-            try {
-                return this.getInt(key);
-            } catch (StringValueConversionException var3) {
-                return null;
-            }
-        }
-    }
-
-    public int getAsInteger(String key, int defaultValue) {
-        return this.getInt(key, defaultValue);
-    }
-
-    public Long getAsLong(String key) {
-        if (!this.containsKey(key)) {
-            return null;
-        } else {
-            try {
-                return this.getLong(key);
-            } catch (StringValueConversionException var3) {
-                return null;
-            }
-        }
-    }
-
-    public long getAsLong(String key, long defaultValue) {
-        return this.getLong(key, defaultValue);
-    }
-
-    public Double getAsDouble(String key) {
-        if (!this.containsKey(key)) {
-            return null;
-        } else {
-            try {
-                return this.getDouble(key);
-            } catch (StringValueConversionException var3) {
-                return null;
-            }
-        }
-    }
-
-    public double getAsDouble(String key, double defaultValue) {
-        return this.getDouble(key, defaultValue);
-    }
-
-    public Duration getAsDuration(String key) {
-        return this.getAsDuration(key, (Duration) null);
-    }
-
-    public Duration getAsDuration(String key, Duration defaultValue) {
-        if (!this.containsKey(key)) {
-            return defaultValue;
-        } else {
-            try {
-                return this.getDuration(key);
-            } catch (StringValueConversionException var4) {
-                return defaultValue;
-            }
-        }
-    }
-
-    public Instant getAsInstant(String key) {
-        return this.getAsTime(key, (Instant) null);
-    }
-
-    public Instant getAsTime(String key, Instant defaultValue) {
-        if (!this.containsKey(key)) {
-            return defaultValue;
-        } else {
-            try {
-                return this.getInstant(key);
-            } catch (StringValueConversionException var4) {
-                return defaultValue;
-            }
-        }
-    }
-
-    public <T extends Enum<T>> T getAsEnum(String key, Class<T> eClass) {
-        return this.getEnumImpl(key, eClass, (Enum) null);
-    }
-
-    public <T extends Enum<T>> T getAsEnum(String key, T defaultValue) {
-        if (defaultValue == null) {
-            throw new IllegalArgumentException("Default value cannot be null");
-        } else {
-            return this.getEnumImpl(key, defaultValue.getClass(), defaultValue);
-        }
-    }
-
-    public <T extends Enum<T>> T getAsEnum(String key, Class<T> eClass, T defaultValue) {
-        return this.getEnumImpl(key, eClass, defaultValue);
-    }
-
-    private <T extends Enum<T>> T getEnumImpl(String key, Class<?> eClass, T defaultValue) {
-        if (eClass == null) {
-            throw new IllegalArgumentException("eClass value cannot be null");
-        } else {
-            String value = this.getString(key);
-            if (value == null) {
-                return defaultValue;
-            } else {
-                Method valueOf = null;
-
-                try {
-                    valueOf = eClass.getMethod("valueOf", String.class);
-                } catch (NoSuchMethodException var7) {
-                    NoSuchMethodException e = var7;
-                    throw new RuntimeException("Could not find method valueOf(String s) for " + eClass.getName(), e);
-                }
-
-                try {
-                    return (Enum) valueOf.invoke(eClass, value);
-                } catch (IllegalAccessException var8) {
-                    IllegalAccessException e = var8;
-                    throw new RuntimeException("Could not invoke method valueOf(String s) on " + eClass.getName(), e);
-                } catch (InvocationTargetException var9) {
-                    InvocationTargetException e = var9;
-                    if (e.getCause() instanceof IllegalArgumentException) {
-                        return defaultValue;
-                    } else {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        }
     }
 
     static {

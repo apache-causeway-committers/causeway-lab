@@ -1,28 +1,8 @@
-/*
- *  Licensed to the Apache Software Foundation (ASF) under one
- *  or more contributor license agreements.  See the NOTICE file
- *  distributed with this work for additional information
- *  regarding copyright ownership.  The ASF licenses this file
- *  to you under the Apache License, Version 2.0 (the
- *  "License"); you may not use this file except in compliance
- *  with the License.  You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing,
- *  software distributed under the License is distributed on an
- *  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- *  KIND, either express or implied.  See the License for the
- *  specific language governing permissions and limitations
- *  under the License.
- */
 package org.apache.causeway.incubator.viewer.vaadin.model.links;
 
 import java.io.Serializable;
 import java.util.Optional;
-import java.util.function.Predicate;
 
-import org.apache.causeway.applib.annotation.ActionLayout.Position;
 import org.apache.causeway.commons.internal.assertions._Assert;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
@@ -44,8 +24,6 @@ public final class LinkAndLabel
         HasManagedAction,
         Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     public static LinkAndLabel of(
             final ActionModel actionModel,
             final ActionLinkUiComponentFactoryVdn uiComponentFactory) {
@@ -66,12 +44,8 @@ public final class LinkAndLabel
         return actionModel.getAction();
     }
 
-    /**
-     * used when explicitly named (eg. menu bar layout file), otherwise {@code null}
-     */
     @Getter private String named;
 
-    // implements HasUiComponent<T>
     @Getter(lazy = true, onMethod_ = {@Override})
     private final AjaxLink<ManagedObject> uiComponent = uiComponentFactory
             .newActionLinkUiComponent(actionModel);
@@ -82,8 +56,6 @@ public final class LinkAndLabel
                 " ~ " + getAction().getFeatureIdentifier().getFullIdentityString();
     }
 
-    // -- RULE CHECKING SHORTCUTS
-
     public boolean isVisible() {
         return actionModel.getVisibilityConsent().isAllowed();
     }
@@ -92,21 +64,12 @@ public final class LinkAndLabel
         return actionModel.getUsabilityConsent().isAllowed();
     }
 
-    // -- UTILITY
-
-    public static Predicate<LinkAndLabel> isPositionedAt(final Position panel) {
-        return HasManagedAction.isPositionedAt(panel);
-    }
-
-    public boolean isRenderOutlined() {
-        return isPositionedAt(Position.BELOW)
-                .or(isPositionedAt(Position.RIGHT))
-                .test(this);
-    }
-
     @Override
     public Kind menuableKind() {
-        return Kind.LINK;
+        return null;
     }
 
+    public String isRenderOutlined() {
+        return null;
+    }
 }

@@ -5,7 +5,5 @@ public interface IMarkupFragment {
 
     MarkupElement get(int i);
 
-    MarkupResourceStream getMarkupResourceStream();
-
     IMarkupFragment find(String id);
 }

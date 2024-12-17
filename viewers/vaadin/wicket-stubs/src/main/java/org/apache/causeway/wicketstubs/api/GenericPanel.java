@@ -3,14 +3,13 @@ package org.apache.causeway.wicketstubs.api;
 public abstract class GenericPanel<T>
         extends Panel
         implements IGenericComponent<T, GenericPanel<T>> {
-    private static final long serialVersionUID = 1L;
 
     public GenericPanel(String id) {
         this(id, (IModel)null);
     }
 
     public GenericPanel(String id, IModel<T> model) {
-        super(id, model);
+        super();
     }
 
     @Override

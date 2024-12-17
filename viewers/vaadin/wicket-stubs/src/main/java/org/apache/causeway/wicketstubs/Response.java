@@ -1,9 +1,9 @@
 package org.apache.causeway.wicketstubs;
 
-import org.apache.causeway.wicketstubs.api.Args;
-
 import java.io.IOException;
 import java.io.OutputStream;
+
+import org.apache.causeway.wicketstubs.api.Args;
 
 public abstract class Response {
     public Response() {

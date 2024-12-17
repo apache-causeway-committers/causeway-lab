@@ -38,9 +38,9 @@ import org.apache.causeway.applib.services.title.TitleService;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
 import org.apache.causeway.core.metamodel.spec.feature.ObjectAssociation;
 import org.apache.causeway.core.metamodel.spec.feature.OneToManyAssociation;
-import org.apache.causeway.core.metamodel.tabular.interactive.DataColumn;
-import org.apache.causeway.core.metamodel.tabular.interactive.DataRow;
-import org.apache.causeway.core.metamodel.tabular.interactive.DataTableInteractive;
+import org.apache.causeway.core.metamodel.tabular.DataColumn;
+import org.apache.causeway.core.metamodel.tabular.DataRow;
+import org.apache.causeway.core.metamodel.tabular.DataTableInteractive;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
 import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.FaIcon;
 
@@ -74,9 +74,9 @@ public class TableViewVaa extends VerticalLayout {
             final @NonNull Where where,
             final @NonNull LayoutService layoutService
     ) {
-        return dataTableModel.getElementCount() == 0
+        return /*dataTableModel.getElementCount() == 0
                 ? empty(uiContext, titleService, layoutService)
-                : new TableViewVaa(dataTableModel, uiContext, titleService, layoutService);
+                :*/ new TableViewVaa(dataTableModel, uiContext, titleService, layoutService);
     }
 
     private static String createTableId(final String str) {
@@ -116,7 +116,7 @@ public class TableViewVaa extends VerticalLayout {
         }};
         add(objectGrid);
 
-        val rows = dataTableModel.getDataRowsFiltered().getValue();
+//        val rows = dataTableModel.getDataRowsFiltered().getValue();
 
         val columns = dataTableModel.getDataColumns().getValue();
         val gridCols = new ArrayList<Grid.Column<DataRow>>();
@@ -169,7 +169,7 @@ public class TableViewVaa extends VerticalLayout {
 
         // -- binding
         // populate the model
-        val rowList = rows.toList();
+/*        val rowList = rows.toList();
         val dataview = objectGrid.setItems(rowList);
 
         dataview.addFilter(row -> {
@@ -191,13 +191,13 @@ public class TableViewVaa extends VerticalLayout {
             return lowerCaseRowCell.stream().anyMatch(cell -> cell.contains(filter.toLowerCase()));
         });
         searchField.addValueChangeListener(event -> dataview.refreshAll());
-
+*/
         objectGrid.recalculateColumnWidths();
 
         if (!gridCols.isEmpty()) {
             // TODO translate
             // TODO make customizable e.g. sum/count/avg/min/max
-            gridCols.get(0).setFooter("Count: " + rowList.size());
+//            gridCols.get(0).setFooter("Count: " + rowList.size());
         }
 
         // -- binding
@@ -206,7 +206,6 @@ public class TableViewVaa extends VerticalLayout {
             uiContext.route(row.getRowElement());
         });
     }
-
 
     private String stringifyPropertyValue(
             final ObjectAssociation property,

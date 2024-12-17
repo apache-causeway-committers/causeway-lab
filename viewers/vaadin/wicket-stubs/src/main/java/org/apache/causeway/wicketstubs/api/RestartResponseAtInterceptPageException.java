@@ -5,10 +5,6 @@ public class RestartResponseAtInterceptPageException extends Throwable {
     }
 
     public static void continueToOriginalDestination() {
-        //FIXME
     }
 
-    public static void clearOriginalDestination() {
-        //FIXME
-    }
 }

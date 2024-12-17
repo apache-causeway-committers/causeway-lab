@@ -96,4 +96,11 @@ public abstract class PanelAbstract<T, M extends IModel<T>>
                 .ifPresent(response::render);
     }
 
+    protected void onInitialize() {
+
+    }
+
+    protected void renderHead(IHeaderResponse response) {
+
+    }
 }

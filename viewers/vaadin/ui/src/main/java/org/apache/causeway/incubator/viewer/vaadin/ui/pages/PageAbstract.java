@@ -18,13 +18,11 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.ui.pages;
 
-import java.net.DatagramSocket;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.causeway.applib.annotation.PromptStyle;
-import org.apache.causeway.applib.services.exceprecog.ExceptionRecognizerService;
 import org.apache.causeway.applib.services.metamodel.BeanSort;
 import org.apache.causeway.applib.services.publishing.spi.PageRenderSubscriber;
 import org.apache.causeway.applib.services.registry.ServiceRegistry;
@@ -47,13 +45,13 @@ import org.apache.causeway.incubator.viewer.vaadin.model.util.PageParameterUtils
 import org.apache.causeway.incubator.viewer.vaadin.ui.ComponentFactory;
 import org.apache.causeway.incubator.viewer.vaadin.ui.app.registry.ComponentFactoryRegistry;
 import org.apache.causeway.incubator.viewer.vaadin.ui.app.registry.HasComponentFactoryRegistry;
-import org.apache.causeway.incubator.viewer.vaadin.ui.components.actionprompt.ActionPromptModalWindow;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.actionpromptsb.ActionPromptSidebar;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.widgets.breadcrumbs.BreadcrumbModel;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.widgets.breadcrumbs.BreadcrumbModelProvider;
 import org.apache.causeway.incubator.viewer.vaadin.ui.errors.ExceptionModel;
-import org.apache.causeway.incubator.viewer.vaadin.ui.util.Vdn;
 import org.apache.causeway.viewer.commons.model.components.UiComponentType;
+import org.apache.causeway.wicketstubs.Application;
+import org.apache.causeway.wicketstubs.Session;
 import org.apache.causeway.wicketstubs.api.AjaxRequestTarget;
 import org.apache.causeway.wicketstubs.api.Behavior;
 import org.apache.causeway.wicketstubs.api.Broadcast;
@@ -70,7 +68,6 @@ import org.apache.causeway.wicketstubs.api.InspectorDebugPanel;
 import org.apache.causeway.wicketstubs.api.MarkupContainer;
 import org.apache.causeway.wicketstubs.api.Page;
 import org.apache.causeway.wicketstubs.api.PageParameters;
-import org.apache.causeway.wicketstubs.api.RestartResponseAtInterceptPageException;
 import org.apache.causeway.wicketstubs.api.WebPage;
 
 import lombok.SneakyThrows;
@@ -103,7 +100,7 @@ public abstract class PageAbstract
      */
     public static final ThreadLocal<ExceptionModel> EXCEPTION = new ThreadLocal<>();
 
-    private final List<UiComponentType> childComponentIds;
+    private final List<UiComponentType> childComponentIds = null;
 
     /**
      * Top-level &lt;div&gt; to which all content is added.
@@ -119,68 +116,21 @@ public abstract class PageAbstract
             final PageParameters pageParameters,
             final String title,
             final UiComponentType... childComponentIds) {
+        super();
 
-        super((IModel<?>) pageParameters);
+    }
 
-        try {
+    private void add(HeaderResponseContainer headerResponseContainer) {
+    }
 
-            // for breadcrumbs support
-            getSession().bind();
-
-            setTitle(title);
-
-            // must be a direct child of <body> for the 'sticky-top' CSS class to work
-            MarkupContainer header = createPageHeader("header");
-            add(header);
-
-            themeDiv = Vdn.containerAdd(this, ID_THEME);
-
-            String applicationName = getApplicationSettings().getName();
-            Vdn.cssAppend(themeDiv, Vdn.cssNormalize(applicationName));
-
-            boolean devUtilitiesEnabled = getApplication().getDebugSettings().isDevelopmentUtilitiesEnabled();
-            Component debugBar = devUtilitiesEnabled
-                    ? newDebugBar("debugBar")
-                    : new EmptyPanel("debugBar").setVisible(false);
-            add(debugBar);
-
-            MarkupContainer footer = createPageFooter("footer");
-            themeDiv.add(footer);
-
-            addActionPromptModalWindow(themeDiv);
-            addActionPromptSidebar(themeDiv);
-
-            this.childComponentIds = List.of(childComponentIds);
-
-            // ensure that all collected JavaScript contributions are loaded at the page footer
-            add(new HeaderResponseContainer("footerJS", "footerJS"));
-
-        } catch (final RuntimeException ex) {
-
-            log.error("Failed to construct page, going back to sign in page", ex);
-
-            val exceptionRecognizerService = getMetaModelContext().getServiceRegistry()
-                    .lookupServiceElseFail(ExceptionRecognizerService.class);
-
-            val recognition = exceptionRecognizerService.recognize(ex);
-
-            val exceptionModel = ExceptionModel.create(getMetaModelContext(), recognition, ex);
-
-            getSession().invalidate();
-            getSession().clear();
-
-            // for the WicketSignInPage to render
-            EXCEPTION.set(exceptionModel);
-
-            throw new RestartResponseAtInterceptPageException(getSignInPage());
-        }
+    private void add(MarkupContainer header) {
     }
 
     public CausewayConfiguration.Viewer.Common.Application getApplicationSettings() {
         return null; //FIXME
     }
 
-    private DatagramSocket getSession() {
+    public Session getSession() {
         return null; //FIXME
     }
 
@@ -199,7 +149,7 @@ public abstract class PageAbstract
         return debugBar;
     }
 
-    private Object getApplication() {
+    public Application getApplication() {
         return null; //FIXME
     }
 
@@ -225,11 +175,7 @@ public abstract class PageAbstract
         return (MarkupContainer) footer;
     }
 
-
     protected void setTitle(final String title) {
-        Vdn.labelAdd(this, ID_PAGE_TITLE, title != null
-                ? title
-                : getApplicationSettings().getName());
     }
 
     private Class<? extends Page> getSignInPage() {
@@ -330,7 +276,8 @@ public abstract class PageAbstract
         });
     }
 
-    private PageParameters getPageParameters() {
+    public PageParameters getPageParameters() {
+        return null;
     }
 
     private boolean isShowBookmarks() {
@@ -370,34 +317,14 @@ public abstract class PageAbstract
     // ActionPromptModalWindowProvider
     // ///////////////////////////////////////////////////////////////////
 
-    private ActionPromptModalWindow actionPromptModalWindow;
+    private Component actionPromptModalWindow;
     private ActionPromptSidebar actionPromptSidebar;
 
     @Override
     public ActionPrompt getActionPrompt(
             final PromptStyle promptStyle,
             final BeanSort sort) {
-
-        switch (promptStyle) {
-            case DIALOG_SIDEBAR:
-                return actionPromptSidebar;
-            case DIALOG_MODAL:
-                return actionPromptModalWindow;
-            default:
-                // fall through
-        }
-
-        val dialogMode =
-                sort.isManagedBeanAny()
-                        ? getWicketViewerSettings().getDialogModeForMenu()
-                        : getWicketViewerSettings().getDialogMode();
-        switch (dialogMode) {
-            case SIDEBAR:
-                return actionPromptSidebar;
-            case MODAL:
-            default:
-                return actionPromptModalWindow;
-        }
+        return null;
     }
 
     @Override
@@ -406,31 +333,22 @@ public abstract class PageAbstract
         actionPromptModalWindow.closePrompt(target);
     }
 
-    private void addActionPromptModalWindow(final MarkupContainer parent) {
-        actionPromptModalWindow = ActionPromptModalWindow.newModalWindow(ID_ACTION_PROMPT_MODAL_WINDOW);
-        parent.addOrReplace(actionPromptModalWindow);
-    }
-
-    private void addActionPromptSidebar(final MarkupContainer parent) {
-        actionPromptSidebar = ActionPromptSidebar.newSidebar(ID_ACTION_PROMPT_SIDEBAR);
-        parent.addOrReplace(actionPromptSidebar);
-    }
-
-
     // ///////////////////////////////////////////////////////////////////
     // UI Hint
     // ///////////////////////////////////////////////////////////////////
 
     /**
      * Propagates all {@link CausewayEventLetterAbstract letter} events down to
-     * all child components, wrapped in an {@link org.apache.causeway.viewer.wicket.model.hints.CausewayEnvelopeEvent envelope} event.
+     * all child components, wrapped in an {@link CausewayEnvelopeEvent envelope} event.
      */
-    @Override
+//    @Override
     public void onEvent(final IEvent<?> event) {
         _Casts.castTo(CausewayEventLetterAbstract.class, event.getPayload())
                 .ifPresent(letter ->
                         send(PageAbstract.this, Broadcast.BREADTH, new CausewayEnvelopeEvent(letter)));
     }
+
+    protected abstract void send(PageAbstract pageAbstract, Broadcast broadcast, CausewayEnvelopeEvent causewayEnvelopeEvent);
 
     // -- getComponentFactoryRegistry (Convenience)
     protected ComponentFactoryRegistry getComponentFactoryRegistry() {

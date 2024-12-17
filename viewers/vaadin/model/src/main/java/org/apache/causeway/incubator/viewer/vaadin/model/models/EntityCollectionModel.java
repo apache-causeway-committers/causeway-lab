@@ -18,7 +18,8 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.model.models;
 
-import java.util.Optional;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import org.apache.causeway.applib.Identifier;
 import org.apache.causeway.applib.annotation.TableDecorator;
@@ -31,13 +32,12 @@ import org.apache.causeway.incubator.viewer.vaadin.model.links.LinksProvider;
 import org.apache.causeway.viewer.commons.model.hints.RenderingHint;
 import org.apache.causeway.wicketstubs.api.IModel;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import java.util.Optional;
 
 public interface EntityCollectionModel
-        extends
+extends
         IModel<DataTableInteractive>,
-        HasCommonContext,
+    HasCommonContext,
         LinksProvider {
 
     // -- VARIANTS
@@ -63,8 +63,8 @@ public interface EntityCollectionModel
 
         public RenderingHint getTitleColumnRenderingHint() {
             return isParented()
-                    ? RenderingHint.PARENTED_TITLE_COLUMN
-                    : RenderingHint.STANDALONE_TITLE_COLUMN;
+                ? RenderingHint.PARENTED_TITLE_COLUMN
+                : RenderingHint.STANDALONE_TITLE_COLUMN;
         }
 
         public boolean isStandalone() {
@@ -80,7 +80,6 @@ public interface EntityCollectionModel
 
     /**
      * This collection's <i>feature</i> {@link Identifier}.
-     *
      * @see Identifier
      */
     Identifier getIdentifier();
@@ -131,8 +130,8 @@ public interface EntityCollectionModel
     @Deprecated // there is no reason to distinguish parented and standalone, I think
     default Optional<EntityCollectionModelParented> parented() {
         return this instanceof EntityCollectionModelParented
-                ? Optional.of((EntityCollectionModelParented) this)
-                : Optional.empty();
+            ? Optional.of((EntityCollectionModelParented)this)
+            : Optional.empty();
     }
 
     @Deprecated // there is no reason to distinguish parented and standalone, I think
@@ -140,5 +139,6 @@ public interface EntityCollectionModel
         return parented()
                 .map(EntityCollectionModelParented::asHintingBookmark);
     }
+
 
 }

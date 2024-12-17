@@ -1,8 +1,21 @@
 package org.apache.causeway.wicketstubs.api;
 
-public class Form {
-    public class MethodMismatchResponse {
-        public static final Form.MethodMismatchResponse CONTINUE = null;
-        public static final MethodMismatchResponse ABORT = null;
+import org.apache.causeway.wicketstubs.IRequestListener;
+
+public class Form<T>
+        extends WebMarkupContainer
+        implements IRequestListener, IGenericComponent<T, Form<T>> {
+    public Form(String id) {
+        super(id);
+    }
+
+    @Override
+    public Component setDefaultModelObject(Object var1) {
+        return null;
+    }
+
+    @Override
+    public Object getDefaultModelObject() {
+        return null;
     }
 }

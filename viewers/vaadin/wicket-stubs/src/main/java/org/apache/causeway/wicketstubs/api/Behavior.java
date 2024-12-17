@@ -1,7 +1,5 @@
 package org.apache.causeway.wicketstubs.api;
 
-//org.apache.wicket.behavior.Behavior
-//FIXME
 public abstract class Behavior {
     public abstract void onComponentTag(final Component component, final ComponentTag tag);
 
@@ -9,9 +7,6 @@ public abstract class Behavior {
     }
 
     public void onConfigure(Component component) {
-    }
-
-    protected void unbind(Component component) {
     }
 
     public boolean isEnabled(Component component) {
@@ -36,6 +31,5 @@ public abstract class Behavior {
     }
 
     public void detach(Component component) {
-
     }
 }

@@ -24,18 +24,18 @@ import org.springframework.lang.Nullable;
 
 import org.apache.causeway.applib.services.i18n.LanguageProvider;
 import org.apache.causeway.applib.services.userreg.EmailNotificationService;
-import org.apache.causeway.incubator.viewer.vaadin.model.hints.UiHintContainer;
 import org.apache.causeway.incubator.viewer.vaadin.model.models.HasCommonContext;
 import org.apache.causeway.incubator.viewer.vaadin.model.models.ImageResourceCache;
 import org.apache.causeway.incubator.viewer.vaadin.ui.app.registry.ComponentFactoryRegistry;
 import org.apache.causeway.incubator.viewer.vaadin.ui.app.registry.HasComponentFactoryRegistry;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.tree.themes.TreeThemeProvider;
+import org.apache.causeway.incubator.viewer.vaadin.ui.components.tree.themes.TreeThemeProviderDefault;
 import org.apache.causeway.incubator.viewer.vaadin.ui.pages.EmailVerificationUrlService;
 import org.apache.causeway.incubator.viewer.vaadin.ui.pages.PageClassRegistry;
 import org.apache.causeway.incubator.viewer.vaadin.ui.pages.PageNavigationService;
 import org.apache.causeway.viewer.commons.applib.services.header.HeaderUiModel;
 import org.apache.causeway.viewer.commons.applib.services.header.HeaderUiService;
-import org.apache.causeway.viewer.wicket.ui.components.tree.themes.TreeThemeProviderDefault;
+import org.apache.causeway.wicketstubs.api.AjaxRequestTarget;
 import org.apache.causeway.wicketstubs.api.GenericPanel;
 import org.apache.causeway.wicketstubs.api.IModel;
 
@@ -56,6 +56,11 @@ public class PanelBase<T>
 
     public PanelBase(final String id, @Nullable final IModel<T> model) {
         super(id, model);
+    }
+
+    @Override
+    public void closePrompt(AjaxRequestTarget target) {
+
     }
 
     private transient PageClassRegistry pageClassRegistry;
@@ -107,12 +112,6 @@ public class PanelBase<T>
         return headerUiService.getHeader();
     }
 
-    // Hint support
-
-    public UiHintContainer getUiHintContainer() {
-        return UiHintContainer.Util.hintContainerOf(this);
-    }
-
     // other Dependencies
 
     protected ComponentFactoryRegistry getComponentFactoryRegistry() {
@@ -120,6 +119,7 @@ public class PanelBase<T>
     }
 
     private Object getApplication() {
+        return null;
     }
 
     // -- HELPER

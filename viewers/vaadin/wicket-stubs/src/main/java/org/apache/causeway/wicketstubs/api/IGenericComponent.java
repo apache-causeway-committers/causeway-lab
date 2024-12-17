@@ -6,7 +6,6 @@ public interface IGenericComponent<T, C extends IGenericComponent<? super T, ?>>
     }
 
     default C setModel(IModel<T> model) {
-        this.setDefaultModel(model);
         return (C) this;
     }
 
@@ -15,8 +14,7 @@ public interface IGenericComponent<T, C extends IGenericComponent<? super T, ?>>
     }
 
     default C setModelObject(T object) {
-        this.setDefaultModelObject(object);
-        return (C) this;
+        return (C) this.setDefaultModelObject(object);
     }
 
     IModel<?> getDefaultModel();

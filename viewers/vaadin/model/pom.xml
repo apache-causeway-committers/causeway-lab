@@ -39,7 +39,6 @@
 	</properties>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.apache.causeway.core</groupId>
 			<artifactId>causeway-core-webapp</artifactId>

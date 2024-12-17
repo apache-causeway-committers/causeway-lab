@@ -7,5 +7,4 @@ public interface IIndexedParameters {
 
     IIndexedParameters remove(int var1);
 
-    IIndexedParameters clearIndexed();
 }

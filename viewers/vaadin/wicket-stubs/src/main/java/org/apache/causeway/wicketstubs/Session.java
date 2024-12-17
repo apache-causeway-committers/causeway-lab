@@ -4,18 +4,14 @@ import java.util.Locale;
 
 public abstract class Session {
     public static Session get() {
-        return Session.get();//FIXME
+        return Session.get();
     }
 
     public Locale getLocale() {
-        return Session.get().getLocale();//FIXME
-    }
-
-    public IAuthorizationStrategy getAuthorizationStrategy() {
-        return null;//FIXME
+        return Session.get().getLocale();
     }
 
     public String getStyle() {
-        return null;//FIXME
+        return null;
     }
 }

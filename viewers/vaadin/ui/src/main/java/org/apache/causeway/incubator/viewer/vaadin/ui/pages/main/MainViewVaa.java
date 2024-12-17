@@ -49,7 +49,7 @@ import org.apache.causeway.core.metamodel.context.MetaModelContext;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedAction;
 import org.apache.causeway.core.metamodel.object.ManagedObject;
 import org.apache.causeway.core.metamodel.object.ManagedObjects;
-import org.apache.causeway.core.metamodel.tabular.interactive.DataTableInteractive;
+import org.apache.causeway.core.metamodel.tabular.DataTableInteractive;
 import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.UiComponentFactoryVaa;
 import org.apache.causeway.incubator.viewer.vaadin.ui.components.collection.TableViewVaa;
@@ -255,7 +255,7 @@ public class MainViewVaa extends AppLayout
 
     private Component registerAndCreateComponentForResultList(ManagedAction managedAction, Can<ManagedObject> params, ManagedObject actionResult) {
         val actionState = state.addActionResult(actionResult, managedAction, params);
-        val dataTableModel = DataTableInteractive.forAction(actionState.managedAction(), actionState.params(), actionState.actionResult());
+        val dataTableModel = DataTableInteractive.forAction(actionState.managedAction(), /*actionState.params(),*/ actionState.actionResult());
         return TableViewVaa.forDataTableModel(uiContext, titleService, dataTableModel, Where.STANDALONE_TABLES, layoutService);
     }
 

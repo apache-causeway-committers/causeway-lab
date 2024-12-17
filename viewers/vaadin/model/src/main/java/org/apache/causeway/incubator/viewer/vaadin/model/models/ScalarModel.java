@@ -143,7 +143,7 @@ public abstract class ScalarModel
     public final void setObject(final Object newValue) {
         proposedValue().update(oldValue -> {
 //FIXME            _Xray.onSclarModelUpdate(this, oldValue, newValue);
-            return newValue;
+            return (ManagedObject) newValue;
         });
     }
 

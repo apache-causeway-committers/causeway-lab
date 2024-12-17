@@ -62,6 +62,10 @@ public class BSGridPanel
         add(rv);
     }
 
+    private void add(RepeatingView rv) {
+
+    }
+
     @Override
     public void closePrompt(AjaxRequestTarget target) {
         //FIXME

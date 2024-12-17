@@ -18,8 +18,8 @@
  */
 package org.apache.causeway.incubator.viewer.vaadin.ui.components.tree.themes;
 
-import org.apache.causeway.viewer.wicket.ui.components.tree.themes.bootstrap.WktBootstrapTreeTheme;
 import org.apache.causeway.wicketstubs.api.Behavior;
+import org.apache.causeway.wicketstubs.api.WktBootstrapTreeTheme;
 
 public class TreeThemeProviderDefault implements TreeThemeProvider {
 

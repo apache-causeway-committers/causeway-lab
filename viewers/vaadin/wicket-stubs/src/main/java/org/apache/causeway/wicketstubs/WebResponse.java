@@ -13,15 +13,13 @@ public class WebResponse {
     }
 
     public void disableCaching() {
-        //FIXME
     }
 
     public void write(CharSequence filteredResponse) {
-        //FIXME
     }
 
     protected String encodeURL(CharSequence url) {
-        return url.toString();//FIXME
+        return url.toString();
     }
 
     protected void setContentType(String mimeType) {
@@ -37,9 +35,11 @@ public class WebResponse {
     }
 
     protected String encodeRedirectURL(CharSequence url) {
+        return null;
     }
 
     protected Object getContainerResponse() {
+        return null;
     }
 
     protected void addCookie(Cookie cookie) {
@@ -49,6 +49,7 @@ public class WebResponse {
     }
 
     protected boolean isHeaderSupported() {
+        return false;
     }
 
     protected void setHeader(String name, String value) {
@@ -61,6 +62,5 @@ public class WebResponse {
     }
 
     protected void flush() {
-
     }
 }

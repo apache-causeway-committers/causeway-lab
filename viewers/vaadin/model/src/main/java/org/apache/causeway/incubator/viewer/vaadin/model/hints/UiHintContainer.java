@@ -76,6 +76,7 @@ public interface UiHintContainer {
             final String fullHintPath = buffer.toString();
             return fullHintPath;
         }
+
     }
 
 }

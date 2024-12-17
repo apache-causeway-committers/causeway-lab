@@ -21,6 +21,7 @@ package org.apache.causeway.incubator.viewer.vaadin.ui.components.actionpromptsb
 import org.apache.causeway.incubator.viewer.vaadin.model.models.ActionPromptWithExtraContent;
 import org.apache.causeway.incubator.viewer.vaadin.ui.util.Vdn;
 import org.apache.causeway.wicketstubs.api.AjaxRequestTarget;
+import org.apache.causeway.wicketstubs.api.Component;
 import org.apache.causeway.wicketstubs.api.GenericPanel;
 import org.apache.causeway.wicketstubs.api.IModel;
 import org.apache.causeway.wicketstubs.api.WebMarkupContainer;
@@ -41,10 +42,14 @@ public class ActionPromptSidebar
         setOutputMarkupId(true);
         setOutputMarkupPlaceholderTag(true);
 
-        Vdn.labelAdd(this, getTitleId(), "(no action)");
+//        Vdn.labelAdd(this, getTitleId(), "(no action)");
 
         add(new WebMarkupContainer(getContentId()));
         add(new WebMarkupContainer(getExtraContentId()));
+    }
+
+    private void add(WebMarkupContainer components) {
+
     }
 
     private void setOutputMarkupPlaceholderTag(boolean b) {
@@ -55,6 +60,21 @@ public class ActionPromptSidebar
 
     public static ActionPromptSidebar newSidebar(final String id) {
         return new ActionPromptSidebar(id);
+    }
+
+    @Override
+    public void setTitle(Component component, AjaxRequestTarget target) {
+
+    }
+
+    @Override
+    public void setPanel(Component component, AjaxRequestTarget target) {
+
+    }
+
+    @Override
+    public void showPrompt(AjaxRequestTarget target) {
+
     }
 
     @Override
@@ -70,6 +90,11 @@ public class ActionPromptSidebar
     @Override
     public String getExtraContentId() {
         return ID_EXTRA_CONTENT;
+    }
+
+    @Override
+    public void setExtraContentPanel(Component extraContentComponent, AjaxRequestTarget target) {
+
     }
 
     private Object getMarkupId() {

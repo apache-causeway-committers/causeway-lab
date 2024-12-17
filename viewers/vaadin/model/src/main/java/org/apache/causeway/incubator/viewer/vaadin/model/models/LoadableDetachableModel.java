@@ -73,7 +73,7 @@ public abstract class LoadableDetachableModel<T> implements IModel<T> {
 
     public void setObject(Object object) {
         this.state = LoadableDetachableModel.InternalState.ATTACHED;
-        this.transientModelObject = object;
+        this.transientModelObject = (T) object;
     }
 
     public static <T> LoadableDetachableModel<T> of(final SerializableSupplier<T> getter) {
@@ -91,7 +91,7 @@ public abstract class LoadableDetachableModel<T> implements IModel<T> {
         ATTACHING,
         ATTACHED;
 
-        private InternalState() {
+        InternalState() {
         }
 
         public String toString() {

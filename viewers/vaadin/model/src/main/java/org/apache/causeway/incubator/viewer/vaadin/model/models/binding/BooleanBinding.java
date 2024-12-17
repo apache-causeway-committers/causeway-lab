@@ -52,7 +52,7 @@ public abstract class BooleanBinding<T>
     @Override
     public final void setObject(final Object value) {
         getBindable(modelObject())
-                .ifPresent(bindable -> bindable.setValue(value));
+                .ifPresent(bindable -> bindable.setValue((Boolean) value));
     }
 
     protected abstract Optional<Bindable<Boolean>> getBindable(@Nullable T model);

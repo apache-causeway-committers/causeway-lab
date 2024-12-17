@@ -103,7 +103,7 @@ public class ObjectViewVaa extends VerticalLayout {
         val style = LayoutExportStyle.COMPLETE;
         val format = NamedWithMimeType.CommonMimeType.XML;
         final String grid = layoutService.objectLayout(managedObject.getClass(), style, format);*/
-        ObjectSpecification. getFacet(GridFacet.class);
+//        ObjectSpecification.getFacet(GridFacet.class);
         // force new row
         //formLayout.getElement().appendChild(ElementFactory.createBr());
 
@@ -306,7 +306,7 @@ public class ObjectViewVaa extends VerticalLayout {
                         });
             }
         };
-        uiGridLayout.visit(gridVisitor);
+//        uiGridLayout.visit(gridVisitor);
         setWidthFull();
     }
 }

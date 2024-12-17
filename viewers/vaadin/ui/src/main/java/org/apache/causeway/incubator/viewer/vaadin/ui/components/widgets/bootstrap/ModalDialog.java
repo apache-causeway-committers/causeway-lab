@@ -27,7 +27,6 @@ import org.apache.causeway.wicketstubs.api.DraggableConfig;
 import org.apache.causeway.wicketstubs.api.IHeaderResponse;
 import org.apache.causeway.wicketstubs.api.IModel;
 import org.apache.causeway.wicketstubs.api.IPartialPageRequestHandler;
-import org.apache.causeway.wicketstubs.api.MarkupContainer;
 import org.apache.causeway.wicketstubs.api.Modal;
 import org.apache.causeway.wicketstubs.api.WebMarkupContainer;
 
@@ -53,6 +52,12 @@ public class ModalDialog<T>
         Vdn.containerAdd(this, getContentId()); // initial empty content
     }
 
+    private void setOutputMarkupPlaceholderTag(boolean b) {
+    }
+
+    private void setDisableEnforceFocus(boolean b) {
+    }
+
     private void setUseKeyboard(boolean b) {
     }
 
@@ -62,7 +67,11 @@ public class ModalDialog<T>
 
     @Override
     public void setTitle(final Component component, final AjaxRequestTarget target) {
-        ((MarkupContainer) get("dialog:header")).addOrReplace(component);
+
+    }
+
+    private Object get(String s) {
+        return null;
     }
 
     @Override
@@ -77,9 +86,6 @@ public class ModalDialog<T>
 
     @Override
     public void showPrompt(final AjaxRequestTarget target) {
-        setVisible(true);
-        target.add(this);
-        show(target);
     }
 
     @Override
@@ -104,11 +110,6 @@ public class ModalDialog<T>
     @Override
     protected WebMarkupContainer createDialog(final String id) {
         WebMarkupContainer dialog = super.createDialog(id);
-        Vdn.cssAppend(dialog, "modal-lg modal-dialog-center");
-        dialog.
-                add(new Draggable(new DraggableConfig().
-                        withHandle(".modal-header").
-                        withCursor("move")));
         return dialog;
     }
 

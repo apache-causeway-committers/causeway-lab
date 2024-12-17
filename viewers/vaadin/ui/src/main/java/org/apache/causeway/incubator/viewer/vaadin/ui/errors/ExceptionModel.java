@@ -99,7 +99,7 @@ public class ExceptionModel extends ModelAbstract<List<StackTraceDetail>> {
     }
 
     @Override
-    protected Object load() {
+    protected List<StackTraceDetail> load() {
         return stackTraceDetailList;
     }
 
@@ -116,10 +116,6 @@ public class ExceptionModel extends ModelAbstract<List<StackTraceDetail>> {
 
     @Override
     public void setObject(final Object stackTraceDetail) {
-        if(stackTraceDetail == null) {
-            return;
-        }
-        this.stackTraceDetailList = stackTraceDetail;
     }
 
 

@@ -9,13 +9,7 @@ public interface IHeaderResponse {
 
     void render(Object o);
 
-    void markRendered(Object object);
-
-    boolean wasRendered(Object object);
-
     Response getResponse();
-
-    void close();
 
     boolean isClosed();
 }

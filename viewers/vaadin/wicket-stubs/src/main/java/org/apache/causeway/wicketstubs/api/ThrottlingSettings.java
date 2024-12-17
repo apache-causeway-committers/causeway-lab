@@ -3,17 +3,15 @@ package org.apache.causeway.wicketstubs.api;
 import java.time.Duration;
 
 public class ThrottlingSettings implements IClusterable {
-    private static final long serialVersionUID = 1L;
-    private Duration delay;
-    private final String id;
-    private boolean postponeTimerOnUpdate;
+    private Duration delay = Duration.ofSeconds(1);
+    private final String id = null;
 
     public ThrottlingSettings(Duration delay) {
-        this((String) null, delay, false);
+        this(null, delay, false);
     }
 
     public ThrottlingSettings(Duration delay, boolean postponeTimerOnUpdate) {
-        this((String) null, delay, postponeTimerOnUpdate);
+        this(null, delay, postponeTimerOnUpdate);
     }
 
     public ThrottlingSettings(String id, Duration delay) {
@@ -21,9 +19,6 @@ public class ThrottlingSettings implements IClusterable {
     }
 
     public ThrottlingSettings(String id, Duration delay, boolean postponeTimerOnUpdate) {
-        this.id = id;
-        this.delay = (Duration) Args.notNull(delay, "delay");
-        this.postponeTimerOnUpdate = postponeTimerOnUpdate;
     }
 
     public Duration getDelay() {
@@ -31,19 +26,12 @@ public class ThrottlingSettings implements IClusterable {
     }
 
     public void setDelay(Duration delay) {
-        this.delay = (Duration) Args.notNull(delay, "delay");
+        this.delay = Args.notNull(delay, "delay");
     }
 
     public String getId() {
         return this.id;
     }
 
-    public boolean getPostponeTimerOnUpdate() {
-        return this.postponeTimerOnUpdate;
-    }
-
-    public void setPostponeTimerOnUpdate(boolean postponeTimerOnUpdate) {
-        this.postponeTimerOnUpdate = postponeTimerOnUpdate;
-    }
 }
 

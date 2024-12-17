@@ -1,8 +1,8 @@
 package org.apache.causeway.wicketstubs.api;
 
-import org.apache.causeway.wicketstubs.ILoggableRequestHandler;
-
 import java.util.Map;
+
+import org.apache.causeway.wicketstubs.ILoggableRequestHandler;
 
 public interface AjaxRequestTarget extends IPartialPageRequestHandler, ILoggableRequestHandler {
     void addListener(IListener var1);
@@ -12,6 +12,8 @@ public interface AjaxRequestTarget extends IPartialPageRequestHandler, ILoggable
     String getLastFocusedElementId();
 
     Page getPage();
+
+    AjaxRequestTarget orElse(Object o);
 
     @FunctionalInterface
     public interface ITargetRespondListener {
