@@ -19,7 +19,7 @@
 	<packaging>pom</packaging>
 	
 	<properties>
-		<spring-boot.version>3.4.0</spring-boot.version>
+		<spring-boot.version>3.4.1</spring-boot.version>
 		<wicket.version>10.2.0</wicket.version>
 	</properties>
 
