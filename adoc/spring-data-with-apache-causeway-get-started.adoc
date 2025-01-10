@@ -27,7 +27,7 @@ Let's start by adding Maven dependencies similar to a standard Spring Boot appli
 <parent>
     <groupId>org.apache.causeway.app</groupId>
     <artifactId>causeway-app-starter-parent</artifactId>
-    <version>2.0.0-xxx</version>
+    <version>3.x.x</version>
     <relativePath/>
 </parent>
 ----

@@ -1,4 +1,4 @@
-package org.apache.causeway.lab.tutorial.springdata;
+package org.apache.causeway.lab.experiments.datajdbc;
 
 import jakarta.inject.Inject;
 import jakarta.inject.Named;

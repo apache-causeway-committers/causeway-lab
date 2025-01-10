@@ -85,7 +85,7 @@ causeway:
       css: css/application.css
       js: scripts/application.js
       themes:
-        initial: Flatly
+        initial: Default
         showChooser: true
         enabled: Cosmo,Flatly,Darkly,Sandstone,United
 

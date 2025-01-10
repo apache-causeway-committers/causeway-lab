@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mb3:menuBars
+	xsi:schemaLocation="https://causeway.apache.org/applib/layout/menubars/bootstrap3 https://causeway.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd https://causeway.apache.org/applib/layout/component https://causeway.apache.org/applib/layout/component/component.xsd https://causeway.apache.org/applib/layout/links https://causeway.apache.org/applib/layout/links/links.xsd"
+	xmlns:cpt="https://causeway.apache.org/applib/layout/component"
+	xmlns:lnk="https://causeway.apache.org/applib/layout/links"
+	xmlns:mb3="https://causeway.apache.org/applib/layout/menubars/bootstrap3"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<mb3:primary>
+		
+		<mb3:menu>
+			<mb3:named>Employees</mb3:named>
+			<mb3:section>
+				<mb3:serviceAction
+					objectType="causewayLab.EmployeeMenu" id="employeeManager">
+					<cpt:named>Employee Manager</cpt:named>
+				</mb3:serviceAction>
+			</mb3:section>
+		</mb3:menu>
+		
+		<mb3:menu unreferencedActions="true">
+			<mb3:named>Other</mb3:named>
+		</mb3:menu>
+		
+	</mb3:primary>
+	
+	<mb3:secondary>
+		<mb3:menu>
+			<mb3:named>Prototyping</mb3:named>
+			<mb3:section>
+				<mb3:serviceAction
+					objectType="causeway.applib.LayoutServiceMenu" id="downloadLayouts">
+					<cpt:named>Download Object Layouts (ZIP)</cpt:named>
+				</mb3:serviceAction>
+				<mb3:serviceAction
+					objectType="causeway.applib.LayoutServiceMenu"
+					id="downloadMenuBarsLayout">
+					<cpt:named>Download Menu Bars Layout (XML)</cpt:named>
+				</mb3:serviceAction>
+			</mb3:section>
+			<mb3:section>
+                <mb3:serviceAction
+                    objectType="causeway.applib.MetaModelServiceMenu"
+                    id="downloadMetaModel">
+                    <cpt:named>Download Meta Model</cpt:named>
+                </mb3:serviceAction>
+				<mb3:serviceAction
+					objectType="causeway.applib.MetaModelServiceMenu"
+					id="downloadMetaModelCsv">
+					<cpt:named>Download Meta Model (CSV)</cpt:named>
+				</mb3:serviceAction>
+			</mb3:section>
+			<mb3:section>
+				<mb3:serviceAction
+					objectType="causeway.applib.TranslationServicePoMenu"
+					id="downloadTranslations">
+					<cpt:named>Download Translations</cpt:named>
+				</mb3:serviceAction>
+				<mb3:serviceAction
+					objectType="causeway.applib.TranslationServicePoMenu"
+					id="resetTranslationCache">
+					<cpt:named>Clear translation cache</cpt:named>
+				</mb3:serviceAction>
+				<mb3:serviceAction
+					objectType="causeway.applib.TranslationServicePoMenu"
+					id="switchToReadingTranslations">
+					<cpt:named>Switch To Reading Translations</cpt:named>
+				</mb3:serviceAction>
+				<mb3:serviceAction
+					objectType="causeway.applib.TranslationServicePoMenu"
+					id="switchToWritingTranslations">
+					<cpt:named>Switch To Writing Translations</cpt:named>
+				</mb3:serviceAction>
+			</mb3:section>
+		</mb3:menu>
+	</mb3:secondary>
+	<mb3:tertiary>
+		<mb3:menu>
+			<mb3:named>Configuration Menu</mb3:named>
+			<mb3:section>
+				<mb3:serviceAction
+					objectType="causeway.conf.ConfigurationMenu" id="configuration">
+					<cpt:named>Configuration</cpt:named>
+				</mb3:serviceAction>
+			</mb3:section>
+		</mb3:menu>
+		<mb3:menu>
+			<mb3:named>Logout Menu</mb3:named>
+			<mb3:section>
+				<mb3:serviceAction
+					objectType="causeway.security.LogoutMenu" id="logout">
+					<cpt:named>Logout</cpt:named>
+				</mb3:serviceAction>
+			</mb3:section>
+		</mb3:menu>
+	</mb3:tertiary>
+</mb3:menuBars>
