@@ -19,10 +19,8 @@
 package org.apache.causeway.lab.experiments.datajdbc;
 
 import jakarta.inject.Named;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Persistent;
 
 import org.apache.causeway.applib.annotation.DomainObject;
 import org.apache.causeway.applib.annotation.Nature;
@@ -34,7 +32,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
+@Persistent
 @Named("causewayLab.Employee")
 @DomainObject(nature=Nature.ENTITY)
 @Getter @Setter @ToString @EqualsAndHashCode
@@ -42,7 +40,7 @@ import lombok.ToString;
 public class Employee {
 
     @Id
-    @GeneratedValue //TODO replacement?
+    //@jakarta.persistence.GeneratedValue //TODO replacement?
     private Long id;
 
     private String firstName;
