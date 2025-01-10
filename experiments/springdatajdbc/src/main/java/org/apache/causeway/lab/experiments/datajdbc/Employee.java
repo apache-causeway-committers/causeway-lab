@@ -18,13 +18,15 @@
  */
 package org.apache.causeway.lab.experiments.datajdbc;
 
-import org.apache.causeway.applib.annotation.DomainObject;
-import org.apache.causeway.applib.annotation.Nature;
-
 import jakarta.inject.Named;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+
+import org.springframework.data.annotation.Id;
+
+import org.apache.causeway.applib.annotation.DomainObject;
+import org.apache.causeway.applib.annotation.Nature;
+
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,7 +42,7 @@ import lombok.ToString;
 public class Employee {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue //TODO replacement?
     private Long id;
 
     private String firstName;

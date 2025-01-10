@@ -18,8 +18,6 @@
  */
 package org.apache.causeway.lab.experiments.datajdbc;
 
-import org.apache.causeway.core.runtimeservices.CausewayModuleCoreRuntimeServices;
-import org.apache.causeway.security.bypass.CausewayModuleSecurityBypass;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,13 +25,15 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
-import org.apache.causeway.persistence.jpa.eclipselink.CausewayModulePersistenceJpaEclipselink;
+import org.apache.causeway.core.runtimeservices.CausewayModuleCoreRuntimeServices;
+import org.apache.causeway.persistence.jdbc.CausewayModulePersistenceJdbc;
+import org.apache.causeway.security.bypass.CausewayModuleSecurityBypass;
 import org.apache.causeway.viewer.wicket.viewer.CausewayModuleViewerWicketViewer;
 
 @SpringBootApplication
 @Import({
     CausewayModuleCoreRuntimeServices.class, // Apache Causeway Runtime
-    CausewayModulePersistenceJpaEclipselink.class, // EclipseLink as JPA provider for Spring Data
+    CausewayModulePersistenceJdbc.class, // Spring Data JDBC integration
     CausewayModuleViewerWicketViewer.class, // UI (Wicket Viewer)
     CausewayModuleSecurityBypass.class // Security (Bypass, grants all access)
 })

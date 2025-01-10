@@ -18,14 +18,13 @@
  */
 package org.apache.causeway.lab.experiments.datajdbc;
 
-import java.util.List;
-
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import org.apache.causeway.applib.annotation.Collection;
 import org.apache.causeway.applib.annotation.DomainObject;
 import org.apache.causeway.applib.annotation.Nature;
+import org.apache.causeway.commons.collections.Can;
 
 @Named("causewayLab.EmployeeManager")
 @DomainObject(nature=Nature.VIEW_MODEL)
@@ -39,8 +38,8 @@ public class EmployeeManager {
     }
 
     @Collection
-    public List<Employee> getAllEmployees(){
-        return employeeRepo.findAll();
+    public Can<Employee> getAllEmployees(){
+        return Can.ofIterable(employeeRepo.findAll());
     }
 
 }
