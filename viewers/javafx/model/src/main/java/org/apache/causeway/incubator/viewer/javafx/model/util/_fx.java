@@ -20,7 +20,7 @@ package org.apache.causeway.incubator.viewer.javafx.model.util;
 
 import java.util.function.Predicate;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -61,7 +61,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.val;
 import lombok.experimental.UtilityClass;
 

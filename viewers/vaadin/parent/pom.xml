@@ -16,8 +16,8 @@
          limitations under the License.
          -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.apache.causeway.incubator.viewer</groupId>
@@ -38,10 +38,12 @@
 
         <revision>3.0.0-SNAPSHOT</revision>
         <causeway.version>3.0.0</causeway.version>
+        <jspecify.version>1.0.0</jspecify.version>
         <lombok.version>1.18.34</lombok.version>
         <spring-boot.version>3.3.0</spring-boot.version>
 
-        <jar-plugin.automaticModuleName>org.apache.causeway.incubator.viewer.vaadin</jar-plugin.automaticModuleName>
+        <jar-plugin.automaticModuleName>
+            org.apache.causeway.incubator.viewer.vaadin</jar-plugin.automaticModuleName>
         <git-plugin.propertiesDir>org/apache/causeway/incubator/viewer/vaadin</git-plugin.propertiesDir>
         <enforcer.skip>true</enforcer.skip>
 
@@ -106,6 +108,11 @@
             </dependency>
 
             <dependency>
+                <groupId>org.jspecify</groupId>
+                <artifactId>jspecify</artifactId>
+                <version>${jspecify.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <scope>provided</scope>
@@ -118,7 +125,8 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!-- flatten-maven-plugin contains allows to reference versions (revision) in submodules -->
+                <!-- flatten-maven-plugin contains allows to reference versions
+                (revision) in submodules -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>flatten-maven-plugin</artifactId>

@@ -26,7 +26,7 @@ import org.apache.causeway.incubator.viewer.vaadin.ui.components.UiComponentFact
 import org.apache.causeway.viewer.commons.model.components.UiComponentFactory.ComponentRequest;
 
 import lombok.Getter;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.val;
 
 public class ActionForm extends FormLayout {

@@ -23,7 +23,7 @@ import java.time.LocalDate;
 import com.vaadin.flow.component.customfield.CustomField;
 import com.vaadin.flow.component.datepicker.DatePicker;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class DateField extends CustomField<LocalDate> {
 

@@ -20,7 +20,7 @@ package org.apache.causeway.incubator.viewer.javafx.ui.components.collections;
 
 import java.util.Optional;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import org.apache.causeway.applib.annotation.Where;
 import org.apache.causeway.applib.layout.grid.Grid;
@@ -44,7 +44,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.val;
 import lombok.extern.log4j.Log4j2;
 

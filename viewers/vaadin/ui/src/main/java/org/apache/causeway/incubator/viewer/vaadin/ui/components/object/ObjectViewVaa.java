@@ -57,7 +57,7 @@ import org.apache.causeway.viewer.commons.model.components.UiComponentFactory;
 import org.apache.causeway.viewer.commons.model.decorators.DisablingDecorator.DisablingDecorationModel;
 import org.apache.causeway.viewer.commons.model.layout.UiGridLayout;
 
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.val;
 import lombok.extern.log4j.Log4j2;
 

@@ -22,7 +22,7 @@ import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import org.apache.causeway.commons.internal.functions._Predicates;
 import org.apache.causeway.core.metamodel.interactions.managed.ManagedProperty;

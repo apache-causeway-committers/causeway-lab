@@ -11,7 +11,7 @@ import org.apache.causeway.lab.experiments.wktbs.widgets.field.FieldPanel.Format
 
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)

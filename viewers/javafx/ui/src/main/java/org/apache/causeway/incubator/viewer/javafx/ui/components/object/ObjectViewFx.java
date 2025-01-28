@@ -52,7 +52,7 @@ import org.apache.causeway.viewer.commons.model.layout.UiGridLayout;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.val;
 import lombok.extern.log4j.Log4j2;
 

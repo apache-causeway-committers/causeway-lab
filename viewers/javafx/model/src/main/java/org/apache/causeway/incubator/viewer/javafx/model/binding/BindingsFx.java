@@ -30,7 +30,7 @@ import org.apache.causeway.viewer.commons.model.binding.BindingConverter;
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.val;
 import lombok.experimental.UtilityClass;
 

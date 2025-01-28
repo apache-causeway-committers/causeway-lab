@@ -20,7 +20,7 @@ package org.apache.causeway.incubator.viewer.javafx.ui.components.form;
 
 import java.util.List;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import org.apache.causeway.applib.annotation.LabelPosition;
 import org.apache.causeway.commons.internal.collections._Lists;
@@ -32,7 +32,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import lombok.Getter;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 

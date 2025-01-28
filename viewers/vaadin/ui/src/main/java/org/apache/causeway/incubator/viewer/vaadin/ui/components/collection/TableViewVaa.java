@@ -44,7 +44,7 @@ import org.apache.causeway.incubator.viewer.vaadin.model.context.UiContextVaa;
 import org.apache.causeway.incubator.viewer.vaadin.ui.pages.main.FaIcon;
 
 import lombok.AccessLevel;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import lombok.extern.log4j.Log4j2;

@@ -57,7 +57,7 @@ import org.apache.causeway.incubator.viewer.vaadin.ui.util.LocalResourceUtil;
 import org.apache.causeway.viewer.commons.applib.services.header.HeaderUiService;
 import org.apache.causeway.viewer.commons.model.decorators.IconDecorator;
 
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.val;
 import lombok.extern.log4j.Log4j2;
 

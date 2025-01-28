@@ -32,7 +32,7 @@ import org.apache.causeway.applib.services.iactn.Interaction;
 import org.apache.causeway.applib.services.iactnlayer.InteractionService;
 import org.apache.causeway.incubator.viewer.vaadin.ui.auth.AuthSessionStoreUtil;
 
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.val;
 import lombok.extern.log4j.Log4j2;
 

@@ -24,11 +24,11 @@ import jakarta.servlet.http.HttpSession;
 
 import com.vaadin.flow.server.VaadinSession;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import org.apache.causeway.applib.services.iactnlayer.InteractionContext;
 
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.experimental.UtilityClass;
 
 /**
