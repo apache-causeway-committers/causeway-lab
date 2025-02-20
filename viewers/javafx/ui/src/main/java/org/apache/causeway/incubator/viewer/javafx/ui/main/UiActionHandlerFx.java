@@ -74,15 +74,15 @@ public class UiActionHandlerFx {
 
             pendingArgs.getParamModels().forEach(paramModel->{
 
-                val paramNr = paramModel.getParamNr(); // zero based
+                val paramIndex = paramModel.paramIndex(); // zero based
 
                 val request = ComponentRequest.of(paramModel);
 
                 val labelAndPosition = uiComponentFactory.labelFor(request);
                 val uiField = uiComponentFactory.parameterFor(request);
 
-                grid.add(labelAndPosition.getUiLabel(), 0, paramNr);
-                grid.add(uiField, 1, paramNr);
+                grid.add(labelAndPosition.getUiLabel(), 0, paramIndex);
+                grid.add(uiField, 1, paramIndex);
 
             });
 
