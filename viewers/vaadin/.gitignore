@@ -12,4 +12,5 @@ webpack.generated.js
 vite.generated.ts
 pnpm*
 
-
+# eclipse plugin https://nodj.github.io/AutoDeriv/
+.derived
