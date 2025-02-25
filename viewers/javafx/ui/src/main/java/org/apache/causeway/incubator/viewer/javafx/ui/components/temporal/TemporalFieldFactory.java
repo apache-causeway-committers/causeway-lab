@@ -27,10 +27,10 @@ import org.apache.causeway.applib.value.semantics.TemporalCharacteristicsProvide
 import org.apache.causeway.applib.value.semantics.TemporalCharacteristicsProvider.TemporalCharacteristic;
 import org.apache.causeway.applib.value.semantics.TemporalValueSemantics;
 import org.apache.causeway.core.metamodel.util.Facets;
+import org.apache.causeway.incubator.viewer.javafx.model.binding.BindingConverterForManagedObject;
 import org.apache.causeway.incubator.viewer.javafx.model.binding.BindingsFx;
 import org.apache.causeway.incubator.viewer.javafx.model.util._fx;
 import org.apache.causeway.incubator.viewer.javafx.ui.components.UiComponentHandlerFx;
-import org.apache.causeway.viewer.commons.model.binding.BindingConverterForManagedObject;
 import org.apache.causeway.viewer.commons.model.components.UiComponentFactory.ComponentRequest;
 
 import lombok.RequiredArgsConstructor;
@@ -60,7 +60,7 @@ public class TemporalFieldFactory implements UiComponentHandlerFx {
         val uiField = _fx.add(uiComponent, new DatePicker());
         val uiValidationFeedback = _fx.newValidationFeedback(uiComponent);
 
-        val managedValue = request.getManagedValue();
+        val managedValue = request.managedValue();
         BindingsFx.bindBidirectional(
                 uiField.valueProperty(),
                 managedValue.getValue(),

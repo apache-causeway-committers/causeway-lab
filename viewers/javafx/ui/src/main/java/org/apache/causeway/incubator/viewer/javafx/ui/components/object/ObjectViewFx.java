@@ -176,7 +176,7 @@ public class ObjectViewFx extends VBox {
                     interaction.checkUsability();
 
                     val uiButton = uiComponentFactory.buttonFor(
-                                    UiComponentFactory.ButtonRequest.of(
+                                    new UiComponentFactory.ButtonRequest(
                                         managedAction,
                                         DisablingDecorationModel.of(interaction),
                                         actionEventHandler));
@@ -206,7 +206,7 @@ public class ObjectViewFx extends VBox {
 
                     val propNeg = managedProperty.startNegotiation();
 
-                    val request = UiComponentFactory.ComponentRequest.of(
+                    val request = new UiComponentFactory.ComponentRequest(
                             propNeg,
                             managedProperty,
                             DisablingDecorationModel.of(interaction));
@@ -215,8 +215,8 @@ public class ObjectViewFx extends VBox {
                     val labelAndPostion = uiComponentFactory.labelFor(request);
 
                     formPane.addField(
-                            labelAndPostion.getLabelPosition(),
-                            labelAndPostion.getUiLabel(),
+                            labelAndPostion.labelPosition(),
+                            labelAndPostion.uiLabel(),
                             uiPropertyField);
 
                     // handle associated actions

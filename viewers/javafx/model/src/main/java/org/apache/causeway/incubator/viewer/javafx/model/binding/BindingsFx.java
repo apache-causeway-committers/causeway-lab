@@ -21,18 +21,19 @@ package org.apache.causeway.incubator.viewer.javafx.model.binding;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
+import org.jspecify.annotations.NonNull;
+
 import org.apache.causeway.commons.binding.Bindable;
 import org.apache.causeway.commons.binding.ChangeListener;
 import org.apache.causeway.commons.binding.Observable;
 import org.apache.causeway.commons.internal.exceptions._Exceptions;
-import org.apache.causeway.viewer.commons.model.binding.BindingConverter;
+
+import lombok.val;
+import lombok.experimental.UtilityClass;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
-import org.jspecify.annotations.NonNull;
-import lombok.val;
-import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class BindingsFx {

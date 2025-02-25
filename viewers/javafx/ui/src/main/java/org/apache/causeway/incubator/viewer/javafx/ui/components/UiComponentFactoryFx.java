@@ -69,9 +69,9 @@ public class UiComponentFactoryFx implements UiComponentFactory<Node, Node> {
     public Node componentFor(final ComponentRequest request) {
 
         val formField = chainOfHandlers.handleElseFail(request);
-        val managedMember = (ManagedMember) request.getManagedFeature();
+        val managedMember = (ManagedMember) request.managedFeature();
 
-        request.getDisablingUiModelIfAny().ifPresent(disablingUiModel->{
+        request.disablingUiModelIfAny().ifPresent(disablingUiModel->{
             uiContext.getDisablingDecoratorForFormField()
             .decorate(formField, disablingUiModel);
         });
@@ -85,9 +85,9 @@ public class UiComponentFactoryFx implements UiComponentFactory<Node, Node> {
     @Override
     public Node buttonFor(final ButtonRequest request) {
 
-        val managedAction = request.getManagedAction();
-        val disablingUiModelIfAny = request.getDisablingUiModelIfAny();
-        val actionEventHandler = request.getActionEventHandler();
+        val managedAction = request.managedAction();
+        val disablingUiModelIfAny = request.disablingUiModelIfAny();
+        val actionEventHandler = request.actionEventHandler();
 
         val uiButton = new Button(managedAction.getFriendlyName());
         uiButton.setOnAction(event->actionEventHandler.accept(managedAction));
@@ -111,9 +111,9 @@ public class UiComponentFactoryFx implements UiComponentFactory<Node, Node> {
 
     @Override
     public LabelAndPosition<Node> labelFor(final ComponentRequest request) {
-        val labelPosition = Facets.labelAt(request.getManagedFeature().getMetaModel());
+        val labelPosition = Facets.labelAt(request.managedFeature().getMetaModel());
         val uiLabel = new Label(request.getFriendlyName());
-        return LabelAndPosition.of(labelPosition, uiLabel);
+        return new LabelAndPosition<>(labelPosition, uiLabel);
     }
 
 }

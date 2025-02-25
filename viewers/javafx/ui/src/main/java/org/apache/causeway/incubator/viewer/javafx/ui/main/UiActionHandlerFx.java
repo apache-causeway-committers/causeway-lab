@@ -81,7 +81,7 @@ public class UiActionHandlerFx {
                 val labelAndPosition = uiComponentFactory.labelFor(request);
                 val uiField = uiComponentFactory.parameterFor(request);
 
-                grid.add(labelAndPosition.getUiLabel(), 0, paramIndex);
+                grid.add(labelAndPosition.uiLabel(), 0, paramIndex);
                 grid.add(uiField, 1, paramIndex);
 
             });

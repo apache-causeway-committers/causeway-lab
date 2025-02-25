@@ -52,11 +52,11 @@ public class ObjectReferenceFieldFactory implements UiComponentHandlerFx {
 //        val textValue = request.getFeatureValue(String.class)
 //                .orElse("");
 
-        val uiComponent = new Label(request.getManagedFeature().getIdentifier().toString());
+        val uiComponent = new Label(request.managedFeature().getIdentifier().toString());
 
-        if(request.getManagedFeature() instanceof ManagedParameter) {
+        if(request.managedFeature() instanceof ManagedParameter) {
 
-            val managedParameter = (ManagedParameter)request.getManagedFeature();
+            val managedParameter = (ManagedParameter)request.managedFeature();
 
 //            uiComponent.textProperty().
 //
@@ -64,9 +64,9 @@ public class ObjectReferenceFieldFactory implements UiComponentHandlerFx {
 
             //TODO bind to parameter model
 
-        } else if(request.getManagedFeature() instanceof ManagedProperty) {
+        } else if(request.managedFeature() instanceof ManagedProperty) {
 
-            val managedProperty = (ManagedProperty)request.getManagedFeature();
+            val managedProperty = (ManagedProperty)request.managedFeature();
             //TODO bind to property model
         }
 
