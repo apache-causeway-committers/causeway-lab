@@ -35,7 +35,7 @@ import org.apache.causeway.incubator.viewer.javafx.viewer.CausewayModuleIncViewe
 import org.apache.causeway.security.bypass.CausewayModuleSecurityBypass;
 import org.apache.causeway.valuetypes.asciidoc.metamodel.semantics.AsciiDocValueSemantics;
 
-import demoapp.dom.DemoModuleJpa;
+import demoapp.dom.ReferenceModuleJpa;
 import demoapp.dom._infra.resources.AsciiDocValueSemanticsWithPreprocessing;
 
 /**
@@ -43,7 +43,7 @@ import demoapp.dom._infra.resources.AsciiDocValueSemanticsWithPreprocessing;
  */
 @SpringBootApplication
 @Import({
-    DemoModuleJpa.class,
+    ReferenceModuleJpa.class,
 
     CausewayModuleSecurityBypass.class,
     // Security Manager Extension (secman)
