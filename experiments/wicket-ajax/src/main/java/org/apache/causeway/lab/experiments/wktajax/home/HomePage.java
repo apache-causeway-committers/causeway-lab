@@ -12,6 +12,7 @@
 
 package org.apache.causeway.lab.experiments.wktajax.home;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
@@ -19,6 +20,7 @@ import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 
 import org.apache.causeway.lab.experiments.wktajax.sample.BasePage;
@@ -31,10 +33,10 @@ public class HomePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        System.err.printf("programmatic %s%n", "person");
-        var person = new Person("hello", "world");
+        System.err.printf("HomePage %s%n", "INIT");
 
-        var personPanel = new PersonPanel("personPanel", new PersonModel(person));
+        var personModel = new PersonModel();
+        var personPanel = new PersonPanel("personPanel", personModel);
 
         add(personPanel);
 
@@ -44,24 +46,42 @@ public class HomePage extends BasePage {
             public void onClick(final Optional<AjaxRequestTarget> target) {
                 target.ifPresent(ajaxRequestTarget->
                     ajaxRequestTarget.add(personPanel));
-                System.err.printf("%s%n", "update");
+
+                var person = personModel.person();
+                person.setFirstName(person.getFirstName() + ".");
+                System.err.printf("%s%n", "PersonPanel UPDATE (AJAX)");
             }
         });
     }
 
-    record PersonModel(Person person) implements IModel<Person> {
+    final class PersonModel extends LoadableDetachableModel<Person> {
+        private static final long serialVersionUID = 1L;
+
+        private List<String> memento = List.of("hello", "world");
+
+        public Person person() {
+            return getObject();
+        }
 
         @Override
-        public Person getObject() {
+        protected Person load() {
+            System.err.printf("PersonModel LOAD %s%n", System.identityHashCode(this));
+            var person = new Person(memento.get(0), memento.get(1));
             return person;
         }
 
-        public IModel<String> first() {
-            return this.map(Person::first);
+        public IModel<String> firstName() {
+            return this.map(Person::getFirstName);
         }
 
-        public IModel<String> last() {
-            return this.map(Person::last);
+        public IModel<String> lastName() {
+            return this.map(Person::getLastName);
+        }
+
+        @Override
+        protected void onDetach() {
+            System.err.printf("PersonModel DETACH [%d]%n", System.identityHashCode(this));
+            this.memento = List.of(person().getFirstName(), person().getLastName());
         }
 
     }

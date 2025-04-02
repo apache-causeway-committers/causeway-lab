@@ -14,32 +14,17 @@ public class PersonPanel extends Panel {
 
     public PersonPanel(final String id, final PersonModel personModel) {
         super(id);
-        System.err.printf("%s%n", "ne person panel");
+        System.err.printf("%s%n", "new person panel");
         add(new Label("time", new TimeModel()));
-        add(new Label("first", personModel.first()));
-        add(new Label("last", personModel.map(Person::last)));
+        add(new Label("firstName", personModel.firstName()));
+        add(new Label("lastName", personModel.lastName()));
         setOutputMarkupId(true);
     }
 
-    private static class TimeModel implements IModel<String>  {
-        private static final long serialVersionUID = 1L;
-
+    record TimeModel() implements IModel<String>  {
         @Override
         public String getObject() {
             return "" + LocalTime.now();
-        }
-    }
-
-    record LabelModel(String label) implements IModel<String> {
-
-        LabelModel(final String label) {
-            this.label = label;
-            System.err.printf("%s%n", "new label model constructed");
-        }
-
-        @Override
-        public String getObject() {
-            return label;
         }
     }
 

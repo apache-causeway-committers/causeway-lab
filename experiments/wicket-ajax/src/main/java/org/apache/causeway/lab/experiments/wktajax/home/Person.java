@@ -1,13 +1,16 @@
 package org.apache.causeway.lab.experiments.wktajax.home;
 
-import java.io.Serializable;
+import lombok.Data;
 
-record Person(String first, String last)
-implements Serializable
-{
-    Person(final String first, final String last) {
-        this.first = first;
-        this.last = last;
+@Data
+class Person {
+
+    String firstName;
+    String lastName;
+
+    Person(final String firstName, final String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         System.err.printf("%s%n", "new person constructed");
     }
 
