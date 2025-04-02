@@ -12,15 +12,12 @@
 
 package org.apache.causeway.lab.experiments.wktajax.home;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
-import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 
 import org.apache.causeway.lab.experiments.wktajax.sample.BasePage;
@@ -35,7 +32,7 @@ public class HomePage extends BasePage {
         super.onInitialize();
         System.err.printf("HomePage %s%n", "INIT");
 
-        var personModel = new PersonModel();
+        var personModel = new PersonIModel2(new Person("hello", "world"));
         var personPanel = new PersonPanel("personPanel", personModel);
 
         add(personPanel);
@@ -49,41 +46,13 @@ public class HomePage extends BasePage {
 
                 var person = personModel.person();
                 person.setFirstName(person.getFirstName() + ".");
+                person.setLastName(person.getLastName() + ".");
+
+                personModel.testSerialization();
+
                 System.err.printf("%s%n", "PersonPanel UPDATE (AJAX)");
             }
         });
-    }
-
-    final class PersonModel extends LoadableDetachableModel<Person> {
-        private static final long serialVersionUID = 1L;
-
-        private List<String> memento = List.of("hello", "world");
-
-        public Person person() {
-            return getObject();
-        }
-
-        @Override
-        protected Person load() {
-            System.err.printf("PersonModel LOAD %s%n", System.identityHashCode(this));
-            var person = new Person(memento.get(0), memento.get(1));
-            return person;
-        }
-
-        public IModel<String> firstName() {
-            return this.map(Person::getFirstName);
-        }
-
-        public IModel<String> lastName() {
-            return this.map(Person::getLastName);
-        }
-
-        @Override
-        protected void onDetach() {
-            System.err.printf("PersonModel DETACH [%d]%n", System.identityHashCode(this));
-            this.memento = List.of(person().getFirstName(), person().getLastName());
-        }
-
     }
 
 }

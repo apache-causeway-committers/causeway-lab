@@ -28,6 +28,7 @@ import org.apache.wicket.markup.head.PriorityHeaderItem;
 import org.apache.wicket.markup.html.IHeaderContributor;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.resource.CssResourceReference;
+import org.apache.wicket.serialize.java.JavaSerializer;
 
 import org.apache.causeway.lab.experiments.wktajax.sample.BasePage;
 
@@ -53,6 +54,16 @@ implements WicketApplicationInitConfiguration {
       final IBootstrapSettings settings = new BootstrapSettings();
       settings.setDeferJavascript(false);
       Bootstrap.install(webApplication, settings);
+
+      webApplication.getFrameworkSettings().setSerializer(new JavaSerializer(webApplication.getApplicationKey()) {
+          @Override
+          public byte[] serialize(final Object object) {
+              var bytes = super.serialize(object);
+              System.err.printf("WicketAjaxApplicationConfiguration: serialized %s to %d bytes%n",
+                  object.getClass().getSimpleName(), bytes.length);
+              return bytes;
+          }
+      });
 
       webApplication.getCspSettings().blocking().disabled();
 
