@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.apache.causeway.core</groupId>
         <artifactId>causeway-core</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>3.4.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
 
@@ -44,25 +44,25 @@
 			<dependency>
 				<groupId>org.apache.causeway.incubator.viewer</groupId>
 				<artifactId>causeway-viewer-javafx-headless</artifactId>
-				<version>3.0.0-SNAPSHOT</version>
+				<version>3.4.0-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.apache.causeway.incubator.viewer</groupId>
 				<artifactId>causeway-viewer-javafx-model</artifactId>
-				<version>3.0.0-SNAPSHOT</version>
+				<version>3.4.0-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.apache.causeway.incubator.viewer</groupId>
 				<artifactId>causeway-viewer-javafx-ui</artifactId>
-				<version>3.0.0-SNAPSHOT</version>
+				<version>3.4.0-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.apache.causeway.incubator.viewer</groupId>
 				<artifactId>causeway-viewer-javafx-viewer</artifactId>
-				<version>3.0.0-SNAPSHOT</version>
+				<version>3.4.0-SNAPSHOT</version>
 			</dependency>
 
 			<!-- JAVA-FX -->
