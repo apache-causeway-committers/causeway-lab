@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.4</version>
+        <version>3.4.5</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -21,7 +21,7 @@
 
     <properties>
         <jspecify.version>1.0.0</jspecify.version>
-        <spring-boot.version>3.4.4</spring-boot.version>
+        <spring-boot.version>3.4.5</spring-boot.version>
         <wicket.version>10.4.0</wicket.version>
     </properties>
 
