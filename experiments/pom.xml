@@ -21,7 +21,7 @@
 
     <properties>
         <jspecify.version>1.0.0</jspecify.version>
-        <spring-boot.version>3.5.3</spring-boot.version>
+        <spring-boot.version>3.5.4</spring-boot.version>
         <wicket.version>10.6.0</wicket.version>
     </properties>
 
