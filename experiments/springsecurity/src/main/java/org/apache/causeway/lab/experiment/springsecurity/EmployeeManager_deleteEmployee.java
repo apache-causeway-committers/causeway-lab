@@ -2,10 +2,9 @@ package org.apache.causeway.lab.experiment.springsecurity;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.apache.causeway.applib.annotation.Action;
 
+import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
 
 @Action(choicesFrom = "allEmployees")
@@ -13,12 +12,12 @@ import lombok.RequiredArgsConstructor;
 public class EmployeeManager_deleteEmployee {
 
     @Inject private EmployeeRepository employeeRepo;
-    
+
     private final EmployeeManager holder;
-    
-    public EmployeeManager act(List<Employee> employeesToRemove) {
+
+    public EmployeeManager act(final List<Employee> employeesToRemove) {
         employeesToRemove.forEach(employeeRepo::delete);
         return holder;
     }
-    
+
 }

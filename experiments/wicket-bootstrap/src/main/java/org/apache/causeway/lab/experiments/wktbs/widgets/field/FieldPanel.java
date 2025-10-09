@@ -6,7 +6,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.causeway.lab.experiments.wktbs.widgets.field.model.FieldModel;
 
 import lombok.Getter;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 
 public class FieldPanel<T> extends Panel {
 
@@ -66,6 +66,5 @@ public class FieldPanel<T> extends Panel {
             throw new IllegalArgumentException("Unexpected value: " + format);
         }
     }
-
 
 }

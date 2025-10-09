@@ -20,12 +20,12 @@ package org.apache.causeway.lab.tutorial.secman;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.causeway.applib.annotation.Collection;
 import org.apache.causeway.applib.annotation.DomainObject;
 import org.apache.causeway.applib.annotation.Nature;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named("causewayLab.EmployeeManager")
 @DomainObject(nature=Nature.VIEW_MODEL)

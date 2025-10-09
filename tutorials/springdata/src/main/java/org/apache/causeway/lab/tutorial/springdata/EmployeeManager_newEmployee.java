@@ -18,7 +18,7 @@
  */
 package org.apache.causeway.lab.tutorial.springdata;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.apache.causeway.applib.annotation.Action;
 
@@ -30,13 +30,13 @@ import lombok.val;
 public class EmployeeManager_newEmployee {
 
     @Inject private EmployeeRepository employeeRepo;
-    
+
     private final EmployeeManager holder;
-    
-    public EmployeeManager act(String firstName, String lastName) {
-        val newEmployee = new Employee(firstName, lastName); 
+
+    public EmployeeManager act(final String firstName, final String lastName) {
+        val newEmployee = new Employee(firstName, lastName);
         employeeRepo.save(newEmployee);
         return holder;
     }
-    
+
 }

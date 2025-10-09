@@ -1,0 +1,27 @@
+spring:
+  jpa:
+    database-platform: org.eclipse.persistence.platform.database.H2Platform
+    show-sql: true
+    generate-ddl: true
+    eclipselink:
+      ddl-generation: drop-and-create-tables
+      ddl-generation.output-mode: database
+  datasource:
+    url: jdbc:h2:mem:testdb2;MODE=LEGACY
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+causeway:
+  eclipseLink:
+    # if enabled, then must be run with JVM arg:
+    # -javaagent:lib/spring-instrument-5.3.8.jar
+    weaving: false
+    # if weaving subproperties are required, then specify all eclipselink.weaving
+    # properties using application.properties instead (it's not possible to
+    # specify both eclipselink.weaving property and its subproperties using yaml syntax)
+  viewer:
+    common:
+      application:
+        name: "Causeway Vaadin Demo"
+vaadin:
+  allowed-packages: com/flowingcode/vaadin/addons/fontawesome

@@ -1,0 +1,17 @@
+# Build
+switch to (this) directory
+
+```
+~/viewers/vaadin
+```
+and invoke
+
+```
+mvn clean install -DskipTests -T1.5C
+```
+
+## Changes
+* Warnings fixed:
+```
+<productionMode>true</productionMode>
+```

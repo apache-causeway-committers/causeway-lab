@@ -18,10 +18,9 @@
  */
 package org.apache.causeway.lab.experiment.springsecurity;
 
-import javax.inject.Inject;
-
 import org.apache.causeway.applib.annotation.Action;
 
+import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 
@@ -30,13 +29,13 @@ import lombok.val;
 public class EmployeeManager_newEmployee {
 
     @Inject private EmployeeRepository employeeRepo;
-    
+
     private final EmployeeManager holder;
-    
-    public EmployeeManager act(String firstName, String lastName) {
-        val newEmployee = new Employee(firstName, lastName); 
+
+    public EmployeeManager act(final String firstName, final String lastName) {
+        val newEmployee = new Employee(firstName, lastName);
         employeeRepo.save(newEmployee);
         return holder;
     }
-    
+
 }

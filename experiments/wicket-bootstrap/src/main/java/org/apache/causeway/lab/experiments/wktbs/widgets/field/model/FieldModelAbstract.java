@@ -3,12 +3,12 @@ package org.apache.causeway.lab.experiments.wktbs.widgets.field.model;
 import java.util.EnumSet;
 
 import org.apache.wicket.model.IModel;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import org.apache.causeway.lab.experiments.wktbs.widgets.field.FieldPanel.FormatModifer;
 
 import lombok.Getter;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.val;
 
 public abstract class FieldModelAbstract<T>

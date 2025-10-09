@@ -6,12 +6,11 @@
 	<parent>
 		<groupId>org.apache.causeway.lab</groupId>
 		<artifactId>causeway-lab-experiments</artifactId>
-		<version>2.0.0-SNAPSHOT</version>
+		<version>3.4.0-SNAPSHOT</version>
 	</parent>
 	
 	<artifactId>causeway-lab-experiments-wicket-bootstrap</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>causeway-lab-experiments-vaadin</name>
+	<name>causeway-lab-experiments-wicket-bootstrap</name>
 	<description>
 		Demo project for Wicket on Spring Boot.
 	</description>
@@ -43,13 +42,13 @@
 		<dependency>
 			<groupId>org.apache.causeway.commons</groupId>
 			<artifactId>causeway-commons</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
+			<version>3.4.0-SNAPSHOT</version>
 		</dependency> 
 
 		<dependency>
 			<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 			<artifactId>wicket-spring-boot-starter</artifactId>
-			<version>3.1.6</version>
+			<version>4.1.1</version>
 		</dependency>
 
 		<dependency>
@@ -61,7 +60,7 @@
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>
 			<artifactId>wicket-bootstrap-core</artifactId>
-			<version>6.0.0-M8</version>
+			<version>7.0.13</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.apache.wicket</groupId>
@@ -93,13 +92,13 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>font-awesome</artifactId>
-			<version>6.2.0</version> <!-- keep in sync with org.apache.causeway.lab.experiments.wktbs.WicketBootstrapApplicationConfiguration.FontAwesomeCssReferenceWkt.FONTAWESOME_RESOURCE -->
+			<version>7.0.1</version> <!-- keep in sync with org.apache.causeway.lab.experiments.wktbs.WicketBootstrapApplicationConfiguration.FontAwesomeCssReferenceWkt.FONTAWESOME_RESOURCE -->
 		</dependency>
 
 		<dependency>
 		    <groupId>org.webjars.bowergithub.eonasdan</groupId>
 		    <artifactId>tempus-dominus</artifactId>
-		    <version>6.0.0-beta2</version>
+		    <version>6.2.10</version>
 		</dependency>
 
 		<dependency>

@@ -91,7 +91,6 @@ public class BasePage extends WebPage
 		// single-select example
 		add(new Label("country", new PropertyModel<>(this, "country")));
 
-
 		Select2Choice<Country> country = new Select2Choice<>("country", new PropertyModel<Country>(
 			this, "country"), new CountriesProvider());
 		defaultSelect2Settings(country.getSettings())
@@ -245,7 +244,6 @@ public class BasePage extends WebPage
 		response.render(CssHeaderItem.forReference(
 		        new CssResourceReference(WicketSelect2Application.class, "css/bootstrap.css")));
 	}
-
 
 	protected Settings defaultSelect2Settings(final Settings settings) {
 		return settings.setWidth("100%");

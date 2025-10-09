@@ -30,5 +30,4 @@ public class JpaSchemaConfiguration {
     @Setter
     private String createSchemaSqlTemplate = "CREATE SCHEMA IF NOT EXISTS %S";
     
-
 }

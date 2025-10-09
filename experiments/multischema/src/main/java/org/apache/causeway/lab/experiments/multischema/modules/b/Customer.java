@@ -1,11 +1,10 @@
 package org.apache.causeway.lab.experiments.multischema.modules.b;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Entity
@@ -20,7 +19,7 @@ public class Customer {
 
     @NonNull
     private String firstName;
-    
+
     @NonNull
     private String lastName;
 }

@@ -36,9 +36,9 @@ public class JpaConfiguration extends JpaBaseConfiguration {
     protected AbstractJpaVendorAdapter createJpaVendorAdapter() { 
         return new EclipseLinkJpaVendorAdapter(); 
     }
-
+    
     @Override
-    protected Map<String, Object> getVendorProperties() {
+    protected Map<String, Object> getVendorProperties(final DataSource dataSource) {
         val jpaProps = new HashMap<String, Object>();
         jpaProps.put(PersistenceUnitProperties.WEAVING, "false");
         jpaProps.put(PersistenceUnitProperties.SCHEMA_GENERATION_CREATE_DATABASE_SCHEMAS, true);
@@ -86,6 +86,5 @@ public class JpaConfiguration extends JpaBaseConfiguration {
         
         return properties;
     }
-
 
 }

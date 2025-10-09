@@ -31,8 +31,6 @@ import org.springframework.stereotype.Component;
 import org.apache.causeway.applib.annotation.PriorityPrecedence;
 import org.apache.causeway.core.config.presets.CausewayPresets;
 import org.apache.causeway.core.runtimeservices.CausewayModuleCoreRuntimeServices;
-import org.apache.causeway.security.spring.CausewayModuleSecuritySpring;
-
 import org.apache.causeway.extensions.secman.encryption.spring.CausewayModuleExtSecmanEncryptionSpring;
 import org.apache.causeway.extensions.secman.integration.CausewayModuleExtSecmanIntegration;
 import org.apache.causeway.extensions.secman.integration.authorizor.AuthorizorSecman;
@@ -40,6 +38,7 @@ import org.apache.causeway.extensions.secman.jpa.CausewayModuleExtSecmanPersiste
 import org.apache.causeway.extensions.spring.security.oauth2.CausewayModuleExtSpringSecurityOAuth2;
 import org.apache.causeway.extensions.spring.security.oauth2.authconverters.AuthenticationConverterOfOAuth2UserPrincipal;
 import org.apache.causeway.persistence.jpa.eclipselink.CausewayModulePersistenceJpaEclipselink;
+import org.apache.causeway.security.spring.CausewayModuleSecuritySpring;
 import org.apache.causeway.testing.fixtures.applib.CausewayModuleTestingFixturesApplib;
 import org.apache.causeway.testing.h2console.ui.CausewayModuleTestingH2ConsoleUi;
 import org.apache.causeway.viewer.wicket.viewer.CausewayModuleViewerWicketViewer;
@@ -113,7 +112,7 @@ public class SpringSecurityApplication {
      * as the 'sven' user is seeded with permissions to actually use this demo app.
      */
     @Component
-    @javax.annotation.Priority(PriorityPrecedence.EARLY)
+    @jakarta.annotation.Priority(PriorityPrecedence.EARLY)
     public static class DemoAuthenticationConverter
     extends AuthenticationConverterOfOAuth2UserPrincipal {
 
@@ -123,6 +122,5 @@ public class SpringSecurityApplication {
         }
 
     }
-
 
 }

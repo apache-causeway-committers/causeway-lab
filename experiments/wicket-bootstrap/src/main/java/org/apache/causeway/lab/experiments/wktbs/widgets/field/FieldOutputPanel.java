@@ -150,7 +150,6 @@ public class FieldOutputPanel<T> extends Panel {
 
     }
 
-
     public FieldOutputPanel(final String id, final FieldModel<T> fieldModel) {
         super(id, new FieldModelHolder<>(fieldModel));
 
@@ -214,6 +213,5 @@ public class FieldOutputPanel<T> extends Panel {
         parent.setFormat(FieldPanel.Format.INPUT);
         ajaxTarget.add(parent);
     }
-
 
 }
