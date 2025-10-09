@@ -35,15 +35,16 @@ import org.apache.causeway.viewer.commons.applib.services.header.HeaderUiModel;
 import org.apache.causeway.viewer.thymeflux.model.root.ThymefluxRootController;
 import org.apache.causeway.viewer.thymeflux.viewer.CausewayModuleIncViewerThymefluxViewer;
 
-import demoapp.testing.jpa.DemoDomainJpa_forTesting;
+import demoapp.testing.jpa.ReferenceDomainJpa_forTesting;
 
 @SpringBootTest(
         classes = {
-                DemoDomainJpa_forTesting.class,
+                ReferenceDomainJpa_forTesting.class,
                 CausewayModuleIncViewerThymefluxViewer.class
         },
         //webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = {
+                "causeway.viewer.restfulobjects.base-path=/restful"
                 //"spring.jpa.show-sql=true",
                 //"logging.level.org.springframework.orm.jpa=DEBUG"
         })

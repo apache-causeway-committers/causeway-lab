@@ -58,5 +58,4 @@ implements HasManagedAction {
                 .decorate(uiLabel, lookupFontAwesomeLayers(false));
     }
 
-
 }

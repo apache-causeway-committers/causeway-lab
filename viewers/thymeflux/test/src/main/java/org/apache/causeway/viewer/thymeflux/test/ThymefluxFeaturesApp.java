@@ -35,13 +35,13 @@ import org.apache.causeway.viewer.thymeflux.viewer.CausewayModuleIncViewerThymef
  */
 @SpringBootApplication
 @Import({
-    CausewayModuleSecurityBypass.class,
     ThymefluxConfig_headlessPersistence.class,
+    CausewayModuleSecurityBypass.class,
 
     // THYMEFLUX INTEGRATION
     CausewayModuleIncViewerThymefluxViewer.class,
     // FEATURES
-    ThymefluxFeaturesController.class
+    ThymefluxFeaturesController.class,
 })
 public class ThymefluxFeaturesApp extends SpringBootServletInitializer {
 

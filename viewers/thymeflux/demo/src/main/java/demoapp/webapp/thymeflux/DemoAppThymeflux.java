@@ -19,6 +19,7 @@
 package demoapp.webapp.thymeflux;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Import;
@@ -31,14 +32,14 @@ import org.apache.causeway.extensions.secman.jpa.CausewayModuleExtSecmanPersiste
 import org.apache.causeway.security.bypass.CausewayModuleSecurityBypass;
 import org.apache.causeway.viewer.thymeflux.viewer.CausewayModuleIncViewerThymefluxViewer;
 
-import demoapp.dom.DemoModuleJpa;
+import demoapp.dom.ReferenceModuleJpa;
 
 /**
  * Bootstrap the application.
  */
 @SpringBootApplication
 @Import({
-    DemoModuleJpa.class,
+    ReferenceModuleJpa.class,
 
     // INCUBATING
     CausewayModuleSecurityBypass.class,
@@ -62,6 +63,7 @@ import demoapp.dom.DemoModuleJpa;
     //TODO CausewayModuleExtFullCalendarThymeflux.class,
 
 })
+@EnableAutoConfiguration
 public class DemoAppThymeflux extends SpringBootServletInitializer {
 
     /**

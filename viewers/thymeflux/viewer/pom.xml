@@ -18,7 +18,7 @@
 	<parent>
 		<groupId>org.apache.causeway.incubator.viewer</groupId>
 		<artifactId>causeway-viewer-thymeflux</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
+		<version>${revision}</version>
 	</parent>
 
 	<artifactId>causeway-viewer-thymeflux-viewer</artifactId>
@@ -40,6 +40,11 @@
 			<groupId>org.apache.causeway.core</groupId>
 			<artifactId>causeway-core-webapp</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.apache.causeway.core</groupId>
+            <artifactId>causeway-core-runtimeservices</artifactId>
+        </dependency>
+
 		
 		<dependency>
 		    <groupId>org.apache.causeway.viewer</groupId>
@@ -49,7 +54,7 @@
 		<dependency>
 		    <groupId>org.webjars</groupId>
 		    <artifactId>bootstrap</artifactId>
-		    <version>5.2.3</version>
+		    <version>5.3.8</version>
 		</dependency>
 		
 <!--		<dependency>-->
@@ -71,19 +76,11 @@
 		</dependency>
 
 
-
 		<!-- TODO remove if already provided by 'model'' artifact-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
-
 		
 	</dependencies>
 

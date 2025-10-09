@@ -87,7 +87,6 @@ implements WicketApplicationInitConfiguration {
       webApplication.mountPage("bootstrap", BasePage.class);
   }
 
-
   static class FontAwesomeCssReferenceWkt extends WebjarsCssResourceReference {
       private static final long serialVersionUID = 1L;
       public static final String FONTAWESOME_RESOURCE = "font-awesome/6.2.0/css/all.min.css";
