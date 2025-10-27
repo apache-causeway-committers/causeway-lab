@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
-	license agreements. See the NOTICE file distributed with this work for additional 
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more
+contributor 
+	license agreements. See the NOTICE file distributed with this work for
+additional 
 	information regarding copyright ownership. The ASF licenses this file to 
 	you under the Apache License, Version 2.0 (the "License"); you may not use 
 	this file except in compliance with the License. You may obtain a copy of 
@@ -10,29 +12,30 @@
 	OF ANY KIND, either express or implied. See the License for the specific 
 	language governing permissions and limitations under the License. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.apache.causeway.examples.apps</groupId>
+    <parent>
+        <groupId>org.apache.causeway.examples.apps</groupId>
         <artifactId>reference-app-parent</artifactId>
-		<version>4.0.0-SNAPSHOT</version>
-		<relativePath/>
-	</parent>
+        <version>4.0.0-SNAPSHOT</version>
+        <relativePath />
+    </parent>
 
-	<artifactId>demo-thymeflux</artifactId>
+    <artifactId>demo-thymeflux</artifactId>
 
-	<name>Demo - Thymeflux (Thymeleaf + Webflux)</name>
+    <name>Demo - Thymeflux (Thymeleaf + Webflux)</name>
 
-	<packaging>jar</packaging>
+    <packaging>jar</packaging>
 
-	<properties>
-		<maven.deploy.skip>true</maven.deploy.skip>
-		<sonar.skip>true</sonar.skip>
-	</properties>
+    <properties>
+        <maven.compiler.release>25</maven.compiler.release>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <sonar.skip>true</sonar.skip>
+    </properties>
 
-	<dependencies>
+    <dependencies>
 
         <dependency>
             <groupId>org.apache.causeway.security</groupId>
@@ -43,78 +46,78 @@
             <artifactId>causeway-core-runtimeservices</artifactId>
         </dependency>
 
-		<!-- DEMO DOMAIN + WEB -->
+        <!-- DEMO DOMAIN + WEB -->
 
-		<dependency>
-			<groupId>org.apache.causeway.examples.apps</groupId>
-			<artifactId>reference-app-web</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.causeway.examples.apps</groupId>
+            <artifactId>reference-app-web</artifactId>
+        </dependency>
 
-		<!-- INCUBATOR: THYMEFLUX VIEWER -->
+        <!-- INCUBATOR: THYMEFLUX VIEWER -->
 
-		<dependency>
-			<groupId>org.apache.causeway.incubator.viewer</groupId>
-			<artifactId>causeway-viewer-thymeflux-viewer</artifactId>
-			<version>4.0.0-SNAPSHOT</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.causeway.incubator.viewer</groupId>
+            <artifactId>causeway-viewer-thymeflux-viewer</artifactId>
+            <version>4.0.0-SNAPSHOT</version>
+        </dependency>
 
-		<!-- EXTENSIONS THYMEFLUX --> 
+        <!-- EXTENSIONS THYMEFLUX -->
 
-		<dependency>
-			<groupId>org.apache.causeway.valuetypes</groupId>
-			<artifactId>causeway-valuetypes-asciidoc-ui</artifactId>
-			<version>4.0.0-SNAPSHOT</version>
-			<type>pom</type>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.causeway.valuetypes</groupId>
+            <artifactId>causeway-valuetypes-asciidoc-ui</artifactId>
+            <version>4.0.0-SNAPSHOT</version>
+            <type>pom</type>
+        </dependency>
 
-		<!-- OTHER DEPENDENCIES -->
+        <!-- OTHER DEPENDENCIES -->
 
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 
-	<profiles>
+    <profiles>
 
-		<!-- running: mvn spring-boot:run -->
-		<profile>
-			<id>package-as-jar</id>
-			<activation>
-				<property>
-					<name>!skip-package-as-jar</name>
-				</property>
-			</activation>
-			<properties>
-			</properties>
+        <!-- running: mvn spring-boot:run -->
+        <profile>
+            <id>package-as-jar</id>
+            <activation>
+                <property>
+                    <name>!skip-package-as-jar</name>
+                </property>
+            </activation>
+            <properties>
+            </properties>
 
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.springframework.boot</groupId>
-						<artifactId>spring-boot-maven-plugin</artifactId>
-						<configuration>
-							<requiresUnpack>
-								<dependency>
-									<groupId>org.asciidoctor</groupId>
-									<artifactId>asciidoctorj</artifactId>
-								</dependency>
-							</requiresUnpack>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>repackage</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <requiresUnpack>
+                                <dependency>
+                                    <groupId>org.asciidoctor</groupId>
+                                    <artifactId>asciidoctorj</artifactId>
+                                </dependency>
+                            </requiresUnpack>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>repackage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
-	</profiles>
+    </profiles>
 
 </project>

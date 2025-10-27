@@ -19,15 +19,16 @@
 package org.apache.causeway.viewer.thymeflux.test;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.ui.Model;
-import org.springframework.validation.support.BindingAwareModelMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.webclient.test.autoconfigure.AutoConfigureWebClient;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.ui.Model;
+import org.springframework.validation.support.BindingAwareModelMap;
 
 import org.apache.causeway.applib.annotation.DomainServiceLayout.MenuBar;
 import org.apache.causeway.commons.io.YamlUtils;
@@ -49,7 +50,7 @@ import demoapp.testing.jpa.ReferenceDomainJpa_forTesting;
                 //"logging.level.org.springframework.orm.jpa=DEBUG"
         })
 @ActiveProfiles(profiles = "demo-jpa")
-@AutoConfigureWebTestClient
+@AutoConfigureWebClient //was @AutoConfigureWebTestClient in Spring Boot 3.x - not tested yet
 class ThymefluxViewerTests {
 
     //@Autowired private WebTestClient client;
