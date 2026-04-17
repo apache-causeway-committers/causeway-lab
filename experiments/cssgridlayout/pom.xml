@@ -12,7 +12,7 @@
     <properties>
         <java.version>17</java.version>
         <maven.compiler.release>17</maven.compiler.release>
-        <vaadin.version>25.1.1</vaadin.version>
+        <vaadin.version>25.1.3</vaadin.version>
     </properties>
 
 	<parent>
