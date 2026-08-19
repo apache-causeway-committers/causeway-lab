@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	   <parent>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
         <groupId>org.apache.causeway.app</groupId>
         <artifactId>causeway-app-starter-parent</artifactId>
-        <version>3.6.0</version>
+        <version>4.0.0-SNAPSHOT</version>
         <relativePath />
     </parent>
-	
-	<groupId>org.apache.causeway.lab</groupId>
-	<artifactId>causeway-lab-experiments-springdatajdbc</artifactId>
-	
-	<name>springdatajdbc</name>
-	<description>Demo project for Spring Data JDBC</description>
-	<properties>
-		<maven.compiler.release>21</maven.compiler.release>
-	</properties>
-	
-	<dependencies>
+
+    <groupId>org.apache.causeway.lab</groupId>
+    <artifactId>causeway-lab-experiments-springdatajdbc</artifactId>
+
+    <name>springdatajdbc</name>
+    <description>Demo project for Spring Data JDBC</description>
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+    </properties>
+
+    <dependencies>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -38,7 +38,11 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator-autoconfigure</artifactId>
         </dependency>
 
         <!-- CAUSEWAY -->
@@ -50,10 +54,6 @@
         <dependency>
             <groupId>org.apache.causeway.viewer</groupId>
             <artifactId>causeway-viewer-restfulobjects-viewer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.causeway.viewer</groupId>
-            <artifactId>causeway-viewer-restfulobjects-jaxrsresteasy</artifactId>
         </dependency>
 
         <dependency>
@@ -95,5 +95,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>

@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.apache.causeway.app</groupId>
 		<artifactId>causeway-app-starter-parent</artifactId>
-		<version>3.6.0</version>
+		<version>4.0.0-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
@@ -44,10 +44,14 @@
 
 		<!-- WEB ENGINE -->
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator-autoconfigure</artifactId>
+        </dependency>
 
 		<!-- CAUSEWAY -->
 
@@ -58,10 +62,6 @@
 		<dependency>
 			<groupId>org.apache.causeway.viewer</groupId>
 			<artifactId>causeway-viewer-restfulobjects-viewer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.causeway.viewer</groupId>
-			<artifactId>causeway-viewer-restfulobjects-jaxrsresteasy</artifactId>
 		</dependency>
 
 		<dependency>

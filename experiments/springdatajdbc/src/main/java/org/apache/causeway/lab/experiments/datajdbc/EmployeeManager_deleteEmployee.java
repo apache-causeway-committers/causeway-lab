@@ -2,23 +2,18 @@ package org.apache.causeway.lab.experiments.datajdbc;
 
 import java.util.List;
 
-import jakarta.inject.Inject;
-
 import org.apache.causeway.applib.annotation.Action;
-
-import lombok.RequiredArgsConstructor;
+import org.apache.causeway.applib.annotation.MemberSupport;
 
 @Action(choicesFrom = "allEmployees")
-@RequiredArgsConstructor
-public class EmployeeManager_deleteEmployee {
+public record EmployeeManager_deleteEmployee(
+        EmployeeManager mixee,
+        EmployeeRepository employeeRepo) {
 
-    @Inject private EmployeeRepository employeeRepo;
-
-    private final EmployeeManager holder;
-
+    @MemberSupport
     public EmployeeManager act(final List<Employee> employeesToRemove) {
         employeesToRemove.forEach(employeeRepo::delete);
-        return holder;
+        return mixee;
     }
 
 }

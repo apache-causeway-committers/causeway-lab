@@ -18,25 +18,21 @@
  */
 package org.apache.causeway.lab.experiments.datajdbc;
 
-import jakarta.inject.Inject;
-
 import org.apache.causeway.applib.annotation.Action;
+import org.apache.causeway.applib.annotation.MemberSupport;
 
-import lombok.RequiredArgsConstructor;
 import lombok.val;
 
 @Action(choicesFrom = "allEmployees")
-@RequiredArgsConstructor
-public class EmployeeManager_newEmployee {
+public record EmployeeManager_newEmployee(
+        EmployeeManager mixee,
+        EmployeeRepository employeeRepo) {
 
-    @Inject private EmployeeRepository employeeRepo;
-
-    private final EmployeeManager holder;
-
+    @MemberSupport
     public EmployeeManager act(final String firstName, final String lastName) {
         val newEmployee = new Employee(firstName, lastName);
         employeeRepo.save(newEmployee);
-        return holder;
+        return mixee;
     }
 
 }

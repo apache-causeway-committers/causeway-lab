@@ -18,16 +18,16 @@
  */
 package org.apache.causeway.lab.tutorial.springdata;
 
-import org.apache.causeway.core.runtimeservices.CausewayModuleCoreRuntimeServices;
-import org.apache.causeway.security.bypass.CausewayModuleSecurityBypass;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.persistence.autoconfigure.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
+import org.apache.causeway.core.runtimeservices.CausewayModuleCoreRuntimeServices;
 import org.apache.causeway.persistence.jpa.eclipselink.CausewayModulePersistenceJpaEclipselink;
+import org.apache.causeway.security.bypass.CausewayModuleSecurityBypass;
 import org.apache.causeway.viewer.wicket.viewer.CausewayModuleViewerWicketViewer;
 
 @SpringBootApplication
@@ -48,7 +48,7 @@ public class Application {
 
     @Bean
     public CommandLineRunner loadData(final EmployeeRepository repository) {
-        return (args) -> {
+        return args -> {
             repository.save(new Employee("Bill", "Gates"));
             repository.save(new Employee("Mark", "Zuckerberg"));
             repository.save(new Employee("Sundar", "Pichai"));

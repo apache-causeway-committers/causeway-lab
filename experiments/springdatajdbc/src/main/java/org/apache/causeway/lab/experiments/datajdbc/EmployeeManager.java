@@ -18,28 +18,33 @@
  */
 package org.apache.causeway.lab.experiments.datajdbc;
 
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import org.apache.causeway.applib.ViewModel;
 import org.apache.causeway.applib.annotation.Collection;
 import org.apache.causeway.applib.annotation.DomainObject;
+import org.apache.causeway.applib.annotation.MemberSupport;
 import org.apache.causeway.applib.annotation.Nature;
 import org.apache.causeway.commons.collections.Can;
 
 @Named("causewayLab.EmployeeManager")
 @DomainObject(nature=Nature.VIEW_MODEL)
-//@RequiredArgsConstructor(onConstructor_ = {@Inject}) //XXX not supported for view models yet
-public class EmployeeManager {
+public record EmployeeManager(
+        EmployeeRepository employeeRepo) implements ViewModel {
 
-    @Inject private EmployeeRepository employeeRepo;
-
+    @MemberSupport
     public String title() {
         return "Employee Manager";
     }
 
     @Collection
-    public Can<Employee> getAllEmployees(){
+    public Can<Employee> allEmployees(){
         return Can.ofIterable(employeeRepo.findAll());
+    }
+
+    @Override
+    public String viewModelMemento() {
+        return "1";
     }
 
 }
