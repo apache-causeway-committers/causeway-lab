@@ -16,7 +16,7 @@
     <name>springdatajdbc</name>
     <description>Demo project for Spring Data JDBC</description>
     <properties>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>27</maven.compiler.release>
     </properties>
 
     <dependencies>

@@ -17,8 +17,8 @@
 	<name>springsecurity</name>
 	<description>Demo project for Spring Security</description>
 	<properties>
-		<java.version>17</java.version>
-		<maven.compiler.release>17</maven.compiler.release>
+		<java.version>27</java.version>
+		<maven.compiler.release>27</maven.compiler.release>
 	</properties>
 	<dependencies>
 	

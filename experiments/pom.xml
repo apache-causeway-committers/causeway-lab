@@ -59,6 +59,7 @@
         <module>wicket-pdfjs</module>
         <module>wicket-select2</module>
         <module>wicket-ajax</module>
+        <module>wicket-springsession</module>
     </modules>
 
 </project>
