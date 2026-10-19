@@ -2,8 +2,9 @@
     <head></head>
     <body>
         Wicket home.
-        
-        <a href="/logout">Sign Out</a>
-        <wicket:child/>
+        <form action="/logout" method="POST">
+            <input type="hidden" wicket:id="_csrf">                
+            <input type="submit" value="Sign Out"/>
+        </form>
     </body>
 </html>

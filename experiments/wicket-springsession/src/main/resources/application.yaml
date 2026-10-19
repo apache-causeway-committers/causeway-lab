@@ -10,3 +10,9 @@ wicket:
   web:
     servlet:
       filter-mapping-param: /wicket/*
+      
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
