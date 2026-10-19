@@ -1,3 +1,12 @@
 spring:
   application:
-    name: experiment.wicket-spring
+    name: experiment.wicket-springsession
+    
+wicket:
+  core:
+    settings:
+      general:
+        configuration-type: development
+  web:
+    servlet:
+      filter-mapping-param: /wicket/*

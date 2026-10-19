@@ -11,20 +11,13 @@ public class IndexController {
     @GetMapping("/home")
     public String index() {
         return """
-                <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-    <head>
-        <title>Hello World!</title>
-    </head>
-    <body>
-        <h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-    </body>
-</html>
-                """;
+            <!DOCTYPE html>
+            <html>
+                <body>
+                    <h1>Hello World!</h1>
+                    <a href="/logout">Sign Out</a>
+                </body>
+            </html>""";
     }
 
     @GetMapping("/login")
@@ -36,5 +29,7 @@ public class IndexController {
     public String test() {
         return "Logout!";
     }
+
+
 
 }
