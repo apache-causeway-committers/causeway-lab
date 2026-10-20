@@ -32,8 +32,8 @@ public class IndexController {
                     <h1>Login</h1>
                     <p>Access to this App</p>
                     <form action="/authenticate" method="post">
-                        <p><input type="text" name="user" class="form-control" placeholder="User" required autofocus/></p>
-                        <p><input type="password" name="pass" class="form-control" placeholder="Password" required /></p>
+                        <p><input type="text" name="username" autocomplete="username" placeholder="User" required autofocus value="sven" /></p>
+                        <p><input type="password" name="password" autocomplete="current-password" placeholder="Password" required /></p>
                         <p><input type="checkbox" name="rememberMe" />&nbsp;Remember Me</p>
                         %s
                         <p><input type="submit" value="Login"/></p>

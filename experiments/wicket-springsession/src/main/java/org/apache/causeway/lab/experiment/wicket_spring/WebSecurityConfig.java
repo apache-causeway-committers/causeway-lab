@@ -3,7 +3,6 @@ package org.apache.causeway.lab.experiment.wicket_spring;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.RememberMeAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -15,10 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
-import org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter;
-import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
 import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter.Directive;
 
@@ -28,8 +24,10 @@ class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(
-            final HttpSecurity http,
-            final RememberMeServices rememberMeServices) {
+            final HttpSecurity http
+            //,
+            //final RememberMeServices rememberMeServices
+            ) {
         http
             //.csrf(CsrfConfigurer::disable)
             .authorizeHttpRequests(requests -> requests
@@ -39,17 +37,17 @@ class WebSecurityConfig {
             .formLogin(form -> form
                     .loginPage("/login")           // Unified entry point
                     .loginProcessingUrl("/authenticate")  // Actual POST target
-                    .usernameParameter("user")
-                    .passwordParameter("pass")
+                    //.usernameParameter("user")
+                    //.passwordParameter("pass")
                     .successHandler(authenticationSuccessHandler())
                     .failureHandler(authenticationFailureHandler())
                     .permitAll()
             )
-            .rememberMe(remember -> remember
-                .rememberMeParameter("rememberMe")
-                .rememberMeServices(rememberMeServices)
-                .tokenValiditySeconds(3600)
-            )
+//            .rememberMe(remember -> remember
+//                .rememberMeParameter("rememberMe")
+//                .rememberMeServices(rememberMeServices)
+//                .tokenValiditySeconds(3600)
+//            )
             .logout(logout -> logout
                 .logoutSuccessUrl("/login?logout")
                 //.deleteCookies("JSESSIONID", "rememberMe")
@@ -59,21 +57,21 @@ class WebSecurityConfig {
         return http.build();
     }
 
-    @Bean
-    RememberMeServices rememberMeServices(final UserDetailsService userDetailsService) {
-        return new TokenBasedRememberMeServices("myKey", userDetailsService);
-    }
-
-    @Bean
-    RememberMeAuthenticationFilter rememberMeFilter(final AuthenticationManager authenticationManager,
-            final RememberMeServices rememberMeServices) {
-        return new RememberMeAuthenticationFilter(authenticationManager, rememberMeServices);
-    }
-
-    @Bean
-    RememberMeAuthenticationProvider rememberMeAuthenticationProvider() {
-        return new RememberMeAuthenticationProvider("myKey");
-    }
+//    @Bean
+//    RememberMeServices rememberMeServices(final UserDetailsService userDetailsService) {
+//        return new TokenBasedRememberMeServices("myKey", userDetailsService);
+//    }
+//
+//    @Bean
+//    RememberMeAuthenticationFilter rememberMeFilter(final AuthenticationManager authenticationManager,
+//            final RememberMeServices rememberMeServices) {
+//        return new RememberMeAuthenticationFilter(authenticationManager, rememberMeServices);
+//    }
+//
+//    @Bean
+//    RememberMeAuthenticationProvider rememberMeAuthenticationProvider() {
+//        return new RememberMeAuthenticationProvider("myKey");
+//    }
 
     private AuthenticationFailureHandler authenticationFailureHandler() {
         return (request, response, exception) -> {
