@@ -14,6 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
 import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
 import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter.Directive;
@@ -23,11 +24,7 @@ import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter
 class WebSecurityConfig {
 
     @Bean
-    SecurityFilterChain securityFilterChain(
-            final HttpSecurity http
-            //,
-            //final RememberMeServices rememberMeServices
-            ) {
+    SecurityFilterChain securityFilterChain(final HttpSecurity http) {
         http
             //.csrf(CsrfConfigurer::disable)
             .authorizeHttpRequests(requests -> requests
@@ -37,17 +34,10 @@ class WebSecurityConfig {
             .formLogin(form -> form
                     .loginPage("/login")           // Unified entry point
                     .loginProcessingUrl("/authenticate")  // Actual POST target
-                    //.usernameParameter("user")
-                    //.passwordParameter("pass")
                     .successHandler(authenticationSuccessHandler())
                     .failureHandler(authenticationFailureHandler())
                     .permitAll()
             )
-//            .rememberMe(remember -> remember
-//                .rememberMeParameter("rememberMe")
-//                .rememberMeServices(rememberMeServices)
-//                .tokenValiditySeconds(3600)
-//            )
             .logout(logout -> logout
                 .logoutSuccessUrl("/login?logout")
                 //.deleteCookies("JSESSIONID", "rememberMe")
@@ -57,22 +47,6 @@ class WebSecurityConfig {
         return http.build();
     }
 
-//    @Bean
-//    RememberMeServices rememberMeServices(final UserDetailsService userDetailsService) {
-//        return new TokenBasedRememberMeServices("myKey", userDetailsService);
-//    }
-//
-//    @Bean
-//    RememberMeAuthenticationFilter rememberMeFilter(final AuthenticationManager authenticationManager,
-//            final RememberMeServices rememberMeServices) {
-//        return new RememberMeAuthenticationFilter(authenticationManager, rememberMeServices);
-//    }
-//
-//    @Bean
-//    RememberMeAuthenticationProvider rememberMeAuthenticationProvider() {
-//        return new RememberMeAuthenticationProvider("myKey");
-//    }
-
     private AuthenticationFailureHandler authenticationFailureHandler() {
         return (request, response, exception) -> {
             System.err.println("failure: %s".formatted(exception));
@@ -81,7 +55,9 @@ class WebSecurityConfig {
     }
 
     private AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return (request, response, authentication) -> System.err.println("success: %s".formatted(authentication));
+    	return new SavedRequestAwareAuthenticationSuccessHandler(); // Auto-redirects to original URL
+
+        //return (request, response, authentication) -> System.err.println("success: %s".formatted(authentication));
     }
 
     @Bean
